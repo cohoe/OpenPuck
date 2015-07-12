@@ -66,7 +66,7 @@ class SidearmLegacyProvider(Provider):
             # Date and Time
             date_col_index = get_list_index(headers, "DATE")
             date_string = cells[date_col_index].text.strip()
-            time_string = details_soup.td.find_all('em')[1].text
+            time_string = details_soup.td.find_all('em')[1].text.strip()
 
             # Sometimes they put a - in the dates to indicate multiple.
             # The bastards...
