@@ -47,10 +47,13 @@ class SidearmLegacyProvider(Provider):
             game_id = int(entry["id"].split("_")[-1])
             # Location
             raw_location = cells[3].text.strip()
-            # Site
-            raw_site = cells[4].text
             # Opponent
             opponent = cells[2].text.strip()
+            # Site
+            if cells[3].span:
+                raw_site = cells[3].span['class'][0]
+            else:
+                raw_site = "away"
 
             # Details
             details_soup = self.get_game_details(game_id)
@@ -135,11 +138,11 @@ class SidearmLegacyProvider(Provider):
         """
         Return a normalized word indiciating the site of the game.
         """
-        if raw_site.upper() == "H":
+        if "home" in raw_site:
             return "home"
-        elif raw_site.upper() == "A":
+        elif "away" in raw_site:
             return "away"
-        elif raw_site.upper() == "N":
+        elif "neutral" in raw_site:
             return "neutral"
         else:
             return "UNKNOWN"
