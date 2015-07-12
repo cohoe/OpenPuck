@@ -1,0 +1,12 @@
+Providers
+* SidearmLegacy (RIT, Clarkson)
+* SidearmAdaptive (Northeastern, Syracuse, RPI)
+* NeulionLegacy (Dartmouth)
+* NeulionAdaptiveClassic (Princeton)
+* NeulionAdaptive (North Dakota)
+* PrestoMonthly (Brown, Merrimack, Quinnipiac)
+* PrestoLegacy (Yale)
+* PrestoLegacy2 (Harvard)
+* PrestoSimple (UNH, Maine)
+* CBSi (Boston College, Wisconsin, Penn State)
+* Streamline (Bemidji)

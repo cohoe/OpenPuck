@@ -109,8 +109,11 @@ class SidearmLegacyProvider(Provider):
 
         # Schedules often give a TBA. Set this to midnight since no game
         # will actually start at midnight.
-        if "TBA" in time_string:
+        if "TBA" in time_string or time_string == "":
             time_string = "12:00 AM"
+
+        if "NOON" in time_string:
+            time_string = "12:00 PM"
 
         if "/" in time_string:
             time_string = time_string.split("/")[0]
