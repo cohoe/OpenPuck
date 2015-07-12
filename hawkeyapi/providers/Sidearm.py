@@ -8,9 +8,9 @@ from hawkeyapi.CommonDates import *
 # @TODO: Stats, Audio, Video links
 
 def parse_schedule_to_json(url, html):
-    soup = BeautifulSoup(html, 'html.parser')
-
-    # Get the table to schedule entries
+#    soup = BeautifulSoup(html, 'html.parser')
+#
+#    # Get the table to schedule entries
     schedule_table = soup('table', 'default_dgrd')[0]
 
     json_games = []
@@ -59,36 +59,36 @@ def parse_schedule_to_json(url, html):
 
 
 def make_normalized_game(game_id, opponent, date_string, time_string, raw_site, location, links):
-    # Determine site
-    if raw_site.upper() == "H":
-        site = "home"
-    elif raw_site.upper() == "A":
-        site = "away"
-    elif raw_site.upper() == "N":
-        site = "neutral"
-    else:
-        site = "UNKNOWN (ERR)"
+#    # Determine site
+#    if raw_site.upper() == "H":
+#        site = "home"
+#    elif raw_site.upper() == "A":
+#        site = "away"
+#    elif raw_site.upper() == "N":
+#        site = "neutral"
+#    else:
+#        site = "UNKNOWN (ERR)"
 
     # Deal with the time
-    game_time = get_timestamp_from_parts(date_string, time_string)
+#    game_time = get_timestamp_from_parts(date_string, time_string)
 
-    # Is this a conference tournament game?
-    is_conf_tournament = False
-    if game_time >= DATE_CONFERENCE_TOURNAMENT_START and game_time < DATE_NATIONAL_TOURNAMENT_START:
-        is_conf_tournament = True
-
-    # Is this a national tournament game?
-    is_national_tournament = False
-    if game_time >= DATE_NATIONAL_TOURNAMENT_START:
-        is_national_tournament = True
-
-    # Is this a pre-season game?
-    is_preseason = False
-    if game_time < DATE_SEASON_START:
-        is_preseason = True;
+#    # Is this a conference tournament game?
+#    is_conf_tournament = False
+#    if game_time >= DATE_CONFERENCE_TOURNAMENT_START and game_time < DATE_NATIONAL_TOURNAMENT_START:
+#        is_conf_tournament = True
+#
+#    # Is this a national tournament game?
+#    is_national_tournament = False
+#    if game_time >= DATE_NATIONAL_TOURNAMENT_START:
+#        is_national_tournament = True
+#
+#    # Is this a pre-season game?
+#    is_preseason = False
+#    if game_time < DATE_SEASON_START:
+#        is_preseason = True;
 
     # Get the location of the game
-    location = normalize_location(location)
+#    location = normalize_location(location)
 
 
     # Now take all of this data and mash it together into a single object
@@ -106,46 +106,46 @@ def make_normalized_game(game_id, opponent, date_string, time_string, raw_site, 
 
     return dict2json("raw_game", raw_game_for_json, True)
 
-def get_timestamp_from_parts(date_string, time_string):
-    """
-    Return a datetime object representing the start time of a game.
-    """
-
-    date_format = "%m/%d/%Y"
-    date_obj = datetime.strptime(date_string, date_format)
-
-    # Schedules often give a TBA. Set this to midnight since no game
-    # will actually start at midnight.
-    if "TBA" in time_string:
-        time_obj = datetime.strptime("12:00 AM", "%I:%M %p")
-    else:
-        time_string = time_string.upper().replace('.', '')
-        if ":" in time_string:
-            time_format = "%I:%M %p"
-        else:
-            time_format = "%I %p"
-        time_obj = datetime.strptime(time_string, time_format)
-
-    return datetime.combine(date_obj, time_obj.time())
-
-
-def get_game_media_urls(server, game_id):
-    """
-    Get the extras box for a given game
-    """
-    media_urls = {}
-    media_urls['video'] = False
-    media_urls['audio'] = False
-    media_urls['stats'] = False
-
-    url = server + "/services/schedule_detail.aspx?id=%i" % game_id
-    contents = get_html_from_url(url)
-    soup = BeautifulSoup(contents)
-
-    stats_string = soup.find(text="Live Stats")
-    if stats_string:
-        stats_url = stats_string.parent['href']
-        media_urls['stats'] = stats_url
+#def get_timestamp_from_parts(date_string, time_string):
+#    """
+#    Return a datetime object representing the start time of a game.
+#    """
+#
+#    date_format = "%m/%d/%Y"
+#    date_obj = datetime.strptime(date_string, date_format)
+#
+#    # Schedules often give a TBA. Set this to midnight since no game
+#    # will actually start at midnight.
+#    if "TBA" in time_string:
+#        time_obj = datetime.strptime("12:00 AM", "%I:%M %p")
+#    else:
+#        time_string = time_string.upper().replace('.', '')
+#        if ":" in time_string:
+#            time_format = "%I:%M %p"
+#        else:
+#            time_format = "%I %p"
+#        time_obj = datetime.strptime(time_string, time_format)
+#
+#    return datetime.combine(date_obj, time_obj.time())
 
 
-    return media_urls
+#def get_game_media_urls(server, game_id):
+#    """
+#    Get the extras box for a given game
+#    """
+#    media_urls = {}
+#    media_urls['video'] = False
+#    media_urls['audio'] = False
+#    media_urls['stats'] = False
+#
+#    url = server + "/services/schedule_detail.aspx?id=%i" % game_id
+#    contents = get_html_from_url(url)
+#    soup = BeautifulSoup(contents)
+#
+#    stats_string = soup.find(text="Live Stats")
+#    if stats_string:
+#        stats_url = stats_string.parent['href']
+#        media_urls['stats'] = stats_url
+#
+#
+#    return media_urls
