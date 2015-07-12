@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from hawkeyapi.CommonLib import *
+from hawkeyapi.util import *
 from hawkeyapi.CommonDates import *
 
 
