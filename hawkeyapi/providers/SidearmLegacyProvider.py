@@ -21,7 +21,8 @@ class SidearmLegacyProvider(Provider):
 
         self.urls = {}
         self.urls['index'] = index_url
-        self.urls['schedule'] = "%s://%s/schedule.aspx?%s" % (url_obj.scheme,
+        #self.urls['schedule'] = "%s://%s/schedule.aspx?%s" % (url_obj.scheme,
+        self.urls['schedule'] = "%s://%s/schedule.aspx?schedule=347&%s" % (url_obj.scheme,
                                                               url_obj.netloc,
                                                               url_obj.query)
         self.urls['schedule_detail'] = (get_base_from_url(index_url) +
@@ -33,6 +34,9 @@ class SidearmLegacyProvider(Provider):
         """
         html = self.get_schedule_from_web()
         soup = get_soup_from_html(html)
+        
+        for linebreak in soup.find_all('br'):
+            linebreak.replace_with(" ")
 
         json_games = []
 
@@ -42,17 +46,20 @@ class SidearmLegacyProvider(Provider):
 
             # Game ID
             game_id = int(entry["id"].split("_")[-1])
-            # Date and Time
-            date_string = chomp(cells[0].text)
-            time_string = chomp(cells[5].text)
             # Location
-            raw_location = chomp(cells[3].text)
+            raw_location = cells[3].text.strip()
             # Site
             raw_site = cells[4].text
-            # Links
-            links = self.get_game_media_urls(game_id)
             # Opponent
-            opponent = chomp(cells[2].text)
+            opponent = cells[2].text.strip()
+
+            # Details
+            details_soup = self.get_game_details(game_id)
+            links = self.get_game_media_urls(details_soup)
+
+            # Date and Time
+            date_string = cells[0].text.strip()
+            time_string = details_soup.td.find_all('em')[1].text
 
             # Sometimes they put a - in the dates to indicate multiple.
             # The bastards...
@@ -83,7 +90,7 @@ class SidearmLegacyProvider(Provider):
 
         game_dict['gameId'] = game_id
         game_dict['startTime'] = timestamp.isoformat()
-        game_dict['opponent'] = opponent
+        game_dict['opponent'] = self.get_normalized_opponent(opponent)
         game_dict['site'] = self.get_normalized_site(raw_site)
         game_dict['location'] = self.get_normalized_location(raw_location)
         game_dict['isConfTourney'] = self.is_conf_tournament(timestamp)
@@ -99,20 +106,25 @@ class SidearmLegacyProvider(Provider):
         """
         Make a timestamp for the given information.
         """
-
-        date_format = "%m/%d/%Y"
+        time_string = time_string.upper().replace('.', '')
 
         # Schedules often give a TBA. Set this to midnight since no game
         # will actually start at midnight.
         if "TBA" in time_string:
             time_string = "12:00 AM"
+
+        if "/" in time_string:
+            time_string = time_string.split("/")[0]
+            if ":" in time_string:
+                time_format = "%I:%M %p %Z"
+            else:
+                time_format = "%I %p %Z"
+        elif ":" in time_string:
             time_format = "%I:%M %p"
         else:
-            time_string = time_string.upper().replace('.', '')
-            if ":" in time_string:
-                time_format = "%I:%M %p"
-            else:
-                time_format = "%I %p"
+            time_format = "%I %p"
+
+        date_format = "%m/%d/%Y"
 
         return get_combined_timestamp(date_string, date_format,
                                       time_string, time_format)
@@ -120,9 +132,6 @@ class SidearmLegacyProvider(Provider):
     def get_normalized_site(self, raw_site):
         """
         Return a normalized word indiciating the site of the game.
-        * home
-        * away
-        * neutral
         """
         if raw_site.upper() == "H":
             return "home"
@@ -133,18 +142,24 @@ class SidearmLegacyProvider(Provider):
         else:
             return "UNKNOWN"
 
-    def get_game_media_urls(self, game_id):
+    def get_game_details(self, game_id):
         """
         Get the extras box for a given game
+        """
+        links_url = self.urls['schedule_detail'] + "?id=%i" % game_id
+        html = get_html_from_url(links_url)
+        soup = get_soup_from_html(html)
+
+        return soup
+
+    def get_game_media_urls(self, soup):
+        """
+        Locate the media URLs from the details box.
         """
         media_urls = {}
         media_urls['video'] = False
         media_urls['audio'] = False
         media_urls['stats'] = False
-
-        links_url = self.urls['schedule_detail'] + "?id=%i" % game_id
-        html = get_html_from_url(links_url)
-        soup = get_soup_from_html(html)
 
         stats_string = soup.find(text="Live Stats")
         if stats_string:

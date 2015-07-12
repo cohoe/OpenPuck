@@ -85,6 +85,29 @@ class Provider(object):
         # Done for now
         return n_location
 
+    def get_normalized_opponent(self, raw_opponent):
+        """
+        Normalize an effectively randomly formatted opponent string.
+        """
+        # Make it all uppercase
+        n_opponent = raw_opponent.upper()
+
+        # If it's a to be determined, make it so
+        if "TBA" in n_opponent:
+            return "TBA"
+
+        # Remove special characters
+        n_opponent = re.sub(r'[^\w ]', '', n_opponent)
+
+        # Remove duplicate spaces
+        n_opponent = re.sub(r'\s+', ' ', n_opponent)
+        
+        # Remove leading numbers from ranked teams
+        n_opponent = re.sub(r'^\d+ ', '', n_opponent)
+
+        # Done for now
+        return n_opponent
+
     def get_date_range(self, date_string):
         """
         Return the month, year, and start/end dates for a date range.
@@ -111,12 +134,6 @@ class Provider(object):
         response = urllib2.urlopen(req)
 
         return response.read()
-
-    def chomp(self, text):
-        """
-        Remove newline characters from text.
-        """
-        return text.rstrip().lstrip()
 
     def dict2json(self, name, input_dict, debug=False):
         """
