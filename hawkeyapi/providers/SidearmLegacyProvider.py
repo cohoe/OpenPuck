@@ -21,8 +21,7 @@ class SidearmLegacyProvider(Provider):
 
         self.urls = {}
         self.urls['index'] = index_url
-        #self.urls['schedule'] = "%s://%s/schedule.aspx?%s" % (url_obj.scheme,
-        self.urls['schedule'] = "%s://%s/schedule.aspx?schedule=347&%s" % (url_obj.scheme,
+        self.urls['schedule'] = "%s://%s/schedule.aspx?%s" % (url_obj.scheme,
                                                               url_obj.netloc,
                                                               url_obj.query)
         self.urls['schedule_detail'] = (get_base_from_url(index_url) +
