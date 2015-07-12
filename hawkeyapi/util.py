@@ -63,3 +63,11 @@ def get_combined_timestamp(date_string, date_format, time_string, time_format):
     time_obj = datetime.strptime(time_string, time_format)
 
     return datetime.combine(date_obj, time_obj.time())
+
+
+def get_list_index(list_, item):
+    """
+    For a given list, return the position of the given item.
+    """
+    for i in [i for i,x in enumerate(list_) if x == item]:
+        return i

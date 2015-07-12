@@ -93,7 +93,7 @@ class Provider(object):
         n_opponent = raw_opponent.upper()
 
         # If it's a to be determined, make it so
-        if "TBA" in n_opponent:
+        if "TBA" in n_opponent or n_opponent == "":
             return "TBA"
 
         # Remove special characters

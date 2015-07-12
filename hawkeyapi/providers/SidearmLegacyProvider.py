@@ -40,18 +40,22 @@ class SidearmLegacyProvider(Provider):
         json_games = []
 
         game_entries = self.get_game_entries(soup)
+        headers = self.get_table_headers(soup)
+
         for entry in game_entries:
             cells = entry.find_all('td')
 
             # Game ID
             game_id = int(entry["id"].split("_")[-1])
             # Location
-            raw_location = cells[3].text.strip()
+            location_col_index = get_list_index(headers, "LOCATION")
+            raw_location = cells[location_col_index].text.strip()
             # Opponent
-            opponent = cells[2].text.strip()
+            opponent_col_index = get_list_index(headers, "OPPONENT")
+            opponent = cells[opponent_col_index].text.strip()
             # Site
-            if cells[3].span:
-                raw_site = cells[3].span['class'][0]
+            if cells[location_col_index].span:
+                raw_site = cells[location_col_index].span['class'][0]
             else:
                 raw_site = "away"
 
@@ -60,7 +64,8 @@ class SidearmLegacyProvider(Provider):
             links = self.get_game_media_urls(details_soup)
 
             # Date and Time
-            date_string = cells[0].text.strip()
+            date_col_index = get_list_index(headers, "DATE")
+            date_string = cells[date_col_index].text.strip()
             time_string = details_soup.td.find_all('em')[1].text
 
             # Sometimes they put a - in the dates to indicate multiple.
@@ -184,3 +189,20 @@ class SidearmLegacyProvider(Provider):
                 entries.append(child)
 
         return entries
+
+    def get_table_headers(self, soup):
+        """
+        Return an upper-case list of all of the column headers from the
+        schedule table.
+        """
+        schedule_table = soup.find_all('table', 'default_dgrd')[0]
+
+        header_elements = schedule_table.find_all('th')
+        headers = []
+        for header in header_elements:
+            if header.text or header.text != "":
+                n_header = header.text.upper().strip()
+                n_header = re.sub(r'[^\w+]$', '', n_header)
+                headers.append(n_header)
+
+        return headers
