@@ -88,27 +88,6 @@ class SidearmLegacyProvider(Provider):
 
         return json_games
 
-    def get_json_entry(self, game_id, timestamp, opponent, raw_site,
-                       raw_location, links):
-        """
-        Return a JSON entry representing the game.
-        """
-        game_dict = {}
-
-        game_dict['gameId'] = game_id
-        game_dict['startTime'] = timestamp.isoformat()
-        game_dict['opponent'] = self.get_normalized_opponent(opponent)
-        game_dict['site'] = self.get_normalized_site(raw_site)
-        game_dict['location'] = self.get_normalized_location(raw_location)
-        game_dict['isConfTourney'] = self.is_conf_tournament(timestamp)
-        game_dict['isNatTourney'] = self.is_national_tournament(timestamp)
-        game_dict['isPreSeason'] = self.is_preseason(timestamp)
-        game_dict['mediaUrls'] = links
-        game_dict['provider'] = __name__
-        game_dict['notes'] = None
-
-        return dict2json("raw_game", game_dict, True)
-
     def get_timestamp(self, date_string, time_string):
         """
         Make a timestamp for the given information.

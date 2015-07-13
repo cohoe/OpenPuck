@@ -96,14 +96,27 @@ class Provider(object):
         if "TBA" in n_opponent or n_opponent == "":
             return "TBA"
 
+        # If there is anything in parenthesis, kill it
+        n_opponent = re.sub(r'\((.*)\)', '', n_opponent)
+
         # Remove special characters
         n_opponent = re.sub(r'[^\w ]', '', n_opponent)
 
         # Remove duplicate spaces
         n_opponent = re.sub(r'\s+', ' ', n_opponent)
         
-        # Remove leading numbers from ranked teams
+        # Remove rankings if that is given
         n_opponent = re.sub(r'^\d+ ', '', n_opponent)
+        n_opponent = re.sub(r'NO \d([\/\d]+)?', '', n_opponent)
+
+        # If they say the opponent is "at", remove it
+        n_opponent = re.sub(r'^AT ', '', n_opponent)
+        
+        # Same with "vs"
+        n_opponent = re.sub(r'^VS ', '', n_opponent)
+
+        # Lastly, strip it up
+        n_opponent = n_opponent.strip()
 
         # Done for now
         return n_opponent
@@ -168,3 +181,38 @@ class Provider(object):
         time_obj = datetime.strptime(time_string, time_format)
 
         return datetime.combine(date_obj, time_obj.time())
+
+    def get_json_entry(self, game_id, timestamp, opponent, site,
+                       location, links, notes=None):
+        """
+        Return a JSON entry representing the game.
+        """
+        game_dict = {}
+
+        game_dict['gameId'] = game_id
+        game_dict['startTime'] = timestamp.isoformat()
+        game_dict['opponent'] = opponent
+        game_dict['site'] = site
+        game_dict['location'] = location
+        game_dict['isConfTourney'] = self.is_conf_tournament(timestamp)
+        game_dict['isNatTourney'] = self.is_national_tournament(timestamp)
+        game_dict['isPreSeason'] = self.is_preseason(timestamp)
+        game_dict['mediaUrls'] = links
+        game_dict['provider'] = __name__
+        game_dict['notes'] = notes
+
+        return dict2json("raw_game", game_dict, True)
+
+
+    def get_normalized_site(self, raw_site):
+        """
+        Return a normalized word indiciating the site of the game.
+        """
+        if "home" in raw_site:
+            return "home"
+        elif "away" in raw_site:
+            return "away"
+        elif "neutral" in raw_site:
+            return "neutral"
+        else:
+            return "UNKNOWN"

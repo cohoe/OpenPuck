@@ -1,1 +1,2 @@
 from SidearmLegacyProvider import SidearmLegacyProvider
+from SidearmAdaptiveProvider import SidearmAdaptiveProvider
