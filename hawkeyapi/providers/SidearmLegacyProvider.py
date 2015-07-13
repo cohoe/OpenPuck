@@ -48,14 +48,18 @@ class SidearmLegacyProvider(Provider):
             # Location
             location_col_index = get_list_index(headers, "LOCATION")
             raw_location = cells[location_col_index].text.strip()
+            location = self.get_normalized_location(raw_location)
             # Opponent
             opponent_col_index = get_list_index(headers, "OPPONENT")
-            opponent = cells[opponent_col_index].text.strip()
+            raw_opponent = cells[opponent_col_index].text.strip()
+            opponent = self.get_normalized_opponent(raw_opponent)
             # Site
             if cells[location_col_index].span:
                 raw_site = cells[location_col_index].span['class'][0]
             else:
                 raw_site = "away"
+
+            site = self.get_normalized_site(raw_site)
 
             # Details
             details_soup = self.get_game_details(game_id)
@@ -75,13 +79,13 @@ class SidearmLegacyProvider(Provider):
                     date_string = "%i/%i/%i" % (month, day, year)
                     timestamp = self.get_timestamp(date_string, time_string)
                     json_game = self.get_json_entry(game_id, timestamp,
-                                                    opponent, raw_site,
-                                                    raw_location, links)
+                                                    opponent, site,
+                                                    location, links)
                     json_games.append(json_game)
             else:
                 timestamp = self.get_timestamp(date_string, time_string)
                 json_game = self.get_json_entry(game_id, timestamp, opponent,
-                                                raw_site, raw_location, links)
+                                                site, location, links)
                 json_games.append(json_game)
 
         return json_games

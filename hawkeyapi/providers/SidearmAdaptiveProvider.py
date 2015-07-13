@@ -46,11 +46,19 @@ class SidearmAdaptiveProvider(Provider):
             site = self.get_game_site(game)
             # Opponent
             opponent = self.get_game_opponent(game)
-            # Timestamp
-            # @TODO: Deal with dashes in the datestamp again
-            timestamp = self.get_game_timestamp(game, schedule_years)
             # Links
             links = self.get_game_media_urls(game)
+            # Timestamp
+            # @TODO: Deal with dashes in the datestamp again
+            date_string, date_format = self.get_game_date(game, schedule_years)
+            time_string, time_format = self.get_game_time(game)
+            if "-" in date_string:
+                print "LOLNOPE"
+                continue
+
+            timestamp = get_combined_timestamp(date_string, date_format, time_string, time_format)
+            print timestamp.isoformat()
+
             json_game = self.get_json_entry(game_id, timestamp, opponent, site, location, links)
             json_games.append(json_game)
 
@@ -94,52 +102,9 @@ class SidearmAdaptiveProvider(Provider):
         site = self.get_game_site(game)
 
         opponent_element = game.find('div', class_='schedule_game_opponent_name')
-        #if site == "away":
         opponent = opponent_element.text
-        #else:
-            #opponent = opponent_element.a.span.text
-            # @TODO: Fix this
-         #   opponent = opponent_element.text
 
         return self.get_normalized_opponent(opponent)
-
-    def get_game_timestamp(self, game, years):
-        """
-        Return a normalized string of the games time.
-        """
-        date_string = game.find('div', class_='schedule_game_opponent_date').text.upper().strip()
-        if re.search(r'[a-zA-Z]', date_string):
-            if re.search(r'SEPT|OCT|NOV|DEC', date_string):
-                date_string = date_string + " %i" % years[0]
-            else:
-                date_string = date_string + " %i" % years[1]
-            date_format = "%a, %B %d %Y"
-        elif "." in date_string:
-            date_format = "%m.%d.%y"
-        elif "/" in date_string:
-            date_format = "%m/%d/%Y"
-
-        time_string = game.find('div', class_='schedule_game_opponent_time').text.strip()
-        time_string = time_string.upper().replace('.', '')
-
-        if "TBA" in time_string or time_string == "":
-            time_string = "12:00 AM"
-        if "NOON" in time_string:
-            time_string = "12:00 PM"
-
-        # @TODO: Simply this time string crap
-        if " " in time_string:
-            if ":" in time_string:
-                time_format = "%I:%M %p"
-            else:
-                time_format = "%I %p"
-        else:
-            if ":" in time_string:
-                time_format = "%I:%M%p"
-            else:
-                time_format = "%I%p"
-
-        return get_combined_timestamp(date_string, date_format, time_string, time_format)
 
     def get_schedule_years(self, soup):
         """
@@ -180,3 +145,48 @@ class SidearmAdaptiveProvider(Provider):
                 media_urls['video'] = link['href']
 
         return media_urls
+
+    def get_game_date(self, game, years):
+        """
+        Returns the raw game date and format.
+        """
+        date_string = game.find('div', class_='schedule_game_opponent_date').text.upper().strip()
+        if re.search(r'[a-zA-Z]', date_string):
+            if re.search(r'SEPT|OCT|NOV|DEC', date_string):
+                date_string = date_string + " %i" % years[0]
+            else:
+                date_string = date_string + " %i" % years[1]
+            date_format = "%a, %B %d %Y"
+        elif "." in date_string:
+            date_format = "%m.%d.%y"
+        elif "/" in date_string:
+            date_format = "%m/%d/%Y"
+
+        return date_string, date_format
+
+    def get_game_time(self, game):
+        """
+        Return the raw gate time and format.
+        """
+        time_string = game.find('div', class_='schedule_game_opponent_time').text.strip()
+        time_string = time_string.upper().replace('.', '')
+
+        # If there are any word times
+        if "TBA" in time_string or time_string == "":
+            time_string = "12:00 AM"
+        if "NOON" in time_string:
+            time_string = "12:00 PM"
+
+        # Figure out the time format to use
+        if " " in time_string:
+            if ":" in time_string:
+                time_format = "%I:%M %p"
+            else:
+                time_format = "%I %p"
+        else:
+            if ":" in time_string:
+                time_format = "%I:%M%p"
+            else:
+                time_format = "%I%p"
+
+        return time_string, time_format
