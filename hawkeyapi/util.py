@@ -20,13 +20,6 @@ def get_html_from_url(url):
     return response.read()
 
 
-def chomp(text):
-    """
-    Remove newline characters from text.
-    """
-    return text.rstrip().lstrip()
-
-
 def dict2json(name, input_dict, debug=False):
     """
     Spit out some JSON from a given dictionary.
@@ -47,13 +40,6 @@ def get_base_from_url(url):
     return n_url
 
 
-def get_soup_from_html(html):
-    """
-    Return a soup tree from a given HTML string.
-    """
-    return BeautifulSoup(html)
-
-
 def get_combined_timestamp(date_string, date_format, time_string, time_format):
     """
     Return a datetime object representing the local start time of a game.
@@ -69,5 +55,5 @@ def get_list_index(list_, item):
     """
     For a given list, return the position of the given item.
     """
-    for i in [i for i,x in enumerate(list_) if x == item]:
-        return i
+    # This will throw an exception when it's not in there
+    return list_.index(item)

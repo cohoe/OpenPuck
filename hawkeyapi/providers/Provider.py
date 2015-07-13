@@ -35,8 +35,7 @@ class Provider(object):
         """
         Return a very long string of HTML data from the schedule URL.
         """
-        html = get_html_from_url(self.urls['schedule'])
-        return html
+        return get_html_from_url(self.urls['schedule'])
 
     def is_conf_tournament(self, timestamp):
         """
@@ -139,67 +138,25 @@ class Provider(object):
 
         return month, year, start_day, end_day
 
-    def get_html_from_url(self, url):
-        """
-        Return the HTML contents from a request to a given URL.
-        """
-        req = urllib2.Request(url, headers=HTTP_REQUEST_HEADERS)
-        response = urllib2.urlopen(req)
-
-        return response.read()
-
-    def dict2json(self, name, input_dict, debug=False):
-        """
-        Spit out some JSON from a given dictionary.
-        """
-        if debug is True:
-            return json.dumps({name: input_dict}, sort_keys=True, indent=4,
-                              separators=(',', ': '))
-
-        return json.dumps([name, input_dict])
-
-    def get_base_from_url(self, url):
-        """
-        Return the base server/protocol from a URL
-        """
-        url_obj = urlparse(url)
-        n_url = "%s://%s" % (url_obj.scheme, url_obj.netloc)
-        return n_url
-
-    def get_soup_from_html(self, html):
-        """
-        Return a soup tree from a given HTML string.
-        """
-        return BeautifulSoup(html)
-
-    def get_combined_timestamp(self, date_string, date_format, time_string, time_format):
-        """
-        Return a datetime object representing the local start time of a game.
-        """
-
-        date_obj = datetime.strptime(date_string, date_format)
-        time_obj = datetime.strptime(time_string, time_format)
-
-        return datetime.combine(date_obj, time_obj.time())
 
     def get_json_entry(self, game_id, timestamp, opponent, site,
                        location, links, notes=None):
         """
         Return a JSON entry representing the game.
         """
-        game_dict = {}
-
-        game_dict['gameId'] = game_id
-        game_dict['startTime'] = timestamp.isoformat()
-        game_dict['opponent'] = opponent
-        game_dict['site'] = site
-        game_dict['location'] = location
-        game_dict['isConfTourney'] = self.is_conf_tournament(timestamp)
-        game_dict['isNatTourney'] = self.is_national_tournament(timestamp)
-        game_dict['isPreSeason'] = self.is_preseason(timestamp)
-        game_dict['mediaUrls'] = links
-        game_dict['provider'] = __name__
-        game_dict['notes'] = notes
+        game_dict = {
+            'gameId': game_id,
+            'startTime': timestamp.isoformat(),
+            'opponent': opponent,
+            'site': site,
+            'location': location,
+            'isConfTourney': self.is_conf_tournament(timestamp),
+            'isNatTourney': self.is_national_tournament(timestamp),
+            'isPreSeason': self.is_preseason(timestamp),
+            'mediaUrls': links,
+            'provider': __name__,
+            'notes': notes,
+        }
 
         return dict2json("raw_game", game_dict, True)
 

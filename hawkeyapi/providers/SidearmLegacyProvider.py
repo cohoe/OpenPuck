@@ -19,20 +19,18 @@ class SidearmLegacyProvider(Provider):
         """
         url_obj = urlparse(index_url)
 
-        self.urls = {}
-        self.urls['index'] = index_url
-        self.urls['schedule'] = "%s://%s/schedule.aspx?%s" % (url_obj.scheme,
-                                                              url_obj.netloc,
-                                                              url_obj.query)
-        self.urls['schedule_detail'] = (get_base_from_url(index_url) +
-                                        "/services/schedule_detail.aspx")
+        self.urls = {
+            'index': index_url,
+            'schedule': "%s://%s/schedule.aspx?%s" % (url_obj.scheme, url_obj.netloc, url_obj.query),
+            'schedule_detail': get_base_from_url(index_url) + "/services/schedule_detail.aspx",
+        }
 
     def get_schedule(self):
         """
         Return a list of JSON objects of the schedule.
         """
         html = self.get_schedule_from_web()
-        soup = get_soup_from_html(html)
+        soup = BeautifulSoup(html)
         
         for linebreak in soup.find_all('br'):
             linebreak.replace_with(" ")
@@ -137,7 +135,7 @@ class SidearmLegacyProvider(Provider):
         """
         links_url = self.urls['schedule_detail'] + "?id=%i" % game_id
         html = get_html_from_url(links_url)
-        soup = get_soup_from_html(html)
+        soup = BeautifulSoup(html)
 
         return soup
 
@@ -145,10 +143,11 @@ class SidearmLegacyProvider(Provider):
         """
         Locate the media URLs from the details box.
         """
-        media_urls = {}
-        media_urls['video'] = False
-        media_urls['audio'] = False
-        media_urls['stats'] = False
+        media_urls = {
+            'video': False,
+            'audio': False,
+            'stats': False,
+        }
 
         stats_string = soup.find(text="Live Stats")
         if stats_string:
@@ -162,7 +161,7 @@ class SidearmLegacyProvider(Provider):
 
         entries = []
         for child in schedule_table.children:
-            child_soup = get_soup_from_html(unicode(child))
+            child_soup = BeautifulSoup(unicode(child))
             cells = child_soup.find_all('td')
             if cells:
                 entries.append(child)

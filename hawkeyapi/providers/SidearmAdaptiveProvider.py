@@ -19,18 +19,17 @@ class SidearmAdaptiveProvider(Provider):
         """
         url_obj = urlparse(index_url)
 
-        self.urls = {}
-        self.urls['index'] = index_url
-        self.urls['schedule'] = "%s://%s/schedule.aspx?%s" % (url_obj.scheme,
-                                                              url_obj.netloc,
-                                                              url_obj.query)
+        self.urls = {
+            'index': index_url,
+            'schedule': "%s://%s/schedule.aspx?%s" % (url_obj.scheme, url_obj.netloc, url_obj.query),
+        }
 
     def get_schedule(self):
         """
         Return a list of JSON objects of the schedule.
         """
         html = self.get_schedule_from_web()
-        soup = get_soup_from_html(html)
+        soup = BeautifulSoup(html)
 
         json_games = []
 
@@ -57,16 +56,11 @@ class SidearmAdaptiveProvider(Provider):
 
         return json_games
 
-
-        return []
-
     def get_game_entries(self, soup):
         """
         Return a list of elements containing games. Usually divs or rows.
         """
-        games = soup.find_all('div', class_='schedule_game')
-
-        return games
+        return soup.find_all('div', class_='schedule_game')
 
     def get_game_location(self, game):
         """
@@ -90,6 +84,7 @@ class SidearmAdaptiveProvider(Provider):
         parent_class = game['class'][1:2][0]
         if parent_class == "" or not parent_class:
             parent_class = "home"
+
         return self.get_normalized_site(parent_class)
 
     def get_game_opponent(self, game):
@@ -164,10 +159,11 @@ class SidearmAdaptiveProvider(Provider):
         """
         Return a normalized dictionary of media URLs.
         """
-        media_urls = {}
-        media_urls['video'] = False
-        media_urls['audio'] = False
-        media_urls['stats'] = False
+        media_urls = {
+            'video': False,
+            'audio': False,
+            'stats': False,
+        }
 
         media_element = game.find('div', class_='schedule_game_multimedia_links')
         if not media_element:
