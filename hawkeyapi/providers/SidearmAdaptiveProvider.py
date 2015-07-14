@@ -49,15 +49,7 @@ class SidearmAdaptiveProvider(Provider):
             # Links
             links = self.get_game_media_urls(game)
             # Timestamp
-            # @TODO: Deal with dashes in the datestamp again
-            date_string, date_format = self.get_game_date(game, schedule_years)
-            time_string, time_format = self.get_game_time(game)
-            if "-" in date_string:
-                print "LOLNOPE"
-                continue
-
-            timestamp = get_combined_timestamp(date_string, date_format, time_string, time_format)
-            print timestamp.isoformat()
+            timestamp = self.get_game_timestamp(game, schedule_years)
 
             json_game = self.get_json_entry(game_id, timestamp, opponent, site, location, links)
             json_games.append(json_game)
@@ -148,25 +140,30 @@ class SidearmAdaptiveProvider(Provider):
 
     def get_game_date(self, game, years):
         """
-        Returns the raw game date and format.
+        Return a datetime object of the games start time. Note that it will
+        have no time so it needs to be paired with a game_time object.
         """
         date_string = game.find('div', class_='schedule_game_opponent_date').text.upper().strip()
-        if re.search(r'[a-zA-Z]', date_string):
+
+        # Dashes mean they dont know the schedule yet. Just do the 1st.
+        if "-" in date_string:
+            date_string = date_string.split("-")[0].strip()
+
+        # Some of them dont even put the year. Figure it out from the doc
+        # header.
+        if re.search(r'[a-zA-Z]{4+}', date_string):
             if re.search(r'SEPT|OCT|NOV|DEC', date_string):
                 date_string = date_string + " %i" % years[0]
             else:
                 date_string = date_string + " %i" % years[1]
-            date_format = "%a, %B %d %Y"
-        elif "." in date_string:
-            date_format = "%m.%d.%y"
-        elif "/" in date_string:
-            date_format = "%m/%d/%Y"
 
-        return date_string, date_format
+        return get_datetime_from_string(date_string)
 
     def get_game_time(self, game):
         """
-        Return the raw gate time and format.
+        Return a datetime object of the games start time. Note that it will
+        have todays date so it needs to be combined with a game_date
+        object.
         """
         time_string = game.find('div', class_='schedule_game_opponent_time').text.strip()
         time_string = time_string.upper().replace('.', '')
@@ -177,16 +174,13 @@ class SidearmAdaptiveProvider(Provider):
         if "NOON" in time_string:
             time_string = "12:00 PM"
 
-        # Figure out the time format to use
-        if " " in time_string:
-            if ":" in time_string:
-                time_format = "%I:%M %p"
-            else:
-                time_format = "%I %p"
-        else:
-            if ":" in time_string:
-                time_format = "%I:%M%p"
-            else:
-                time_format = "%I%p"
+        return get_datetime_from_string(time_string)
 
-        return time_string, time_format
+    def get_game_timestamp(self, game, years):
+        """
+        Return a datetime object representing the start time of the game.
+        """
+        game_date = self.get_game_date(game, years)
+        game_time = self.get_game_time(game)
+
+        return datetime.combine(game_date, game_time.time())

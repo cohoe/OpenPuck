@@ -8,29 +8,6 @@ class Provider(object):
     def __init__(self):
         pass
 
-    def get_schedule(self):
-        """
-        This function should return a list of JSON objects
-        representing a complete schedule.
-        """
-        raise NotImplementedError("This function is required for a provider.")
-
-    def get_timestamp(self):
-        """
-        This function should return a datetime object representing the start
-        time of a game.
-        """
-        raise NotImplementedError("This function is required for a provider.")
-
-    def get_normalized_site(self, raw_site):
-        """
-        Return a normalized word indiciating the site of the game.
-        * home
-        * away
-        * neutral
-        """
-        raise NotImplementedError("This function is required for a provider.")
-
     def get_schedule_from_web(self):
         """
         Return a very long string of HTML data from the schedule URL.
@@ -120,25 +97,6 @@ class Provider(object):
         # Done for now
         return n_opponent
 
-    def get_date_range(self, date_string):
-        """
-        Return the month, year, and start/end dates for a date range.
-        """
-        if "-" not in date_string:
-            return date_string
-
-        month, days, year = date_string.split('/')
-        start_day, end_day = days.split('-')
-        start_day = int(start_day)
-        end_day = int(end_day)
-        month = int(month)
-        year = int(year)
-
-        end_day += 1
-
-        return month, year, start_day, end_day
-
-
     def get_json_entry(self, game_id, timestamp, opponent, site,
                        location, links, notes=None):
         """
@@ -159,7 +117,6 @@ class Provider(object):
         }
 
         return dict2json("raw_game", game_dict, True)
-
 
     def get_normalized_site(self, raw_site):
         """

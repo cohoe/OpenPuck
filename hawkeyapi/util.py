@@ -6,6 +6,7 @@ import json
 from bs4 import BeautifulSoup
 from urlparse import urlparse
 from datetime import datetime
+import dateutil.parser
 
 HTTP_REQUEST_HEADERS = {'User-Agent': 'Mozilla/5.0'}
 
@@ -40,15 +41,11 @@ def get_base_from_url(url):
     return n_url
 
 
-def get_combined_timestamp(date_string, date_format, time_string, time_format):
+def get_combined_timestamp(date, time):
     """
     Return a datetime object representing the local start time of a game.
     """
-
-    date_obj = datetime.strptime(date_string, date_format)
-    time_obj = datetime.strptime(time_string, time_format)
-
-    return datetime.combine(date_obj, time_obj.time())
+    return datetime.combine(date, time.time())
 
 
 def get_list_index(list_, item):
@@ -57,3 +54,9 @@ def get_list_index(list_, item):
     """
     # This will throw an exception when it's not in there
     return list_.index(item)
+
+def get_datetime_from_string(string):
+    """
+    Return an object from a given date string. Best guess.
+    """
+    return dateutil.parser.parse(string)
