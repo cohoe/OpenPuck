@@ -52,8 +52,10 @@ def get_list_index(list_, item):
     """
     For a given list, return the position of the given item.
     """
-    # This will throw an exception when it's not in there
-    return list_.index(item)
+    try:
+        return list_.index(item)
+    except ValueError:
+        return None
 
 def get_datetime_from_string(string):
     """

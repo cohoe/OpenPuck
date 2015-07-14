@@ -27,8 +27,7 @@ class TemplateProvider(Provider):
         """
         Return a list of JSON objects of the schedule.
         """
-        html = self.get_schedule_from_web()
-        soup = BeautifulSoup(html)
+        soup = BeautifulSoup(self.get_schedule_from_web())
 
         json_games = []
 
