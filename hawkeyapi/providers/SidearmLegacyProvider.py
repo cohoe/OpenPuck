@@ -11,6 +11,7 @@ class SidearmLegacyProvider(Provider):
         Provider.__init__(self)
 
         self.set_provider_urls(index_url)
+        self.provider_name = __name__
 
     def set_provider_urls(self, index_url):
         """
@@ -143,6 +144,7 @@ class SidearmLegacyProvider(Provider):
         Return a datetime object of the games start time.
         """
         time_string = details.td.find_all('em')[1].text.strip()
+        time_string = time_string.upper().replace('.', '')
 
         if "TBA" in time_string or time_string == "":
             time_string = "12:00 AM"

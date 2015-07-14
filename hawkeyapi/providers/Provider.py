@@ -19,31 +19,22 @@ class Provider(object):
         Return true or false as to if the given timestamp is a conference
         tournament game.
         """
-        if (timestamp >= DATE_CONFERENCE_TOURNAMENT_START and
-           timestamp < DATE_NATIONAL_TOURNAMENT_START):
-            return True
-
-        return False
+        return (timestamp >= DATE_CONFERENCE_TOURNAMENT_START and
+                timestamp < DATE_NATIONAL_TOURNAMENT_START)
 
     def is_national_tournament(self, timestamp):
         """
         Return true or false as to if the given timestamp is a national
         tournament game.
         """
-        if timestamp >= DATE_NATIONAL_TOURNAMENT_START:
-            return True
-
-        return False
+        return (timestamp >= DATE_NATIONAL_TOURNAMENT_START)
 
     def is_preseason(self, timestamp):
         """
         Return true of false as to if the given timestamp is a preseason
         game.
         """
-        if timestamp < DATE_SEASON_START:
-            return True
-
-        return False
+        return (timestamp < DATE_SEASON_START)
 
     def get_normalized_location(self, raw_location):
         """
@@ -112,7 +103,7 @@ class Provider(object):
             'isNatTourney': self.is_national_tournament(timestamp),
             'isPreSeason': self.is_preseason(timestamp),
             'mediaUrls': links,
-            'provider': __name__,
+            'provider': self.provider_name,
             'notes': notes,
         }
 

@@ -11,6 +11,7 @@ class TemplateProvider(Provider):
         Provider.__init__(self)
 
         self.set_provider_urls(index_url)
+        self.provider_name = __name__
 
     def set_provider_urls(self, index_url):
         """

@@ -12,6 +12,7 @@ class SidearmAdaptiveProvider(Provider):
 
         # Set up the URL information for this provider
         self.set_provider_urls(index_url)
+        self.provider_name = __name__
 
     def set_provider_urls(self, index_url):
         """
