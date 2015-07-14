@@ -1,4 +1,7 @@
-Providers
+# HockeySchedule
+Some kind of application that scrapes sports providers into a central database
+
+## Providers
 * SidearmLegacy (RIT, Clarkson)
 * SidearmAdaptive (Northeastern, Syracuse, RPI)
 * NeulionLegacy (Dartmouth)
@@ -10,3 +13,9 @@ Providers
 * PrestoSimple (UNH, Maine)
 * CBSInteractive (Boston College, Wisconsin, Penn State)
 * Streamline (Bemidji)
+
+## Extras 
+### Awards for Stupid Stuff
+* Robert Morris: for using "Noon" as a time and mixing column order
+* CBSi: For having one 4-character month ("Sept") and the rest 3.
+* RIT: For not marking their exhibition games and entering non-game events
