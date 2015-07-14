@@ -1,2 +1,3 @@
 from SidearmLegacyProvider import SidearmLegacyProvider
 from SidearmAdaptiveProvider import SidearmAdaptiveProvider
+from CBSInteractiveProvider import CBSInteractiveProvider

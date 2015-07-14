@@ -1,5 +1,6 @@
 TODO
 
-* Noramlize site, location, opponent in SidearmLegacy
-* A bunch of little TODOs in SidearmAdaptive
 * Implement the things in #1
+* Add is_tournament flag to all providers
+* Make games return objects then shit out json from those
+* Add schedule year field and have it somewhat auto calculate
