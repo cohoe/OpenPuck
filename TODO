@@ -4,3 +4,11 @@ TODO
 * Add is_tournament flag to all providers
 * Make games return objects then shit out json from those
 * Add schedule year field and have it somewhat auto calculate
+* Make season object to hold dates and things
+* Make standard function for getting schedule years from string
+* Make SidearmAdaptive schedule years function deal with extra -'s
+* Implement notes in all providers
+* Figure out team object that will handle website and season data
+* Move game timestamp parsing out of get_schedule and leave game_time/game_date instead
+* Make combine_datetime a generic function (game obj will handle combinations later)
+* date / startTime should be different fields

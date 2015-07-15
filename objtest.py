@@ -20,7 +20,14 @@ cbs_urls = [
     #'http://www.gophersports.com/sports/w-hockey/minn-w-hockey-body.html',
     #'http://www.bceagles.com/sports/w-hockey/bc-w-hockey-body.html',
     #'http://www.gopsusports.com/sports/w-hockey/psu-w-hockey-body.html',
-    'http://www.uwbadgers.com/sports/w-hockey/wis-w-hockey-body-main.html',
+    #'http://www.uwbadgers.com/sports/w-hockey/wis-w-hockey-body-main.html',
+]
+
+pm_urls = [
+    #'http://www.brownbears.com/sports/w-hockey/index',
+    #'http://merrimackathletics.com/sports/wice/index',
+    #'http://quinnipiacbobcats.com/sports/wice/index',
+    'http://sacredheartpioneers.com/sports/w-hockey/index'
 ]
 
 for legacy_url in legacy_urls:
@@ -41,6 +48,14 @@ for adaptive_url in adaptive_urls:
 
 for cbs_url in cbs_urls:
     sp = CBSInteractiveProvider(cbs_url)
+
+    print sp.urls['schedule']
+    games = sp.get_schedule()
+    for game in games:
+        print game
+
+for pm_url in pm_urls:
+    sp = PrestoMonthlyProvider(pm_url)
 
     print sp.urls['schedule']
     games = sp.get_schedule()

@@ -5,8 +5,9 @@ from hawkeyapi.CommonDates import *
 
 
 class Provider(object):
-    def __init__(self):
-        pass
+    def __init__(self, index_url):
+        url_obj = urlparse(index_url)
+        self.server = "%s://%s" % (url_obj.scheme, url_obj.netloc)
 
     def get_schedule_from_web(self):
         """
