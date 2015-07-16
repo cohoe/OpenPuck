@@ -27,7 +27,12 @@ pm_urls = [
     #'http://www.brownbears.com/sports/w-hockey/index',
     #'http://merrimackathletics.com/sports/wice/index',
     #'http://quinnipiacbobcats.com/sports/wice/index',
-    'http://sacredheartpioneers.com/sports/w-hockey/index'
+    #'http://sacredheartpioneers.com/sports/w-hockey/index'
+]
+
+ps_urls = [
+    'http://unhwildcats.com/sports/wice/index',
+    'http://goblackbears.com/sports/w-hockey/index',
 ]
 
 for legacy_url in legacy_urls:
@@ -56,6 +61,14 @@ for cbs_url in cbs_urls:
 
 for pm_url in pm_urls:
     sp = PrestoMonthlyProvider(pm_url)
+
+    print sp.urls['schedule']
+    games = sp.get_schedule()
+    for game in games:
+        print game
+
+for ps_url in ps_urls:
+    sp = PrestoSimpleProvider(ps_url)
 
     print sp.urls['schedule']
     games = sp.get_schedule()

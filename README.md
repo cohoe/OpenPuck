@@ -7,7 +7,7 @@ Some kind of application that scrapes sports providers into a central database
 * *NeulionLegacy (Dartmouth)*
 * *NeulionClassic (Princeton)*
 * *NeulionAdaptive (North Dakota)*
-* *PrestoMonthly (Brown, Merrimack, Quinnipiac, SHU)*
+* PrestoMonthly (Brown, Merrimack, Quinnipiac, SHU)
 * *PrestoLegacy (Yale)*
 * *PrestoLegacy2 (Harvard)*
 * *PrestoSimple (UNH, Maine)*

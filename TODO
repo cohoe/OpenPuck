@@ -12,3 +12,4 @@ TODO
 * Move game timestamp parsing out of get_schedule and leave game_time/game_date instead
 * Make combine_datetime a generic function (game obj will handle combinations later)
 * date / startTime should be different fields
+* Implement column lookups in PrestoSimple
