@@ -10,7 +10,7 @@ Some kind of application that scrapes sports providers into a central database
 * PrestoMonthly (Brown, Merrimack, Quinnipiac, SHU)
 * *PrestoLegacy (Yale)*
 * *PrestoLegacy2 (Harvard)*
-* *PrestoSimple (UNH, Maine)*
+* PrestoSimple (UNH, Maine)
 * CBSInteractive (Boston College, Wisconsin, Penn State)
 * *Streamline (Bemidji)*
 

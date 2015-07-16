@@ -66,23 +66,40 @@ class PrestoSimpleProvider(Provider):
 
     def get_game_entries(self, soup):
         """
-        Return a list of elements containing games. Usually divs or rows.
+        Return a list of elements containing games.
         """
-        # Skip the first since its always an empty
         games = []
+        index = 0
+        game = []
+
         table_element = soup.find('table', class_='schedule')
-        # @TODO: row0 and row1 are the same game. Parse, combine, and return both
-        for game in table_element.find_all('tr', class_=['schedule-row0', 'schedule-row1']):
-            if game.text.strip() != "":
+        for row in table_element.find_all('tr', class_=['schedule-row0', 'schedule-row1']):
+            if "schedule-row%i" % index in row['class']:
+                # This row is for the current game
+                game.append(row)
+            else:
+                # This row is for a different game
                 games.append(game)
+                # Reset the index and game holder
+                game = []
+                if index == 0:
+                    index = 1
+                else:
+                    index = 0
+                # Append to a new game
+                game.append(row)
+
+        # Flush the last bits of game we have
+        games.append(game)
 
         return games
+
 
     def get_game_site(self, game):
         """
         Return a normalized string of the games site classification.
         """
-        opponent_element = game.find_all('td')[1]
+        opponent_element = game[0].find_all('td')[1]
         if opponent_element.b:
             return self.get_normalized_site("home")
         else:
@@ -92,7 +109,7 @@ class PrestoSimpleProvider(Provider):
         """
         Return a normalized string of the games opponent.
         """
-        raw_opponent = game.find_all('td')[1].text.strip()
+        raw_opponent = game[0].find_all('td')[1].text.strip()
         raw_opponent = re.sub(r'^at ', '', raw_opponent)
         return self.get_normalized_opponent(raw_opponent)
 
@@ -105,8 +122,14 @@ class PrestoSimpleProvider(Provider):
             'video': False,
             'stats': False,
         }
-        # @TODO: Implement column lookups and something to deal with multirows
-        links_element = game.find_all('td')[5]
+
+        if len(game) >= 2:
+            # It's a Maine-style dual-row
+            links_element = game[1].find_all('td')[1]
+        else:
+            # It's a UNH-style single-row
+            links_element = game[0].find_all('td')[5]
+
         for link in links_element.find_all('a'):
             if link.text == "Live stats":
                 media_urls['stats'] = self.server + link['href']
@@ -121,7 +144,12 @@ class PrestoSimpleProvider(Provider):
         """
         Return a datetime object of the games start time.
         """
-        time_string = game.find_all('td')[4].text.strip()
+        col_index = 4
+        if len(game) >= 2:
+            col_index = 3
+        time_string = game[0].find_all('td')[col_index].text.strip().upper()
+        if re.search(r'[a-zA-Z]{3,}', time_string):
+            time_string = "12:00 AM"
 
         return get_datetime_from_string(time_string)
 
@@ -130,7 +158,7 @@ class PrestoSimpleProvider(Provider):
         Return a datetime object of the games start date.
         """
         # The field only gives us the day of the month
-        date_string = game.find_all('td')[0].text.upper().strip()
+        date_string = game[0].find_all('td')[0].text.upper().strip()
 
         # Figure out which year should be put in
         if re.search(r'SEP|OCT|NOV|DEC', date_string):
