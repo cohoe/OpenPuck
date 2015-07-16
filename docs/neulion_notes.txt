@@ -1,0 +1,16 @@
+index   http://www.dartmouthsports.com/SportSelect.dbml?SPID=4726&SPSID=48905
+sched   http://www.dartmouthsports.com/SportSelect.dbml?&DB_OEM_ID=11600&SPID=4726&SPSID=48908
+roster  http://www.dartmouthsports.com/SportSelect.dbml?&DB_OEM_ID=11600&SPID=4726&SPSID=48906
+
+
+http://www.goprincetontigers.com/SportSelect.dbml?DB_OEM_ID=10600&SPID=4275&SPSID=46915&DB_OEM_ID=10600
+http://www.goprincetontigers.com/SportSelect.dbml?SPID=4275&SPSID=46915&DB_OEM_ID=10600
+http://www.goprincetontigers.com/SportSelect.dbml?SPSID=46920&SPID=4275&DB_OEM_ID=10600
+http://www.goprincetontigers.com/SportSelect.dbml?SPSID=46920&SPID=4275&DB_OEM_ID=10600&Q_SEASON=2012
+http://www.goprincetontigers.com/SportSelect.dbml?SPSID=46918&SPID=4275&DB_OEM_ID=10600
+
+SPID = Sport ID
+SPSID = Sport Section ID
+Q_SEASON = Season start year
+DB_OEM_ID = Something consistant across all URLs
+
