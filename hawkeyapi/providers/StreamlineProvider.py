@@ -136,7 +136,6 @@ class StreamlineProvider(Provider):
         else:
             date_string = date_string + " %i" % years[1]
         
-        print date_string
         return get_datetime_from_string(date_string)
 
     def get_clean_headers(self, headers):

@@ -157,7 +157,7 @@ class PrestoMonthlyProvider(Provider):
         date_string = date_string.upper()
 
         # Figure out which year should be put in
-        if re.search(r'SEPT|OCT|NOV|DEC', date_string):
+        if re.search(r'SEP|OCT|NOV|DEC', date_string):
             date_string = date_string + " %i" % years[0]
         else:
             date_string = date_string + " %i" % years[1]

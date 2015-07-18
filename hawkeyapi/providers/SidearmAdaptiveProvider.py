@@ -154,7 +154,7 @@ class SidearmAdaptiveProvider(Provider):
         # Some of them dont even put the year. Figure it out from the doc
         # header.
         if re.search(r'[a-zA-Z]{4+}', date_string):
-            if re.search(r'SEPT|OCT|NOV|DEC', date_string):
+            if re.search(r'SEP|OCT|NOV|DEC', date_string):
                 date_string = date_string + " %i" % years[0]
             else:
                 date_string = date_string + " %i" % years[1]

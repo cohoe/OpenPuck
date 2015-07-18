@@ -57,6 +57,7 @@ neua_urls = [
 
 strline_urls = [
     'http://www.bsubeavers.com/whockey/',
+    'http://www.bsubeavers.com/mhockey/',
 ]
 
 for legacy_url in legacy_urls:
