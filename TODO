@@ -9,6 +9,5 @@ TODO
 * Make SidearmAdaptive schedule years function deal with extra -'s
 * Implement notes in all providers
 * Figure out team object that will handle website and season data
-* Move game timestamp parsing out of get_schedule and leave game_time/game_date instead
-* Make combine_datetime a generic function (game obj will handle combinations later)
 * date / startTime should be different fields
+* Make media_urls defined somewhere else first (obj???)
