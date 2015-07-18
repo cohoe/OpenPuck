@@ -3,7 +3,7 @@
 from Provider import *
 
 
-class PrestoSimpleProvider(Provider):
+class PrestoLegacyProvider(Provider):
     def __init__(self, index_url):
         """
         Constructor
@@ -68,29 +68,22 @@ class PrestoSimpleProvider(Provider):
         """
         Return a list of elements containing games.
         """
+        schedule_table = soup.find('table', class_='schedule')
+        # The bastards dont use th's!!!!
+        headers = [header.text.upper().strip() for header in schedule_table.tr.find_all('td')]
+
         games = []
-        index = 0
-        game = []
+        for row in schedule_table.find_all('tr', class_=["schedule-home", "schedule-away"]):
+            if len(row.find_all('td')) < len(headers):
+                # It's a second row that we don't care about
+                continue
 
-        table_element = soup.find('table', class_='schedule')
-        for row in table_element.find_all('tr', class_=['schedule-row0', 'schedule-row1']):
-            if "schedule-row%i" % index in row['class']:
-                # This row is for the current game
-                game.append(row)
-            else:
-                # This row is for a different game
-                games.append(game)
-                # Reset the index and game holder
-                game = []
-                if index == 0:
-                    index = 1
-                else:
-                    index = 0
-                # Append to a new game
-                game.append(row)
+            game = {}
+            for i, cell in enumerate(row.find_all('td')):
+                game[headers[i]] = cell
 
-        # Flush the last bits of game we have
-        games.append(game)
+            game['CLASS'] = row['class']
+            games.append(game)
 
         return games
 
@@ -99,17 +92,18 @@ class PrestoSimpleProvider(Provider):
         """
         Return a normalized string of the games site classification.
         """
-        opponent_element = game[0].find_all('td')[1]
-        if opponent_element.b:
+        if "schedule-home" in game['CLASS']:
             return self.get_normalized_site("home")
-        else:
+        elif "schedule-away" in game['CLASS']:
             return self.get_normalized_site("away")
+        else:
+            return self.get_noramlized_site("unknown")
 
     def get_game_opponent(self, game):
         """
         Return a normalized string of the games opponent.
         """
-        raw_opponent = game[0].find_all('td')[1].text.strip()
+        raw_opponent = game['OPPONENT'].text.strip()
         raw_opponent = re.sub(r'^at ', '', raw_opponent)
         return self.get_normalized_opponent(raw_opponent)
 
@@ -123,17 +117,7 @@ class PrestoSimpleProvider(Provider):
             'stats': False,
         }
 
-        if len(game) >= 2:
-            # It's a Maine-style dual-row
-            second_row_elements = game[1].find_all('td')
-            if len(second_row_elements) == 1:
-                links_element = second_row_elements[0]
-            else:
-                # They put a "Links:" header elemenet in there
-                links_element = second_row_elements[1]
-        else:
-            # It's a UNH-style single-row
-            links_element = game[0].find_all('td')[5]
+        links_element = game['LINKS']
 
         for link in links_element.find_all('a'):
             if link.text == "Live stats":
@@ -149,10 +133,7 @@ class PrestoSimpleProvider(Provider):
         """
         Return a datetime object of the games start time.
         """
-        col_index = 4
-        if len(game) >= 2:
-            col_index = 3
-        time_string = game[0].find_all('td')[col_index].text.strip().upper()
+        time_string = game['STATUS'].text.strip().upper()
         if re.search(r'[a-zA-Z]{3,}', time_string):
             time_string = "12:00 AM"
 
@@ -163,7 +144,7 @@ class PrestoSimpleProvider(Provider):
         Return a datetime object of the games start date.
         """
         # The field only gives us the day of the month
-        date_string = game[0].find_all('td')[0].text.upper().strip()
+        date_string = game['DATE'].text.upper().strip()
 
         # Figure out which year should be put in
         if re.search(r'SEP|OCT|NOV|DEC', date_string):

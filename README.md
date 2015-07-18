@@ -8,9 +8,8 @@ Some kind of application that scrapes sports providers into a central database
 * NeulionClassic (Princeton)
 * NeulionAdaptive (North Dakota)
 * PrestoMonthly (Brown, Merrimack, Quinnipiac, SHU)
-* *PrestoLegacy (Yale)*
-* *PrestoLegacy2 (Harvard)*
-* PrestoSimple (UNH, Maine)
+* PrestoLegacy (Yale)
+* PrestoSimple (UNH, Maine, Harvard, Yale)
 * CBSInteractive (Boston College, Wisconsin, Penn State)
 * *Streamline (Bemidji)*
 

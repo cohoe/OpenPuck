@@ -33,6 +33,11 @@ pm_urls = [
 ps_urls = [
     #'http://unhwildcats.com/sports/wice/index',
     #'http://goblackbears.com/sports/w-hockey/index',
+    #'http://www.gocrimson.com/sports/wice/index',
+]
+
+pl_urls = [
+    'http://www.yalebulldogs.com/sports/w-hockey/index',
 ]
 
 neuc_urls = [
@@ -46,8 +51,8 @@ neul_urls = [
 ]
 
 neua_urls = [
-    'http://www.undsports.com/SportSelect.dbml?SPID=6405',
-    'http://www.undsports.com/SportSelect.dbml?SPID=6403',
+    #'http://www.undsports.com/SportSelect.dbml?SPID=6405',
+    #'http://www.undsports.com/SportSelect.dbml?SPID=6403',
 ]
 
 for legacy_url in legacy_urls:
@@ -84,6 +89,14 @@ for pm_url in pm_urls:
 
 for ps_url in ps_urls:
     sp = PrestoSimpleProvider(ps_url)
+
+    print sp.urls['schedule']
+    games = sp.get_schedule()
+    for game in games:
+        print game
+
+for pl_url in pl_urls:
+    sp = PrestoLegacyProvider(pl_url)
 
     print sp.urls['schedule']
     games = sp.get_schedule()
