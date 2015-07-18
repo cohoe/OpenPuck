@@ -8,7 +8,7 @@ class SidearmAdaptiveProvider(Provider):
         """
         Constructor
         """
-        Provider.__init__(self)
+        Provider.__init__(self, index_url)
 
         # Set up the URL information for this provider
         self.set_provider_urls(index_url)
@@ -31,12 +31,13 @@ class SidearmAdaptiveProvider(Provider):
         """
         soup = BeautifulSoup(self.get_schedule_from_web())
 
+        # Years
+        page_title = soup.find('div', class_='page_title').text
+        schedule_years = self.get_data_years(page_title)
+
         json_games = []
-
-        # Some schedules dont even put the year...
-        schedule_years = self.get_schedule_years(soup)
-
         game_entries = self.get_game_entries(soup)
+
         for game in game_entries:
             # Game ID
             game_id = game['id'].split('_')[-1]
@@ -100,20 +101,6 @@ class SidearmAdaptiveProvider(Provider):
 
         return self.get_normalized_opponent(opponent)
 
-    def get_schedule_years(self, soup):
-        """
-        Return two integers representing the years of this schedule.
-        """
-        page_title = soup.find('div', class_='page_title').text
-        year_string = re.sub(r'[^\d-]', '', page_title)
-        years = year_string.split("-")
-        n_years = []
-        for year in years:
-            if len(year) < 4:
-                year = "20" + year
-            n_years.append(int(year))
-        return n_years
-
     def get_game_media_urls(self, game):
         """
         Return a normalized dictionary of media URLs.
@@ -147,19 +134,7 @@ class SidearmAdaptiveProvider(Provider):
         """
         date_string = game.find('div', class_='schedule_game_opponent_date').text.upper().strip()
 
-        # Dashes mean they dont know the schedule yet. Just do the 1st.
-        if "-" in date_string:
-            date_string = date_string.split("-")[0].strip()
-
-        # Some of them dont even put the year. Figure it out from the doc
-        # header.
-        if re.search(r'[a-zA-Z]{4+}', date_string):
-            if re.search(r'SEP|OCT|NOV|DEC', date_string):
-                date_string = date_string + " %i" % years[0]
-            else:
-                date_string = date_string + " %i" % years[1]
-
-        return get_datetime_from_string(date_string)
+        return get_datetime_from_string(date_string, years)
 
     def get_game_time(self, game):
         """
@@ -168,12 +143,5 @@ class SidearmAdaptiveProvider(Provider):
         object.
         """
         time_string = game.find('div', class_='schedule_game_opponent_time').text.strip()
-        time_string = time_string.upper().replace('.', '')
-
-        # If there are any word times
-        if "TBA" in time_string or time_string == "":
-            time_string = "12:00 AM"
-        if "NOON" in time_string:
-            time_string = "12:00 PM"
 
         return get_datetime_from_string(time_string)

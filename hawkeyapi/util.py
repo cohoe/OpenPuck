@@ -57,8 +57,38 @@ def get_list_index(list_, item):
     except ValueError:
         return None
 
-def get_datetime_from_string(string):
+def get_datetime_from_string(string, years=None):
     """
     Return an object from a given date string. Best guess.
     """
+    string = string.upper().strip()
+    # Dashes mean they dont know the schedule yet. Just do the 1st.
+    if "-" in string:
+        string = string.split("-")[0].strip()
+
+    # Sub some characters
+    if re.search(r'[A-Z]\.[A-Z]\.', string):
+        # Remove the dots from things like P.M.
+        string = string.replace('.', '')
+
+    # TBA/D
+    if "TBA" in string or string == "":
+        string = "12:00 AM"
+    if "TBD" in string or string == "":
+        string = "12:00 AM"
+    if "FINAL" in string:
+        string = "12:00 AM"
+    if "POSTPONED" in string:
+        string = "12:00 AM"
+
+    if "NOON" in string:
+        string = "12:00 PM"
+
+    # Some of them dont even put the year. Figure it out.
+    if re.search(r'[a-zA-Z]{4+}', string):
+        if re.search(r'SEP|OCT|NOV|DEC', string):
+            string = string + " %i" % years[0]
+        else:
+            string = string + " %i" % years[1]
+
     return dateutil.parser.parse(string)

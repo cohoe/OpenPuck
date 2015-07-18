@@ -34,11 +34,13 @@ class PrestoSimpleProvider(Provider):
         """
         soup = BeautifulSoup(self.get_schedule_from_web())
 
+        # Years
+        page_title = soup.title.text
+        schedule_years = self.get_data_years(page_title)
+
         json_games = []
-
-        schedule_years = self.get_schedule_years(soup)
-
         game_entries = self.get_game_entries(soup)
+
         for game in game_entries:
             # They do not provide a common location field, so
             # we have to assume it is not there. Sometimes it's given in the
@@ -165,26 +167,4 @@ class PrestoSimpleProvider(Provider):
         # The field only gives us the day of the month
         date_string = game[0].find_all('td')[0].text.upper().strip()
 
-        # Figure out which year should be put in
-        if re.search(r'SEP|OCT|NOV|DEC', date_string):
-            date_string = date_string + " %i" % years[0]
-        else:
-            date_string = date_string + " %i" % years[1]
-
-        return get_datetime_from_string(date_string)
-
-    def get_schedule_years(self, soup):
-        """
-        Return two integers representing the years of this schedule
-        """
-        page_title = soup.title.text
-        year_string = re.sub(r'[^\d-]', '', page_title)
-        years = year_string.split("-")
-        n_years = []
-        for year in years:
-            if len(year) == 2:
-                year = "20" + year
-            if len(year) == 4:
-                n_years.append(int(year))
-
-        return n_years
+        return get_datetime_from_string(date_string, years)

@@ -136,3 +136,26 @@ class Provider(object):
         Used for teams that do not have their own gameids
         """
         return "%i%i%i%i" % (timestamp.year, timestamp.month, timestamp.day, timestamp.hour)
+
+    def get_data_years(self, string):
+        """
+        Return two integers representing the years of a data set from
+        a string (usually the title).
+        """
+        year_string = re.sub(r'[^\d-]', '', string)
+        years = year_string.split("-")
+        n_years = []
+        for year in years:
+            if len(year) == 2:
+                year = "20" + year
+            if len(year) == 4:
+                n_years.append(int(year))
+
+        return n_years
+
+    def get_id_from_string(self, string):
+        """
+        Return an integer ID from a given string by striping out
+        all non-number characters.
+        """
+        return int(re.sub(r'[^\d]', '', string))

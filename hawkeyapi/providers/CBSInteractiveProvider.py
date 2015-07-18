@@ -8,7 +8,7 @@ class CBSInteractiveProvider(Provider):
         """
         Constructor
         """
-        Provider.__init__(self)
+        Provider.__init__(self, index_url)
 
         self.set_provider_urls(index_url)
         self.provider_name = __name__
@@ -38,16 +38,19 @@ class CBSInteractiveProvider(Provider):
         """
         soup = BeautifulSoup(self.get_schedule_from_web())
 
-        json_games = []
+        # Years
+        page_title = soup.find('div', class_='compositetitle').text
+        schedule_years = self.get_data_years(page_title)
 
-        year = self.get_schedule_year(soup)
+        json_games = []
         game_entries = self.get_game_entries(soup)
 
         for game in game_entries:
             # Game ID
-            game_id = int(game['id'])
+            raw_game_id = game['id']
+            game_id = self.get_id_from_string(game['id'])
             # Details
-            details_soup = self.get_game_details(year, game_id)
+            details_soup = self.get_game_details(schedule_years[0], raw_game_id)
             # Location
             location = self.get_game_location(details_soup)
             # Site
@@ -101,7 +104,13 @@ class CBSInteractiveProvider(Provider):
         if is_neutral == "yes":
             return self.get_normalized_site("neutral")
 
-        home_code = game.find('home')['code']
+        # If it has no home_element, then its likely an exhibition
+        home_element = game.find('home')
+        if home_element:
+            home_code = game.find('home')['code']
+        else:
+            return self.get_normalized_site("home")
+
         if my_code == home_code:
             return self.get_normalized_site("home")
 
@@ -112,14 +121,19 @@ class CBSInteractiveProvider(Provider):
         Return a normalized string of the games opponent.
         """
         my_code = game.find('event')['school']
-        home_code = game.find('home')['code']
 
-        if my_code == home_code:
-            # I am home, get the away team
-            raw_opponent = game.find('away')['opp']
+        home_element = game.find('home')
+        if home_element:
+            home_code = game.find('home')['code']
+            if my_code == home_code:
+                # I am home, get the away team
+                raw_opponent = game.find('away')['opp']
+            else:
+                raw_opponent = game.find('home')['opp']
         else:
-            raw_opponent = game.find('home')['opp']
-            
+            # Its one of those funky exhibitions
+            raw_opponent = game.find('event')['event_name']
+
         return self.get_normalized_opponent(raw_opponent)
 
     def get_game_media_urls(self, game):
@@ -145,9 +159,6 @@ class CBSInteractiveProvider(Provider):
         """
         time_string = game.find('detail')['time'].strip()
 
-        if "TBA" in time_string or time_string == "":
-            time_string = "12:00 AM"
-
         return get_datetime_from_string(time_string)
 
     def get_game_date(self, game):
@@ -161,16 +172,9 @@ class CBSInteractiveProvider(Provider):
 
         return get_datetime_from_string(date_string)
 
-    def get_schedule_year(self, soup):
-        """
-        Figure out what year we are in.
-        """
-        title = soup.find('div', class_='compositetitle').text
-        return int(title.split("-")[0])
-
     def get_game_details(self, year, game_id):
         """
         Return the detail schedule information for a game.
         """
-        game_url = self.urls['event_data'] + "%i/%i.xml" % (year, game_id)
+        game_url = self.urls['event_data'] + "%i/%s.xml" % (year, game_id)
         return BeautifulSoup(get_html_from_url(game_url))

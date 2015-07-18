@@ -8,7 +8,7 @@ class SidearmLegacyProvider(Provider):
         """
         Constructor
         """
-        Provider.__init__(self)
+        Provider.__init__(self, index_url)
 
         self.set_provider_urls(index_url)
         self.provider_name = __name__
@@ -145,12 +145,6 @@ class SidearmLegacyProvider(Provider):
         Return a datetime object of the games start time.
         """
         time_string = details.td.find_all('em')[1].text.strip()
-        time_string = time_string.upper().replace('.', '')
-
-        if "TBA" in time_string or time_string == "":
-            time_string = "12:00 AM"
-        if "NOON" in time_string:
-            time_string = "12:00 PM"
 
         return get_datetime_from_string(time_string)
 
@@ -160,7 +154,5 @@ class SidearmLegacyProvider(Provider):
         """
         date_col_index = get_list_index(self.schedule_headers, "DATE")
         date_string = game.find_all('td')[date_col_index].text.strip()
-        if "-" in date_string:
-            date_string = date_string.split("-")[0].strip()
 
         return get_datetime_from_string(date_string)

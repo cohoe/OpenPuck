@@ -31,10 +31,12 @@ class NeulionAdaptiveProvider(Provider):
         """
         soup = BeautifulSoup(self.get_schedule_from_web())
 
-        json_games = []
+        # Years
+        page_title = soup.find(id='schedule-table').caption.text
+        schedule_years = self.get_data_years(page_title)
 
+        json_games = []
         game_entries = self.get_game_entries(soup)
-        schedule_years = self.get_schedule_years(soup)
 
         for game in game_entries:
             # Location
@@ -117,12 +119,7 @@ class NeulionAdaptiveProvider(Provider):
         """
         Return a datetime object of the games start time.
         """
-        time_element = game.find('td', class_='time')
-        time_string = time_element.text
-        if "TBA" in time_string:
-            time_string = "12:00 AM"
-
-
+        time_string = game.find('td', class_='time').text
         return get_datetime_from_string(time_string)
 
     def get_game_date(self, game, years):
@@ -132,26 +129,4 @@ class NeulionAdaptiveProvider(Provider):
         date_element = game.find('td', class_='date').div
         date_string = date_element.text.strip().upper()
 
-        # Figure out which year should be put in
-        if re.search(r'SEP|OCT|NOV|DEC', date_string):
-            date_string = date_string + " %i" % years[0]
-        else:
-            date_string = date_string + " %i" % years[1]
-
         return get_datetime_from_string(date_string)
-
-    def get_schedule_years(self, soup):
-        """
-        Return two integers representing the years of this schedule
-        """
-        page_title = soup.find(id='schedule-table').caption.text
-        year_string = re.sub(r'[^\d-]', '', page_title)
-        years = year_string.split("-")
-        n_years = []
-        for year in years:
-            if len(year) == 2:
-                year = "20" + year
-            if len(year) == 4:
-                n_years.append(int(year))
-
-        return n_years

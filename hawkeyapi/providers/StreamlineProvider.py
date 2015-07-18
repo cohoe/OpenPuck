@@ -30,10 +30,12 @@ class StreamlineProvider(Provider):
         """
         soup = BeautifulSoup(self.get_schedule_from_web())
 
-        json_games = []
+        # Years
+        page_title = soup.find('div', class_='listname').text
+        schedule_years = self.get_data_years(page_title)
 
+        json_games = []
         game_entries = self.get_game_entries(soup)
-        schedule_years = self.get_schedule_years(soup)
 
         for game in game_entries:
             # Location
@@ -122,8 +124,6 @@ class StreamlineProvider(Provider):
         """
         time_string = game['TIME'].text
 
-        if "TBA" in time_string:
-            time_string = "12:00 AM"
         return get_datetime_from_string(time_string)
 
     def get_game_date(self, game, years):
@@ -131,12 +131,8 @@ class StreamlineProvider(Provider):
         Return a datetime object of the games start date.
         """
         date_string = game['DATE'].text.upper().strip()
-        if re.search(r'SEP|OCT|NOV|DEC', date_string):
-            date_string = date_string + " %i" % years[0]
-        else:
-            date_string = date_string + " %i" % years[1]
         
-        return get_datetime_from_string(date_string)
+        return get_datetime_from_string(date_string, years)
 
     def get_clean_headers(self, headers):
         """
@@ -158,7 +154,6 @@ class StreamlineProvider(Provider):
         """
         Return two integers representing the years of this schedule
         """
-        page_title = soup.find('div', class_='listname').text
         year_string = re.sub(r'[^\d-]', '', page_title)
         years = year_string.split("-")
         n_years = []

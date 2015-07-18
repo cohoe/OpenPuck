@@ -34,11 +34,12 @@ class PrestoMonthlyProvider(Provider):
         """
         soup = BeautifulSoup(self.get_schedule_from_web())
 
-        json_games = []
-
-        schedule_years = self.get_schedule_years(soup)
+        # Years
+        page_title = soup.title.text
+        schedule_years = self.get_data_years(page_title)
         month = ""
 
+        json_games = []
         game_entries = self.get_game_entries(soup)
         for game in game_entries:
             if game['class'][0] == "month-title":
@@ -132,16 +133,7 @@ class PrestoMonthlyProvider(Provider):
         """
         Return a datetime object of the games start time.
         """
-        time_element = game.find('td', class_='e_status')
-        time_string = time_element.text.strip()
-        # If the game is over, it will switch to saying "Final"
-        if "Final" in time_string:
-            time_string = "12:00 AM"
-        # Seperate structure since I dont know what else we'll need
-        if "TBA" in time_string:
-            time_string = "12:00 AM"
-        if "Postponed" in time_string:
-            raise Exception("postponed")
+        time_string = game.find('td', class_='e_status').text.strip()
 
         return get_datetime_from_string(time_string)
 
@@ -156,26 +148,4 @@ class PrestoMonthlyProvider(Provider):
         date_string = "%s %i" % (month, day)
         date_string = date_string.upper()
 
-        # Figure out which year should be put in
-        if re.search(r'SEP|OCT|NOV|DEC', date_string):
-            date_string = date_string + " %i" % years[0]
-        else:
-            date_string = date_string + " %i" % years[1]
-
-        return get_datetime_from_string(date_string)
-
-    def get_schedule_years(self, soup):
-        """
-        Return two integers representing the years of this schedule
-        """
-        page_title = soup.title.text
-        year_string = re.sub(r'[^\d-]', '', page_title)
-        years = year_string.split("-")
-        n_years = []
-        for year in years:
-            if len(year) == 2:
-                year = "20" + year
-            if len(year) == 4:
-                n_years.append(int(year))
-
-        return n_years
+        return get_datetime_from_string(date_string, years)

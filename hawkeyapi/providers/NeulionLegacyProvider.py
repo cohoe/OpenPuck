@@ -31,10 +31,13 @@ class NeulionLegacyProvider(Provider):
         """
         soup = BeautifulSoup(self.get_schedule_from_web())
 
-        json_games = []
+        # Years
+        # You people should be ashamed of yourselves....
+        page_title = soup.table.table.td.text
+        schedule_years = self.get_data_years(page_title)
 
         game_entries = self.get_game_entries(soup)
-        schedule_years = self.get_schedule_years(soup)
+        json_games = []
 
         for game in game_entries:
             # Location
@@ -133,8 +136,6 @@ class NeulionLegacyProvider(Provider):
                 break
 
         time_string = game[time_header].text.strip()
-        if "TBA" in time_string:
-            time_string = "12:00 AM"
 
         return get_datetime_from_string(time_string)
 
@@ -143,23 +144,13 @@ class NeulionLegacyProvider(Provider):
         Return a datetime object of the games start date.
         """
         date_string = game['DATE'].text.strip().upper()
-        if "-" in date_string:
-            date_string = date_string.split("-")[0].strip()
 
-        # Figure out which year should be put in
-        if re.search(r'SEP|OCT|NOV|DEC', date_string):
-            date_string = date_string + " %i" % years[0]
-        else:
-            date_string = date_string + " %i" % years[1]
-
-        return get_datetime_from_string(date_string)
+        return get_datetime_from_string(date_string, years)
 
     def get_schedule_years(self, soup):
         """
         Return two integers representing the years of this schedule
         """
-        # You people should be ashamed of yourselves....
-        page_title = soup.table.table.td.text
         year_string = re.sub(r'[^\d-]', '', page_title)
         years = year_string.split("-")
         n_years = []

@@ -5,7 +5,6 @@ TODO
 * Make SidearmAdaptive schedule years function deal with extra dashes
 
 ## Organization
-* Move get_schedule_years to be generic parsing from input string
 * Implement get_date_string_with_year(string, years)
 * add and implement get_noramlized_date_string and get_normalized_time_string
 * Make media_urls defined somewhere else first (obj???)
@@ -13,7 +12,6 @@ TODO
 * Implement notes in all providers
 * Reimplement SidearmLegacy to use the table-as-a-dict functionality
 * Fix the Neulion provider that passes text and not elements
-
 
 ## Features
 ### Objects
