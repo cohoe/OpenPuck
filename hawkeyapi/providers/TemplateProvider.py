@@ -35,11 +35,19 @@ class TemplateProvider(Provider):
 
         for game in game_entries:
             # Game ID
+
             # Location
+            location = self.get_game_location(game)
             # Site
+            site = self.get_game_site(game)
             # Opponent
+            opponent = self.get_game_opponent(game)
             # Links
+            links = self.get_game_media_urls(game)
             # Timestamp
+            game_time = self.get_game_time(game)
+            game_date = self.get_game_date(game)
+            timestamp = get_combined_timestamp(game_date, game_time)
 
             json_game = self.get_json_entry(game_id, timestamp, opponent, site, location, links)
             json_games.append(json_game)
@@ -55,6 +63,7 @@ class TemplateProvider(Provider):
         """
         Return a normalized string of the games location.
         """
+        return self.get_normalized_location(location)
 
     def get_game_site(self, game):
         """
@@ -65,25 +74,30 @@ class TemplateProvider(Provider):
         """
         Return a normalized string of the games opponent.
         """
+        return self.get_normalized_opponent(opponent)
 
     def get_game_media_urls(self, game):
         """
         Locate the media URLs from the details box.
         """
+        media_urls = {
+            'audio': False,
+            'video': False,
+            'stats': False,
+        }
+
+        return media_urls
 
     def get_game_time(self, game):
         """
         Return a datetime object of the games start time.
         """
 
+        return get_datetime_from_string(time_string)
+
     def get_game_date(self, game):
         """
         Return a datetime object of the games start date.
         """
 
-    def get_game_timestamp(self, game):
-        """
-        Return a datetime object representing the start time of the game.
-        """
-
-        return datetime.combine(game_date, game_time.time())
+        return get_datetime_from_string(date_string)

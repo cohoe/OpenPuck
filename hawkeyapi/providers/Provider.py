@@ -50,6 +50,9 @@ class Provider(object):
         # Remove duplicate spaces
         n_location = re.sub(r'\s+', ' ', n_location)
 
+        # Remove AT
+        n_location = re.sub(r'^AT ', '', n_location)
+
         # Done for now
         return n_location
 
@@ -122,3 +125,10 @@ class Provider(object):
             return "neutral"
         else:
             return "UNKNOWN"
+    
+    def get_gameid_from_timestamp(self, timestamp):
+        """
+        Return a gameID value from a given timestamp.
+        Used for teams that do not have their own gameids
+        """
+        return "%i%i%i%i" % (timestamp.year, timestamp.month, timestamp.day, timestamp.hour)

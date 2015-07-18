@@ -49,7 +49,9 @@ class SidearmAdaptiveProvider(Provider):
             # Links
             links = self.get_game_media_urls(game)
             # Timestamp
-            timestamp = self.get_game_timestamp(game, schedule_years)
+            game_date = self.get_game_date(game, schedule_years)
+            game_time = self.get_game_time(game)
+            timestamp = get_combined_timestamp(game_date, game_time)
 
             json_game = self.get_json_entry(game_id, timestamp, opponent, site, location, links)
             json_games.append(json_game)
@@ -175,12 +177,3 @@ class SidearmAdaptiveProvider(Provider):
             time_string = "12:00 PM"
 
         return get_datetime_from_string(time_string)
-
-    def get_game_timestamp(self, game, years):
-        """
-        Return a datetime object representing the start time of the game.
-        """
-        game_date = self.get_game_date(game, years)
-        game_time = self.get_game_time(game)
-
-        return datetime.combine(game_date, game_time.time())

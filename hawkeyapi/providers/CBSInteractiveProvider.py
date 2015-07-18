@@ -57,7 +57,9 @@ class CBSInteractiveProvider(Provider):
             # Links
             links = self.get_game_media_urls(details_soup)
             # Timestamp
-            timestamp = self.get_game_timestamp(details_soup)
+            game_date = self.get_game_date(details_soup)
+            game_time = self.get_game_time(details_soup)
+            timestamp = get_combined_timestamp(game_date, game_time)
 
             json_game = self.get_json_entry(game_id, timestamp, opponent, site, location, links)
             json_games.append(json_game)
@@ -158,15 +160,6 @@ class CBSInteractiveProvider(Provider):
             date_string = re.sub(r'SEPT', 'SEP', date_string)
 
         return get_datetime_from_string(date_string)
-
-    def get_game_timestamp(self, game):
-        """
-        Return a datetime object representing the start time of the game.
-        """
-        game_date = self.get_game_date(game)
-        game_time = self.get_game_time(game)
-
-        return datetime.combine(game_date, game_time.time())
 
     def get_schedule_year(self, soup):
         """
