@@ -60,18 +60,11 @@ class PrestoMonthlyProvider(Provider):
             # Links
             links = self.get_game_media_urls(game)
             # Timestamp
-            try:
-                game_date = self.get_game_date(game, month, schedule_years)
-                game_time = self.get_game_time(game)
-                timestamp = datetime.combine(game_date, game_time.time())
-            except Exception as e:
-                if e.message == "postponed":
-                    continue
-                else:
-                    raise Exception(e)
+            game_date = self.get_game_date(game, month, schedule_years)
+            game_time = self.get_game_time(game)
+            timestamp = datetime.combine(game_date, game_time.time())
             # Game ID
-            # They don't have game_id's, so lets build one
-            game_id = "%i%i%i%i" % (timestamp.year, timestamp.month, timestamp.day, timestamp.hour)
+            game_id = get_id_from_timestamp(timestamp)
 
             json_game = self.get_json_entry(game_id, timestamp, opponent, site, location, links)
             json_games.append(json_game)

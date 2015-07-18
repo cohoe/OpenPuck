@@ -58,8 +58,7 @@ class PrestoSimpleProvider(Provider):
             timestamp = get_combined_timestamp(game_date, game_time)
 
             # Game ID
-            # They don't have game_id's, so lets build one
-            game_id = "%i%i%i%i" % (timestamp.year, timestamp.month, timestamp.day, timestamp.hour)
+            game_id = get_id_from_timestamp(timestamp)
 
             json_game = self.get_json_entry(game_id, timestamp, opponent, site, location, links)
             json_games.append(json_game)
