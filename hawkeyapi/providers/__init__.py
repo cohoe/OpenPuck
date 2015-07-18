@@ -4,3 +4,4 @@ from CBSInteractiveProvider import CBSInteractiveProvider
 from PrestoMonthlyProvider import PrestoMonthlyProvider
 from PrestoSimpleProvider import PrestoSimpleProvider
 from NeulionClassicProvider import NeulionClassicProvider
+from NeulionLegacyProvider import NeulionLegacyProvider

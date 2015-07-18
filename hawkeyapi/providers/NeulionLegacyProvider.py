@@ -3,7 +3,7 @@
 from Provider import *
 
 
-class NeulionClassicProvider(Provider):
+class NeulionLegacyProvider(Provider):
     def __init__(self, index_url):
         """
         Constructor
@@ -22,7 +22,7 @@ class NeulionClassicProvider(Provider):
 
         self.urls = {
             'index': index_url,
-            'schedule': self.server + soup.find(id='section-menu').find('a', text="SCHEDULE")['href']
+            'schedule': self.server + soup.find(id='section-menu').find('a', text="Schedules/Results")['href']
         }
 
     def get_schedule(self):
@@ -61,54 +61,64 @@ class NeulionClassicProvider(Provider):
         """
         Return a list of elements containing games. Usually divs or rows.
         """
-        schedule_table = soup.find(id="schedule-table")
+        schedule_table = soup.find('table', class_="ScheduleTable")
         headers = [header.text.upper().strip() for header in schedule_table.find_all('th')]
         results = []
         for row in schedule_table.find_all('tr'):
             game = {}
             for i, cell in enumerate(row.find_all('td')):
-                game[headers[i]] = cell.text
-
-            if "tournament-head" in row['class'] or "tournament-end" in row['class']:
-                continue
-
-            game['CLASS'] = row['class']
-            results.append(game)
+                game[headers[i]] = cell
+            if game and len(game.keys()) == len(headers):
+                results.append(game)
         return results
 
     def get_game_location(self, game):
         """
         Return a normalized string of the games location.
         """
-        return self.get_normalized_location(game['LOCATION'])
+        return self.get_normalized_location(game['LOCATION'].text)
 
     def get_game_site(self, game):
         """
         Return a normalized string of the games site classification.
         """
-        if "home" in game['CLASS']:
+        if "highlight" in game['OPPONENT'].font['class']:
             return self.get_normalized_site("home")
-        elif "tournament" in game['CLASS']:
-            return self.get_normalized_site("neutral")
-        else:
+        elif "sm" in game['OPPONENT'].font['class']:
             return self.get_normalized_site("away")
+        else:
+            return self.get_noramlized_site("unknown")
 
     def get_game_opponent(self, game):
         """
         Return a normalized string of the games opponent.
         """
-        return self.get_normalized_opponent(game['OPPONENT'])
+        return self.get_normalized_opponent(game['OPPONENT'].text)
 
     def get_game_media_urls(self, game):
         """
         Locate the media URLs from the details box.
         """
-        # @TODO: This needs implemented when data is actually available
         media_urls = {
             'audio': False,
             'video': False,
             'stats': False,
         }
+
+        media_element = game['MEDIA']
+        for link in media_element.find_all('a'):
+            link_text = link.text.strip()
+            # @TODO This is somewhat institution specific. Likely
+            # need to add more stuff here.
+            if "ILDN" in link_text:
+                media_urls['video'] = link['href']
+
+            title = link.get("title")
+            if title and "Live Stats" in title:
+                media_urls['stats'] = self.server + link['href']
+
+            if "iheart" in link['href']:
+                media_urls['audio'] = link['href']
 
         return media_urls
 
@@ -121,13 +131,20 @@ class NeulionClassicProvider(Provider):
             if "TIME" in header:
                 time_header = header
                 break
-        return get_datetime_from_string(game[time_header])
+
+        time_string = game[time_header].text.strip()
+        if "TBA" in time_string:
+            time_string = "12:00 AM"
+
+        return get_datetime_from_string(time_string)
 
     def get_game_date(self, game, years):
         """
         Return a datetime object of the games start date.
         """
-        date_string = game['DATE'].strip().upper()
+        date_string = game['DATE'].text.strip().upper()
+        if "-" in date_string:
+            date_string = date_string.split("-")[0].strip()
 
         # Figure out which year should be put in
         if re.search(r'SEP|OCT|NOV|DEC', date_string):
@@ -141,7 +158,8 @@ class NeulionClassicProvider(Provider):
         """
         Return two integers representing the years of this schedule
         """
-        page_title = soup.find('div', class_='title_header').find('div', class_=['top-color']).text
+        # You people should be ashamed of yourselves....
+        page_title = soup.table.table.td.text
         year_string = re.sub(r'[^\d-]', '', page_title)
         years = year_string.split("-")
         n_years = []

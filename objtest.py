@@ -37,7 +37,12 @@ ps_urls = [
 
 neuc_urls = [
     #'http://www.goprincetontigers.com/SportSelect.dbml?DB_OEM_ID=10600&SPID=4264&SPSID=46867&DB_OEM_ID=10600',
-    'http://www.goprincetontigers.com/SportSelect.dbml?DB_OEM_ID=10600&SPID=4275&SPSID=46915&DB_OEM_ID=10600',
+    #'http://www.goprincetontigers.com/SportSelect.dbml?DB_OEM_ID=10600&SPID=4275&SPSID=46915&DB_OEM_ID=10600',
+]
+
+neul_urls = [
+    #'http://www.dartmouthsports.com/SportSelect.dbml?&DB_OEM_ID=11600&SPID=4726&SPSID=48905',
+    'http://www.dartmouthsports.com/SportSelect.dbml?DB_OEM_ID=11600&SPID=4728&SPSID=48935&DB_OEM_ID=11600',
 ]
 
 for legacy_url in legacy_urls:
@@ -82,6 +87,14 @@ for ps_url in ps_urls:
 
 for neuc_url in neuc_urls:
     sp = NeulionClassicProvider(neuc_url)
+
+    print sp.urls['schedule']
+    games = sp.get_schedule()
+    for game in games:
+        print game
+
+for neul_url in neul_urls:
+    sp = NeulionLegacyProvider(neul_url)
 
     print sp.urls['schedule']
     games = sp.get_schedule()

@@ -11,3 +11,6 @@ TODO
 * Figure out team object that will handle website and season data
 * date / startTime should be different fields
 * Make media_urls defined somewhere else first (obj???)
+* add and implement get_noramlized_date_string and get_normalized_time_string
+* Implement get_date_string_with_year(string, years)
+* Move get_schedule_years to be generic parsing from input string

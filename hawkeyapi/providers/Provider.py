@@ -44,6 +44,9 @@ class Provider(object):
         # Make it all uppercase
         n_location = raw_location.upper()
 
+        # Turn slashes into spaces just to make life a bit nicer
+        n_location = re.sub(r'[\/\\]', ' ', n_location)
+
         # Remove special characters
         n_location = re.sub(r'[^\w ]', '', n_location)
 
