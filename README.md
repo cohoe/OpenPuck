@@ -11,14 +11,14 @@ Some kind of application that scrapes sports providers into a central database
 * PrestoLegacy (Yale)
 * PrestoSimple (UNH, Maine, Harvard, Yale)
 * CBSInteractive (Boston College, Wisconsin, Penn State)
-* *Streamline (Bemidji)*
-
-*not completed*
+* Streamline (Bemidji)
 
 ## Extras 
 ### Awards for Stupid Stuff
 * Robert Morris: for using "Noon" as a time and mixing column order
 * CBSi: For having one 4-character month ("Sept") and the rest 3.
-* RIT: For not marking their exhibition games and entering non-game events
-* Neulion: For having the grossest URL structure
+* RIT: For not marking their exhibition games
+* Neulion (and all who use it): For having the grossest URL structure
 * Dartmouth: For using the oldest grossest Neulion application ever
+* Bemidji: For being the only one to use a different technology
+* Yale: For bastardizing their site to require its own provider
