@@ -37,7 +37,7 @@ ps_urls = [
 ]
 
 pl_urls = [
-    'http://www.yalebulldogs.com/sports/w-hockey/index',
+    #'http://www.yalebulldogs.com/sports/w-hockey/index',
 ]
 
 neuc_urls = [
@@ -53,6 +53,10 @@ neul_urls = [
 neua_urls = [
     #'http://www.undsports.com/SportSelect.dbml?SPID=6405',
     #'http://www.undsports.com/SportSelect.dbml?SPID=6403',
+]
+
+strline_urls = [
+    'http://www.bsubeavers.com/whockey/',
 ]
 
 for legacy_url in legacy_urls:
@@ -121,6 +125,14 @@ for neul_url in neul_urls:
 
 for neua_url in neua_urls:
     sp = NeulionAdaptiveProvider(neua_url)
+
+    print sp.urls['schedule']
+    games = sp.get_schedule()
+    for game in games:
+        print game
+
+for strline_url in strline_urls:
+    sp = StreamlineProvider(strline_url)
 
     print sp.urls['schedule']
     games = sp.get_schedule()

@@ -8,7 +8,7 @@ class TemplateProvider(Provider):
         """
         Constructor
         """
-        Provider.__init__(self)
+        Provider.__init__(self, index_url)
 
         self.set_provider_urls(index_url)
         self.provider_name = __name__

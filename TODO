@@ -15,3 +15,4 @@ TODO
 * Implement get_date_string_with_year(string, years)
 * Move get_schedule_years to be generic parsing from input string
 * add isConference flag
+* isPreSeason is totally busted and isn't going to work without a season object

@@ -82,6 +82,7 @@ class Provider(object):
         # Remove rankings if that is given
         n_opponent = re.sub(r'^\d+ ', '', n_opponent)
         n_opponent = re.sub(r'NO \d([\/\d]+)?', '', n_opponent)
+        n_opponent = n_opponent.strip()
 
         # If they say the opponent is "at", remove it
         n_opponent = re.sub(r'^AT ', '', n_opponent)
@@ -89,7 +90,7 @@ class Provider(object):
         # Same with "vs"
         n_opponent = re.sub(r'^VS ', '', n_opponent)
 
-        # Lastly, strip it up
+        # Lastly, strip it up again
         n_opponent = n_opponent.strip()
 
         # Done for now

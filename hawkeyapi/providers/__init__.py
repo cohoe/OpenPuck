@@ -7,3 +7,4 @@ from PrestoLegacyProvider import PrestoLegacyProvider
 from NeulionClassicProvider import NeulionClassicProvider
 from NeulionLegacyProvider import NeulionLegacyProvider
 from NeulionAdaptiveProvider import NeulionAdaptiveProvider
+from StreamlineProvider import StreamlineProvider
