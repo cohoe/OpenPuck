@@ -4,9 +4,9 @@ Some kind of application that scrapes sports providers into a central database
 ## Providers
 * SidearmLegacy (RIT, Clarkson)
 * SidearmAdaptive (Northeastern, Syracuse, RPI)
-* *NeulionLegacy (Dartmouth)*
+* NeulionLegacy (Dartmouth)
 * NeulionClassic (Princeton)
-* *NeulionAdaptive (North Dakota)*
+* NeulionAdaptive (North Dakota)
 * PrestoMonthly (Brown, Merrimack, Quinnipiac, SHU)
 * *PrestoLegacy (Yale)*
 * *PrestoLegacy2 (Harvard)*
