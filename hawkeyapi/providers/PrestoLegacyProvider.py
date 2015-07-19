@@ -62,7 +62,7 @@ class PrestoLegacyProvider(Provider):
             conference = self.get_game_conference(game)
 
             # They don't have game_id's, so lets build one
-            game = ScheduleEntry(game_id, timestamp, opponent, site, location, links, conference)
+            game = ScheduleEntry(game_id, timestamp, opponent, site, location, links, conference, schedule_years)
             games.append(game)
 
         return games

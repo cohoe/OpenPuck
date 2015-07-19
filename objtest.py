@@ -11,7 +11,7 @@ legacy_urls = [
 ]
 
 adaptive_urls = [
-    #'http://www.gonu.com/index.aspx?path=whockey',
+    'http://www.gonu.com/index.aspx?path=whockey',
     #'http://hurstathletics.com/index.aspx?path=whockey',
     #'http://msumavericks.com/index.aspx?path=whockey',
     #'http://cuse.com/index.aspx?path=wice',
@@ -57,8 +57,8 @@ neua_urls = [
 ]
 
 strline_urls = [
-    'http://www.bsubeavers.com/whockey/',
-    'http://www.bsubeavers.com/mhockey/',
+    #'http://www.bsubeavers.com/whockey/',
+    #'http://www.bsubeavers.com/mhockey/',
 ]
 
 for legacy_url in legacy_urls:

@@ -31,8 +31,10 @@ class SidearmLegacyProvider(Provider):
         """
         soup = BeautifulSoup(self.get_schedule_from_web())
 
-        games = []
+        # Years
+        schedule_years = self.get_data_years(soup.title.text)
 
+        games = []
         game_entries = self.get_game_entries(soup)
 
         for game in game_entries:
@@ -54,7 +56,7 @@ class SidearmLegacyProvider(Provider):
             # Conference
             conference = self.get_game_conference(game)
 
-            game = ScheduleEntry(game_id, timestamp, opponent, site, location, links, conference)
+            game = ScheduleEntry(game_id, timestamp, opponent, site, location, links, conference, schedule_years)
             games.append(game)
 
         return games
@@ -68,7 +70,7 @@ class SidearmLegacyProvider(Provider):
         for header in schedule_table.tr.find_all('th'):
             raw_header = header.text.upper().strip()
             raw_header = re.sub(r'[^\w ]', '', raw_header)
-            if raw_header == '' or raw_header == 'CHA':
+            if raw_header == '' or raw_header == 'CHA' or raw_header == 'AHA':
                 # Its the Clarkson conference header
                 raw_header = 'CONF'
             headers.append(raw_header)
