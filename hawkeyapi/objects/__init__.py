@@ -1,3 +1,3 @@
 #!/usr/bin/env python
 
-from Game import Game
+from ScheduleEntry import ScheduleEntry

@@ -3,7 +3,7 @@
 from HawkeyApiObject import HawkeyApiObject 
 from hawkeyapi.CommonDates import *
 
-class Game(HawkeyApiObject):
+class ScheduleEntry(HawkeyApiObject):
     def __init__(self, id, timestamp, opponent, site, location, links):
         HawkeyApiObject.__init__(self)
 

@@ -53,10 +53,8 @@ class SidearmLegacyProvider(Provider):
             game_date = self.get_game_date(game)
             timestamp = get_combined_timestamp(game_date, game_time)
 
-            json_game = self.get_json_entry(game_id, timestamp, opponent, site, location, links)
-            game = Game(game_id, timestamp, opponent, site, location, links)
+            game = ScheduleEntry(game_id, timestamp, opponent, site, location, links)
             games.append(game)
-            break
 
         return games
 

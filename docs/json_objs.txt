@@ -1,0 +1,25 @@
+{
+    "Conference": {
+        "name": "College Hockey America",
+        "abbreviation": "CHA",
+        "members": [
+            {
+                schoolName: "ROCHESTER INSTITUTE OF TECHNOLOGY",
+                schoolId: ASDJSKDFJKAOGD???,
+                memberSince: 2012,
+            },
+            {
+                schoolName: "PENN STATE UNIVERSITY",
+                memberSince: 2012,
+            }
+        ]
+    }
+}
+
+{
+    "Season": {
+        id: "2015-16",
+        startYear: 2015,
+        endYear: 2016,
+    }
+}
