@@ -6,14 +6,12 @@ TODO
 ## Organization
 
 ## Data Integrity
-* links should be None, not False
 
 ## Features
 ### Objects
 * Make season object to hold dates and things
 * Figure out team object that will handle website and season data
 * Make games return objects then shit out json from those
-* Make media_urls defined somewhere else first (obj???)
 
 ### Fields
 * add isConference flag
