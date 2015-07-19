@@ -2,6 +2,7 @@
 
 from HawkeyApiObject import HawkeyApiObject 
 from hawkeyapi.CommonDates import *
+from datetime import time
 
 class ScheduleEntry(HawkeyApiObject):
     def __init__(self, id, timestamp, opponent, site, location, links):
@@ -9,7 +10,7 @@ class ScheduleEntry(HawkeyApiObject):
 
         self.id = id
         self.date = timestamp.date()
-        self.start_time = timestamp.time()
+        self.start_time = self.__get_starttime(timestamp.time())
         self.opponent = opponent
         self.site = site
         self.location = location
@@ -30,3 +31,7 @@ class ScheduleEntry(HawkeyApiObject):
 
     def __is_preseason(self, timestamp):
         return (timestamp < DATE_SEASON_START)
+
+    def __get_starttime(self, starttime):
+        if starttime != time(0):
+            return starttime

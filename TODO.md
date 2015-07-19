@@ -6,7 +6,6 @@ TODO
 ## Organization
 
 ## Data Integrity
-* startTime should be None if TBA
 * links should be None, not False
 
 ## Features
