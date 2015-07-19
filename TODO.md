@@ -4,7 +4,6 @@ TODO
 ## Bugs
 
 ## Organization
-* Reimplement SidearmLegacy to use the table-as-a-dict functionality
 
 ## Data Integrity
 * startTime should be None if TBA

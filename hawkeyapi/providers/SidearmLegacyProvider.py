@@ -34,11 +34,10 @@ class SidearmLegacyProvider(Provider):
         games = []
 
         game_entries = self.get_game_entries(soup)
-        self.schedule_headers = self.get_table_headers(soup)
 
         for game in game_entries:
             # Game ID
-            game_id = int(game["id"].split("_")[-1])
+            game_id = int(game["ID"].split("_")[-1])
             # Location
             location = self.get_game_location(game)
             # Site
@@ -62,40 +61,33 @@ class SidearmLegacyProvider(Provider):
         """
         Return a list of elements containing games. Usually divs or rows.
         """
-        return soup.find_all('tr', class_=['schedule_dgrd_alt', 'schedule_dgrd_item'])
-
-    def get_table_headers(self, soup):
-        """
-        Return an upper-case list of all of the column headers from the
-        schedule table.
-        """
         schedule_table = soup.find('table', 'default_dgrd')
+        headers = [header.text.upper().strip() for header in schedule_table.tr.find_all('th')]
 
-        header_elements = schedule_table.find_all('th')
-        headers = []
-        for header in header_elements:
-            if header.text or header.text != "":
-                n_header = header.text.upper().strip()
-                n_header = re.sub(r'[^\w+]$', '', n_header)
-                headers.append(n_header)
+        games = []
+        for row in schedule_table.find_all('tr', class_=['schedule_dgrd_item', 'schedule_dgrd_alt']):
+            game = {}
+            for i, cell in enumerate(row.find_all('td')):
+                game[headers[i]] = cell
 
-        return headers
+            game['CLASS'] = row['class']
+            game['ID'] = row['id']
+            games.append(game)
+
+        return games
 
     def get_game_location(self, game):
         """
         Return a normalized string of the games location.
         """
-        location_col_index = get_list_index(self.schedule_headers, "LOCATION")
-        raw_location = game.find_all('td')[location_col_index].text
-        
-        return self.get_normalized_location(raw_location)
+
+        return self.get_normalized_location(game['LOCATION'].text)
 
     def get_game_site(self, game):
         """
         Return a normalized string of the games site classification.
         """
-        location_col_index = get_list_index(self.schedule_headers, "LOCATION")
-        location_element = game.find_all('td')[location_col_index]
+        location_element = game['LOCATION']
 
         if location_element.span:
             raw_site = location_element.span['class'][0]
@@ -108,10 +100,8 @@ class SidearmLegacyProvider(Provider):
         """
         Return a normalized string of the games opponent.
         """
-        opponent_col_index = get_list_index(self.schedule_headers, "OPPONENT")
-        raw_opponent = game.find_all('td')[opponent_col_index].text
 
-        return self.get_normalized_opponent(raw_opponent)
+        return self.get_normalized_opponent(game['OPPONENT'].text)
 
     def get_game_details(self, game_id):
         """
@@ -152,7 +142,5 @@ class SidearmLegacyProvider(Provider):
         """
         Return a datetime object of the games start date.
         """
-        date_col_index = get_list_index(self.schedule_headers, "DATE")
-        date_string = game.find_all('td')[date_col_index].text.strip()
 
-        return get_datetime_from_string(date_string)
+        return get_datetime_from_string(game['DATE'].text.strip())
