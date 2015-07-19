@@ -48,15 +48,6 @@ def get_combined_timestamp(date, time):
     return datetime.combine(date, time.time())
 
 
-def get_list_index(list_, item):
-    """
-    For a given list, return the position of the given item.
-    """
-    try:
-        return list_.index(item)
-    except ValueError:
-        return None
-
 def get_datetime_from_string(string, years=None):
     """
     Return an object from a given date string. Best guess.
