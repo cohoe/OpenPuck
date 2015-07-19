@@ -20,34 +20,6 @@
 }
 
 {
-    "Season": {
-        "id": "2015-16",
-        "startYear": 2015,
-        "endYear": 2016,
-        "phases": [
-            {
-                "ConferencePlay": {
-                    "startDate": "2015-09-24",
-                    "endDate": "2016-02-21"
-                },
-            },
-            {
-                "ConferenceTournament": {
-                    "startDate": "2016-02-26",
-                    "endDate": "2016-03-06"
-                },
-            },
-            {
-                "NationalTournament": {
-                    "startDate: "2016-03-11",
-                    "endDate: "2016-03-20"
-                },
-            },
-        ],
-    }
-}
-
-{
     "Institution": {
         "name": "ROCHESTER INSTITUTE OF TECHNOLOGY",
         "stylizedName": "Rochester Inst. of Technology",
@@ -58,22 +30,5 @@
             "state": "NY",
             "postalCode": 14623
         },
-    }
-}
-
-{
-    "Team": {
-        "institutionName": "ROCHESTER INSTITUTE OF TECHNOLOGY"
-        "mascot": "Tigers",
-        "isWomen": true,
-        "homeConference": "COLLEGE HOCKEY AMERICA",
-        "socialMedia": {
-            "twitter": "@RITWHKY",
-            "instagram": "@ritwhky",
-        },
-        "website": {
-            "indexUrl": "http://ritathletics.com/index.aspx?path=whock",
-            "dataProvider": "SidearmLegacyProvider",
-        }
     }
 }
