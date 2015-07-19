@@ -7,6 +7,10 @@ TODO
 * Implement notes in all providers
 * Reimplement SidearmLegacy to use the table-as-a-dict functionality
 
+## Data Integrity
+* starTime should be None if TBA
+* links should be None, not False
+
 ## Features
 ### Objects
 * Make season object to hold dates and things
@@ -19,3 +23,4 @@ TODO
 * isPreSeason is totally busted and isnt going to work without a season object
 * Add schedule year field and have it somewhat auto calculate
 * Add is_tournament flag to all providers
+* Add game status (scheduled, inprogress, final)
