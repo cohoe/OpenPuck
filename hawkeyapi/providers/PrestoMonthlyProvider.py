@@ -64,7 +64,7 @@ class PrestoMonthlyProvider(Provider):
             game_time = self.get_game_time(game)
             timestamp = datetime.combine(game_date, game_time.time())
             # Game ID
-            game_id = get_id_from_timestamp(timestamp)
+            game_id = self.get_gameid_from_timestamp(timestamp)
 
             json_game = self.get_json_entry(game_id, timestamp, opponent, site, location, links)
             json_games.append(json_game)

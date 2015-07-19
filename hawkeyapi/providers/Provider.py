@@ -103,7 +103,8 @@ class Provider(object):
         """
         game_dict = {
             'gameId': game_id,
-            'startTime': timestamp.isoformat(),
+            'date': timestamp.date().isoformat(),
+            'startTime': timestamp.time().isoformat(),
             'opponent': opponent,
             'site': site,
             'location': location,

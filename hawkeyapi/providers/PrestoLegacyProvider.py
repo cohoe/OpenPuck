@@ -57,7 +57,7 @@ class PrestoLegacyProvider(Provider):
             game_time = self.get_game_time(game)
             timestamp = get_combined_timestamp(game_date, game_time)
             # Game ID
-            game_id = get_id_from_timestamp(timestamp)
+            game_id = self.get_gameid_from_timestamp(timestamp)
 
             # They don't have game_id's, so lets build one
             json_game = self.get_json_entry(game_id, timestamp, opponent, site, location, links)
