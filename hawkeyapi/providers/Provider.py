@@ -2,6 +2,7 @@
 
 from hawkeyapi.util import *
 from hawkeyapi.CommonDates import *
+from hawkeyapi.objects import Game
 
 
 class Provider(object):

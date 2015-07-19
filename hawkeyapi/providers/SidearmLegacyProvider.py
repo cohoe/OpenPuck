@@ -27,11 +27,11 @@ class SidearmLegacyProvider(Provider):
 
     def get_schedule(self):
         """
-        Return a list of JSON objects of the schedule.
+        Return a list of objects of the schedule.
         """
         soup = BeautifulSoup(self.get_schedule_from_web())
 
-        json_games = []
+        games = []
 
         game_entries = self.get_game_entries(soup)
         self.schedule_headers = self.get_table_headers(soup)
@@ -54,9 +54,11 @@ class SidearmLegacyProvider(Provider):
             timestamp = get_combined_timestamp(game_date, game_time)
 
             json_game = self.get_json_entry(game_id, timestamp, opponent, site, location, links)
-            json_games.append(json_game)
+            game = Game(game_id, timestamp, opponent, site, location, links)
+            games.append(game)
+            break
 
-        return json_games
+        return games
 
     def get_game_entries(self, soup):
         """

@@ -6,7 +6,6 @@ TODO
 ## Organization
 * Implement notes in all providers
 * Reimplement SidearmLegacy to use the table-as-a-dict functionality
-* Fix the Neulion provider that passes text and not elements
 
 ## Features
 ### Objects

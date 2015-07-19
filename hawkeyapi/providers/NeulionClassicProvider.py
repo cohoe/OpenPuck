@@ -69,7 +69,7 @@ class NeulionClassicProvider(Provider):
         for row in schedule_table.find_all('tr'):
             game = {}
             for i, cell in enumerate(row.find_all('td')):
-                game[headers[i]] = cell.text
+                game[headers[i]] = cell
 
             if "tournament-head" in row['class'] or "tournament-end" in row['class']:
                 continue
@@ -82,7 +82,7 @@ class NeulionClassicProvider(Provider):
         """
         Return a normalized string of the games location.
         """
-        return self.get_normalized_location(game['LOCATION'])
+        return self.get_normalized_location(game['LOCATION'].text)
 
     def get_game_site(self, game):
         """
@@ -99,18 +99,19 @@ class NeulionClassicProvider(Provider):
         """
         Return a normalized string of the games opponent.
         """
-        return self.get_normalized_opponent(game['OPPONENT'])
+        return self.get_normalized_opponent(game['OPPONENT'].text)
 
     def get_game_media_urls(self, game):
         """
         Locate the media URLs from the details box.
         """
-        # @TODO: This needs implemented when data is actually available
         media_urls = {
             'audio': False,
             'video': False,
             'stats': False,
         }
+
+        # @TODO: This needs implemented when data is actually available
 
         return media_urls
 
@@ -123,11 +124,11 @@ class NeulionClassicProvider(Provider):
             if "TIME" in header:
                 time_header = header
                 break
-        return get_datetime_from_string(game[time_header])
+        return get_datetime_from_string(game[time_header].text)
 
     def get_game_date(self, game, years):
         """
         Return a datetime object of the games start date.
         """
-        date_string = game['DATE'].strip().upper()
+        date_string = game['DATE'].text.strip().upper()
         return get_datetime_from_string(date_string, years)
