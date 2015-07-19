@@ -16,28 +16,6 @@ class Provider(object):
         """
         return get_html_from_url(self.urls['schedule'])
 
-    def is_conf_tournament(self, timestamp):
-        """
-        Return true or false as to if the given timestamp is a conference
-        tournament game.
-        """
-        return (timestamp >= DATE_CONFERENCE_TOURNAMENT_START and
-                timestamp < DATE_NATIONAL_TOURNAMENT_START)
-
-    def is_national_tournament(self, timestamp):
-        """
-        Return true or false as to if the given timestamp is a national
-        tournament game.
-        """
-        return (timestamp >= DATE_NATIONAL_TOURNAMENT_START)
-
-    def is_preseason(self, timestamp):
-        """
-        Return true of false as to if the given timestamp is a preseason
-        game.
-        """
-        return (timestamp < DATE_SEASON_START)
-
     def get_normalized_location(self, raw_location):
         """
         Normalize an effectively randomly formatted location string.

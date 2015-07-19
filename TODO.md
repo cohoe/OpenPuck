@@ -2,11 +2,13 @@ TODO
 ====
 
 ## Bugs
-* isPreSeason means absolutely nothing
 
 ## Organization
 
 ## Data Integrity
+* True = Yes
+* False = No
+* None = Unknown
 
 ## Features
 ### Objects

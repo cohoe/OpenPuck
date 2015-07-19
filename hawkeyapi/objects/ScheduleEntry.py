@@ -16,7 +16,6 @@ class ScheduleEntry(HawkeyApiObject):
         self.location = location
         self.is_conference_tournament = self.__is_conf_tournament(timestamp)
         self.is_national_tournament = self.__is_national_tournament(timestamp)
-        self.is_preseason = self.__is_preseason(timestamp)
         self.links = links
 
     def __repr__(self):
@@ -28,9 +27,6 @@ class ScheduleEntry(HawkeyApiObject):
 
     def __is_national_tournament(self, timestamp):
         return (timestamp >= DATE_NATIONAL_TOURNAMENT_START)
-
-    def __is_preseason(self, timestamp):
-        return (timestamp < DATE_SEASON_START)
 
     def __get_starttime(self, starttime):
         if starttime != time(0):
