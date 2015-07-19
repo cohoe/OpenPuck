@@ -105,11 +105,7 @@ class SidearmAdaptiveProvider(Provider):
         """
         Return a normalized dictionary of media URLs.
         """
-        media_urls = {
-            'video': False,
-            'audio': False,
-            'stats': False,
-        }
+        media_urls = {}
 
         media_element = game.find('div', class_='schedule_game_multimedia_links')
         if not media_element:

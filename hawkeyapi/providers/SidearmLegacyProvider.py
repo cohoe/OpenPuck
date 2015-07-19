@@ -117,11 +117,7 @@ class SidearmLegacyProvider(Provider):
         """
         Locate the media URLs from the details box.
         """
-        media_urls = {
-            'video': False,
-            'audio': False,
-            'stats': False,
-        }
+        media_urls = {}
 
         stats_string = details.find(text="Live Stats")
         if stats_string:

@@ -102,11 +102,7 @@ class NeulionLegacyProvider(Provider):
         """
         Locate the media URLs from the details box.
         """
-        media_urls = {
-            'audio': False,
-            'video': False,
-            'stats': False,
-        }
+        media_urls = {}
 
         media_element = game['MEDIA']
         for link in media_element.find_all('a'):

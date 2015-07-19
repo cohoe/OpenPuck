@@ -140,11 +140,7 @@ class CBSInteractiveProvider(Provider):
         """
         Locate the media URLs from the details box.
         """
-        media_urls = {
-            'video': False,
-            'audio': False,
-            'stats': False,
-        }
+        media_urls = {}
 
         media_elements = game.find_all('media')
         for element in media_elements:

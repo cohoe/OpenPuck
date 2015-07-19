@@ -106,11 +106,8 @@ class PrestoMonthlyProvider(Provider):
         """
         Locate the media URLs from the details box.
         """
-        media_urls = {
-            'audio': False,
-            'video': False,
-            'stats': False,
-        }
+        media_urls = {}
+
         links = game.find('td', class_='e_links').find_all('a')
         for link in links:
             if link.text == "Live stats":

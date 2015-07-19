@@ -105,11 +105,7 @@ class NeulionClassicProvider(Provider):
         """
         Locate the media URLs from the details box.
         """
-        media_urls = {
-            'audio': False,
-            'video': False,
-            'stats': False,
-        }
+        media_urls = {}
 
         # @TODO: This needs implemented when data is actually available
 

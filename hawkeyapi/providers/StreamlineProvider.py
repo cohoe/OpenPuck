@@ -108,11 +108,7 @@ class StreamlineProvider(Provider):
         """
         Locate the media URLs from the details box.
         """
-        media_urls = {
-            'audio': False,
-            'video': False,
-            'stats': False,
-        }
+        media_urls = {}
 
         # @TODO: They don't have any posted :(
 
