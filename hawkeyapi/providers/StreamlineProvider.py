@@ -52,8 +52,10 @@ class StreamlineProvider(Provider):
             timestamp = get_combined_timestamp(game_date, game_time)
             # Game ID
             game_id = self.get_gameid_from_timestamp(timestamp)
+            # Conference
+            conference = self.get_game_conference(game)
 
-            game = ScheduleEntry(game_id, timestamp, opponent, site, location, links)
+            game = ScheduleEntry(game_id, timestamp, opponent, site, location, links, conference)
             games.append(game)
 
         return games
@@ -160,3 +162,10 @@ class StreamlineProvider(Provider):
                 n_years.append(int(year))
 
         return n_years
+
+    def get_game_conference(self, game):
+        """
+        Is this a conference game?
+        """
+        raw_opponent = game['OPPONENT'].text
+        return ("*" in raw_opponent)

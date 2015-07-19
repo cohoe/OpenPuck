@@ -63,8 +63,10 @@ class CBSInteractiveProvider(Provider):
             game_date = self.get_game_date(details_soup)
             game_time = self.get_game_time(details_soup)
             timestamp = get_combined_timestamp(game_date, game_time)
+            # Conference
+            conference = self.get_game_conference(game)
 
-            game = ScheduleEntry(game_id, timestamp, opponent, site, location, links)
+            game = ScheduleEntry(game_id, timestamp, opponent, site, location, links, conference)
             games.append(game)
 
         return games
@@ -174,3 +176,10 @@ class CBSInteractiveProvider(Provider):
         """
         game_url = self.urls['event_data'] + "%i/%s.xml" % (year, game_id)
         return BeautifulSoup(get_html_from_url(game_url))
+
+    def get_game_conference(self, game):
+        """
+        Is this a conference game? Some teams dont tell us
+        so this has to be None... :(
+        """
+        return None

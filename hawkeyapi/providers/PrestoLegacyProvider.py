@@ -58,9 +58,11 @@ class PrestoLegacyProvider(Provider):
             timestamp = get_combined_timestamp(game_date, game_time)
             # Game ID
             game_id = self.get_gameid_from_timestamp(timestamp)
+            # Conference
+            conference = self.get_game_conference(game)
 
             # They don't have game_id's, so lets build one
-            game = ScheduleEntry(game_id, timestamp, opponent, site, location, links)
+            game = ScheduleEntry(game_id, timestamp, opponent, site, location, links, conference)
             games.append(game)
 
         return games
@@ -144,3 +146,10 @@ class PrestoLegacyProvider(Provider):
         date_string = game['DATE'].text.upper().strip()
 
         return get_datetime_from_string(date_string, years)
+
+    def get_game_conference(self, game):
+        """
+        Is this a conference game?
+        """
+        raw_opponent = game['OPPONENT'].text.strip()
+        return ("*" in raw_opponent)

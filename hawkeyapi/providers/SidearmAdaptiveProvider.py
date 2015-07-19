@@ -53,8 +53,9 @@ class SidearmAdaptiveProvider(Provider):
             game_date = self.get_game_date(game, schedule_years)
             game_time = self.get_game_time(game)
             timestamp = get_combined_timestamp(game_date, game_time)
+            conference = self.get_game_conference(game)
 
-            game = ScheduleEntry(game_id, timestamp, opponent, site, location, links)
+            game = ScheduleEntry(game_id, timestamp, opponent, site, location, links, conference)
             games.append(game)
 
         return games
@@ -141,3 +142,10 @@ class SidearmAdaptiveProvider(Provider):
         time_string = game.find('div', class_='schedule_game_opponent_time').text.strip()
 
         return get_datetime_from_string(time_string)
+
+    def get_game_conference(self, game):
+        """
+        Return if this is a conference game or not
+        """
+        element = game.find('div', class_='schedule_games_conference')
+        return bool(element)

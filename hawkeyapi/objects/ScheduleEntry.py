@@ -5,7 +5,7 @@ from hawkeyapi.CommonDates import *
 from datetime import time
 
 class ScheduleEntry(HawkeyApiObject):
-    def __init__(self, id, timestamp, opponent, site, location, links):
+    def __init__(self, id, timestamp, opponent, site, location, links, conference):
         HawkeyApiObject.__init__(self)
 
         self.id = id
@@ -17,6 +17,7 @@ class ScheduleEntry(HawkeyApiObject):
         self.is_conference_tournament = self.__is_conf_tournament(timestamp)
         self.is_national_tournament = self.__is_national_tournament(timestamp)
         self.links = links
+        self.is_conference = conference
 
     def __repr__(self):
         return "<%s %s %s>" % (self.__class__.__module__, self.date, self.opponent)

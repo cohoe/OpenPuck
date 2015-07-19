@@ -6,9 +6,6 @@ TODO
 ## Organization
 
 ## Data Integrity
-* True = Yes
-* False = No
-* None = Unknown
 
 ## Features
 ### Objects
@@ -16,7 +13,6 @@ TODO
 * Figure out team object that will handle website and season data
 
 ### Fields
-* add isConference flag
 * Add schedule year field and have it somewhat auto calculate
 * Add is_tournament flag to all providers
 * Add game status (scheduled, inprogress, final)

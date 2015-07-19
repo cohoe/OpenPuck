@@ -51,8 +51,10 @@ class SidearmLegacyProvider(Provider):
             game_time = self.get_game_time(details_soup)
             game_date = self.get_game_date(game)
             timestamp = get_combined_timestamp(game_date, game_time)
+            # Conference
+            conference = self.get_game_conference(game)
 
-            game = ScheduleEntry(game_id, timestamp, opponent, site, location, links)
+            game = ScheduleEntry(game_id, timestamp, opponent, site, location, links, conference)
             games.append(game)
 
         return games
@@ -62,7 +64,14 @@ class SidearmLegacyProvider(Provider):
         Return a list of elements containing games. Usually divs or rows.
         """
         schedule_table = soup.find('table', 'default_dgrd')
-        headers = [header.text.upper().strip() for header in schedule_table.tr.find_all('th')]
+        headers = []
+        for header in schedule_table.tr.find_all('th'):
+            raw_header = header.text.upper().strip()
+            raw_header = re.sub(r'[^\w ]', '', raw_header)
+            if raw_header == '' or raw_header == 'CHA':
+                # Its the Clarkson conference header
+                raw_header = 'CONF'
+            headers.append(raw_header)
 
         games = []
         for row in schedule_table.find_all('tr', class_=['schedule_dgrd_item', 'schedule_dgrd_alt']):
@@ -140,3 +149,9 @@ class SidearmLegacyProvider(Provider):
         """
 
         return get_datetime_from_string(game['DATE'].text.strip())
+
+    def get_game_conference(self, game):
+        """
+        Is this a conference game?
+        """
+        return bool(game['CONF'].img)

@@ -53,8 +53,10 @@ class NeulionAdaptiveProvider(Provider):
             timestamp = get_combined_timestamp(game_date, game_time)
             # Game ID
             game_id = int(game['schedule-id'])
+            # Conference
+            conference = self.get_game_conference(game)
 
-            game = ScheduleEntry(game_id, timestamp, opponent, site, location, links)
+            game = ScheduleEntry(game_id, timestamp, opponent, site, location, links, conference)
             games.append(game)
 
         return games
@@ -126,3 +128,10 @@ class NeulionAdaptiveProvider(Provider):
         date_string = date_element.text.strip().upper()
 
         return get_datetime_from_string(date_string)
+
+    def get_game_conference(self, game):
+        """
+        Is this a conference game?
+        """
+        raw_opponent = game.find('td', class_='opponent').text
+        return ("*" in raw_opponent)

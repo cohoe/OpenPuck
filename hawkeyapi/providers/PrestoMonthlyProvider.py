@@ -65,8 +65,10 @@ class PrestoMonthlyProvider(Provider):
             timestamp = datetime.combine(game_date, game_time.time())
             # Game ID
             game_id = self.get_gameid_from_timestamp(timestamp)
+            # Conference
+            conference = self.get_game_conference(game)
 
-            game = ScheduleEntry(game_id, timestamp, opponent, site, location, links)
+            game = ScheduleEntry(game_id, timestamp, opponent, site, location, links, conference)
             games.append(game)
 
         return games
@@ -139,3 +141,10 @@ class PrestoMonthlyProvider(Provider):
         date_string = date_string.upper()
 
         return get_datetime_from_string(date_string, years)
+
+    def get_game_conference(self, game):
+        """
+        Return if this a conference game.
+        """
+        raw_opponent = game.find('td', class_='e_opponent').text
+        return ("*" in raw_opponent)
