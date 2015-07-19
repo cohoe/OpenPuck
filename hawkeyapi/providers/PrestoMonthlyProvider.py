@@ -39,7 +39,7 @@ class PrestoMonthlyProvider(Provider):
         schedule_years = self.get_data_years(page_title)
         month = ""
 
-        json_games = []
+        games = []
         game_entries = self.get_game_entries(soup)
         for game in game_entries:
             if game['class'][0] == "month-title":
@@ -66,10 +66,10 @@ class PrestoMonthlyProvider(Provider):
             # Game ID
             game_id = self.get_gameid_from_timestamp(timestamp)
 
-            json_game = self.get_json_entry(game_id, timestamp, opponent, site, location, links)
-            json_games.append(json_game)
+            game = ScheduleEntry(game_id, timestamp, opponent, site, location, links)
+            games.append(game)
 
-        return json_games
+        return games
 
     def get_game_entries(self, soup):
         """

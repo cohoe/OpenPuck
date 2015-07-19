@@ -35,7 +35,7 @@ class SidearmAdaptiveProvider(Provider):
         page_title = soup.find('div', class_='page_title').text
         schedule_years = self.get_data_years(page_title)
 
-        json_games = []
+        games = []
         game_entries = self.get_game_entries(soup)
 
         for game in game_entries:
@@ -54,10 +54,10 @@ class SidearmAdaptiveProvider(Provider):
             game_time = self.get_game_time(game)
             timestamp = get_combined_timestamp(game_date, game_time)
 
-            json_game = self.get_json_entry(game_id, timestamp, opponent, site, location, links)
-            json_games.append(json_game)
+            game = ScheduleEntry(game_id, timestamp, opponent, site, location, links)
+            games.append(game)
 
-        return json_games
+        return games
 
     def get_game_entries(self, soup):
         """

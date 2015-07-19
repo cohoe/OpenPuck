@@ -11,7 +11,6 @@ TODO
 ### Objects
 * Make season object to hold dates and things
 * Figure out team object that will handle website and season data
-* Make games return objects then shit out json from those
 
 ### Fields
 * add isConference flag

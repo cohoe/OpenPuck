@@ -29,7 +29,7 @@ class TemplateProvider(Provider):
         """
         soup = BeautifulSoup(self.get_schedule_from_web())
 
-        json_games = []
+        games = []
 
         game_entries = self.get_game_entries(soup)
 
@@ -49,10 +49,10 @@ class TemplateProvider(Provider):
             game_date = self.get_game_date(game)
             timestamp = get_combined_timestamp(game_date, game_time)
 
-            json_game = self.get_json_entry(game_id, timestamp, opponent, site, location, links)
-            json_games.append(json_game)
+            game = ScheduleEntry(game_id, timestamp, opponent, site, location, links)
+            games.append(game)
 
-        return json_games
+        return games
 
     def get_game_entries(self, soup):
         """

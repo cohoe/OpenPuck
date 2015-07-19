@@ -42,8 +42,8 @@ class CBSInteractiveProvider(Provider):
         page_title = soup.find('div', class_='compositetitle').text
         schedule_years = self.get_data_years(page_title)
 
-        json_games = []
         game_entries = self.get_game_entries(soup)
+        games = []
 
         for game in game_entries:
             # Game ID
@@ -64,10 +64,10 @@ class CBSInteractiveProvider(Provider):
             game_time = self.get_game_time(details_soup)
             timestamp = get_combined_timestamp(game_date, game_time)
 
-            json_game = self.get_json_entry(game_id, timestamp, opponent, site, location, links)
-            json_games.append(json_game)
+            game = ScheduleEntry(game_id, timestamp, opponent, site, location, links)
+            games.append(game)
 
-        return json_games
+        return games
 
     def get_game_entries(self, soup):
         """

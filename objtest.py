@@ -69,75 +69,75 @@ for legacy_url in legacy_urls:
     games = sp.get_schedule()
     for game in games:
         print game.json()
-#
-#for adaptive_url in adaptive_urls:
-#    sp = SidearmAdaptiveProvider(adaptive_url)
-#
-#    print sp.urls['schedule']
-#    games = sp.get_schedule()
-#    for game in games:
-#        print game
-#
-#for cbs_url in cbs_urls:
-#    sp = CBSInteractiveProvider(cbs_url)
-#
-#    print sp.urls['schedule']
-#    games = sp.get_schedule()
-#    for game in games:
-#        print game
-#
-#for pm_url in pm_urls:
-#    sp = PrestoMonthlyProvider(pm_url)
-#
-#    print sp.urls['schedule']
-#    games = sp.get_schedule()
-#    for game in games:
-#        print game
-#
-#for ps_url in ps_urls:
-#    sp = PrestoSimpleProvider(ps_url)
-#
-#    print sp.urls['schedule']
-#    games = sp.get_schedule()
-#    for game in games:
-#        print game
-#
-#for pl_url in pl_urls:
-#    sp = PrestoLegacyProvider(pl_url)
-#
-#    print sp.urls['schedule']
-#    games = sp.get_schedule()
-#    for game in games:
-#        print game
-#
-#for neuc_url in neuc_urls:
-#    sp = NeulionClassicProvider(neuc_url)
-#
-#    print sp.urls['schedule']
-#    games = sp.get_schedule()
-#    for game in games:
-#        print game
-#
-#for neul_url in neul_urls:
-#    sp = NeulionLegacyProvider(neul_url)
-#
-#    print sp.urls['schedule']
-#    games = sp.get_schedule()
-#    for game in games:
-#        print game
-#
-#for neua_url in neua_urls:
-#    sp = NeulionAdaptiveProvider(neua_url)
-#
-#    print sp.urls['schedule']
-#    games = sp.get_schedule()
-#    for game in games:
-#        print game
-#
-#for strline_url in strline_urls:
-#    sp = StreamlineProvider(strline_url)
-#
-#    print sp.urls['schedule']
-#    games = sp.get_schedule()
-#    for game in games:
-#        print game
+
+for adaptive_url in adaptive_urls:
+    sp = SidearmAdaptiveProvider(adaptive_url)
+
+    print sp.urls['schedule']
+    games = sp.get_schedule()
+    for game in games:
+        print game.json()
+
+for cbs_url in cbs_urls:
+    sp = CBSInteractiveProvider(cbs_url)
+
+    print sp.urls['schedule']
+    games = sp.get_schedule()
+    for game in games:
+        print game.json()
+
+for pm_url in pm_urls:
+    sp = PrestoMonthlyProvider(pm_url)
+
+    print sp.urls['schedule']
+    games = sp.get_schedule()
+    for game in games:
+        print game.json()
+
+for ps_url in ps_urls:
+    sp = PrestoSimpleProvider(ps_url)
+
+    print sp.urls['schedule']
+    games = sp.get_schedule()
+    for game in games:
+        print game.json()
+
+for pl_url in pl_urls:
+    sp = PrestoLegacyProvider(pl_url)
+
+    print sp.urls['schedule']
+    games = sp.get_schedule()
+    for game in games:
+        print game.json()
+
+for neuc_url in neuc_urls:
+    sp = NeulionClassicProvider(neuc_url)
+
+    print sp.urls['schedule']
+    games = sp.get_schedule()
+    for game in games:
+        print game.json()
+
+for neul_url in neul_urls:
+    sp = NeulionLegacyProvider(neul_url)
+
+    print sp.urls['schedule']
+    games = sp.get_schedule()
+    for game in games:
+        print game.json()
+
+for neua_url in neua_urls:
+    sp = NeulionAdaptiveProvider(neua_url)
+
+    print sp.urls['schedule']
+    games = sp.get_schedule()
+    for game in games:
+        print game.json()
+
+for strline_url in strline_urls:
+    sp = StreamlineProvider(strline_url)
+
+    print sp.urls['schedule']
+    games = sp.get_schedule()
+    for game in games:
+        print game.json()

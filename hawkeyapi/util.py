@@ -21,17 +21,6 @@ def get_html_from_url(url):
     return response.read()
 
 
-def dict2json(name, input_dict, debug=False):
-    """
-    Spit out some JSON from a given dictionary.
-    """
-    if debug is True:
-        return json.dumps({name: input_dict}, sort_keys=True, indent=4,
-                          separators=(',', ': '))
-
-    return json.dumps([name, input_dict])
-
-
 def get_base_from_url(url):
     """
     Return the base server/protocol from a URL

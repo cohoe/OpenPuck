@@ -97,27 +97,6 @@ class Provider(object):
         # Done for now
         return n_opponent
 
-    def get_json_entry(self, game_id, timestamp, opponent, site,
-                       location, links):
-        """
-        Return a JSON entry representing the game.
-        """
-        game_dict = {
-            'gameId': game_id,
-            'date': timestamp.date().isoformat(),
-            'startTime': timestamp.time().isoformat(),
-            'opponent': opponent,
-            'site': site,
-            'location': location,
-            'isConfTourney': self.is_conf_tournament(timestamp),
-            'isNatTourney': self.is_national_tournament(timestamp),
-            'isPreSeason': self.is_preseason(timestamp),
-            'mediaUrls': links,
-            'provider': self.provider_name,
-        }
-
-        return dict2json("raw_game", game_dict, True)
-
     def get_normalized_site(self, raw_site):
         """
         Return a normalized word indiciating the site of the game.
