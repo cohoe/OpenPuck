@@ -98,7 +98,7 @@ class Provider(object):
         return n_opponent
 
     def get_json_entry(self, game_id, timestamp, opponent, site,
-                       location, links, notes=None):
+                       location, links):
         """
         Return a JSON entry representing the game.
         """
@@ -114,7 +114,6 @@ class Provider(object):
             'isPreSeason': self.is_preseason(timestamp),
             'mediaUrls': links,
             'provider': self.provider_name,
-            'notes': notes,
         }
 
         return dict2json("raw_game", game_dict, True)

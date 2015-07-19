@@ -4,11 +4,10 @@ TODO
 ## Bugs
 
 ## Organization
-* Implement notes in all providers
 * Reimplement SidearmLegacy to use the table-as-a-dict functionality
 
 ## Data Integrity
-* starTime should be None if TBA
+* startTime should be None if TBA
 * links should be None, not False
 
 ## Features

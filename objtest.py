@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from hawkeyapi.providers import *
-from hawkeyapi.objects import Game
+from hawkeyapi.objects import ScheduleEntry
 
 legacy_urls = [
     #'http://ritathletics.com/index.aspx?path=mhock',

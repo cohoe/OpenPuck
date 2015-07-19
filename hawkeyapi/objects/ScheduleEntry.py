@@ -17,7 +17,6 @@ class ScheduleEntry(HawkeyApiObject):
         self.is_national_tournament = self.__is_national_tournament(timestamp)
         self.is_preseason = self.__is_preseason(timestamp)
         self.links = links
-        self.notes = None
 
     def __repr__(self):
         return "<%s %s %s>" % (self.__class__.__module__, self.date, self.opponent)
