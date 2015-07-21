@@ -4,11 +4,13 @@ from Provider import *
 
 
 class SidearmLegacyProvider(Provider):
-    def __init__(self, index_url):
+    def __init__(self, team):
         """
         Constructor
         """
-        Provider.__init__(self, index_url)
+        Provider.__init__(self, team)
+
+        index_url = team.website['index_url']
 
         self.set_provider_urls(index_url)
         self.provider_name = __name__
@@ -18,6 +20,10 @@ class SidearmLegacyProvider(Provider):
         Set our URLs so we can reference them later.
         """
         url_obj = urlparse(index_url)
+        url_queries = url_obj.query.split('&')
+        for query in url_queries:
+            if "path" in query:
+                self.sport = query.split('=')[1]
 
         self.urls = {
             'index': index_url,
@@ -25,14 +31,16 @@ class SidearmLegacyProvider(Provider):
             'schedule_detail': get_base_from_url(index_url) + "/services/schedule_detail.aspx",
         }
 
-    def get_schedule(self):
+    def get_schedule(self, season):
         """
         Return a list of objects of the schedule.
         """
-        soup = BeautifulSoup(self.get_schedule_from_web())
-
         # Years
-        schedule_years = self.get_data_years(soup.title.text)
+        #schedule_years = self.get_data_years(soup.title.text)
+        schedule_years = [season.start_year, season.end_year]
+        url = self.get_schedule_url_for_season(season)
+        soup = BeautifulSoup(get_html_from_url(url))
+        #soup = BeautifulSoup(self.get_schedule_from_web())
 
         games = []
         game_entries = self.get_game_entries(soup)
@@ -142,6 +150,8 @@ class SidearmLegacyProvider(Provider):
         Return a datetime object of the games start time.
         """
         time_string = details.td.find_all('em')[1].text.strip()
+        if "/" in time_string:
+            time_string = time_string.split("/")[0]
 
         return get_datetime_from_string(time_string)
 
@@ -157,3 +167,16 @@ class SidearmLegacyProvider(Provider):
         Is this a conference game?
         """
         return bool(game['CONF'].img)
+
+    def get_schedule_url_for_season(self, season):
+        """
+        Return the full URL of the schedule for a given season.
+        """
+        soup = BeautifulSoup(self.get_schedule_from_web())
+        schedule_selection = soup.find(id='ctl00_cplhMainContent_ddlPastschedules')
+        for option in schedule_selection.find_all('option'):
+            if option.text == season.id:
+                print "The season is %s" % season.id
+                schedule_number = option['value']
+
+        return "%s/schedule.aspx?path=%s&schedule=%s" % (self.server, self.sport, schedule_number)
