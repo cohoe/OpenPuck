@@ -8,11 +8,8 @@ TODO
 ## Data Integrity
 
 ## Features
-### Objects
-* Make season object to hold dates and things
-* Figure out team object that will handle website and season data
+* Finish all providers to use new team objects and not be season-dependent
 
 ### Fields
 * Add is_tournament flag to all providers
 * Add game status (scheduled, inprogress, final)
-* Add gender field

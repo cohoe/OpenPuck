@@ -64,7 +64,7 @@ class SidearmLegacyProvider(Provider):
             # Conference
             conference = self.get_game_conference(game)
 
-            game = ScheduleEntry(game_id, timestamp, opponent, site, location, links, conference, schedule_years)
+            game = ScheduleEntry(game_id, timestamp, opponent, site, location, links, conference, season)
             games.append(game)
 
         return games
