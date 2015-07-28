@@ -4,6 +4,7 @@ TODO
 ## Bugs
 
 ## Organization
+* Remove schedule year detection since we have objects now
 
 ## Data Integrity
 
