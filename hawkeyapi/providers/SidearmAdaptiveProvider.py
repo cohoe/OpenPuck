@@ -4,13 +4,15 @@ from Provider import *
 
 
 class SidearmAdaptiveProvider(Provider):
-    def __init__(self, index_url):
+    def __init__(self, team):
         """
         Constructor
         """
-        Provider.__init__(self, index_url)
+        Provider.__init__(self, team)
 
         # Set up the URL information for this provider
+        index_url = team.website['index_url']
+
         self.set_provider_urls(index_url)
         self.provider_name = __name__
 
@@ -19,17 +21,22 @@ class SidearmAdaptiveProvider(Provider):
         Set our URLs so we can reference them later.
         """
         url_obj = urlparse(index_url)
+        url_queries = url_obj.query.split('&')
+        for query in url_queries:
+            if "path" in query:
+                self.sport = query.split('=')[1]
 
         self.urls = {
             'index': index_url,
             'schedule': "%s://%s/schedule.aspx?%s" % (url_obj.scheme, url_obj.netloc, url_obj.query),
         }
 
-    def get_schedule(self):
+    def get_schedule(self, season):
         """
         Return a list of JSON objects of the schedule.
         """
-        soup = BeautifulSoup(self.get_schedule_from_web())
+        url = self.get_schedule_url_for_season(season)
+        soup = BeautifulSoup(get_html_from_url(url))
 
         # Years
         page_title = soup.find('div', class_='page_title').text
@@ -55,7 +62,7 @@ class SidearmAdaptiveProvider(Provider):
             timestamp = get_combined_timestamp(game_date, game_time)
             conference = self.get_game_conference(game)
 
-            game = ScheduleEntry(game_id, timestamp, opponent, site, location, links, conference, schedule_years)
+            game = ScheduleEntry(game_id, timestamp, opponent, site, location, links, conference, season)
             games.append(game)
 
         return games
@@ -149,3 +156,16 @@ class SidearmAdaptiveProvider(Provider):
         """
         element = game.find('div', class_='schedule_games_conference')
         return bool(element)
+
+    def get_schedule_url_for_season(self, season):
+        """
+        Return the full URL of the schedule for a given season.
+        """
+        soup = BeautifulSoup(self.get_schedule_from_web())
+        schedule_selection = soup.find(id='ctl00_cplhMainContent_ddlPastschedules2')
+        for option in schedule_selection.find_all('option'):
+            if option.text == season.id:
+                schedule_number = option['value']
+
+        return "%s/schedule.aspx?path=%s&schedule=%s" % (self.server, self.sport, schedule_number)
+

@@ -22,7 +22,8 @@ class ScheduleEntry(HawkeyApiObject):
         self.league = season.league
 
     def __repr__(self):
-        return "<%s %s %s>" % (self.__class__.__module__, self.date, self.opponent)
+        game_time = datetime.combine(self.date, self.start_time).isoformat()
+        return "<%s %s %s>" % (self.__class__.__module__, game_time, self.opponent)
 
     def __is_conf_tournament(self, timestamp):
         return (timestamp >= DATE_CONFERENCE_TOURNAMENT_START and
