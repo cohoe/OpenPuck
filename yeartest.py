@@ -6,12 +6,13 @@ from hawkeyapi.objects import ScheduleEntry, Season, Team, Conference, Instituti
 
 from hawkeyapi.TestData import seasons, teams
 
-teams = teams[4:]
+teams = teams[1:]
 seasons = seasons[0:]
 
-for s in seasons:
-    for t in teams:
-        print t.json()
+for t in teams:
+    print t.json()
+    for s in seasons:
+        print s.json()
         p = t.get_provider()
         entries = p.get_schedule(s)
         for e in entries:

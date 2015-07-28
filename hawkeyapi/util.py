@@ -65,6 +65,9 @@ def get_datetime_from_string(string, years=None):
     if "NOON" in string:
         string = "12:00 PM"
 
+    # Remove time zone crap
+    string = re.sub(r'\(.*\)', '', string)
+
     # Some of them dont even put the year. Figure it out.
     if re.search(r'[a-zA-Z]{4+}', string):
         if re.search(r'SEP|OCT|NOV|DEC', string):
