@@ -22,22 +22,22 @@ class Team(HawkeyApiObject):
         provider = self.website['data_provider']
 
         if provider is "CBSInteractiveProvider":
-            return CBSInteractiveProvider(self)
+            return hawkeyapi.providers.CBSInteractiveProvider(self)
         if provider is "NeulionAdaptiveProvider":
-            return NeulionAdaptiveProvider(self)
+            return hawkeyapi.providers.NeulionAdaptiveProvider(self)
         if provider is "NeulionClassicProvider":
-            return NeulionClassicProvider(self)
+            return hawkeyapi.providers.NeulionClassicProvider(self)
         if provider is "NeulionLegacyProvider":
-            return NeulionLegacyProvider(self)
+            return hawkeyapi.providers.NeulionLegacyProvider(self)
         if provider is "PrestoLegacyProvider":
-            return PrestoLegacyProvider(self)
+            return hawkeyapi.providers.PrestoLegacyProvider(self)
         if provider is "PrestoMonthlyProvider":
-            return PrestoMonthlyProvider(self)
+            return hawkeyapi.providers.PrestoMonthlyProvider(self)
         if provider is "PrestoSimpleProvider":
-            return PrestoSimpleProvider(self)
+            return hawkeyapi.providers.PrestoSimpleProvider(self)
         if provider is "SidearmLegacyProvider":
             return hawkeyapi.providers.SidearmLegacyProvider(self)
         if provider is "SidearmAdaptiveProvider":
-            return SidearmAdaptiveProvider(self)
+            return hawkeyapi.providers.SidearmAdaptiveProvider(self)
         if provider is "StreamlineProvider":
-            return StreamlineProvider(self)
+            return hawkeyapi.providers.StreamlineProvider(self)
