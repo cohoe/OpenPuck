@@ -22,7 +22,10 @@ class ScheduleEntry(HawkeyApiObject):
         self.league = season.league
 
     def __repr__(self):
-        game_time = datetime.combine(self.date, self.start_time).isoformat()
+        start_time = self.start_time
+        if not self.start_time or self.start_time == "":
+            start_time = time(0)
+        game_time = datetime.combine(self.date, start_time).isoformat()
         return "<%s %s %s>" % (self.__class__.__module__, game_time, self.opponent)
 
     def __is_conf_tournament(self, timestamp):

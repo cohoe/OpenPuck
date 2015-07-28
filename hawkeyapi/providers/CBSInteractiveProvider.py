@@ -4,12 +4,13 @@ from Provider import *
 
 
 class CBSInteractiveProvider(Provider):
-    def __init__(self, index_url):
+    def __init__(self, team):
         """
         Constructor
         """
-        Provider.__init__(self, index_url)
+        Provider.__init__(self, team)
 
+        index_url = team.website['index_url']
         self.set_provider_urls(index_url)
         self.provider_name = __name__
 
@@ -23,20 +24,21 @@ class CBSInteractiveProvider(Provider):
         index_file = url_obj.path.split("/")[-1]
         schedule_path = "/".join(url_obj.path.split("/")[:-1]) + "/sched"
         schedule_file = index_file.replace("-main", "")
-        schedule_file = schedule_file.replace("body", "sched")
-        sport = url_obj.path.split("/")[2]
+        self.schedule_file = schedule_file.replace("body", "sched")
+        self.sport = url_obj.path.split("/")[2]
 
         self.urls = {
             'index': index_url,
-            'schedule': "%s://%s%s/%s" % (url_obj.scheme, url_obj.netloc, schedule_path, schedule_file),
-            'event_data': "%s://%s/data/xml/events/%s/" % (url_obj.scheme, url_obj.netloc, sport),
+            'schedule': "%s://%s%s/%s" % (url_obj.scheme, url_obj.netloc, schedule_path, self.schedule_file),
+            'event_data': "%s://%s/data/xml/events/%s/" % (url_obj.scheme, url_obj.netloc, self.sport),
         }
 
-    def get_schedule(self):
+    def get_schedule(self, season):
         """
         Return a list of JSON objects of the schedule.
         """
-        soup = BeautifulSoup(self.get_schedule_from_web())
+        url = self.get_schedule_url_for_season(season)
+        soup = BeautifulSoup(get_html_from_url(url))
 
         # Years
         page_title = soup.find('div', class_='compositetitle').text
@@ -66,7 +68,7 @@ class CBSInteractiveProvider(Provider):
             # Conference
             conference = self.get_game_conference(game)
 
-            game = ScheduleEntry(game_id, timestamp, opponent, site, location, links, conference, schedule_years)
+            game = ScheduleEntry(game_id, timestamp, opponent, site, location, links, conference, season)
             games.append(game)
 
         return games
@@ -131,7 +133,11 @@ class CBSInteractiveProvider(Provider):
                 # I am home, get the away team
                 raw_opponent = game.find('away')['opp']
             else:
-                raw_opponent = game.find('home')['opp']
+                # Sometimes they dont explicitly state the opponent
+                if home_element.has_attr("opp"):
+                    raw_opponent = home_element['opp']
+                else:
+                    raw_opponent = home_element['code']
         else:
             # Its one of those funky exhibitions
             raw_opponent = game.find('event')['event_name']
@@ -183,3 +189,20 @@ class CBSInteractiveProvider(Provider):
         so this has to be None... :(
         """
         return None
+
+    def get_schedule_url_for_season(self, season):
+        """
+        Return the full URL of the schedule for a given season.
+        """
+        # Try the archive
+        file_ = re.sub(r'\.html', "-%i.html" % season.start_year, self.schedule_file)
+        directory = "archive"
+        url = "%s/sports/%s/%s/%s" % (self.server, self.sport, directory, file_)
+
+        r = requests.get(url)
+        if r.status_code == 404:
+            # Then its probably active
+            directory = "sched"
+            url = "%s/sports/%s/%s/%s" % (self.server, self.sport, directory, self.schedule_file)
+
+        return url

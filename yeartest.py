@@ -6,7 +6,8 @@ from hawkeyapi.objects import ScheduleEntry, Season, Team, Conference, Instituti
 
 from hawkeyapi.TestData import seasons, teams
 
-teams = teams[1:]
+teams = teams[2:]
+seasons = seasons[0:]
 
 for s in seasons:
     for t in teams:

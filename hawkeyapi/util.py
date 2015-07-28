@@ -3,6 +3,7 @@
 import urllib2
 import re
 import json
+import requests
 from bs4 import BeautifulSoup
 from urlparse import urlparse
 from datetime import datetime
