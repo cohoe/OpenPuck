@@ -71,7 +71,8 @@ def get_datetime_from_string(string, years=None):
     string = re.sub(r'\(.*\)', '', string)
 
     # Some of them dont even put the year. Figure it out.
-    if re.search(r'[a-zA-Z]{4+}', string):
+    if re.search(r'[a-zA-Z]{3,}', string):
+        print "YEARS"
         if re.search(r'SEP|OCT|NOV|DEC', string):
             string = string + " %i" % years[0]
         else:

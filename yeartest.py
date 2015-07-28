@@ -6,8 +6,8 @@ from hawkeyapi.objects import ScheduleEntry, Season, Team, Conference, Instituti
 
 from hawkeyapi.TestData import seasons, teams
 
-teams = teams[8:]
-seasons = seasons[0:]
+teams = teams[9:]
+seasons = seasons[2:]
 
 for t in teams:
     print t.json()
