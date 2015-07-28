@@ -4,12 +4,13 @@ from Provider import *
 
 
 class StreamlineProvider(Provider):
-    def __init__(self, index_url):
+    def __init__(self, team):
         """
         Constructor
         """
-        Provider.__init__(self, index_url)
+        Provider.__init__(self, team)
 
+        index_url = team.website['index_url']
         self.set_provider_urls(index_url)
         self.provider_name = __name__
 
@@ -21,14 +22,16 @@ class StreamlineProvider(Provider):
 
         self.urls = {
             'index': index_url,
-            'schedule': "%s/schedule/%s" % (index_url, DATE_SEASON)
+            'schedule': "%s/schedule" % (index_url)
         }
 
-    def get_schedule(self):
+    def get_schedule(self, season):
         """
         Return a list of JSON objects of the schedule.
         """
-        soup = BeautifulSoup(self.get_schedule_from_web())
+        url = self.get_schedule_url_for_season(season)
+        print url
+        soup = BeautifulSoup(get_html_from_url(url))
 
         # Years
         page_title = soup.find('div', class_='listname').text
@@ -55,7 +58,7 @@ class StreamlineProvider(Provider):
             # Conference
             conference = self.get_game_conference(game)
 
-            game = ScheduleEntry(game_id, timestamp, opponent, site, location, links, conference, schedule_years)
+            game = ScheduleEntry(game_id, timestamp, opponent, site, location, links, conference, season)
             games.append(game)
 
         return games
@@ -72,6 +75,8 @@ class StreamlineProvider(Provider):
         for row in schedule_table.find_all('tr'):
             if row.th:
                 # It contains headers
+                continue
+            if "groupstart" in row['class'] or "groupend" in row['class']:
                 continue
             
             game = {}
@@ -169,3 +174,9 @@ class StreamlineProvider(Provider):
         """
         raw_opponent = game['OPPONENT'].text
         return ("*" in raw_opponent)
+
+    def get_schedule_url_for_season(self, season):
+        """
+        Return the full URL of the schedule for a given season.
+        """
+        return "%s/%s/" % (self.urls['schedule'], season.id)

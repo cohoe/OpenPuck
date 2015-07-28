@@ -4,12 +4,13 @@ from Provider import *
 
 
 class PrestoLegacyProvider(Provider):
-    def __init__(self, index_url):
+    def __init__(self, team):
         """
         Constructor
         """
-        Provider.__init__(self, index_url)
+        Provider.__init__(self, team)
 
+        index_url = team.website['index_url']
         self.set_provider_urls(index_url)
         self.provider_name = __name__
 
@@ -19,20 +20,21 @@ class PrestoLegacyProvider(Provider):
         """
         url_obj = urlparse(index_url)
 
-        sport = url_obj.path.split("/")[2]
+        self.sport = url_obj.path.split("/")[2]
         season = DATE_SEASON
-        schedule_url = "%s://%s/sports/%s/%s/schedule" % (url_obj.scheme, url_obj.netloc, sport, season)
+        schedule_url = "%s://%s/sports/%s/%s/schedule" % (url_obj.scheme, url_obj.netloc, self.sport, season)
 
         self.urls = {
             'index': index_url,
             'schedule': schedule_url,
         }
 
-    def get_schedule(self):
+    def get_schedule(self, season):
         """
         Return a list of JSON objects of the schedule.
         """
-        soup = BeautifulSoup(self.get_schedule_from_web())
+        url = self.get_schedule_url_for_season(season)
+        soup = BeautifulSoup(get_html_from_url(url))
 
         # Years
         page_title = soup.title.text
@@ -62,7 +64,7 @@ class PrestoLegacyProvider(Provider):
             conference = self.get_game_conference(game)
 
             # They don't have game_id's, so lets build one
-            game = ScheduleEntry(game_id, timestamp, opponent, site, location, links, conference, schedule_years)
+            game = ScheduleEntry(game_id, timestamp, opponent, site, location, links, conference, season)
             games.append(game)
 
         return games
@@ -153,3 +155,9 @@ class PrestoLegacyProvider(Provider):
         """
         raw_opponent = game['OPPONENT'].text.strip()
         return ("*" in raw_opponent)
+
+    def get_schedule_url_for_season(self, season):
+        """
+        Return the full URL of the schedule for a given season.
+        """
+        return "%s/sports/%s/%s/schedule" % (self.server, self.sport, season.id)
