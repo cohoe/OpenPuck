@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-import urllib2
 import re
 import json
 import requests
@@ -8,18 +7,17 @@ from bs4 import BeautifulSoup
 from urlparse import urlparse
 from datetime import datetime
 import dateutil.parser
-
-HTTP_REQUEST_HEADERS = {'User-Agent': 'Mozilla/5.0'}
+import requests
 
 
 def get_html_from_url(url):
     """
     Return the HTML contents from a request to a given URL.
     """
-    req = urllib2.Request(url, headers=HTTP_REQUEST_HEADERS)
-    response = urllib2.urlopen(req)
+    r = requests.get(url)
+    r.raise_for_status()
 
-    return response.read()
+    return r.text
 
 
 def get_base_from_url(url):
