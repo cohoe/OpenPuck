@@ -33,10 +33,6 @@ class NeulionLegacyProvider(Provider):
         url = self.get_schedule_url_for_season(season)
         soup = BeautifulSoup(get_html_from_url(url))
 
-        # Years
-        # You people should be ashamed of yourselves....
-        page_title = soup.table.table.td.text
-        schedule_years = self.get_data_years(page_title)
 
         game_entries = self.get_game_entries(soup)
         games = []
@@ -51,7 +47,7 @@ class NeulionLegacyProvider(Provider):
             # Links
             links = self.get_game_media_urls(game)
             # Timestamp
-            game_date = self.get_game_date(game, schedule_years)
+            game_date = self.get_game_date(game, season.years())
             game_time = self.get_game_time(game)
             timestamp = get_combined_timestamp(game_date, game_time)
             # Game ID
@@ -149,21 +145,6 @@ class NeulionLegacyProvider(Provider):
         date_string = game['DATE'].text.strip().upper()
 
         return get_datetime_from_string(date_string, years)
-
-    def get_schedule_years(self, soup):
-        """
-        Return two integers representing the years of this schedule
-        """
-        year_string = re.sub(r'[^\d-]', '', page_title)
-        years = year_string.split("-")
-        n_years = []
-        for year in years:
-            if len(year) == 2:
-                year = "20" + year
-            if len(year) == 4:
-                n_years.append(int(year))
-
-        return n_years
 
     def get_game_conference(self, game):
         """

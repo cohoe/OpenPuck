@@ -40,10 +40,6 @@ class CBSInteractiveProvider(Provider):
         url = self.get_schedule_url_for_season(season)
         soup = BeautifulSoup(get_html_from_url(url))
 
-        # Years
-        page_title = soup.find('div', class_='compositetitle').text
-        schedule_years = self.get_data_years(page_title)
-
         game_entries = self.get_game_entries(soup)
         games = []
 
@@ -52,7 +48,7 @@ class CBSInteractiveProvider(Provider):
             raw_game_id = game['id']
             game_id = self.get_id_from_string(game['id'])
             # Details
-            details_soup = self.get_game_details(schedule_years[0], raw_game_id)
+            details_soup = self.get_game_details(season.start_year, raw_game_id)
             # Location
             location = self.get_game_location(details_soup)
             # Site

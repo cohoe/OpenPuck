@@ -16,3 +16,7 @@ class Season(HawkeyApiObject):
             'ConferenceTournament': conftour,
             'NationalTournament': nattour,
         }
+
+
+    def years(self):
+        return [self.start_year, self.end_year]

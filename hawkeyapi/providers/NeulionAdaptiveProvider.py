@@ -33,10 +33,6 @@ class NeulionAdaptiveProvider(Provider):
         url = self.get_schedule_url_for_season(season)
         soup = BeautifulSoup(get_html_from_url(url))
 
-        # Years
-        page_title = soup.find(id='schedule-table').caption.text
-        schedule_years = self.get_data_years(page_title)
-
         games = []
         game_entries = self.get_game_entries(soup)
 
@@ -50,7 +46,7 @@ class NeulionAdaptiveProvider(Provider):
             # Links
             links = self.get_game_media_urls(game)
             # Timestamp
-            game_date = self.get_game_date(game, schedule_years)
+            game_date = self.get_game_date(game, season.years())
             game_time = self.get_game_time(game)
             timestamp = get_combined_timestamp(game_date, game_time)
             # Game ID

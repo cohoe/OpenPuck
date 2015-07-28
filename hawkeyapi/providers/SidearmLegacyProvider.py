@@ -35,8 +35,6 @@ class SidearmLegacyProvider(Provider):
         """
         Return a list of objects of the schedule.
         """
-        # Years
-        schedule_years = [season.start_year, season.end_year]
         url = self.get_schedule_url_for_season(season)
         soup = BeautifulSoup(get_html_from_url(url))
 

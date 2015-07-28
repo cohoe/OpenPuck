@@ -36,9 +36,6 @@ class PrestoMonthlyProvider(Provider):
         url = self.get_schedule_url_for_season(season)
         soup = BeautifulSoup(get_html_from_url(url))
 
-        # Years
-        page_title = soup.title.text
-        schedule_years = self.get_data_years(page_title)
         month = ""
 
         games = []
@@ -62,7 +59,7 @@ class PrestoMonthlyProvider(Provider):
             # Links
             links = self.get_game_media_urls(game)
             # Timestamp
-            game_date = self.get_game_date(game, month, schedule_years)
+            game_date = self.get_game_date(game, month, season.years())
             game_time = self.get_game_time(game)
             timestamp = datetime.combine(game_date, game_time.time())
             # Game ID
