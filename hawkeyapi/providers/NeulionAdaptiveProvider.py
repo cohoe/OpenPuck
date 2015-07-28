@@ -31,7 +31,7 @@ class NeulionAdaptiveProvider(Provider):
         Return a list of JSON objects of the schedule.
         """
         url = self.get_schedule_url_for_season(season)
-        soup = BeautifulSoup(self.get_schedule_from_web())
+        soup = BeautifulSoup(get_html_from_url(url))
 
         # Years
         page_title = soup.find(id='schedule-table').caption.text
@@ -119,8 +119,11 @@ class NeulionAdaptiveProvider(Provider):
         """
         Return a datetime object of the games start time.
         """
-        time_string = game.find('td', class_='time').text
-        return get_datetime_from_string(time_string)
+        time_element = game.find('td', class_='time')
+        if time_element:
+            return get_datetime_from_string(time_element.text)
+
+        return get_datetime_from_string("12:00 AM")
 
     def get_game_date(self, game, years):
         """

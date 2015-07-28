@@ -52,6 +52,10 @@ def get_datetime_from_string(string, years=None):
         # Remove the dots from things like P.M.
         string = string.replace('.', '')
 
+    # Deal with results
+    if re.search(r'[WL-]', string):
+        string = "12:00 AM"
+
     # TBA/D
     if "TBA" in string or string == "":
         string = "12:00 AM"

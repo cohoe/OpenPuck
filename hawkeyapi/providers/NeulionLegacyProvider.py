@@ -31,7 +31,7 @@ class NeulionLegacyProvider(Provider):
         Return a list of JSON objects of the schedule.
         """
         url = self.get_schedule_url_for_season(season)
-        soup = BeautifulSoup(self.get_schedule_from_web())
+        soup = BeautifulSoup(get_html_from_url(url))
 
         # Years
         # You people should be ashamed of yourselves....
@@ -129,13 +129,16 @@ class NeulionLegacyProvider(Provider):
         """
         Return a datetime object of the games start time.
         """
-        time_header = ""
+        time_header = None
         for header in game.keys():
             if "TIME" in header:
                 time_header = header
                 break
 
-        time_string = game[time_header].text.strip()
+        if time_header is None:
+            time_string = "12:00 AM"
+        else:
+            time_string = game[time_header].text.strip()
 
         return get_datetime_from_string(time_string)
 
