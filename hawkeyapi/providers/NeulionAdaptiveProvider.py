@@ -48,13 +48,12 @@ class NeulionAdaptiveProvider(Provider):
             # Timestamp
             game_date = self.get_game_date(game, season.years())
             game_time = self.get_game_time(game)
-            timestamp = get_combined_timestamp(game_date, game_time)
             # Game ID
             game_id = int(game['schedule-id'])
             # Conference
             conference = self.get_game_conference(game)
 
-            game = ScheduleEntry(game_id, timestamp, opponent, site, location, links, conference, season)
+            game = ScheduleEntry(game_id, game_date, game_time, opponent, site, location, links, conference, season)
             games.append(game)
 
         return games

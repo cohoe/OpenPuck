@@ -60,11 +60,10 @@ class CBSInteractiveProvider(Provider):
             # Timestamp
             game_date = self.get_game_date(details_soup, season.years())
             game_time = self.get_game_time(details_soup)
-            timestamp = get_combined_timestamp(game_date, game_time)
             # Conference
             conference = self.get_game_conference(game)
 
-            game = ScheduleEntry(game_id, timestamp, opponent, site, location, links, conference, season)
+            game = ScheduleEntry(game_id, game_date, game_time, opponent, site, location, links, conference, season)
             games.append(game)
 
         return games

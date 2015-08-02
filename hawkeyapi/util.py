@@ -33,6 +33,9 @@ def get_combined_timestamp(date, time):
     """
     Return a datetime object representing the local start time of a game.
     """
+    if time is None:
+        time = datetime.time(0)
+
     return datetime.datetime.combine(date, time)
 
 
@@ -66,13 +69,11 @@ def get_time_from_string(string):
 
     # Deal with results
     if re.search(r'[WL]', string):
-        # @TODO This might be becoming None in the future.
-        return datetime.time(0, 0)
+        return None
     
     # Too be <x>
     if re.search(r'TBA|TBD|FINAL|POSTPONED', string):
-        # @TODO Same thing here
-        return datetime.time(0, 0)
+        return None
 
     # Frak you Robert Morris
     if "NOON" in string:

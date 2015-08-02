@@ -54,7 +54,7 @@ class NeulionClassicProvider(Provider):
             # Conference
             conference = self.get_game_conference(game)
 
-            game = ScheduleEntry(game_id, timestamp, opponent, site, location, links, conference, season)
+            game = ScheduleEntry(game_id, game_date, game_time, opponent, site, location, links, conference, season)
             games.append(game)
 
         return games

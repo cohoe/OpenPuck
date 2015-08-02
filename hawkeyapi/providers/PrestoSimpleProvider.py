@@ -56,11 +56,10 @@ class PrestoSimpleProvider(Provider):
             timestamp = get_combined_timestamp(game_date, game_time)
             # Conference
             conference = self.get_game_conference(game)
-
             # Game ID
             game_id = self.get_gameid_from_timestamp(timestamp)
 
-            game = ScheduleEntry(game_id, timestamp, opponent, site, location, links, conference, season)
+            game = ScheduleEntry(game_id, game_date, game_time, opponent, site, location, links, conference, season)
             games.append(game)
 
         return games
