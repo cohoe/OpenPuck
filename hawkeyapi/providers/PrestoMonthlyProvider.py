@@ -61,7 +61,7 @@ class PrestoMonthlyProvider(Provider):
             # Timestamp
             game_date = self.get_game_date(game, month, season.years())
             game_time = self.get_game_time(game)
-            timestamp = datetime.combine(game_date, game_time.time())
+            timestamp = datetime.combine(game_date, game_time)
             # Game ID
             game_id = self.get_gameid_from_timestamp(timestamp)
             # Conference
@@ -122,15 +122,15 @@ class PrestoMonthlyProvider(Provider):
 
     def get_game_time(self, game):
         """
-        Return a datetime object of the games start time.
+        Return a time object of the games start time.
         """
         time_string = game.find('td', class_='e_status').text.strip()
 
-        return get_datetime_from_string(time_string)
+        return get_time_from_string(time_string)
 
     def get_game_date(self, game, month, years):
         """
-        Return a datetime object of the games start date.
+        Return a date object of the games start date.
         """
         # The field only gives us the day of the month
         raw_date = game.find('td', class_='e_date').text.strip()
@@ -139,7 +139,7 @@ class PrestoMonthlyProvider(Provider):
         date_string = "%s %i" % (month, day)
         date_string = date_string.upper()
 
-        return get_datetime_from_string(date_string, years)
+        return get_date_from_string(date_string, years)
 
     def get_game_conference(self, game):
         """

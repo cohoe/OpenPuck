@@ -6,18 +6,23 @@ from hawkeyapi.objects import ScheduleEntry, Season, Team, Conference, Instituti
 
 from hawkeyapi.TestData import seasons, teams
 
-teams = teams[2:]
-seasons = seasons[0:1]
+teams = teams[4:]
+seasons = seasons[0:]
 
-for t in teams:
+for i, t in enumerate(teams):
+#for t in teams:
     print t.json()
-    for s in seasons:
+    #for s in seasons:
+    for k, s in enumerate(seasons):
+        print "T:%i, S:%i" % (i, k)
         print s.json()
         p = t.get_provider()
         try:
             entries = p.get_schedule(s)
             for e in entries:
                 print e
+                print e.json()
         except requests.HTTPError:
             print "***** Season %s not available *****" % s.id
 
+        exit(1)

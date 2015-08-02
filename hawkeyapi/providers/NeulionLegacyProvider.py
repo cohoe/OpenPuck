@@ -123,7 +123,7 @@ class NeulionLegacyProvider(Provider):
 
     def get_game_time(self, game):
         """
-        Return a datetime object of the games start time.
+        Return a time object of the games start time.
         """
         time_header = None
         for header in game.keys():
@@ -136,15 +136,15 @@ class NeulionLegacyProvider(Provider):
         else:
             time_string = game[time_header].text.strip()
 
-        return get_datetime_from_string(time_string)
+        return get_time_from_string(time_string)
 
     def get_game_date(self, game, years):
         """
-        Return a datetime object of the games start date.
+        Return a date object of the games start date.
         """
         date_string = game['DATE'].text.strip().upper()
 
-        return get_datetime_from_string(date_string, years)
+        return get_date_from_string(date_string, years)
 
     def get_game_conference(self, game):
         """

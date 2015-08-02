@@ -55,7 +55,7 @@ class SidearmLegacyProvider(Provider):
             links = self.get_game_media_urls(details_soup)
             # Timestamp
             game_time = self.get_game_time(details_soup)
-            game_date = self.get_game_date(game)
+            game_date = self.get_game_date(game, season.years())
             timestamp = get_combined_timestamp(game_date, game_time)
             # Conference
             conference = self.get_game_conference(game)
@@ -143,20 +143,20 @@ class SidearmLegacyProvider(Provider):
 
     def get_game_time(self, details):
         """
-        Return a datetime object of the games start time.
+        Return a time object of the games start time.
         """
         time_string = details.td.find_all('em')[1].text.strip()
         if "/" in time_string:
             time_string = time_string.split("/")[0]
 
-        return get_datetime_from_string(time_string)
+        return get_time_from_string(time_string)
 
-    def get_game_date(self, game):
+    def get_game_date(self, game, years):
         """
-        Return a datetime object of the games start date.
+        Return a date object of the games start date.
         """
 
-        return get_datetime_from_string(game['DATE'].text.strip())
+        return get_date_from_string(game['DATE'].text.strip(), years)
 
     def get_game_conference(self, game):
         """

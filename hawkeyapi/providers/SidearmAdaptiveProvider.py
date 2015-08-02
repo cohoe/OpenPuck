@@ -129,22 +129,22 @@ class SidearmAdaptiveProvider(Provider):
 
     def get_game_date(self, game, years):
         """
-        Return a datetime object of the games start time. Note that it will
+        Return a date object of the games start time. Note that it will
         have no time so it needs to be paired with a game_time object.
         """
         date_string = game.find('div', class_='schedule_game_opponent_date').text.upper().strip()
 
-        return get_datetime_from_string(date_string, years)
+        return get_date_from_string(date_string, years)
 
     def get_game_time(self, game):
         """
-        Return a datetime object of the games start time. Note that it will
+        Return a time object of the games start time. Note that it will
         have todays date so it needs to be combined with a game_date
         object.
         """
         time_string = game.find('div', class_='schedule_game_opponent_time').text.strip()
 
-        return get_datetime_from_string(time_string)
+        return get_time_from_string(time_string)
 
     def get_game_conference(self, game):
         """

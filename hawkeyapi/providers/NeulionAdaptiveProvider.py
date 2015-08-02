@@ -113,22 +113,22 @@ class NeulionAdaptiveProvider(Provider):
 
     def get_game_time(self, game):
         """
-        Return a datetime object of the games start time.
+        Return a time object of the games start time.
         """
         time_element = game.find('td', class_='time')
         if time_element:
-            return get_datetime_from_string(time_element.text)
+            return get_time_from_string(time_element.text)
 
-        return get_datetime_from_string("12:00 AM")
+        return get_time_from_string("12:00 AM")
 
     def get_game_date(self, game, years):
         """
-        Return a datetime object of the games start date.
+        Return a date object of the games start date.
         """
         date_element = game.find('td', class_='date').div
         date_string = date_element.text.strip().upper()
 
-        return get_datetime_from_string(date_string)
+        return get_date_from_string(date_string, years)
 
     def get_game_conference(self, game):
         """

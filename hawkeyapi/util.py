@@ -5,7 +5,7 @@ import json
 import requests
 from bs4 import BeautifulSoup
 from urlparse import urlparse
-from datetime import datetime
+import datetime
 import dateutil.parser
 import requests
 
@@ -33,50 +33,52 @@ def get_combined_timestamp(date, time):
     """
     Return a datetime object representing the local start time of a game.
     """
-    return datetime.combine(date, time.time())
+    return datetime.datetime.combine(date, time)
 
 
-def get_datetime_from_string(string, years=None):
+def get_date_from_string(string, years):
     """
-    Return an object from a given date string. Best guess.
+    Return a best-guess date object from given string.
     """
     string = string.upper().strip()
-    # Dashes mean they dont know the schedule yet. Just do the 1st.
+
+    # If theres a dash in the date, it likely means a range. We're only
+    # going to take the first one.
     if "-" in string:
         string = string.split("-")[0].strip()
 
-    # Sub some characters
-    if re.search(r'[A-Z]\.[A-Z]\.', string):
-        # Remove the dots from things like P.M.
-        string = string.replace('.', '')
-
-    # Deal with results
-    if re.search(r'[WL-]', string):
-        string = "12:00 AM"
-
-    # TBA/D
-    if "TBA" in string or string == "":
-        string = "12:00 AM"
-    if "TBD" in string or string == "":
-        string = "12:00 AM"
-    if "FINAL" in string:
-        string = "12:00 AM"
-    if "POSTPONED" in string:
-        string = "12:00 AM"
-
-    if "NOON" in string:
-        string = "12:00 PM"
-
-    # Remove time zone crap
-    string = re.sub(r'\(.*\)', '', string)
-
-    print string
-    # Some of them dont even put the year. Figure it out.
     if re.search(r'[a-zA-Z]{3,}', string):
         if re.search(r'SEP|OCT|NOV|DEC', string):
             string = string + " %i" % years[0]
         else:
             string = string + " %i" % years[1]
 
-    return dateutil.parser.parse(string)
+    return dateutil.parser.parse(string).date()
 
+def get_time_from_string(string):
+    """
+    Return a best-guess time object from the given string.
+    """
+    string = string.upper().strip()
+
+    # Remove the dots from the time (such as "P.M.")
+    string = string.replace('.', '')
+
+    # Deal with results
+    if re.search(r'[WL]', string):
+        # @TODO This might be becoming None in the future.
+        return datetime.time(0, 0)
+    
+    # Too be <x>
+    if re.search(r'TBA|TBD|FINAL|POSTPONED', string):
+        # @TODO Same thing here
+        return datetime.time(0, 0)
+
+    # Frak you Robert Morris
+    if "NOON" in string:
+        return datetime.time(12, 0)
+
+    # Sometimes they put the host or local time zone in there too.
+    string = re.sub(r'\(.*\)', '', string)
+
+    return dateutil.parser.parse(string).time()

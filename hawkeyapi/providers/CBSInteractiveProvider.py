@@ -58,7 +58,7 @@ class CBSInteractiveProvider(Provider):
             # Links
             links = self.get_game_media_urls(details_soup)
             # Timestamp
-            game_date = self.get_game_date(details_soup)
+            game_date = self.get_game_date(details_soup, season.years())
             game_time = self.get_game_time(details_soup)
             timestamp = get_combined_timestamp(game_date, game_time)
             # Conference
@@ -155,22 +155,22 @@ class CBSInteractiveProvider(Provider):
 
     def get_game_time(self, game):
         """
-        Return a datetime object of the games start time.
+        Return a time object of the games start time.
         """
         time_string = game.find('detail')['time'].strip()
 
-        return get_datetime_from_string(time_string)
+        return get_time_from_string(time_string)
 
-    def get_game_date(self, game):
+    def get_game_date(self, game, years):
         """
-        Return a datetime object of the games start date.
+        Return a date object of the games start date.
         """
         date_string = game.find('detail')['date'].strip()
         date_string = date_string.upper().replace('.', '')
         if "SEPT" in date_string:
             date_string = re.sub(r'SEPT', 'SEP', date_string)
 
-        return get_datetime_from_string(date_string)
+        return get_date_from_string(date_string, years)
 
     def get_game_details(self, year, game_id):
         """
