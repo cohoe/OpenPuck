@@ -27,7 +27,7 @@ class Provider(object):
         n_location = re.sub(r'[\/\\]', ' ', n_location)
 
         # Remove special characters
-        n_location = re.sub(r'[^\w ]', '', n_location)
+        n_location = re.sub(r'[^\w\- ]', '', n_location)
 
         # Remove duplicate spaces
         n_location = re.sub(r'\s+', ' ', n_location)
@@ -42,15 +42,25 @@ class Provider(object):
         """
         Normalize an effectively randomly formatted opponent string.
         """
-        # Make it all uppercase
-        n_opponent = raw_opponent.upper()
+        # Make it all uppercase and remove extra crap
+        n_opponent = raw_opponent.upper().strip()
 
         # If it's a to be determined, make it so
         if "TBA" in n_opponent or n_opponent == "":
-            return "TBA"
+            # @TODO This might have broken some shit
+            return None
 
         # If there is anything in parenthesis, kill it
-        n_opponent = re.sub(r'\((.*)\)', '', n_opponent)
+        n_opponent = re.sub(r'\((.*?)\)', '', n_opponent)
+
+        # Remove anything after an @
+        n_opponent = re.sub(r'@ (.*)$', '', n_opponent)
+
+        # Some special words
+        # This regex is only going to get longer as schools put stupid crap
+        # in the schedule.
+        n_opponent = re.sub(r'GAME \d|(SEMI)?FINAL(S)?|CHAMPIONSHIP|NATIONAL QUARTERFINAL', '', n_opponent)
+        n_opponent = re.sub(r'FIRST ROUND GAME \w+|QUARTER|SEMIS AND', '', n_opponent)
 
         # Remove special characters
         n_opponent = re.sub(r'[^\w ]', '', n_opponent)
@@ -60,7 +70,7 @@ class Provider(object):
         
         # Remove rankings if that is given
         n_opponent = re.sub(r'^\d+ ', '', n_opponent)
-        n_opponent = re.sub(r'NO \d([\/\d]+)?', '', n_opponent)
+        n_opponent = re.sub(r'NO \d([\/\dRV]+)?', '', n_opponent)
         n_opponent = n_opponent.strip()
 
         # If they say the opponent is "at", remove it
@@ -72,7 +82,10 @@ class Provider(object):
         # Lastly, strip it up again
         n_opponent = n_opponent.strip()
 
-        # Done for now
+        if not n_opponent or n_opponent == "":
+            return None
+
+        # Done
         return n_opponent
 
     def get_normalized_site(self, raw_site):
