@@ -1,0 +1,27 @@
+{
+    "game": {
+        "season": "2015-16",
+        "gameDate": "2016-02-08",
+        "gameTime": "08:00:00",
+        "homeEntryId": "abcd1234",
+        "awayEntryId": "efgh5678",
+        "isTournament": true,
+        "tournamentName": "Womens Beanpot",
+        "name": "Championship",
+        "isConference": false,
+        "isExhibition": false,
+        "isConfTournament": false,
+        "isNationalTournament": false,
+    }
+}
+
+{
+    "tournament": {
+        "name": "Womens Beanpot",
+        "isWomen": true,
+        "venue": "TD Garden",
+        "host": "Boston University",
+        "startDate": "2016-02-01",
+        "endDate": "2016-02-08",
+    }
+}
