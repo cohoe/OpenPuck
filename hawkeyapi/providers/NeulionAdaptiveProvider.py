@@ -21,9 +21,10 @@ class NeulionAdaptiveProvider(Provider):
         url_obj = urlparse(index_url)
         soup = BeautifulSoup(get_html_from_url(index_url))
 
+        sched_element = soup.find(id='section-menu').find('a', text="Schedule")
         self.urls = {
             'index': index_url,
-            'schedule': self.server + soup.find(id='section-menu').find('a', text="Schedule")['href']
+            'schedule': self.server + sched_element['href']
         }
 
     def get_schedule(self, season):
@@ -53,7 +54,8 @@ class NeulionAdaptiveProvider(Provider):
             # Conference
             conference = self.get_game_conference(game)
 
-            game = ScheduleEntry(game_id, game_date, game_time, opponent, site, location, links, conference, season)
+            game = ScheduleEntry(game_id, game_date, game_time, opponent, site,
+                                 location, links, conference, season)
             games.append(game)
 
         return games

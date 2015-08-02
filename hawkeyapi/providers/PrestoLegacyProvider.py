@@ -36,7 +36,6 @@ class PrestoLegacyProvider(Provider):
         url = self.get_schedule_url_for_season(season)
         soup = BeautifulSoup(get_html_from_url(url))
 
-
         games = []
         game_entries = self.get_game_entries(soup)
 
@@ -61,7 +60,8 @@ class PrestoLegacyProvider(Provider):
             conference = self.get_game_conference(game)
 
             # They don't have game_id's, so lets build one
-            game = ScheduleEntry(game_id, game_date, game_time, opponent, site, location, links, conference, season)
+            game = ScheduleEntry(game_id, game_date, game_time, opponent, site,
+                                 location, links, conference, season)
             games.append(game)
 
         return games
@@ -88,7 +88,6 @@ class PrestoLegacyProvider(Provider):
             games.append(game)
 
         return games
-
 
     def get_game_site(self, game):
         """

@@ -58,6 +58,7 @@ def get_date_from_string(string, years):
 
     return dateutil.parser.parse(string).date()
 
+
 def get_time_from_string(string):
     """
     Return a best-guess time object from the given string.
@@ -70,7 +71,7 @@ def get_time_from_string(string):
     # Deal with results
     if re.search(r'[WL]', string):
         return None
-    
+
     # Too be <x>
     if re.search(r'TBA|TBD|FINAL|POSTPONED', string):
         return None

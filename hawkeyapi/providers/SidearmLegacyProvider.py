@@ -25,10 +25,11 @@ class SidearmLegacyProvider(Provider):
             if "path" in query:
                 self.sport = query.split('=')[1]
 
+        detail_url = "/services/schedule_detail.aspx"
         self.urls = {
             'index': index_url,
             'schedule': "%s://%s/schedule.aspx?%s" % (url_obj.scheme, url_obj.netloc, url_obj.query),
-            'schedule_detail': get_base_from_url(index_url) + "/services/schedule_detail.aspx",
+            'schedule_detail': get_base_from_url(index_url) + detail_url,
         }
 
     def get_schedule(self, season):
@@ -59,7 +60,8 @@ class SidearmLegacyProvider(Provider):
             # Conference
             conference = self.get_game_conference(game)
 
-            game = ScheduleEntry(game_id, game_date, game_time, opponent, site, location, links, conference, season)
+            game = ScheduleEntry(game_id, game_date, game_time, opponent, site,
+                                 location, links, conference, season)
             games.append(game)
 
         return games
@@ -168,10 +170,9 @@ class SidearmLegacyProvider(Provider):
         Return the full URL of the schedule for a given season.
         """
         soup = BeautifulSoup(self.get_schedule_from_web())
-        schedule_selection = soup.find(id='ctl00_cplhMainContent_ddlPastschedules')
-        for option in schedule_selection.find_all('option'):
+        sched_select = soup.find(id='ctl00_cplhMainContent_ddlPastschedules')
+        for option in sched_select.find_all('option'):
             if option.text == season.id:
-                print "The season is %s" % season.id
                 schedule_number = option['value']
 
         return "%s/schedule.aspx?path=%s&schedule=%s" % (self.server, self.sport, schedule_number)

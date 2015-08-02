@@ -19,7 +19,7 @@ class CBSInteractiveProvider(Provider):
         Set our URLs so we can reference them later.
         """
         url_obj = urlparse(index_url)
-        
+
         # Really? Really? Ugh...
         index_file = url_obj.path.split("/")[-1]
         schedule_path = "/".join(url_obj.path.split("/")[:-1]) + "/sched"
@@ -29,8 +29,11 @@ class CBSInteractiveProvider(Provider):
 
         self.urls = {
             'index': index_url,
-            'schedule': "%s://%s%s/%s" % (url_obj.scheme, url_obj.netloc, schedule_path, self.schedule_file),
-            'event_data': "%s://%s/data/xml/events/%s/" % (url_obj.scheme, url_obj.netloc, self.sport),
+            'schedule': "%s://%s%s/%s" % (url_obj.scheme, url_obj.netloc,
+                                          schedule_path, self.schedule_file),
+            'event_data': "%s://%s/data/xml/events/%s/" % (url_obj.scheme,
+                                                           url_obj.netloc,
+                                                           self.sport),
         }
 
     def get_schedule(self, season):
@@ -45,10 +48,10 @@ class CBSInteractiveProvider(Provider):
 
         for game in game_entries:
             # Game ID
-            raw_game_id = game['id']
+            r_game_id = game['id']
             game_id = self.get_id_from_string(game['id'])
             # Details
-            details_soup = self.get_game_details(season.start_year, raw_game_id)
+            details_soup = self.get_game_details(season.start_year, r_game_id)
             # Location
             location = self.get_game_location(details_soup)
             # Site
@@ -63,7 +66,8 @@ class CBSInteractiveProvider(Provider):
             # Conference
             conference = self.get_game_conference(game)
 
-            game = ScheduleEntry(game_id, game_date, game_time, opponent, site, location, links, conference, season)
+            game = ScheduleEntry(game_id, game_date, game_time, opponent,
+                                 site, location, links, conference, season)
             games.append(game)
 
         return games
@@ -84,13 +88,12 @@ class CBSInteractiveProvider(Provider):
 
         return game_entries
 
-
     def get_game_location(self, game):
         """
         Return a normalized string of the games location.
         """
         raw_location = game.find('detail')['location']
-        
+
         return self.get_normalized_location(raw_location)
 
     def get_game_site(self, game):
@@ -198,6 +201,7 @@ class CBSInteractiveProvider(Provider):
         if r.status_code == 404:
             # Then its probably active
             directory = "sched"
-            url = "%s/sports/%s/%s/%s" % (self.server, self.sport, directory, self.schedule_file)
+            url = "%s/sports/%s/%s/%s" % (self.server, self.sport, directory,
+                                          self.schedule_file)
 
         return url

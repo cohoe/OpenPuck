@@ -57,7 +57,8 @@ class SidearmAdaptiveProvider(Provider):
             game_time = self.get_game_time(game)
             conference = self.get_game_conference(game)
 
-            game = ScheduleEntry(game_id, game_date, game_time, opponent, site, location, links, conference, season)
+            game = ScheduleEntry(game_id, game_date, game_time, opponent, site,
+                                 location, links, conference, season)
             games.append(game)
 
         return games
@@ -99,8 +100,8 @@ class SidearmAdaptiveProvider(Provider):
         """
         site = self.get_game_site(game)
 
-        opponent_element = game.find('div', class_='schedule_game_opponent_name')
-        opponent = opponent_element.text
+        opp_element = game.find('div', class_='schedule_game_opponent_name')
+        opponent = opp_element.text
 
         return self.get_normalized_opponent(opponent)
 
@@ -110,12 +111,12 @@ class SidearmAdaptiveProvider(Provider):
         """
         media_urls = {}
 
-        media_element = game.find('div', class_='schedule_game_multimedia_links')
-        if not media_element:
+        m_element = game.find('div', class_='schedule_game_multimedia_links')
+        if not m_element:
             return media_urls
 
-        link_elements = media_element.find_all('a', class_='schedule_game_media_link')
-        for link in link_elements:
+        a_elements = m_element.find_all('a', class_='schedule_game_media_link')
+        for link in a_elements:
             link_text = link.text.upper()
             if "STATS" in link_text:
                 media_urls['stats'] = link['href']
@@ -131,7 +132,8 @@ class SidearmAdaptiveProvider(Provider):
         Return a date object of the games start time. Note that it will
         have no time so it needs to be paired with a game_time object.
         """
-        date_string = game.find('div', class_='schedule_game_opponent_date').text.upper().strip()
+        date_element = game.find('div', class_='schedule_game_opponent_date')
+        date_string = date_element.text.upper().strip()
 
         return get_date_from_string(date_string, years)
 
@@ -141,7 +143,8 @@ class SidearmAdaptiveProvider(Provider):
         have todays date so it needs to be combined with a game_date
         object.
         """
-        time_string = game.find('div', class_='schedule_game_opponent_time').text.strip()
+        t_element = game.find('div', class_='schedule_game_opponent_time')
+        time_string = t_element.text.strip()
 
         return get_time_from_string(time_string)
 
@@ -157,10 +160,9 @@ class SidearmAdaptiveProvider(Provider):
         Return the full URL of the schedule for a given season.
         """
         soup = BeautifulSoup(self.get_schedule_from_web())
-        schedule_selection = soup.find(id='ctl00_cplhMainContent_ddlPastschedules2')
-        for option in schedule_selection.find_all('option'):
+        sched_select = soup.find(id='ctl00_cplhMainContent_ddlPastschedules2')
+        for option in sched_select.find_all('option'):
             if option.text == season.id:
                 schedule_number = option['value']
 
         return "%s/schedule.aspx?path=%s&schedule=%s" % (self.server, self.sport, schedule_number)
-

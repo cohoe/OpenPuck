@@ -67,7 +67,8 @@ class PrestoMonthlyProvider(Provider):
             # Conference
             conference = self.get_game_conference(game)
 
-            game = ScheduleEntry(game_id, game_date, game_time, opponent, site, location, links, conference, season)
+            game = ScheduleEntry(game_id, game_date, game_time, opponent, site,
+                                 location, links, conference, season)
             games.append(game)
 
         return games
@@ -78,7 +79,8 @@ class PrestoMonthlyProvider(Provider):
         In this case, we need it for months as well.
         """
         # Skip the first since its always an empty
-        return soup.find('div', class_=['schedule-data', 'schedule-content']).find_all('tr')[1:]
+        s_element = soup.find('div', class_=['schedule-data', 'schedule-content'])
+        return s_element.find_all('tr')[1:]
 
     def get_game_site(self, game):
         """
@@ -89,7 +91,8 @@ class PrestoMonthlyProvider(Provider):
         if neutral_element:
             return self.get_normalized_site("neutral")
 
-        # Others are given as a CSS class. Anything not explicit is assumed to be away.
+        # Others are given as a CSS class. Anything not
+        # explicit is assumed to be away.
         opponent_element = game.find('span', class_='e_opponent_name')
         if "e_home" in opponent_element['class']:
             return self.get_normalized_site("home")

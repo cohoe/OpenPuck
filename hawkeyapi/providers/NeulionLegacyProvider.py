@@ -21,9 +21,10 @@ class NeulionLegacyProvider(Provider):
         url_obj = urlparse(index_url)
         soup = BeautifulSoup(get_html_from_url(index_url))
 
+        sched_element = soup.find(id='section-menu').find('a', text="Schedules/Results")
         self.urls = {
             'index': index_url,
-            'schedule': self.server + soup.find(id='section-menu').find('a', text="Schedules/Results")['href']
+            'schedule': self.server + sched_element['href']
         }
 
     def get_schedule(self, season):
@@ -32,7 +33,6 @@ class NeulionLegacyProvider(Provider):
         """
         url = self.get_schedule_url_for_season(season)
         soup = BeautifulSoup(get_html_from_url(url))
-
 
         game_entries = self.get_game_entries(soup)
         games = []
@@ -55,7 +55,8 @@ class NeulionLegacyProvider(Provider):
             # Conference
             conference = self.get_game_conference(game)
 
-            game = ScheduleEntry(game_id, game_date, game_time, opponent, site, location, links, conference, season)
+            game = ScheduleEntry(game_id, game_date, game_time, opponent, site,
+                                 location, links, conference, season)
             games.append(game)
 
         return games

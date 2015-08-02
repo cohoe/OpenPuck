@@ -53,7 +53,8 @@ class StreamlineProvider(Provider):
             # Conference
             conference = self.get_game_conference(game)
 
-            game = ScheduleEntry(game_id, game_date, game_time, opponent, site, location, links, conference, season)
+            game = ScheduleEntry(game_id, game_date, game_time, opponent, site,
+                                 location, links, conference, season)
             games.append(game)
 
         return games
@@ -73,7 +74,7 @@ class StreamlineProvider(Provider):
                 continue
             if "groupstart" in row['class'] or "groupend" in row['class']:
                 continue
-            
+
             game = {}
             for i, cell in enumerate(row.find_all('td')):
                 game[headers[i]] = cell
@@ -129,7 +130,7 @@ class StreamlineProvider(Provider):
         Return a date object of the games start date.
         """
         date_string = game['DATE'].text.upper().strip()
-        
+
         return get_date_from_string(date_string, years)
 
     def get_clean_headers(self, headers):
