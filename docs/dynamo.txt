@@ -1,0 +1,3 @@
+Local test instance here: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tools.DynamoDBLocal.html
+
+

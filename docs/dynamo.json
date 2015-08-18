@@ -1,0 +1,11 @@
+{
+    "RIT", // Hash Key - Institution
+    {
+        "range_key": 010101, // Schedule Entry ID
+        "attributes": {
+            "gameDate": "blah",
+            "home": "blah",
+            "away": "blah",
+        }
+    }
+}
