@@ -2,10 +2,6 @@
 from pynamodb.models import Model
 from pynamodb.attributes import UnicodeAttribute
 
-from boto.dynamodb2.layer1 import DynamoDBConnection
-from boto import dynamodb2
-from boto.dynamodb2.table import Table
-
 class UserModel(Model):
     """
     A DynamoDB User
@@ -20,8 +16,7 @@ class UserModel(Model):
 
 def create_table():
     UserModel.create_table(read_capacity_units=1, write_capacity_units=1)
-
-    UserModel.dump("test.json")
+    #UserModel.dump("test.json")
 
 def add_table():
     #user_item = UserModel("Jack", "Oph")
