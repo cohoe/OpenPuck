@@ -1,6 +1,12 @@
 # OpenPuck
 Some kind of application that provides hockey data in a consumable and fun way. No idea what it will do yet.
 
+## Data
+* Schedules
+* Media aggregation
+* Rosters
+* Stats
+
 ## Providers
 * SidearmLegacy (RIT, Clarkson)
 * SidearmAdaptive (Northeastern, Syracuse, RPI)
@@ -12,6 +18,8 @@ Some kind of application that provides hockey data in a consumable and fun way. 
 * PrestoSimple (UNH, Maine, Harvard, Yale)
 * CBSInteractive (Boston College, Wisconsin, Penn State)
 * Streamline (Bemidji)
+* NWHL???
+* CWHL???
 
 ## Extras 
 ### Awards for Stupid Stuff
