@@ -1,5 +1,5 @@
-# HockeySchedule
-Some kind of application that scrapes sports providers into a central database
+# OpenPuck
+Some kind of application that provides hockey data in a consumable and fun way. No idea what it will do yet.
 
 ## Providers
 * SidearmLegacy (RIT, Clarkson)
