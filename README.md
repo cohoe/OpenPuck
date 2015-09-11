@@ -13,9 +13,9 @@ Some kind of application that provides hockey data in a consumable and fun way. 
 * NeulionLegacy (Dartmouth)
 * NeulionClassic (Princeton)
 * NeulionAdaptive (North Dakota)
-* PrestoMonthly (Brown, Merrimack, Quinnipiac, SHU)
+* PrestoMonthly (Brown, Merrimack, SHU)
 * PrestoLegacy (Yale)
-* PrestoSimple (UNH, Maine, Harvard, Yale)
+* PrestoSimple (Maine, Harvard, Yale)
 * CBSInteractive (Boston College, Wisconsin, Penn State)
 * Streamline (Bemidji)
 * NWHL???
