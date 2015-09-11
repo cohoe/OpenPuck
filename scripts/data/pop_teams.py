@@ -18,12 +18,23 @@ nu = TeamModel(
     name = "Northeastern University",
     is_women = True,
     mascot = "Huskies",
-    home_conference = "WHEA",
+    home_conference = "HEA",
     league = "NCAA",
     web_site = "http://www.gonu.com/index.aspx?path=whockey",
     web_provider = "SidearmAdaptiveProvider",
 )
 nu.save()
+
+numen = TeamModel(
+    name = "Northeastern University",
+    is_women = False,
+    mascot = "Huskies",
+    home_conference = "HEA",
+    league = "NCAA",
+    web_site = "http://www.gonu.com/index.aspx?path=mhockey",
+    web_provider = "SidearmAdaptiveProvider",
+)
+numen.save()
 
 du = TeamModel(
     name = "Dartmouth University",
@@ -62,7 +73,7 @@ mc = TeamModel(
     name = "Merrimack University",
     is_women = True,
     mascot = "Warriors",
-    home_conference = "WHEA",
+    home_conference = "HEA",
     league = "NCAA",
     web_site = "http://merrimackathletics.com/sports/wice/index",
     web_provider = "PrestoMonthlyProvider",
@@ -84,7 +95,7 @@ ume = TeamModel(
     name = "University of Maine",
     is_women = True,
     mascot = "Black Bears",
-    home_conference = "WHEA",
+    home_conference = "HEA",
     league = "NCAA",
     web_site = "http://goblackbears.com/sports/w-hockey/index",
     web_provider = "PrestoSimpleProvider",

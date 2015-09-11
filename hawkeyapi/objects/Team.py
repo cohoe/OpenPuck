@@ -4,7 +4,7 @@ from HawkeyApiObject import HawkeyApiObject
 import hawkeyapi.providers
 
 class Team(HawkeyApiObject):
-    def __init__(self, institution, mascot, is_women, home_conference, social_media, website):
+    def __init__(self, institution, mascot, is_women, home_conference, social_media, web_site, web_provider):
         HawkeyApiObject.__init__(self)
 
         self.institution_name = institution
@@ -12,32 +12,33 @@ class Team(HawkeyApiObject):
         self.is_women = is_women
         self.home_conference = home_conference
         self.social_media = social_media
-        self.website = website
+        self.website = web_site
+        self.provider = web_provider
 
 
     def get_provider(self):
         """
         Return an object of the appropriate provider for a team website.
         """
-        provider = self.website['data_provider']
+        #provider = self.website['data_provider']
 
-        if provider is "CBSInteractiveProvider":
+        if self.provider is "CBSInteractiveProvider":
             return hawkeyapi.providers.CBSInteractiveProvider(self)
-        if provider is "NeulionAdaptiveProvider":
+        if self.provider is "NeulionAdaptiveProvider":
             return hawkeyapi.providers.NeulionAdaptiveProvider(self)
-        if provider is "NeulionClassicProvider":
+        if self.provider is "NeulionClassicProvider":
             return hawkeyapi.providers.NeulionClassicProvider(self)
-        if provider is "NeulionLegacyProvider":
+        if self.provider is "NeulionLegacyProvider":
             return hawkeyapi.providers.NeulionLegacyProvider(self)
-        if provider is "PrestoLegacyProvider":
+        if self.provider is "PrestoLegacyProvider":
             return hawkeyapi.providers.PrestoLegacyProvider(self)
-        if provider is "PrestoMonthlyProvider":
+        if self.provider is "PrestoMonthlyProvider":
             return hawkeyapi.providers.PrestoMonthlyProvider(self)
-        if provider is "PrestoSimpleProvider":
+        if self.provider is "PrestoSimpleProvider":
             return hawkeyapi.providers.PrestoSimpleProvider(self)
-        if provider is "SidearmLegacyProvider":
+        if self.provider is "SidearmLegacyProvider":
             return hawkeyapi.providers.SidearmLegacyProvider(self)
-        if provider is "SidearmAdaptiveProvider":
+        if self.provider is "SidearmAdaptiveProvider":
             return hawkeyapi.providers.SidearmAdaptiveProvider(self)
-        if provider is "StreamlineProvider":
+        if self.provider is "StreamlineProvider":
             return hawkeyapi.providers.StreamlineProvider(self)
