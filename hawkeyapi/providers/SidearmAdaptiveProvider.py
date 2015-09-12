@@ -11,7 +11,7 @@ class SidearmAdaptiveProvider(Provider):
         Provider.__init__(self, team)
 
         # Set up the URL information for this provider
-        index_url = team.website['index_url']
+        index_url = team.website
 
         self.set_provider_urls(index_url)
         self.provider_name = __name__
@@ -30,7 +30,7 @@ class SidearmAdaptiveProvider(Provider):
             'index': index_url,
             'schedule': "%s://%s/schedule.aspx?%s" % (url_obj.scheme, url_obj.netloc, url_obj.query),
         }
-
+        
     def get_schedule(self, season):
         """
         Return a list of JSON objects of the schedule.
@@ -145,7 +145,6 @@ class SidearmAdaptiveProvider(Provider):
         """
         t_element = game.find('div', class_='schedule_game_opponent_time')
         time_string = t_element.text.strip()
-
         return get_time_from_string(time_string)
 
     def get_game_conference(self, game):
@@ -161,8 +160,20 @@ class SidearmAdaptiveProvider(Provider):
         """
         soup = BeautifulSoup(self.get_schedule_from_web())
         sched_select = soup.find(id='ctl00_cplhMainContent_ddlPastschedules2')
+
+        # 20150911 They made some of the dropdowns have full years. Ugh.
+        # AND THEY MIX THEM IN THE SAME SCHOOL!!!
+        test_option = sched_select.find('option')
         for option in sched_select.find_all('option'):
-            if option.text == season.id:
+            text = option.text.strip()
+            if len(text) == 9:
+                # Long
+                season_id = "%s-%s" % (season.start_year, season.end_year)
+            elif len(text) == 7:
+                # Short
+                season_id = season.id
+
+            if text == season_id:
                 schedule_number = option['value']
 
         return "%s/schedule.aspx?path=%s&schedule=%s" % (self.server, self.sport, schedule_number)

@@ -10,7 +10,7 @@ class PrestoMonthlyProvider(Provider):
         """
         Provider.__init__(self, team)
 
-        index_url = team.website['index_url']
+        index_url = team.website
         self.set_provider_urls(index_url)
         self.provider_name = __name__
 
@@ -45,7 +45,12 @@ class PrestoMonthlyProvider(Provider):
                 if re.search(r'[a-zA-Z]{3}', game.text):
                     month = game.text
                 continue
+            # @TODO: Why is this here?
             if game['class'][0] == "month-sep":
+                continue
+
+            # See if there is actually a game here.
+            if not game.find('td', class_='e_date'):
                 continue
 
             # They do not provide a common location field, so

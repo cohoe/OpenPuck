@@ -10,7 +10,7 @@ class NeulionLegacyProvider(Provider):
         """
         Provider.__init__(self, team)
 
-        index_url = team.website['index_url']
+        index_url = team.website
         self.set_provider_urls(index_url)
         self.provider_name = __name__
 
@@ -21,7 +21,9 @@ class NeulionLegacyProvider(Provider):
         url_obj = urlparse(index_url)
         soup = BeautifulSoup(get_html_from_url(index_url))
 
-        sched_element = soup.find(id='section-menu').find('a', text="Schedules/Results")
+        # @TODO: There has to be a better way to do this....
+        sched_opts = ["Schedules/Results", "Schedule & Results", "Schedule/Results", "Schedule"]
+        sched_element = soup.find(id='section-menu').find('a', text=sched_opts)
         self.urls = {
             'index': index_url,
             'schedule': self.server + sched_element['href']

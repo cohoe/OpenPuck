@@ -14,7 +14,10 @@ def get_html_from_url(url):
     """
     Return the HTML contents from a request to a given URL.
     """
-    r = requests.get(url)
+    headers = {
+        'User-Agent': 'Mozilla/5.0'
+    }
+    r = requests.get(url, headers = headers)
     r.raise_for_status()
 
     return r.text
@@ -65,20 +68,21 @@ def get_time_from_string(string):
     """
     string = string.upper().strip()
 
-    # Remove the dots from the time (such as "P.M.")
-    string = string.replace('.', '')
-
-    # Deal with results
-    if re.search(r'[WL]', string):
-        return None
-
     # Too be <x>
     if re.search(r'TBA|TBD|FINAL|POSTPONED', string):
+        return None
+
+    # Deal with results
+    if re.search(r'[WLT]', string):
         return None
 
     # Frak you Robert Morris
     if "NOON" in string:
         return datetime.time(12, 0)
+
+    # Remove extra characters from the time (Thanks 
+    # MSU for putting a random ` in there...)
+    string = re.sub(r'[^a-zA-Z0-9\:]', '', string)
 
     # Sometimes they put the host or local time zone in there too.
     string = re.sub(r'\(.*\)', '', string)

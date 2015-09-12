@@ -10,8 +10,7 @@ class SidearmLegacyProvider(Provider):
         """
         Provider.__init__(self, team)
 
-        index_url = team.website['index_url']
-
+        index_url = team.website
         self.set_provider_urls(index_url)
         self.provider_name = __name__
 
@@ -75,8 +74,8 @@ class SidearmLegacyProvider(Provider):
         for header in schedule_table.tr.find_all('th'):
             raw_header = header.text.upper().strip()
             raw_header = re.sub(r'[^\w ]', '', raw_header)
-            if raw_header == '' or raw_header == 'CHA' or raw_header == 'AHA':
-                # Its the Clarkson conference header
+            if raw_header == '' or raw_header == 'CHA' or raw_header == 'AHA' or raw_header == 'CONFERENCE GAME':
+                # Its the Clarkson-esqe conference header
                 raw_header = 'CONF'
             headers.append(raw_header)
 
@@ -172,7 +171,7 @@ class SidearmLegacyProvider(Provider):
         soup = BeautifulSoup(self.get_schedule_from_web())
         sched_select = soup.find(id='ctl00_cplhMainContent_ddlPastschedules')
         for option in sched_select.find_all('option'):
-            if option.text == season.id:
+            if option.text.strip() == season.id:
                 schedule_number = option['value']
 
         return "%s/schedule.aspx?path=%s&schedule=%s" % (self.server, self.sport, schedule_number)
