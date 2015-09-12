@@ -69,12 +69,14 @@ def get_time_from_string(string):
     string = string.upper().strip()
 
     # Too be <x>
+    # @TODO: This might need some work later on. Midnight games are
+    # not likely but could happen.
     if re.search(r'TBA|TBD|FINAL|POSTPONED', string):
-        return None
+        return datetime.time(0, 0)
 
     # Deal with results
     if re.search(r'[WLT]', string):
-        return None
+        return datetime.time(0, 0)
 
     # Frak you Robert Morris
     if "NOON" in string:
