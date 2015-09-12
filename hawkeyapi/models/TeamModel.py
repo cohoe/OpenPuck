@@ -12,7 +12,7 @@ class ConferenceIndex(GlobalSecondaryIndex):
         projection = AllProjection()
     
     home_conference = UnicodeAttribute(hash_key=True)
-    name = UnicodeAttribute(range_key=True)
+    id = UnicodeAttribute(range_key=True)
     is_women = BooleanAttribute()
 
 class TeamModel(HawkeyModel):
@@ -25,12 +25,14 @@ class TeamModel(HawkeyModel):
         read_capacity_units = 1
         write_capacity_units = 1
 
-    name = UnicodeAttribute(hash_key=True)
-    is_women = BooleanAttribute(range_key=True)
-    mascot = UnicodeAttribute()
+    id = UnicodeAttribute(hash_key=True)
+    institution = UnicodeAttribute()
+    common_name = UnicodeAttribute()
+    is_women = BooleanAttribute()
+    mascot = UnicodeAttribute(null=True)
     home_conference = UnicodeAttribute()
-    social_media = JSONAttribute(default="")
-    web_site = UnicodeAttribute()
+    social_media = JSONAttribute(null=True)
+    web_site = UnicodeAttribute(null=True)
     web_provider = UnicodeAttribute()
     league = UnicodeAttribute()
     conference_index = ConferenceIndex()

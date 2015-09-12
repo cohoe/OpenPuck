@@ -4,7 +4,9 @@ from hawkeyapi.models import TeamModel
 
 # RIT, Northeastern, Dartmouth, Princeton, North Dakota, Merrimack, Yale, Maine, Penn State, Bemidji 
 rit = TeamModel(
-    name = "Rochester Institute of Technology",
+    id = "NCAA-RIT-W",
+    institution = "Rochester Institute of Technology",
+    common_name = "RIT",
     is_women = True,
     mascot = "Tigers",
     home_conference = "CHA",
