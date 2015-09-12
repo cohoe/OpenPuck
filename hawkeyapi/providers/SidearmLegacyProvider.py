@@ -171,7 +171,7 @@ class SidearmLegacyProvider(Provider):
         soup = BeautifulSoup(self.get_schedule_from_web())
         sched_select = soup.find(id='ctl00_cplhMainContent_ddlPastschedules')
         for option in sched_select.find_all('option'):
-            if option.text == season.id:
+            if option.text.strip() == season.id:
                 schedule_number = option['value']
 
         return "%s/schedule.aspx?path=%s&schedule=%s" % (self.server, self.sport, schedule_number)
