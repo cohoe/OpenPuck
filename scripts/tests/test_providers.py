@@ -7,9 +7,9 @@ from hawkeyapi.TestData import seasons
 
 s = seasons[1]
 
-#teams = TeamModel.scan()
-#teams = TeamModel.conference_index.query('WCHA', is_women__eq=True)
-teams = TeamModel.conference_index.query('ECAC', is_women__eq=True)
+teams = TeamModel.scan(is_women__eq=True)
+#teams = TeamModel.conference_index.query('Independent', is_women__eq=True)
+#teams = TeamModel.conference_index.query('ECAC', is_women__eq=True, name__begins_with='Clarkson')
 
 for e in teams:
     t = Team(

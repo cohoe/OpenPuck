@@ -74,8 +74,8 @@ class SidearmLegacyProvider(Provider):
         for header in schedule_table.tr.find_all('th'):
             raw_header = header.text.upper().strip()
             raw_header = re.sub(r'[^\w ]', '', raw_header)
-            if raw_header == '' or raw_header == 'CHA' or raw_header == 'AHA':
-                # Its the Clarkson conference header
+            if raw_header == '' or raw_header == 'CHA' or raw_header == 'AHA' or raw_header == 'CONFERENCE GAME':
+                # Its the Clarkson-esqe conference header
                 raw_header = 'CONF'
             headers.append(raw_header)
 
