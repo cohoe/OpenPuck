@@ -162,14 +162,18 @@ class SidearmAdaptiveProvider(Provider):
         sched_select = soup.find(id='ctl00_cplhMainContent_ddlPastschedules2')
 
         # 20150911 They made some of the dropdowns have full years. Ugh.
+        # AND THEY MIX THEM IN THE SAME SCHOOL!!!
         test_option = sched_select.find('option')
-        season_id = season.id
-        if len(test_option.text) == 9:
-            # Double years! 2015-2016
-            season_id = "%s-%s" % (season.start_year, season.end_year)
-
         for option in sched_select.find_all('option'):
-            if option.text.strip() == season_id:
+            text = option.text.strip()
+            if len(text) == 9:
+                # Long
+                season_id = "%s-%s" % (season.start_year, season.end_year)
+            elif len(text) == 7:
+                # Short
+                season_id = season.id
+
+            if text == season_id:
                 schedule_number = option['value']
 
         return "%s/schedule.aspx?path=%s&schedule=%s" % (self.server, self.sport, schedule_number)
