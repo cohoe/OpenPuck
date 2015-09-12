@@ -68,8 +68,9 @@ def get_time_from_string(string):
     """
     string = string.upper().strip()
 
-    # Remove the dots from the time (such as "P.M.")
-    string = string.replace('.', '')
+    # Remove extra characters from the time (Thanks 
+    # MSU for putting a random ` in there...)
+    string = re.sub(r'[^a-zA-Z0-9\:]', '', string)
 
     # Deal with results
     if re.search(r'[WL]', string):

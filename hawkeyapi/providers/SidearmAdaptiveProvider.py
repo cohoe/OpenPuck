@@ -145,7 +145,6 @@ class SidearmAdaptiveProvider(Provider):
         """
         t_element = game.find('div', class_='schedule_game_opponent_time')
         time_string = t_element.text.strip()
-
         return get_time_from_string(time_string)
 
     def get_game_conference(self, game):
@@ -170,7 +169,7 @@ class SidearmAdaptiveProvider(Provider):
             season_id = "%s-%s" % (season.start_year, season.end_year)
 
         for option in sched_select.find_all('option'):
-            if option.text == season_id:
+            if option.text.strip() == season_id:
                 schedule_number = option['value']
 
         return "%s/schedule.aspx?path=%s&schedule=%s" % (self.server, self.sport, schedule_number)

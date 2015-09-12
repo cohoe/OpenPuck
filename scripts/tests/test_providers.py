@@ -8,7 +8,8 @@ from hawkeyapi.TestData import seasons
 s = seasons[1]
 
 #teams = TeamModel.scan()
-teams = TeamModel.conference_index.query('CHA', is_women__eq=True)
+#teams = TeamModel.conference_index.query('WCHA', is_women__eq=True)
+teams = TeamModel.conference_index.query('ECAC', is_women__eq=True)
 
 for e in teams:
     t = Team(
@@ -25,6 +26,9 @@ for e in teams:
     print "%s - %s" % (t.institution_name, s.id)
 
     team_provider = t.get_provider()
+
+#    sched_entries = team_provider.get_schedule(s)
+#    print "%s Parsed %i entries" % (t.provider, len(sched_entries))
 
     try:
         sched_entries = team_provider.get_schedule(s)
