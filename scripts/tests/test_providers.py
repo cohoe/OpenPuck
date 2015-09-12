@@ -8,8 +8,8 @@ from hawkeyapi.TestData import seasons
 s = seasons[1]
 
 #teams = TeamModel.scan(is_women__eq=True)
-#teams = TeamModel.conference_index.query('WCHA', is_women__eq=False)
-teams = TeamModel.conference_index.query('WCHA', is_women__eq=False, name__begins_with='University of Alaska')
+teams = TeamModel.conference_index.query('WCHA', is_women__eq=False)
+#teams = TeamModel.conference_index.query('WCHA', is_women__eq=False, name__begins_with='University of Alaska')
 
 for e in teams:
     t = Team(

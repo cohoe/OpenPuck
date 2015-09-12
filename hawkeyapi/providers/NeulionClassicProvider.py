@@ -21,7 +21,7 @@ class NeulionClassicProvider(Provider):
         url_obj = urlparse(index_url)
         soup = BeautifulSoup(get_html_from_url(index_url))
 
-        sched_element = soup.find(id='section-menu').find('a', text="SCHEDULE")
+        sched_element = soup.find(id='section-menu').find('a', text=["SCHEDULE", "Schedule"])
         self.urls = {
             'index': index_url,
             'schedule': self.server + sched_element['href']
