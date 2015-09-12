@@ -14,7 +14,10 @@ def get_html_from_url(url):
     """
     Return the HTML contents from a request to a given URL.
     """
-    r = requests.get(url)
+    headers = {
+        'User-Agent': 'Mozilla/5.0'
+    }
+    r = requests.get(url, headers = headers)
     r.raise_for_status()
 
     return r.text

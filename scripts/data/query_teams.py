@@ -6,7 +6,7 @@ from hawkeyapi.objects import Team
 #entries = TeamModel.query(home_conference__eq='CHA')
 #entries = TeamModel.scan()
 #entries = TeamModel.query('Northeastern University', is_women__eq=True)
-#entries = TeamModel.query('Northeastern University', home_conference__eq='WHEA')
+#entries = TeamModel.query('Northeastern University')
 entries = TeamModel.conference_index.query('HEA', is_women__eq=True)
 for e in entries:
     print e.name
@@ -22,8 +22,8 @@ for e in entries:
 
     print t.json()
 
-entry = TeamModel.get('Northeastern University', True)
+#entry = TeamModel.get('Northeastern University', True)
 #print entry.dumps()
-print entry.name
-print entry.is_women
-print entry.web_site
+#print entry.name
+#print entry.is_women
+#print entry.web_site

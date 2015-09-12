@@ -20,25 +20,26 @@ class Team(HawkeyApiObject):
         """
         Return an object of the appropriate provider for a team website.
         """
-        #provider = self.website['data_provider']
 
-        if self.provider is "CBSInteractiveProvider":
+        if self.provider == "CBSInteractiveProvider":
             return hawkeyapi.providers.CBSInteractiveProvider(self)
-        if self.provider is "NeulionAdaptiveProvider":
+        if self.provider == "NeulionAdaptiveProvider":
             return hawkeyapi.providers.NeulionAdaptiveProvider(self)
-        if self.provider is "NeulionClassicProvider":
+        if self.provider == "NeulionClassicProvider":
             return hawkeyapi.providers.NeulionClassicProvider(self)
-        if self.provider is "NeulionLegacyProvider":
+        if self.provider == "NeulionLegacyProvider":
             return hawkeyapi.providers.NeulionLegacyProvider(self)
-        if self.provider is "PrestoLegacyProvider":
+        if self.provider == "PrestoLegacyProvider":
             return hawkeyapi.providers.PrestoLegacyProvider(self)
-        if self.provider is "PrestoMonthlyProvider":
+        if self.provider == "PrestoMonthlyProvider":
             return hawkeyapi.providers.PrestoMonthlyProvider(self)
-        if self.provider is "PrestoSimpleProvider":
+        if self.provider == "PrestoSimpleProvider":
             return hawkeyapi.providers.PrestoSimpleProvider(self)
-        if self.provider is "SidearmLegacyProvider":
+        if self.provider == "SidearmLegacyProvider":
             return hawkeyapi.providers.SidearmLegacyProvider(self)
-        if self.provider is "SidearmAdaptiveProvider":
+        if self.provider == "SidearmAdaptiveProvider":
             return hawkeyapi.providers.SidearmAdaptiveProvider(self)
-        if self.provider is "StreamlineProvider":
+        if self.provider == "StreamlineProvider":
             return hawkeyapi.providers.StreamlineProvider(self)
+        else:
+            raise Exception("Invalid provider given (%s)" % self.provider)

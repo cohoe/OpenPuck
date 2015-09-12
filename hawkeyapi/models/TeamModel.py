@@ -27,9 +27,9 @@ class TeamModel(HawkeyModel):
 
     name = UnicodeAttribute(hash_key=True)
     is_women = BooleanAttribute(range_key=True)
-    mascot = UnicodeAttribute()
+    mascot = UnicodeAttribute(null=True)
     home_conference = UnicodeAttribute()
-    social_media = JSONAttribute(default="")
+    social_media = JSONAttribute(null=True)
     web_site = UnicodeAttribute()
     web_provider = UnicodeAttribute()
     league = UnicodeAttribute()

@@ -7,7 +7,7 @@ from hawkeyapi.objects import ScheduleEntry
 
 class Provider(object):
     def __init__(self, team):
-        url_obj = urlparse(team.website['index_url'])
+        url_obj = urlparse(team.website)
         self.server = "%s://%s" % (url_obj.scheme, url_obj.netloc)
 
     def get_schedule_from_web(self):
