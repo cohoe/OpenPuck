@@ -36,3 +36,4 @@ class TeamModel(HawkeyModel):
     web_provider = UnicodeAttribute()
     league = UnicodeAttribute()
     conference_index = ConferenceIndex()
+    altnames = UnicodeSetAttribute(null=True)
