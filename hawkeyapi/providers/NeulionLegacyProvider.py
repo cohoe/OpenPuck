@@ -21,7 +21,9 @@ class NeulionLegacyProvider(Provider):
         url_obj = urlparse(index_url)
         soup = BeautifulSoup(get_html_from_url(index_url))
 
-        sched_element = soup.find(id='section-menu').find('a', text=["Schedules/Results", "Schedule & Results"])
+        # @TODO: There has to be a better way to do this....
+        sched_opts = ["Schedules/Results", "Schedule & Results", "Schedule/Results", "Schedule"]
+        sched_element = soup.find(id='section-menu').find('a', text=sched_opts)
         self.urls = {
             'index': index_url,
             'schedule': self.server + sched_element['href']

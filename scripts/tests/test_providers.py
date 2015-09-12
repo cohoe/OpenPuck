@@ -3,13 +3,14 @@
 from hawkeyapi.models import TeamModel
 from hawkeyapi.objects import Team
 from hawkeyapi.TestData import seasons
+import traceback
 
 
 s = seasons[1]
 
 #teams = TeamModel.scan(is_women__eq=True)
 teams = TeamModel.conference_index.query('NCHC', is_women__eq=False)
-#teams = TeamModel.conference_index.query('WCHA', is_women__eq=False, name__begins_with='Northern')
+#teams = TeamModel.conference_index.query('NCHC', is_women__eq=False, name__begins_with='University of Nebraska')
 
 for e in teams:
     try:
@@ -27,6 +28,7 @@ for e in teams:
     except Exception as ex:
         print "Totally blew up on %s" % e.name
         print "  Specific error: %s" % ex
+        print(traceback.format_exc())
         continue
 
     print ""
