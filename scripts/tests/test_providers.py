@@ -8,8 +8,8 @@ import traceback
 
 s = seasons[1]
 
-#teams = TeamModel.scan(is_women__eq=True)
-teams = TeamModel.conference_index.query('NCHC', is_women__eq=False)
+teams = TeamModel.scan(is_women__eq=False)
+#teams = TeamModel.conference_index.query('Independent', is_women__eq=False)
 #teams = TeamModel.conference_index.query('NCHC', is_women__eq=False, name__begins_with='University of Nebraska')
 
 for e in teams:
