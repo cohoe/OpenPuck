@@ -11,3 +11,4 @@ conn = DynamoDBConnection(host='localhost', port=8000,
 
 Teams = Table('teams', connection=conn)
 ScheduleEntries = Table('schedule_entries', connection=conn)
+TeamAltnames = Table('team_altnames', connection=conn)

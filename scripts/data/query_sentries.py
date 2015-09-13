@@ -9,7 +9,6 @@ season = seasons[1]
 
 #team = Teams.get_item(id='NCAA-Yale-W')
 entries = ScheduleEntries.query_2(
-    #index='ScheduleEntries-TeamId-Index',
     team_id__eq='NCAA-Yale-W'
 )
 

@@ -21,11 +21,6 @@ except JSONResponseError:
 #                                            'read': 1,
 #                                            'write': 1
 #                                        })
-sentries_teamid_index = AllIndex("ScheduleEntries-TeamId-Index",
-                                 parts=[
-                                     HashKey("team_id"),
-                                     RangeKey("timestamp"),
-                                 ])
 
 schedule_entries_table = Table.create("schedule_entries", 
                             schema=[
