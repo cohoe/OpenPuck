@@ -52,6 +52,11 @@ class CBSInteractiveProvider(Provider):
             game_id = self.get_id_from_string(game['id'])
             # Details
             details_soup = self.get_game_details(season.start_year, r_game_id)
+            # Determine head-to-head
+            raw_h2h = details_soup.find('headtohead')['flag']
+            if raw_h2h == 'no':
+                # Skip this game since its not ours
+                continue
             # Location
             location = self.get_game_location(details_soup)
             # Site
