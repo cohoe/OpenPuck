@@ -1,29 +1,27 @@
 #!/usr/bin/env python
 
-from hawkeyapi.models import TeamModel
+from hawkeyapi.database import Teams
 from hawkeyapi.objects import Team
 
-#entries = TeamModel.query(home_conference__eq='CHA')
-#entries = TeamModel.scan()
-#entries = TeamModel.query('Northeastern University', is_women__eq=True)
-#entries = TeamModel.query('Northeastern University')
-entries = TeamModel.conference_index.query('HEA', is_women__eq=True)
-for e in entries:
-    print e.name
-    t = Team(
-        e.name,
-        e.mascot,
-        e.is_women,
-        e.home_conference,
-        e.social_media,
-        e.web_site,
-        e.web_provider,
+item = Teams.get_item(id='NCAA-RIT-W')
+#print item['id']
+
+teams = Teams.query_2(
+    index='Conference-Id-Index',
+    home_conference__eq='CHA',
+    is_women__eq=True,
+)
+
+for t in teams:
+    print t['id']
+    team = Team(
+        t['institution'],
+        t['mascot'],
+        t['is_women'],
+        t['home_conference'],
+        t['social_media'],
+        t['web_site'],
+        t['web_provider'],
     )
 
-    print t.json()
-
-#entry = TeamModel.get('Northeastern University', True)
-#print entry.dumps()
-#print entry.name
-#print entry.is_women
-#print entry.web_site
+    print team.json()

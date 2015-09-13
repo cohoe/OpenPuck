@@ -1,19 +1,5 @@
 #!/usr/bin/env python
-from HawkeyModel import *
-
-class ConferenceIndex(GlobalSecondaryIndex):
-    """
-    Index for viewing teams by conference
-    """
-    class Meta:
-        index_name = 'team_conference_index'
-        read_capacity_units = 1
-        write_capacity_units = 1
-        projection = AllProjection()
-    
-    home_conference = UnicodeAttribute(hash_key=True)
-    id = UnicodeAttribute(range_key=True)
-    is_women = BooleanAttribute()
+from HawkeyModel import HawkeyModel
 
 class TeamModel(HawkeyModel):
     """
