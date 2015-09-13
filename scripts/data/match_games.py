@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from hawkeyapi.database import ScheduleEntries, Teams
+from hawkeyapi.database import ScheduleEntries, Teams, TeamAltnames
 from hawkeyapi.objects import ScheduleEntry, Team
 from hawkeyapi.util import get_uncombined_timestamp
 from hawkeyapi.TestData import seasons
@@ -32,7 +32,7 @@ for e_db in entries:
     )
 
     try:
-        opponent_entry = Teams.scan(altnames__contains=e_obj.opponent, is_women__eq=t_entry['is_women'])
+        opponent_entry = TeamAltnames.query(index='AltnamesGenderIndex', altname__eq=e_obj.opponent, is_women__eq=t_entry['is_women'])
         results_list = list(opponent_entry)
         num_results = len(results_list)
         if num_results == 0:
@@ -40,7 +40,7 @@ for e_db in entries:
         elif num_results > 1:
             raise Exception("Too many results (%i) for %s?" % (num_results, e_obj.opponent))
         o_entry = results_list[0]
-        print "Found opponent %s" % o_entry['id']
+        print "Found opponent %s" % o_entry['team_id']
     except ItemNotFound:
         print "Could not find %s" % e_obj.opponent
     except Exception as e:
