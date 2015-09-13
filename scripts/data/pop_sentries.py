@@ -6,9 +6,12 @@ from hawkeyapi.objects import Team
 from datetime import datetime
 
 team_entries = [
-    Teams.get_item(id='NCAA-Harvard-W'),
-    Teams.get_item(id='NCAA-Yale-W'),
+    #Teams.get_item(id='NCAA-Harvard-W'),
+    #Teams.get_item(id='NCAA-Yale-W'),
+    Teams.get_item(id='NCAA-UConn-W'),
 ]
+
+#team_entries = Teams.scan(is_women__eq=True, league__eq='NCAA')
 
 team_objs = {}
 for tm in team_entries:
@@ -27,7 +30,9 @@ s = seasons[1]
 
 for id in team_objs.keys():
     t = team_objs[id]
+#    try:
     entries = t.get_provider().get_schedule(s)
+    print len(entries)
     for e in entries:
         ScheduleEntries.put_item(data={
             'team_id': id,
@@ -42,4 +47,9 @@ for id in team_objs.keys():
             'is_conference': e.is_conference,
             'season': e.season,
             'league': e.league,
-        })
+        },
+        overwrite=True)
+    print "SUCCESS on %s" % id
+#    except Exception as e:
+#        print "FAILED on %s" % id
+#        print e
