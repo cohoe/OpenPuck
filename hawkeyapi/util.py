@@ -42,6 +42,14 @@ def get_combined_timestamp(date, time):
     return datetime.datetime.combine(date, time)
 
 
+def get_uncombined_timestamp(timestamp):
+    """
+    Return a set of two objects representing the date and time.
+    """
+    obj = dateutil.parser.parse(timestamp)
+    return [obj.date(), obj.time()]
+
+
 def get_date_from_string(string, years):
     """
     Return a best-guess date object from given string.

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from hawkeyapi.database import conn
-from boto.dynamodb2.fields import HashKey, RangeKey, GlobalAllIndex
+from boto.dynamodb2.fields import HashKey, RangeKey, GlobalAllIndex, AllIndex
 from boto.dynamodb2.table import Table
 from boto.exception import JSONResponseError
 from boto.dynamodb2.types import NUMBER
@@ -21,6 +21,11 @@ except JSONResponseError:
 #                                            'read': 1,
 #                                            'write': 1
 #                                        })
+sentries_teamid_index = AllIndex("ScheduleEntries-TeamId-Index",
+                                 parts=[
+                                     HashKey("team_id"),
+                                     RangeKey("timestamp"),
+                                 ])
 
 schedule_entries_table = Table.create("schedule_entries", 
                             schema=[
@@ -31,7 +36,8 @@ schedule_entries_table = Table.create("schedule_entries",
                                 'read': 1,
                                 'write': 1
                             },
-                            global_indexes=[
+                            indexes=[
+                                sentries_teamid_index,
                             ],
                             connection=conn)
 

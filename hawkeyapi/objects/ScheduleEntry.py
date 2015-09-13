@@ -17,7 +17,7 @@ class ScheduleEntry(HawkeyApiObject):
         self.is_conference_tournament = self.__is_conf_tournament(date)
         self.is_national_tournament = self.__is_national_tournament(date)
         self.links = links
-        self.is_conference = conference
+        self.is_conference = bool(conference)
         self.season = season.id
         self.league = season.league
 
