@@ -5,7 +5,7 @@ from hawkeyapi.factories import TeamFactory
 
 team_items = Teams.query_2(
     index='Conference-Id-Index',
-    home_conference__eq='ECAC',
+    #home_conference__eq='ECAC',
     is_women__eq=True,
 )
 
