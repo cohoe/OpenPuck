@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 
-from hawkeyapi.database import ScheduleEntries, Teams, TeamAltnames
-from hawkeyapi.objects import ScheduleEntry, Team
+from hawkeyapi.database import ScheduleEntries, Teams, TeamAltnames, Seasons
+from hawkeyapi.factories import ScheduleEntryFactory, SeasonFactory
 from hawkeyapi.util import get_uncombined_timestamp
-from hawkeyapi.TestData import seasons
 from boto.dynamodb2.exceptions import ItemNotFound
 
-season = seasons[1]
+s_db = Seasons.get_item(league='NCAA', id='2014-15W')
+season = SeasonFactory.make(s_db)
 
 #team = Teams.get_item(id='NCAA-Yale-W')
-team_id = 'NCAA-RIT-W'
+team_id = 'NCAA-Harvard-W'
 t_entry = Teams.get_item(id=team_id)
 
 entries = ScheduleEntries.query_2(
@@ -18,18 +18,7 @@ entries = ScheduleEntries.query_2(
 
 for e_db in entries:
     e_myid = e_db['id']
-    [date, time] = get_uncombined_timestamp(e_db['timestamp'])
-    e_obj = ScheduleEntry(
-        e_db['entry_id'],
-        date,
-        time,
-        e_db['opponent'],
-        e_db['site'],
-        e_db['location'],
-        e_db['links'],
-        e_db['is_conference'],
-        season
-    )
+    e_obj = ScheduleEntryFactory.make(e_db)
 
     try:
         opponent_entry = TeamAltnames.query(index='AltnamesGenderIndex', altname__eq=e_obj.opponent, is_women__eq=t_entry['is_women'])

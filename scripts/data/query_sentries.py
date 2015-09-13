@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 
-from hawkeyapi.database import ScheduleEntries
-from hawkeyapi.objects import ScheduleEntry
+from hawkeyapi.database import ScheduleEntries, Seasons
 from hawkeyapi.util import get_uncombined_timestamp
-from hawkeyapi.TestData import seasons
+from hawkeyapi.factories import ScheduleEntryFactory, SeasonFactory
 
-season = seasons[1]
+s_db = Seasons.get_item(league='NCAA', id='2014-15W')
+season = SeasonFactory.make(s_db)
 
 #team = Teams.get_item(id='NCAA-Yale-W')
 entries = ScheduleEntries.query_2(
@@ -14,17 +14,5 @@ entries = ScheduleEntries.query_2(
 
 for e_db in entries:
     e_myid = e_db['id']
-    [date, time] = get_uncombined_timestamp(e_db['timestamp'])
-    e_obj = ScheduleEntry(
-        e_db['entry_id'],
-        date,
-        time,
-        e_db['opponent'],
-        e_db['site'],
-        e_db['location'],
-        e_db['links'],
-        e_db['is_conference'],
-        season
-    )
-
+    e_obj = ScheduleEntryFactory.make(e_db)
     print e_obj.json()

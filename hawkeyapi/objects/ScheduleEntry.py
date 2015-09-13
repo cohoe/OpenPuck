@@ -2,10 +2,9 @@
 
 import datetime
 from HawkeyApiObject import HawkeyApiObject 
-from hawkeyapi.CommonDates import *
 
 class ScheduleEntry(HawkeyApiObject):
-    def __init__(self, id, date, time, opponent, site, location, links, conference, season):
+    def __init__(self, id, date, time, opponent, site, location, links, conference, league, season):
         HawkeyApiObject.__init__(self)
 
         self.id = id
@@ -14,12 +13,10 @@ class ScheduleEntry(HawkeyApiObject):
         self.opponent = opponent
         self.site = site
         self.location = location
-        self.is_conference_tournament = self.__is_conf_tournament(date)
-        self.is_national_tournament = self.__is_national_tournament(date)
         self.links = links
         self.is_conference = bool(conference)
-        self.season = season.id
-        self.league = season.league
+        self.league = league
+        self.season = season
 
     def __repr__(self):
         start_time = self.start_time
@@ -27,10 +24,3 @@ class ScheduleEntry(HawkeyApiObject):
             start_time = datetime.time(0)
         game_time = datetime.datetime.combine(self.date, start_time).isoformat()
         return "<%s %s %s>" % (self.__class__.__module__, game_time, self.opponent)
-
-    def __is_conf_tournament(self, date):
-        return (date >= DATE_CONFERENCE_TOURNAMENT_START and
-                date < DATE_NATIONAL_TOURNAMENT_START)
-
-    def __is_national_tournament(self, date):
-        return (date >= DATE_NATIONAL_TOURNAMENT_START)

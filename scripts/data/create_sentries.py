@@ -32,7 +32,6 @@ schedule_entries_table = Table.create("schedule_entries",
                                 'write': 1
                             },
                             indexes=[
-                                sentries_teamid_index,
                             ],
                             connection=conn)
 

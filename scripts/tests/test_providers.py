@@ -1,38 +1,28 @@
 #!/usr/bin/env python
 
-from hawkeyapi.models import TeamModel
-from hawkeyapi.objects import Team
-from hawkeyapi.TestData import seasons
 import traceback
+from hawkeyapi.factories import SeasonFactory, TeamFactory
+from hawkeyapi.database import Teams, Seasons
 
+s_db = Seasons.get_item(league='NCAA', id='2014-15W')
+season = SeasonFactory.make(s_db)
 
-s = seasons[1]
-
-teams = TeamModel.scan(is_women__eq=False)
+teams = Teams.scan(is_women__eq=True)
 #teams = TeamModel.conference_index.query('Independent', is_women__eq=False)
 #teams = TeamModel.conference_index.query('NCHC', is_women__eq=False, name__begins_with='University of Nebraska')
 
 for e in teams:
     try:
-        t = Team(
-            e.name,
-            e.mascot,
-            e.is_women,
-            e.home_conference,
-            e.social_media,
-            e.web_site,
-            e.web_provider,
-        )
-
+        t = TeamFactory.make(e)
         team_provider = t.get_provider()
     except Exception as ex:
-        print "Totally blew up on %s" % e.name
+        print "Totally blew up on %s" % e['id']
         print "  Specific error: %s" % ex
         print(traceback.format_exc())
         continue
 
     print ""
-    print "%s - %s" % (t.institution_name, s.id)
+    print "%s - %s" % (t.institution_name, season.id)
 
 
 #    sched_entries = team_provider.get_schedule(s)
@@ -40,7 +30,7 @@ for e in teams:
 
 
     try:
-        sched_entries = team_provider.get_schedule(s)
+        sched_entries = team_provider.get_schedule(season)
         print "%s Parsed %i entries" % (t.provider, len(sched_entries))
     except Exception as e:
         print "FAILED"

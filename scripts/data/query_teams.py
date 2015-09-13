@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from hawkeyapi.database import Teams
-from hawkeyapi.objects import Team
+from hawkeyapi.factories import TeamFactory
 
 item = Teams.get_item(id='NCAA-RIT-W')
 #print item['id']
@@ -14,14 +14,6 @@ teams = Teams.query_2(
 
 for t in teams:
     print t['id']
-    team = Team(
-        t['institution'],
-        t['mascot'],
-        t['is_women'],
-        t['home_conference'],
-        t['social_media'],
-        t['web_site'],
-        t['web_provider'],
-    )
+    team = TeamFactory.make(t)
 
     print team.json()

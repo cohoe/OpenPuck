@@ -10,6 +10,7 @@ class Season(HawkeyApiObject):
         self.start_year = start
         self.end_year = end
         self.league = league
+        self.is_women = is_women
 
         self.phases = {
             'ConferencePlay': confplay,

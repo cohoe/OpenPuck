@@ -1,37 +1,29 @@
 #!/usr/bin/env python
 
-from hawkeyapi.database import Teams, ScheduleEntries
-from hawkeyapi.TestData import seasons
-from hawkeyapi.objects import Team
+from hawkeyapi.database import Teams, ScheduleEntries, Seasons
+from hawkeyapi.factories import TeamFactory, SeasonFactory
 from datetime import datetime
 
 team_entries = [
-    #Teams.get_item(id='NCAA-Harvard-W'),
-    #Teams.get_item(id='NCAA-Yale-W'),
-    Teams.get_item(id='NCAA-UConn-W'),
+    Teams.get_item(id='NCAA-Harvard-W'),
+    Teams.get_item(id='NCAA-Yale-W'),
+    #Teams.get_item(id='NCAA-UConn-W'),
 ]
 
 #team_entries = Teams.scan(is_women__eq=True, league__eq='NCAA')
 
 team_objs = {}
 for tm in team_entries:
-    t = Team(
-        tm['common_name'],
-        tm['mascot'],
-        tm['is_women'],
-        tm['home_conference'],
-        tm['social_media'],
-        tm['web_site'],
-        tm['provider'],
-    )
+    t = TeamFactory.make(tm)
     team_objs[tm['id']] = t
 
-s = seasons[1]
+s_db = Seasons.get_item(league='NCAA', id='2014-15W')
+s_obj = SeasonFactory.make(s_db)
 
 for id in team_objs.keys():
     t = team_objs[id]
 #    try:
-    entries = t.get_provider().get_schedule(s)
+    entries = t.get_provider().get_schedule(s_obj)
     print len(entries)
     for e in entries:
         ScheduleEntries.put_item(data={
@@ -41,8 +33,6 @@ for id in team_objs.keys():
             'opponent': e.opponent,
             'site': e.site,
             'location': e.location,
-            'is_conference_tournament': e.is_conference_tournament,
-            'is_national_tournament': e.is_national_tournament,
             'links': e.links,
             'is_conference': e.is_conference,
             'season': e.season,

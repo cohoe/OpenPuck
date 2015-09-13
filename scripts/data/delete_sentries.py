@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 
 from hawkeyapi.database import Teams, ScheduleEntries
-from hawkeyapi.TestData import seasons
-from hawkeyapi.objects import Team
-from datetime import datetime
 
 item = ScheduleEntries.get_item(
     team_id='NCAA-Harvard-W',
