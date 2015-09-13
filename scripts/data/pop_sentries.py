@@ -24,7 +24,6 @@ for id in team_objs.keys():
     t = team_objs[id]
 #    try:
     entries = t.get_provider().get_schedule(s_obj)
-    print len(entries)
     for e in entries:
         ScheduleEntries.put_item(data={
             'team_id': id,
@@ -39,7 +38,7 @@ for id in team_objs.keys():
             'league': e.league,
         },
         overwrite=True)
-    print "SUCCESS on %s" % id
+    print "SUCCESS on %s (%i entries)" % (id, len(entries))
 #    except Exception as e:
 #        print "FAILED on %s" % id
 #        print e

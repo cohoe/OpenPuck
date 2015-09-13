@@ -21,6 +21,7 @@ class SeasonFactory():
     def make(cls, e_db):
         return Season(
             e_db['league'],
+            e_db['id'],
             bool(e_db['is_women']),
             int(e_db['start']),
             int(e_db['end']),

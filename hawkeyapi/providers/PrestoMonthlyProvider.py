@@ -160,4 +160,4 @@ class PrestoMonthlyProvider(Provider):
         """
         Return the full URL of the schedule for a given season.
         """
-        return "%s/sports/%s/%s/schedule" % (self.server, self.sport, season.id)
+        return "%s/sports/%s/%s/schedule" % (self.server, self.sport, season.short_id)

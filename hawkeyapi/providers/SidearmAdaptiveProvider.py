@@ -171,7 +171,7 @@ class SidearmAdaptiveProvider(Provider):
                 season_id = "%s-%s" % (season.start_year, season.end_year)
             elif len(text) == 7:
                 # Short
-                season_id = season.id
+                season_id = season.short_id
 
             if text == season_id:
                 schedule_number = option['value']

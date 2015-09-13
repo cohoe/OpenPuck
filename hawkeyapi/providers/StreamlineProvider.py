@@ -160,4 +160,4 @@ class StreamlineProvider(Provider):
         """
         Return the full URL of the schedule for a given season.
         """
-        return "%s/%s/" % (self.urls['schedule'], season.id)
+        return "%s/%s/" % (self.urls['schedule'], season.short_id)
