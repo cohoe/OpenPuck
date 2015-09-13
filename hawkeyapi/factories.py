@@ -42,7 +42,7 @@ class ScheduleEntryFactory():
             e_db['site'],
             e_db['location'],
             e_db['links'],
-            e_db['is_conference'],
+            bool(e_db['is_conference']),
             e_db['league'],
             e_db['season'],
         )

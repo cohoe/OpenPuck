@@ -9,7 +9,7 @@ class Team(HawkeyApiObject):
 
         self.institution_name = institution
         self.mascot = mascot
-        self.is_women = bool(is_women)
+        self.is_women = is_women
         self.home_conference = home_conference
         self.social_media = social_media
         self.website = web_site

@@ -14,7 +14,7 @@ class ScheduleEntry(HawkeyApiObject):
         self.site = site
         self.location = location
         self.links = links
-        self.is_conference = bool(conference)
+        self.is_conference = conference
         self.league = league
         self.season = season
 
