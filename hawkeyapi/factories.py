@@ -14,6 +14,7 @@ class TeamFactory():
             e_db['social_media'],
             e_db['web_site'],
             e_db['provider'],
+            e_db['league'],
         )
 
 class SeasonFactory():

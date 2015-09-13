@@ -4,7 +4,7 @@ from HawkeyApiObject import HawkeyApiObject
 import hawkeyapi.providers
 
 class Team(HawkeyApiObject):
-    def __init__(self, institution, mascot, is_women, home_conference, social_media, web_site, web_provider):
+    def __init__(self, institution, mascot, is_women, home_conference, social_media, web_site, web_provider, league):
         HawkeyApiObject.__init__(self)
 
         self.institution_name = institution
@@ -14,6 +14,7 @@ class Team(HawkeyApiObject):
         self.social_media = social_media
         self.website = web_site
         self.provider = web_provider
+        self.league = league
 
 
     def get_provider(self):

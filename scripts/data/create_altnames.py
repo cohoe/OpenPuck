@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from hawkeyapi.database import conn
-from boto.dynamodb2.fields import HashKey, RangeKey, GlobalAllIndex
+from boto.dynamodb2.fields import HashKey, RangeKey, GlobalAllIndex, AllIndex
 from boto.dynamodb2.table import Table
 from boto.exception import JSONResponseError
 from boto.dynamodb2.types import NUMBER
@@ -33,6 +33,8 @@ altnames_table = Table.create("team_altnames",
                             },
                             global_indexes=[
                                 altnames_gender_index,
+                            ],
+                            indexes=[
                             ],
                             connection=conn)
 
