@@ -9,7 +9,7 @@ s_db = Seasons.get_item(league='NCAA', id='2014-15W')
 season = SeasonFactory.make(s_db)
 
 #team = Teams.get_item(id='NCAA-Yale-W')
-team_id = 'NCAA-Harvard-W'
+team_id = 'NCAA-Yale-W'
 t_entry = Teams.get_item(id=team_id)
 
 entries = ScheduleEntries.query_2(
