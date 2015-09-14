@@ -11,6 +11,7 @@ TODO
 * Remove league from team_altnames
 
 ## Features
+* If provider provides tournament info, get that
 
 ### Fields
 
