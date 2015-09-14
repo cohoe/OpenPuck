@@ -2,16 +2,27 @@
 
 from hawkeyapi.database import Teams, TeamAltnames
 from hawkeyapi.factories import TeamFactory
+from boto.dynamodb2.exceptions import ItemNotFound
+import argparse
 
-#b_team = Teams.get_item(id='NCAA-RIT-W')
-#b_team['altnames'] = ['RIT', 'ROCHESTER INSTITUTE OF TECHNOLOGY', 'ROCHESTER INST OF TECHNOLOGY']
-#b_team.save()
+parser = argparse.ArgumentParser()
+parser.add_argument("--id", dest='team_id', required=True)
+parser.add_argument("altname", metavar="ALTNAME")
 
-team_id = 'NCAA-Harvard-W'
-new_altname = 'HARVARD'
+args = parser.parse_args()
 
-t_db = Teams.get_item(id=team_id)
-t_obj = TeamFactory.make(t_db)
+team_id = args.team_id
+new_altname = args.altname
+
+#team_id = 'NCAA-Harvard-W'
+#new_altname = 'HARVARD'
+
+try:
+    t_db = Teams.get_item(id=team_id)
+    t_obj = TeamFactory.make(t_db)
+except ItemNotFound as inf:
+    print "ERROR: Team '%s' not found." % team_id
+    exit(1)
 
 TeamAltnames.put_item(data={
     'team_id': team_id,
@@ -22,4 +33,4 @@ TeamAltnames.put_item(data={
 overwrite=True)
 
 alts = TeamAltnames.query_2(team_id__eq=team_id)
-print [t['altname'] for t in alts]
+print "SUCCESS: " + str([t['altname'] for t in alts])
