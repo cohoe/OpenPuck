@@ -8,6 +8,9 @@ class TeamFactory():
 
     @classmethod
     def objectify(cls, e_db):
+        """
+        Turn an item into an object.
+        """
         return Team(
             e_db['institution'],
             e_db['mascot'],

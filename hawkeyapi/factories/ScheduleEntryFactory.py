@@ -16,7 +16,7 @@ class ScheduleEntryFactory():
         return ScheduleEntry(
             e_db['entry_id'],
             dateparser.parse(e_db['date']).date(),
-            dateparser.parse(e_db['time']).time(),
+            dateparser.parse(e_db['start_time']).time(),
             e_db['opponent'],
             e_db['site'],
             e_db['location'],

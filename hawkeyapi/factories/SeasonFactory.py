@@ -8,6 +8,9 @@ class SeasonFactory():
 
     @classmethod
     def objectify(cls, e_db):
+        """
+        Turn an item into an object.
+        """
         return Season(
             e_db['league'],
             e_db['id'],
