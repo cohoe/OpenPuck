@@ -32,24 +32,6 @@ def get_base_from_url(url):
     return n_url
 
 
-def get_combined_timestamp(date, time):
-    """
-    Return a datetime object representing the local start time of a game.
-    """
-    if time is None:
-        time = datetime.time(0)
-
-    return datetime.datetime.combine(date, time)
-
-
-def get_uncombined_timestamp(timestamp):
-    """
-    Return a set of two objects representing the date and time.
-    """
-    obj = dateutil.parser.parse(timestamp)
-    return [obj.date(), obj.time()]
-
-
 def get_date_from_string(string, years):
     """
     Return a best-guess date object from given string.

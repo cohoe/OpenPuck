@@ -66,9 +66,8 @@ class PrestoMonthlyProvider(Provider):
             # Timestamp
             game_date = self.get_game_date(game, month, season.years())
             game_time = self.get_game_time(game)
-            timestamp = get_combined_timestamp(game_date, game_time)
             # Game ID
-            game_id = self.get_gameid_from_timestamp(timestamp)
+            game_id = self.get_gameid_from_date_time(game_date, game_time)
             # Conference
             conference = self.get_game_conference(game)
 

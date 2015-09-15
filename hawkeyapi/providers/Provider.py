@@ -101,12 +101,12 @@ class Provider(object):
         else:
             return "UNKNOWN"
     
-    def get_gameid_from_timestamp(self, timestamp):
+    def get_gameid_from_date_time(self, i_date, i_time):
         """
-        Return a gameID value from a given timestamp.
+        Return a gameID value from a given date and time.
         Used for teams that do not have their own gameids
         """
-        return "%i%i%i%i" % (timestamp.year, timestamp.month, timestamp.day, timestamp.hour)
+        return "%i%i%i%i" % (i_date.year, i_date.month, i_date.day, i_time.hour)
 
     def get_data_years(self, string):
         """
