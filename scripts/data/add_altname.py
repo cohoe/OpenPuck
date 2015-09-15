@@ -29,7 +29,6 @@ TeamAltnames.put_item(data={
     'team_id': team_id,
     'altname': new_altname,
     'is_women': t_obj.is_women,
-    'league': t_obj.league,
 },
 overwrite=True)
 
@@ -54,7 +53,6 @@ TeamAltnames.put_item(data={
     'team_id': gen_team_id,
     'altname': new_altname,
     'is_women': at_obj.is_women,
-    'league': at_obj.league,
 },
 overwrite=True)
 
