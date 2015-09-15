@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 from hawkeyapi.database import ScheduleEntries, Seasons
-from hawkeyapi.util import get_uncombined_timestamp
 from hawkeyapi.factories import ScheduleEntryFactory, SeasonFactory
 
 s_db = Seasons.get_item(league='NCAA', id='2014-15W')

@@ -47,9 +47,8 @@ class TemplateProvider(Provider):
             # Timestamp
             game_time = self.get_game_time(game)
             game_date = self.get_game_date(game)
-            timestamp = get_combined_timestamp(game_date, game_time)
 
-            game = ScheduleEntry(game_id, timestamp, opponent, site, location, links, season.league, season.id)
+            game = ScheduleEntry(game_id, game_date, game_time, opponent, site, location, links, season.league, season.id)
             games.append(game)
 
         return games

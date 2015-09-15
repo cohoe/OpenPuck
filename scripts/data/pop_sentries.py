@@ -28,7 +28,8 @@ for id in team_objs.keys():
             ScheduleEntries.put_item(data={
                 'team_id': id,
                 'entry_id': e.id,
-                'timestamp': datetime.combine(e.date, e.start_time).isoformat(),
+                'date': e.date,
+                'time': e.start_time,
                 'opponent': e.opponent,
                 'site': e.site,
                 'location': e.location,

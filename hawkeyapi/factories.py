@@ -34,11 +34,10 @@ class SeasonFactory():
 class ScheduleEntryFactory():
     @classmethod
     def make(cls, e_db):
-        [date, time] = get_uncombined_timestamp(e_db['timestamp'])
         return ScheduleEntry(
             e_db['entry_id'],
-            date,
-            time,
+            e_db['date'],
+            e_db['time'],
             e_db['opponent'],
             e_db['site'],
             e_db['location'],

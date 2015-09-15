@@ -2,7 +2,6 @@
 
 from hawkeyapi.database import ScheduleEntries, Teams, TeamAltnames, Seasons
 from hawkeyapi.factories import ScheduleEntryFactory, SeasonFactory
-from hawkeyapi.util import get_uncombined_timestamp
 from boto.dynamodb2.exceptions import ItemNotFound
 import argparse
 

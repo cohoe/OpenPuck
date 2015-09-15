@@ -2,7 +2,6 @@
 
 from hawkeyapi.database import ScheduleEntries, Teams, TeamAltnames, Seasons
 from hawkeyapi.factories import ScheduleEntryFactory, SeasonFactory
-from hawkeyapi.util import get_uncombined_timestamp
 from boto.dynamodb2.exceptions import ItemNotFound
 
 s_db = Seasons.get_item(league='NCAA', id='2014-15W')
@@ -32,7 +31,7 @@ for e_db in entries:
         o_entry = results_list[0]
         print "Found opponent %s" % o_entry['team_id']
         try:
-            s_items = ScheduleEntries.query_2(team_id__eq=o_entry['team_id'], timestamp__beginswith=e_obj.date.isoformat())
+            s_items = ScheduleEntries.query_2(team_id__eq=o_entry['team_id'], date__eq=e_obj.date.isoformat())
             s_item_results = list(s_items)
             num_s_item_results = len(s_item_results)
             if num_s_item_results == 0:
