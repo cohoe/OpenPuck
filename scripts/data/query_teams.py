@@ -14,6 +14,6 @@ teams = Teams.query_2(
 
 for t in teams:
     print t['id']
-    team = TeamFactory.make(t)
+    team = TeamFactory.objectify(t)
 
     print team.json()

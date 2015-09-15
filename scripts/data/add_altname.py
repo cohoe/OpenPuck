@@ -20,7 +20,7 @@ new_altname = args.altname
 
 try:
     t_db = Teams.get_item(id=team_id)
-    t_obj = TeamFactory.make(t_db)
+    t_obj = TeamFactory.objectify(t_db)
 except ItemNotFound as inf:
     print "ERROR: Team '%s' not found." % team_id
     exit(1)
@@ -46,7 +46,7 @@ else:
 
 try:
     at_db = Teams.get_item(id=gen_team_id)
-    at_obj = TeamFactory.make(at_db)
+    at_obj = TeamFactory.objectify(at_db)
 except ItemNotFound as inf:
     print "ERROR: Team '%s' not found." % gen_team_id
     exit(1)

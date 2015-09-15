@@ -5,7 +5,7 @@ from hawkeyapi.factories import ScheduleEntryFactory, SeasonFactory
 from boto.dynamodb2.exceptions import ItemNotFound
 
 s_db = Seasons.get_item(league='NCAA', id='2014-15W')
-season = SeasonFactory.make(s_db)
+season = SeasonFactory.objectify(s_db)
 
 #team = Teams.get_item(id='NCAA-Yale-W')
 team_id = 'NCAA-Harvard-W'
@@ -18,7 +18,7 @@ entries = ScheduleEntries.query_2(
 
 for e_db in entries:
     e_myid = e_db['id']
-    e_obj = ScheduleEntryFactory.make(e_db)
+    e_obj = ScheduleEntryFactory.objectify(e_db)
 
     try:
         opponent_entry = TeamAltnames.query(index='AltnamesGenderIndex', altname__eq=e_obj.opponent, is_women__eq=t_entry['is_women'])
