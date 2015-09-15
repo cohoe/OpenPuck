@@ -5,12 +5,12 @@ from hawkeyapi.factories import TeamFactory, SeasonFactory
 from datetime import datetime
 
 team_entries = [
-    Teams.get_item(id='NCAA-Harvard-W'),
-    Teams.get_item(id='NCAA-Yale-W'),
+    Teams.get_item(id='NCAA-Dartmouth-W'),
+    #Teams.get_item(id='NCAA-Yale-W'),
     #Teams.get_item(id='NCAA-UConn-W'),
 ]
 
-team_entries = Teams.scan(is_women__eq=True, league__eq='NCAA')
+#team_entries = Teams.scan(is_women__eq=True, league__eq='NCAA')
 
 team_objs = {}
 for tm in team_entries:
