@@ -1,84 +1,47 @@
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-RIT-M"}, "is_women": {"N": "0"}, "altname": {"S": "ROCHESTER INSTITUTE OF TECHNOLOGY"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Princeton-W"}, "is_women": {"N": "1"}, "altname": {"S": "PRINCETON"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Princeton-W"}, "is_women": {"N": "1"}, "altname": {"S": "PRINCETON UNIVERSITY"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Minnesota-W"}, "is_women": {"N": "1"}, "altname": {"S": "MINNESOTA"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Minnesota-W"}, "is_women": {"N": "1"}, "altname": {"S": "UNIVERSITY OF MINNESOTA"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-UConn-W"}, "is_women": {"N": "1"}, "altname": {"S": "CONNECTICUT"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-UConn-W"}, "is_women": {"N": "1"}, "altname": {"S": "UCONN"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-UConn-W"}, "is_women": {"N": "1"}, "altname": {"S": "UNIVERSITY OF CONNECTICUT"}}
-{"league": {"S": "CWHL"}, "team_id": {"S": "CWHL-Calgary-W"}, "is_women": {"N": "1"}, "altname": {"S": "CALGARY INFERNO"}}
-{"league": {"S": "NHL"}, "team_id": {"S": "NHL-San Jose-M"}, "is_women": {"N": "0"}, "altname": {"S": "SAN JOSE SHARKS"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Minnesota-M"}, "is_women": {"N": "0"}, "altname": {"S": "MINNESOTA"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Minnesota-M"}, "is_women": {"N": "0"}, "altname": {"S": "UNIVERSITY OF MINNESOTA"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-N Dakota-W"}, "is_women": {"N": "1"}, "altname": {"S": "UNIVERSITY OF NORTH DAKOTA"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-RIT-W"}, "is_women": {"N": "1"}, "altname": {"S": "ROCHESTER INSTITUTE OF TECHNOLOGY"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Air Force-M"}, "is_women": {"N": "0"}, "altname": {"S": "AIR FORCE ACADEMY"}}
-{"league": {"S": "CWHL"}, "team_id": {"S": "CWHL-Toronto-W"}, "is_women": {"N": "1"}, "altname": {"S": "TORONTO FURIES"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Arizona St-M"}, "is_women": {"N": "0"}, "altname": {"S": "ARIZONA STATE UNIVERSITY"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Bemidji-M"}, "is_women": {"N": "0"}, "altname": {"S": "BEMIDJI STATE UNIVERSITY"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Army-M"}, "is_women": {"N": "0"}, "altname": {"S": "ARMY WEST POINT"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Omaha-M"}, "is_women": {"N": "0"}, "altname": {"S": "UNIVERSITY OF NEBRASKA-OMAHA"}}
-{"league": {"S": "NWHL"}, "team_id": {"S": "NWHL-New York-W"}, "is_women": {"N": "1"}, "altname": {"S": "NEW YORK RIVETERS"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Minnesota St-W"}, "is_women": {"N": "1"}, "altname": {"S": "MINNESOTA STATE UNIVERSITY"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-W Michigan-M"}, "is_women": {"N": "0"}, "altname": {"S": "WESTERN MICHIGAN UNIVERSITY"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Maine-M"}, "is_women": {"N": "0"}, "altname": {"S": "UNIVERSITY OF MAINE"}}
-{"league": {"S": "CWHL"}, "team_id": {"S": "CWHL-Boston-W"}, "is_women": {"N": "1"}, "altname": {"S": "BOSTON BLADES"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Bentley-M"}, "is_women": {"N": "0"}, "altname": {"S": "BENTLEY UNIVERSITY"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-N Michigan-M"}, "is_women": {"N": "0"}, "altname": {"S": "NORTHERN MICHIGAN UNIVERSITY"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-RPI-M"}, "is_women": {"N": "0"}, "altname": {"S": "RENSSELAER"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-RPI-M"}, "is_women": {"N": "0"}, "altname": {"S": "RENSSELAER POLYTECHNIC INSTITUTE"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-RPI-M"}, "is_women": {"N": "0"}, "altname": {"S": "RPI"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Michigan-M"}, "is_women": {"N": "0"}, "altname": {"S": "UNIVERSITY OF MICHIGAN"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Colgate-M"}, "is_women": {"N": "0"}, "altname": {"S": "COLGATE"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Colgate-M"}, "is_women": {"N": "0"}, "altname": {"S": "COLGATE UNIVERSITY"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Holy Cross-M"}, "is_women": {"N": "0"}, "altname": {"S": "COLLEGE OF THE HOLY CROSS"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Syracuse-W"}, "is_women": {"N": "1"}, "altname": {"S": "SYRACUSE UNIVERSITY"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-N Dakota-M"}, "is_women": {"N": "0"}, "altname": {"S": "UNIVERSITY OF NORTH DAKOTA"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-BU-M"}, "is_women": {"N": "0"}, "altname": {"S": "BOSTON UNIVERSITY"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Providence-M"}, "is_women": {"N": "0"}, "altname": {"S": "PROVIDENCE"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Providence-M"}, "is_women": {"N": "0"}, "altname": {"S": "PROVIDENCE COLLEGE"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-New Hampshire-W"}, "is_women": {"N": "1"}, "altname": {"S": "NEW HAMPSHIRE"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-New Hampshire-W"}, "is_women": {"N": "1"}, "altname": {"S": "UNIVERSITY OF NEW HAMPSHIRE"}}
-{"league": {"S": "NWHL"}, "team_id": {"S": "NWHL-Boston-W"}, "is_women": {"N": "1"}, "altname": {"S": "BOSTON PRIDE"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Merrimack-M"}, "is_women": {"N": "0"}, "altname": {"S": "MERRIMACK COLLEGE"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Ohio State-W"}, "is_women": {"N": "1"}, "altname": {"S": "OHIO STATE UNIVERSITY"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Princeton-M"}, "is_women": {"N": "0"}, "altname": {"S": "PRINCETON"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Princeton-M"}, "is_women": {"N": "0"}, "altname": {"S": "PRINCETON UNIVERSITY"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-BC-M"}, "is_women": {"N": "0"}, "altname": {"S": "BOSTON COLLEGE"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Amherst-M"}, "is_women": {"N": "0"}, "altname": {"S": "UNIVERSITY OF MASSACHUSETTS-AMHERST"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Providence-W"}, "is_women": {"N": "1"}, "altname": {"S": "PROVIDENCE"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Providence-W"}, "is_women": {"N": "1"}, "altname": {"S": "PROVIDENCE COLLEGE"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Harvard-M"}, "is_women": {"N": "0"}, "altname": {"S": "HARVARD"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Harvard-M"}, "is_women": {"N": "0"}, "altname": {"S": "HARVARD UNIVERSITY"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-St Cloud St-M"}, "is_women": {"N": "0"}, "altname": {"S": "ST CLOUD STATE UNIVERSITY"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Cornell-M"}, "is_women": {"N": "0"}, "altname": {"S": "CORNELL"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Cornell-M"}, "is_women": {"N": "0"}, "altname": {"S": "CORNELL UNIVERSITY"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Wisconsin-M"}, "is_women": {"N": "0"}, "altname": {"S": "UNIVERSITY OF WISCONSIN"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Colgate-W"}, "is_women": {"N": "1"}, "altname": {"S": "COLGATE"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Colgate-W"}, "is_women": {"N": "1"}, "altname": {"S": "COLGATE UNIVERSITY"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Clarkson-M"}, "is_women": {"N": "0"}, "altname": {"S": "CLARKSON"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Clarkson-M"}, "is_women": {"N": "0"}, "altname": {"S": "CLARKSON UNIVERSITY"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Denver-M"}, "is_women": {"N": "0"}, "altname": {"S": "UNIVERSITY OF DENVER"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Fairbanks-M"}, "is_women": {"N": "0"}, "altname": {"S": "UNIVERSITY OF ALASKA"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Harvard-W"}, "is_women": {"N": "1"}, "altname": {"S": "HARVARD"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Harvard-W"}, "is_women": {"N": "1"}, "altname": {"S": "HARVARD UNIVERSITY"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Quinnipiac-M"}, "is_women": {"N": "0"}, "altname": {"S": "QUINNIPIAC"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Quinnipiac-M"}, "is_women": {"N": "0"}, "altname": {"S": "QUINNIPIAC UNIVERSITY"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-UConn-M"}, "is_women": {"N": "0"}, "altname": {"S": "CONNECTICUT"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-UConn-M"}, "is_women": {"N": "0"}, "altname": {"S": "UCONN"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-UConn-M"}, "is_women": {"N": "0"}, "altname": {"S": "UNIVERSITY OF CONNECTICUT"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Vermont-W"}, "is_women": {"N": "1"}, "altname": {"S": "UNIVERSITY OF VERMONT"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-RMU-W"}, "is_women": {"N": "1"}, "altname": {"S": "ROBERT MORRIS UNIVERSITY"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-St Cloud St-W"}, "is_women": {"N": "1"}, "altname": {"S": "ST CLOUD STATE UNIVERSITY"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Duluth-W"}, "is_women": {"N": "1"}, "altname": {"S": "UNIVERSITY OF MINNESOTA-DULUTH"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Bowling Green-M"}, "is_women": {"N": "0"}, "altname": {"S": "BOWLING GREEN STATE UNIVERSITY"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-BC-W"}, "is_women": {"N": "1"}, "altname": {"S": "BOSTON COLLEGE"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Yale-W"}, "is_women": {"N": "1"}, "altname": {"S": "YALE"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Yale-W"}, "is_women": {"N": "1"}, "altname": {"S": "YALE UNIVERSITY"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Dartmouth-M"}, "is_women": {"N": "0"}, "altname": {"S": "DARTMOUTH"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Dartmouth-M"}, "is_women": {"N": "0"}, "altname": {"S": "DARTMOUTH UNIVERSITY"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Anchorage-M"}, "is_women": {"N": "0"}, "altname": {"S": "UNIVERSITY OF ALASKA-ANCHORAGE"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Merrimack-W"}, "is_women": {"N": "1"}, "altname": {"S": "MERRIMACK COLLEGE"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Ferris St-M"}, "is_women": {"N": "0"}, "altname": {"S": "FERRIS STATE UNIVERSITY"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Northeastern-W"}, "is_women": {"N": "1"}, "altname": {"S": "NORTHEASTERN"}}
-{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Northeastern-W"}, "is_women": {"N": "1"}, "altname": {"S": "NORTHEASTERN UNIVERSITY"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Northeastern-M"}, "is_women": {"N": "0"}, "altname": {"S": "NORTHEASTERN"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Northeastern-M"}, "is_women": {"N": "0"}, "altname": {"S": "NORTHEASTERN UNIVERSITY"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Lowell-M"}, "is_women": {"N": "0"}, "altname": {"S": "UNIVERSITY OF MASSACHUSETTS-LOWELL"}}
+{"league": {"S": "CWHL"}, "team_id": {"S": "CWHL-Brampton-W"}, "is_women": {"N": "1"}, "altname": {"S": "BRAMPTON THUNDER"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Cornell-W"}, "is_women": {"N": "1"}, "altname": {"S": "CORNELL"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Cornell-W"}, "is_women": {"N": "1"}, "altname": {"S": "CORNELL UNIVERSITY"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Penn State-W"}, "is_women": {"N": "1"}, "altname": {"S": "PENN STATE"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Penn State-W"}, "is_women": {"N": "1"}, "altname": {"S": "PENN STATE UNIVERSITY"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Quinnipiac-W"}, "is_women": {"N": "1"}, "altname": {"S": "QUINNIPIAC"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Quinnipiac-W"}, "is_women": {"N": "1"}, "altname": {"S": "QUINNIPIAC UNIVERSITY"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Canisius-M"}, "is_women": {"N": "0"}, "altname": {"S": "CANISIUS COLLEGE"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Maine-W"}, "is_women": {"N": "1"}, "altname": {"S": "MAINE"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Maine-W"}, "is_women": {"N": "1"}, "altname": {"S": "UNIVERSITY OF MAINE"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Sacred Heart-M"}, "is_women": {"N": "0"}, "altname": {"S": "SACRED HEART"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Sacred Heart-M"}, "is_women": {"N": "0"}, "altname": {"S": "SACRED HEART UNIVERSITY"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Bemidji-W"}, "is_women": {"N": "1"}, "altname": {"S": "BEMIDJI"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Bemidji-W"}, "is_women": {"N": "1"}, "altname": {"S": "BEMIDJI STATE"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Bemidji-W"}, "is_women": {"N": "1"}, "altname": {"S": "BEMIDJI STATE UNIVERSITY"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Sacred Heart-W"}, "is_women": {"N": "1"}, "altname": {"S": "SACRED HEART"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Sacred Heart-W"}, "is_women": {"N": "1"}, "altname": {"S": "SACRED HEART UNIVERSITY"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Clarkson-W"}, "is_women": {"N": "1"}, "altname": {"S": "CLARKSON"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Clarkson-W"}, "is_women": {"N": "1"}, "altname": {"S": "CLARKSON UNIVERSITY"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Niagara-M"}, "is_women": {"N": "0"}, "altname": {"S": "NIAGARA UNIVERSITY"}}
+{"league": {"S": "NWHL"}, "team_id": {"S": "NWHL-Buffalo-W"}, "is_women": {"N": "1"}, "altname": {"S": "BUFFALO BEAUTS"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-St Lawrence-W"}, "is_women": {"N": "1"}, "altname": {"S": "ST LAWRENCE"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-St Lawrence-W"}, "is_women": {"N": "1"}, "altname": {"S": "ST LAWRENCE UNIVERSITY"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Michigan Tech-M"}, "is_women": {"N": "0"}, "altname": {"S": "MICHIGAN TECHNOLOGICAL UNIVERSITY"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Lindenwood-W"}, "is_women": {"N": "1"}, "altname": {"S": "LINDENWOOD"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Lindenwood-W"}, "is_women": {"N": "1"}, "altname": {"S": "LINDENWOOD UNIVERSITY"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Yale-M"}, "is_women": {"N": "0"}, "altname": {"S": "YALE UNIVERSITY"}}
+{"league": {"S": "NHL"}, "team_id": {"S": "NHL-Boston-M"}, "is_women": {"N": "0"}, "altname": {"S": "BOSTON BRUINS"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Dartmouth-W"}, "is_women": {"N": "1"}, "altname": {"S": "DARTMOUTH"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Dartmouth-W"}, "is_women": {"N": "1"}, "altname": {"S": "DARTMOUTH COLLEGE"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Dartmouth-W"}, "is_women": {"N": "1"}, "altname": {"S": "DARTMOUTH UNIVERSITY"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Union-M"}, "is_women": {"N": "0"}, "altname": {"S": "UNION"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Union-M"}, "is_women": {"N": "0"}, "altname": {"S": "UNION COLLEGE"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Union-M"}, "is_women": {"N": "0"}, "altname": {"S": "UNION NY"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Union-W"}, "is_women": {"N": "1"}, "altname": {"S": "UNION"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Union-W"}, "is_women": {"N": "1"}, "altname": {"S": "UNION COLLEGE"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Union-W"}, "is_women": {"N": "1"}, "altname": {"S": "UNION NY"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-RMU-M"}, "is_women": {"N": "0"}, "altname": {"S": "ROBERT MORRIS"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-RMU-M"}, "is_women": {"N": "0"}, "altname": {"S": "ROBERT MORRIS UNIVERSITY"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-New Hampshire-M"}, "is_women": {"N": "0"}, "altname": {"S": "NEW HAMPSHIRE"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-New Hampshire-M"}, "is_women": {"N": "0"}, "altname": {"S": "UNIVERSITY OF NEW HAMPSHIRE"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Duluth-M"}, "is_women": {"N": "0"}, "altname": {"S": "MINNESOTA DULUTH"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Duluth-M"}, "is_women": {"N": "0"}, "altname": {"S": "UNIVERSITY OF MINNESOTA DULUTH"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Duluth-M"}, "is_women": {"N": "0"}, "altname": {"S": "UNIVERSITY OF MINNESOTA-DULUTH"}}
