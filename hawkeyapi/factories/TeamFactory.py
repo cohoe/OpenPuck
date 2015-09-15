@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 from hawkeyapi.objects import Team
+from boto.dynamodb2.items import Item
 
 class TeamFactory():
     """
@@ -22,3 +23,23 @@ class TeamFactory():
             e_db['league'],
         )
 
+    @classmethod
+    def itemify(cls, db_table, team_id, obj):
+        """
+        Turn an object into an item.
+        """
+        #@TODO: Add team_id
+        return Item(
+            db_table,
+            data = {
+                'id': team_id,
+                'institution': obj.institution_name,
+                'mascot': obj.mascot,
+                'is_women': obj.is_women,
+                'home_conference': obj.home_conference,
+                'provider': obj.provider,
+                'league': obj.league,
+                'web_site': obj.website,
+                'social_media': obj.social_media,
+            },
+        )
