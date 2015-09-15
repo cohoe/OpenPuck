@@ -2,14 +2,9 @@
 
 from hawkeyapi.database import Teams, ScheduleEntries
 
-item = ScheduleEntries.get_item(
-    team_id='NCAA-Harvard-W',
-    timestamp='2014-10-17T00:00:00',
+items = ScheduleEntries.query_2(
+    team_id__eq="NCAA-Yale-W"
 )
 
-print item['opponent']
-
-print ScheduleEntries.delete_item(
-    team_id='NCAA-Harvard-W',
-    timestamp='2014-10-17T00:00:00',
-)
+for i in items:
+    i.delete()
