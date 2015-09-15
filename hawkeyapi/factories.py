@@ -2,6 +2,7 @@
 
 from hawkeyapi.objects import Team, ScheduleEntry, Season
 from hawkeyapi.util import *
+from dateutil import parser as dateparser
 
 class TeamFactory():
     @classmethod
@@ -36,8 +37,8 @@ class ScheduleEntryFactory():
     def make(cls, e_db):
         return ScheduleEntry(
             e_db['entry_id'],
-            e_db['date'],
-            e_db['time'],
+            dateparser.parse(e_db['date']).date(),
+            dateparser.parse(e_db['time']).time(),
             e_db['opponent'],
             e_db['site'],
             e_db['location'],

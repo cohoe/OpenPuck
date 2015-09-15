@@ -5,7 +5,7 @@ from hawkeyapi.factories import TeamFactory, SeasonFactory
 from datetime import datetime
 
 team_entries = [
-    #Teams.get_item(id='NCAA-Harvard-W'),
+    Teams.get_item(id='NCAA-Harvard-W'),
     Teams.get_item(id='NCAA-Yale-W'),
     #Teams.get_item(id='NCAA-UConn-W'),
 ]
@@ -28,8 +28,8 @@ for id in team_objs.keys():
             ScheduleEntries.put_item(data={
                 'team_id': id,
                 'entry_id': e.id,
-                'date': e.date,
-                'time': e.start_time,
+                'date': e.date.isoformat(),
+                'time': e.start_time.isoformat(),
                 'opponent': e.opponent,
                 'site': e.site,
                 'location': e.location,
