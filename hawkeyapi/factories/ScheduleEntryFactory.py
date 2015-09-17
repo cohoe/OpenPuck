@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 from hawkeyapi.objects import ScheduleEntry
 from boto.dynamodb2.items import Item
+from datetime import date
 from dateutil import parser as dateparser
 
 class ScheduleEntryFactory():
@@ -15,7 +16,7 @@ class ScheduleEntryFactory():
         """
         return ScheduleEntry(
             e_db['entry_id'],
-            dateparser.parse(e_db['date']).date(),
+            date.fromordinal(e_db['date']),
             dateparser.parse(e_db['start_time']).time(),
             e_db['opponent'],
             e_db['site'],
@@ -36,7 +37,7 @@ class ScheduleEntryFactory():
             data = {
                 'team_id': team_id,
                 'entry_id': obj.id,
-                'date': obj.date.isoformat(),
+                'date': obj.date.toordinal(),
                 'start_time': obj.start_time.isoformat(),
                 'opponent': obj.opponent,
                 'site': obj.site,

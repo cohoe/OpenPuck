@@ -25,7 +25,7 @@ except JSONResponseError:
 schedule_entries_table = Table.create("schedule_entries", 
                             schema=[
                                 HashKey("team_id"),
-                                RangeKey("date"),
+                                RangeKey("date", data_type=NUMBER),
                             ],
                             throughput={
                                 'read': 1,
