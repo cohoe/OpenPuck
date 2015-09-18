@@ -10,6 +10,7 @@ TODO
 ## Organization
 
 ## Data Integrity
+* Add is_women to schedule_entries
 
 ## Features
 * If provider provides tournament info, get that
