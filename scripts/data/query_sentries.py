@@ -16,7 +16,9 @@ start_date = date(2015, 1, 1).toordinal()
 end_date = date(2015, 1, 31).toordinal()
 
 entries = ScheduleEntries.query_2(
-    team_id__eq='NCAA-Yale-W',
+    index='ScheduleEntriesGenderDateIndex',
+    #team_id__eq='NCAA-Yale-W',
+    is_women__eq=1,
     date__between=[start_date, end_date],
 )
 

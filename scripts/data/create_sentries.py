@@ -22,6 +22,16 @@ except JSONResponseError:
 #                                            'write': 1
 #                                        })
 
+sentries_gender_date_index = GlobalAllIndex("ScheduleEntriesGenderDateIndex",
+                                     parts=[
+                                        HashKey("is_women"),
+                                        RangeKey("date", data_type=NUMBER),
+                                     ],
+                                     throughput={
+                                        'read': 1,
+                                        'write': 1
+                                     })
+
 schedule_entries_table = Table.create("schedule_entries", 
                             schema=[
                                 HashKey("team_id"),
@@ -31,7 +41,8 @@ schedule_entries_table = Table.create("schedule_entries",
                                 'read': 1,
                                 'write': 1
                             },
-                            indexes=[
+                            global_indexes=[
+                                sentries_gender_date_index
                             ],
                             connection=conn)
 
