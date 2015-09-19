@@ -10,7 +10,7 @@ TODO
 
 ## Data Integrity
 * Add is_women to schedule_entries
-* Add team_id to schedule_entry object
+* Season dates need converted to ordinal
 
 ## Features
 * If provider provides tournament info, get that

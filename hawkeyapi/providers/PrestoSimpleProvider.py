@@ -59,7 +59,8 @@ class PrestoSimpleProvider(Provider):
             game_id = self.get_gameid_from_date_time(game_date, game_time)
 
             game = ScheduleEntry(game_id, game_date, game_time, opponent, site,
-                                 location, links, conference, season.league, season.id)
+                                 location, links, conference,
+                                 season.league, season.id, self.team_id)
             games.append(game)
 
         return games

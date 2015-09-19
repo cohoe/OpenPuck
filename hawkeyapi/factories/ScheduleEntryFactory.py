@@ -25,17 +25,18 @@ class ScheduleEntryFactory():
             bool(e_db['is_conference']),
             e_db['league'],
             e_db['season'],
+            e_db['team_id'],
         )
 
     @classmethod
-    def itemify(cls, db_table, team_id, obj):
+    def itemify(cls, db_table, obj):
         """
         Turn an object into an item.
         """
         return Item(
             db_table,
             data = {
-                'team_id': team_id,
+                'team_id': obj.team_id,
                 'entry_id': obj.id,
                 'date': obj.date.toordinal(),
                 'start_time': obj.start_time.isoformat(),

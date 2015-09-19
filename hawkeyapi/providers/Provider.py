@@ -9,6 +9,7 @@ class Provider(object):
     def __init__(self, team):
         url_obj = urlparse(team.website)
         self.server = "%s://%s" % (url_obj.scheme, url_obj.netloc)
+        self.team_id = team.id
 
     def get_schedule_from_web(self):
         """

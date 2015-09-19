@@ -11,22 +11,18 @@ team_entries = [
 
 #team_entries = Teams.scan(is_women__eq=True, league__eq='NCAA')
 
-team_objs = {}
-for tm in team_entries:
-    t = TeamFactory.objectify(tm)
-    team_objs[tm['id']] = t
-
 s_db = Seasons.get_item(league='NCAA', id='2014-15W')
 s_obj = SeasonFactory.objectify(s_db)
 
-for id in team_objs.keys():
-    t = team_objs[id]
+for t_db in team_entries:
+    t_obj = TeamFactory.objectify(t_db)
+
     try:
-        entries = t.get_provider().get_schedule(s_obj)
+        entries = t_obj.get_provider().get_schedule(s_obj)
         for e in entries:
-            sched_entry = ScheduleEntryFactory.itemify(ScheduleEntries, id, e)
+            sched_entry = ScheduleEntryFactory.itemify(ScheduleEntries, e)
             sched_entry.save(overwrite=True)
-        print "SUCCESS on %s (%i entries)" % (id, len(entries))
+        print "SUCCESS on %s (%i entries)" % (t_obj.id, len(entries))
     except Exception as e:
-        print "FAILED on %s" % id
+        print "FAILED on %s" % t_obj.id
         print e
