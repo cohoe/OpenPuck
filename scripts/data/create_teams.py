@@ -12,27 +12,27 @@ try:
 except JSONResponseError:
     print "Table 'teams' does not exist."
 
-teams_conference_index = GlobalAllIndex("Conference-Id-Index",
-                                        parts=[
-                                            HashKey("home_conference"),
-                                            RangeKey("is_women", data_type=NUMBER),
-                                        ],
-                                        throughput={
-                                            'read': 1,
-                                            'write': 1
-                                        })
+co_idx = GlobalAllIndex("ConferenceIndex",
+                        parts=[
+                            HashKey("home_conference"),
+                            RangeKey("is_women", data_type=NUMBER),
+                        ],
+                        throughput={
+                            'read': 1,
+                            'write': 1,
+                        })
 
-teams_table = Table.create("teams", 
-                            schema=[
-                                HashKey("id")
-                            ],
-                            throughput={
-                                'read': 1,
-                                'write': 1
-                            },
-                            global_indexes=[
-                                teams_conference_index,
-                            ],
-                            connection=conn)
+tble = Table.create("teams", 
+                    schema=[
+                        HashKey("id")
+                    ],
+                    throughput={
+                        'read': 1,
+                        'write': 1
+                    },
+                    global_indexes=[
+                        co_idx
+                    ],
+                    connection=conn)
 
 print "Created teams table"

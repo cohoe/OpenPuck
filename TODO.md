@@ -10,7 +10,6 @@ TODO
 
 ## Data Integrity
 * Add is_women to schedule_entries
-* Add id to team object
 * Add team_id to schedule_entry object
 
 ## Features
