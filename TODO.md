@@ -2,7 +2,6 @@ TODO
 ====
 
 ## Bugs
-* add id to team object
 * St Lawrence-W has ranking bugs!
 * As does Clarkson
 * ANd cornell
@@ -11,9 +10,12 @@ TODO
 
 ## Data Integrity
 * Add is_women to schedule_entries
+* Add id to team object
+* Add team_id to schedule_entry object
 
 ## Features
 * If provider provides tournament info, get that
+* Test connection circuit breaker
 
 ### Fields
 
