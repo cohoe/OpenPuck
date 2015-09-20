@@ -10,6 +10,7 @@ class Provider(object):
         url_obj = urlparse(team.website)
         self.server = "%s://%s" % (url_obj.scheme, url_obj.netloc)
         self.team_id = team.id
+        self.is_women = team.is_women
 
     def get_schedule_from_web(self):
         """

@@ -26,6 +26,7 @@ class ScheduleEntryFactory():
             e_db['league'],
             e_db['season'],
             e_db['team_id'],
+            bool(e_db['is_women']),
         )
 
     @classmethod
@@ -47,5 +48,6 @@ class ScheduleEntryFactory():
                 'is_conference': obj.is_conference,
                 'season': obj.season,
                 'league': obj.league,
+                'is_women': obj.is_women,
             },
         )

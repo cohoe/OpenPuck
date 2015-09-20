@@ -9,7 +9,6 @@ TODO
 ## Organization
 
 ## Data Integrity
-* Add is_women to schedule_entries
 * Season dates need converted to ordinal
 
 ## Features

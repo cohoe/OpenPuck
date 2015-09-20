@@ -56,7 +56,8 @@ class NeulionAdaptiveProvider(Provider):
 
             game = ScheduleEntry(game_id, game_date, game_time, opponent, site,
                                  location, links, conference,
-                                 season.league, season.id, self.team_id)
+                                 season.league, season.id, self.team_id,
+                                 self.is_women)
             games.append(game)
 
         return games
