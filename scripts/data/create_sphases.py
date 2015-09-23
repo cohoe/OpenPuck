@@ -7,14 +7,15 @@ from boto.exception import JSONResponseError
 from boto.dynamodb2.types import NUMBER
 
 try:
-    seasons_table = Table('seasons', connection=conn)
+    seasons_table = Table('season_phases', connection=conn)
     seasons_table.delete()
 except JSONResponseError:
-    print "Table 'seasons' does not exist."
+    print "Table 'season_phases' does not exist."
 
-seasons_table = Table.create("seasons", 
+seasons_table = Table.create("season_phases", 
                             schema=[
                                 HashKey("id"),
+                                RangeKey("name"),
                             ],
                             throughput={
                                 'read': 1,
@@ -24,4 +25,4 @@ seasons_table = Table.create("seasons",
                             ],
                             connection=conn)
 
-print "Created 'seasons' table"
+print "Created 'season_phases' table"

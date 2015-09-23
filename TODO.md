@@ -9,7 +9,7 @@ TODO
 ## Organization
 
 ## Data Integrity
-* Season dates need converted to ordinal
+* Going to need a validator at some point for things like seasonphase dates
 
 ## Features
 * If provider provides tournament info, get that

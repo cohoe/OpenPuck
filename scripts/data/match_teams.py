@@ -9,7 +9,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("team_id", metavar='team_id')
 args = parser.parse_args()
 
-s_db = Seasons.get_item(league='NCAA', id='2014-15W')
+s_db = Seasons.get_item(id='NCAA-1415-W')
 season = SeasonFactory.objectify(s_db)
 
 #team = Teams.get_item(id='NCAA-Yale-W')

@@ -4,7 +4,7 @@ from hawkeyapi.database import ScheduleEntries, Seasons
 from hawkeyapi.factories import ScheduleEntryFactory, SeasonFactory
 from datetime import date
 
-s_db = Seasons.get_item(league='NCAA', id='2014-15W')
+s_db = Seasons.get_item(id='NCAA-1415-W')
 season = SeasonFactory.objectify(s_db)
 
 #team = Teams.get_item(id='NCAA-Yale-W')

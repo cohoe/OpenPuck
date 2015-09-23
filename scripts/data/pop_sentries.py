@@ -11,7 +11,7 @@ team_entries = [
 
 #team_entries = Teams.scan(is_women__eq=True, league__eq='NCAA')
 
-s_db = Seasons.get_item(league='NCAA', id='2014-15W')
+s_db = Seasons.get_item(id='NCAA-1415-W')
 s_obj = SeasonFactory.objectify(s_db)
 
 for t_db in team_entries:
