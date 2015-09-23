@@ -12,8 +12,11 @@ team_id = 'NCAA-Harvard-W'
 print "Searching for %s" % team_id
 t_entry = Teams.get_item(id=team_id)
 
+print "Finding schedule entries..."
 entries = ScheduleEntries.query_2(
-    team_id__eq=team_id
+    index='TeamSeasonIndex',
+    team_id__eq=team_id,
+    season__eq=season.id,
 )
 
 for e_db in entries:
@@ -31,7 +34,7 @@ for e_db in entries:
         o_entry = results_list[0]
         print "Found opponent %s" % o_entry['team_id']
         try:
-            s_items = ScheduleEntries.query_2(team_id__eq=o_entry['team_id'], date__eq=e_obj.date.isoformat())
+            s_items = ScheduleEntries.query_2(team_id__eq=o_entry['team_id'], date__eq=e_obj.date.toordinal())
             s_item_results = list(s_items)
             num_s_item_results = len(s_item_results)
             if num_s_item_results == 0:
@@ -40,6 +43,7 @@ for e_db in entries:
                 raise Exception("Too many schedule entries found for %s vs %s" % (team_id, o_entry['team_id']))
             opponent_s_entry = s_item_results[0]
             print "Their opponent is: %s" % opponent_s_entry['opponent']
+            # WE HAVE REACHED SUCCESS!!!!
         except Exception as e:
             print "Could not find matching entry (%s)" % e
     except ItemNotFound:

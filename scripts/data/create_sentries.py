@@ -22,6 +22,12 @@ ld_idx = GlobalAllIndex("LeagueDateIndex",
                             'write': 1,
                         })
 
+team_idx = AllIndex("TeamSeasonIndex",
+                    parts=[
+                        HashKey("team_id"),
+                        RangeKey("season"),
+                    ])
+
 tble = Table.create("schedule_entries",
                     schema=[
                         HashKey("team_id"),
@@ -33,6 +39,9 @@ tble = Table.create("schedule_entries",
                     },
                     global_indexes=[
                         ld_idx
+                    ],
+                    indexes=[
+                        team_idx
                     ],
                     connection=conn)
 
