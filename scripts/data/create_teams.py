@@ -15,7 +15,7 @@ except JSONResponseError:
 pr_idx = GlobalAllIndex("ProviderIndex",
                         parts=[
                             HashKey("provider"),
-                            RangeKey("id"),
+                            RangeKey("is_women", data_type=NUMBER),
                         ],
                         throughput={
                             'read': 1,
