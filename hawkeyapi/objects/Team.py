@@ -8,7 +8,7 @@ class Team(HawkeyApiObject):
         HawkeyApiObject.__init__(self)
 
         self.id = id
-        self.institution_name = institution
+        self.institution = institution
         self.mascot = mascot
         self.is_women = is_women
         self.home_conference = home_conference

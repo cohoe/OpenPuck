@@ -33,7 +33,7 @@ class TeamFactory():
             db_table,
             data = {
                 'id': obj.id,
-                'institution': obj.institution_name,
+                'institution': obj.institution,
                 'mascot': obj.mascot,
                 'is_women': obj.is_women,
                 'home_conference': obj.home_conference,
