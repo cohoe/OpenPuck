@@ -8,10 +8,10 @@ item = Teams.get_item(id='NCAA-RIT-W')
 
 teams = Teams.query_2(
     index='ConferenceIndex',
-    home_conference__eq='CHA',
+    home_conference__eq='ECAC',
     is_women__eq=True,
 )
 
 for t in teams:
     team = TeamFactory.objectify(t)
-    print team.json()
+    print team.id
