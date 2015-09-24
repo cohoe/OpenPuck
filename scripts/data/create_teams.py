@@ -12,6 +12,16 @@ try:
 except JSONResponseError:
     print "Table 'teams' does not exist."
 
+pr_idx = GlobalAllIndex("ProviderIndex",
+                        parts=[
+                            HashKey("provider"),
+                            RangeKey("id"),
+                        ],
+                        throughput={
+                            'read': 1,
+                            'write': 1,
+                        })
+
 co_idx = GlobalAllIndex("ConferenceIndex",
                         parts=[
                             HashKey("home_conference"),
@@ -31,7 +41,8 @@ tble = Table.create("teams",
                         'write': 1
                     },
                     global_indexes=[
-                        co_idx
+                        co_idx,
+                        pr_idx,
                     ],
                     connection=conn)
 
