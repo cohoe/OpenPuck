@@ -7,7 +7,6 @@ TODO
 * ANd cornell
 * CBSInteractive - BU/Providence had a postponed game that BU reports (PRO doesnt).
 * CBSInteractive doesnt seem to be reporting past conference games. Different attribute?
-* SidearmAdaptiveProvider giving lots of unknown sites
 
 ## Organization
 
