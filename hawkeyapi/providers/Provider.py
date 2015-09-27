@@ -61,7 +61,7 @@ class Provider(object):
         # Some special words
         # This regex is only going to get longer as schools put stupid crap
         # in the schedule.
-        n_opponent = re.sub(r'GAME \d|(SEMI)?FINAL(S)?|CHAMPIONSHIP|NATIONAL QUARTERFINAL', '', n_opponent)
+        n_opponent = re.sub(r'GAME \d|(SEMI)?FINAL(S)?|CHAMPIONSHIP( GAME)?|NATIONAL QUARTERFINAL', '', n_opponent)
         n_opponent = re.sub(r'FIRST ROUND GAME \w+|QUARTER|SEMIS AND', '', n_opponent)
 
         # Remove special characters
@@ -71,8 +71,8 @@ class Provider(object):
         n_opponent = re.sub(r'\s+', ' ', n_opponent)
         
         # Remove rankings if that is given
-        n_opponent = re.sub(r'\d+ ', '', n_opponent)
         n_opponent = re.sub(r'NO \d([\/\dRV]+)?', '', n_opponent)
+        n_opponent = re.sub(r'\d+ ', '', n_opponent)
         n_opponent = n_opponent.strip()
 
         # If they say the opponent is "at", remove it
