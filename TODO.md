@@ -12,6 +12,7 @@ TODO
 
 ## Data Integrity
 * Going to need a validator at some point for things like seasonphase dates
+* Sanity check for number of total games, number of conference games, etc.
 
 ## Features
 * If provider provides tournament info, get that

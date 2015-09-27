@@ -61,7 +61,7 @@ class GameFactory():
         if site_status is False:
             ret_status = False
 
-        start_status = cls.__validate_start(obj1, obj2)
+        start_status = cls.__validate_start(obj1, obj2, intelligent=True)
         if start_status is False:
             ret_status = False
 
@@ -115,13 +115,25 @@ class GameFactory():
         return False
 
     @classmethod
-    def __validate_start(cls, obj1, obj2):
+    def __validate_start(cls, obj1, obj2, intelligent=False):
         """
         Validate that two start times line up. If they dont see if
         we did some null value shit.
         """
         if obj1.start_time == obj2.start_time:
             return True
+
+        if intelligent is True:
+            # Test for 0's
+            if obj1.start_time == time(0, 0, 0) or obj2.start_time == time(0, 0, 0):
+                # One of them is good
+                return True
+
+            # Test for <7 minute difference for TV start
+            if obj1.start_time.hour == obj2.start_time.hour:
+                if abs(obj1.start_time.minute - obj2.start_time.minute) <= 7:
+                    # There is a 0-7 minute difference, for TV
+                    return True
 
         cls.__exception(obj1, obj2, "start_time")
         return False
