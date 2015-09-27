@@ -58,7 +58,7 @@ class GameFactory():
             print "OPPONENT"
             ret_status = False
 
-        site_status = cls.__validate_site(obj1, obj2)
+        site_status = cls.__validate_site(obj1, obj2, intelligent=True)
         if site_status is False:
             print "SITE"
             ret_status = False
@@ -110,7 +110,7 @@ class GameFactory():
         return False
 
     @classmethod
-    def __validate_site(cls, obj1, obj2):
+    def __validate_site(cls, obj1, obj2, intelligent=False):
         """
         Validate that the two sites line up.
         """
@@ -125,6 +125,12 @@ class GameFactory():
         # as will the site
         if obj1.site == obj2.site and obj1.team_id == obj2.team_id:
             return True
+
+        if intelligent is True:
+            if obj1.site == 'UNKNOWN' and obj2.site != 'UNKNOWN':
+                return True
+            if obj2.site == 'UNKNOWN' and obj1.site != 'UNKNOWN':
+                return True
         
         cls.__exception(obj1, obj2, "site")
         return False

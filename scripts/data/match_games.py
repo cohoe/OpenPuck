@@ -13,10 +13,10 @@ season = SeasonFactory.objectify(s_db)
 #t_entry = Teams.get_item(id=team_id)
 
 t_entries = Teams.query_2(
-    #index='ConferenceIndex',
-    #home_conference__eq='HEA',
-    #is_women__eq=True,
-    id__eq='NCAA-BU-W',
+    index='ConferenceIndex',
+    home_conference__eq='HEA',
+    is_women__eq=True,
+    #id__eq='NCAA-BU-W',
 )
 
 for team_item in t_entries:
@@ -50,7 +50,7 @@ for team_item in t_entries:
                 if valid_status is True:
                     print "PASSED: '%s vs %s'" % (my_obj.team_id, their_obj.team_id)
                 else:
-                    print "FAILED: '%s vs %s'" % (my_obj.team_id, their_obj.team_id)
+                    print "FAILED: '%s' vs '%s' on '%s'" % (my_obj.team_id, their_obj.team_id, my_obj.date)
             except Exception as e:
                 print "Could not find matching schedule entry (%s)" % e
                 #pass

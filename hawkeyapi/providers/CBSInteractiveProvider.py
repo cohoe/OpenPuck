@@ -58,10 +58,13 @@ class CBSInteractiveProvider(Provider):
                 # Skip this game since its not ours
                 continue
             # Test for postponed games
-            postponed = details_soup.find('outcome_score')['data']
-            if postponed.upper().strip() == "POSTPONED":
-                # Skip it
-                continue
+            try:
+                postponed = details_soup.find('outcome_score')['data']
+                if postponed.upper().strip() == "POSTPONED":
+                    # Skip it
+                    continue
+            except KeyError:
+                pass
             # Location
             location = self.get_game_location(details_soup)
             # Site
