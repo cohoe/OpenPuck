@@ -110,6 +110,11 @@ class GameFactory():
             return True
         elif obj1.site == 'neutral' and obj2.site == 'neutral':
             return True
+
+        # In the case of an in-house scrimmage, both teams will be the same
+        # as will the site
+        if obj1.site == obj2.site and obj1.team_id == obj2.team_id:
+            return True
         
         cls.__exception(obj1, obj2, "site")
         return False
