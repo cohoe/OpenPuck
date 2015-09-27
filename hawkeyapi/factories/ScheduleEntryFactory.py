@@ -14,6 +14,10 @@ class ScheduleEntryFactory():
         """
         Turn an item into an object.
         """
+        isconf = None
+        if e_db['is_conference'] is not None:
+            isconf = bool(e_db['is_conference'])
+
         return ScheduleEntry(
             e_db['entry_id'],
             date.fromordinal(e_db['date']),
@@ -22,7 +26,7 @@ class ScheduleEntryFactory():
             e_db['site'],
             e_db['location'],
             e_db['links'],
-            bool(e_db['is_conference']),
+            isconf,
             e_db['league'],
             e_db['season'],
             e_db['team_id'],

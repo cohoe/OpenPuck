@@ -57,6 +57,11 @@ class CBSInteractiveProvider(Provider):
             if raw_h2h == 'no':
                 # Skip this game since its not ours
                 continue
+            # Test for postponed games
+            postponed = details_soup.find('outcome_score')['data']
+            if postponed.upper().strip() == "POSTPONED":
+                # Skip it
+                continue
             # Location
             location = self.get_game_location(details_soup)
             # Site
@@ -193,6 +198,9 @@ class CBSInteractiveProvider(Provider):
         Is this a conference game? Some teams dont tell us
         so this has to be None... :(
         """
+        raw_opponent = game.find_all('td')[1].text
+        if "*" in raw_opponent:
+            return True
         return None
 
     def get_schedule_url_for_season(self, season):

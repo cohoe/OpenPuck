@@ -4,18 +4,31 @@ from hawkeyapi.database import Teams, ScheduleEntries, Seasons, TeamAltnames
 from hawkeyapi.factories import TeamFactory, SeasonFactory, ScheduleEntryFactory
 
 team_entries = [
-    Teams.get_item(id='NCAA-Harvard-W'),
-    Teams.get_item(id='NCAA-Yale-W'),
+    #Teams.get_item(id='NCAA-Harvard-W'),
+    Teams.get_item(id='NCAA-BU-W'),
     #Teams.get_item(id='NCAA-UConn-W'),
 ]
 
 #team_entries = Teams.scan(is_women__eq=True, league__eq='NCAA')
+team_entries = Teams.query_2(
+    index='ProviderIndex',
+    provider__eq='CBSInteractiveProvider',
+    is_women__eq=True,
+)
 
 s_db = Seasons.get_item(id='NCAA-1415-W')
 s_obj = SeasonFactory.objectify(s_db)
 
 for t_db in team_entries:
     t_obj = TeamFactory.objectify(t_db)
+
+    # Delete past entries
+    sentry_items = ScheduleEntries.query_2(
+        team_id__eq=t_obj.id
+    )
+    for item in sentry_items:
+        item.delete()
+    print "Done deleting entries."
 
     try:
         entries = t_obj.get_provider().get_schedule(s_obj)

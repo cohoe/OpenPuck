@@ -34,7 +34,7 @@ class GameFactory():
             print "Date: '%s' vs '%s'" % (obj1.date, obj2.date)
             ret_status = False
 
-        conf_status = cls.__validate_isconf(obj1, obj2)
+        conf_status = cls.__validate_isconf(obj1, obj2, intelligent=True)
         if conf_status is None:
             ret_status = False
 
@@ -55,14 +55,17 @@ class GameFactory():
 
         opponent_status = cls.__validate_opponent(obj1, obj2)
         if opponent_status is False:
+            print "OPPONENT"
             ret_status = False
 
         site_status = cls.__validate_site(obj1, obj2)
         if site_status is False:
+            print "SITE"
             ret_status = False
 
         start_status = cls.__validate_start(obj1, obj2, intelligent=True)
         if start_status is False:
+            print "START"
             ret_status = False
 
         #print "** Finished validation **\n"
@@ -76,14 +79,21 @@ class GameFactory():
         return (obj1.__dict__[key] == obj2.__dict__[key])
 
     @classmethod
-    def __validate_isconf(cls, obj1, obj2):
+    def __validate_isconf(cls, obj1, obj2, intelligent=False):
         """
         Validate that two objects agree on is_conference.
         """
-        # @TODO: I think there are some logic issues here
-        if obj1.is_conference == obj2.is_conference:
+        if obj1.is_conference == obj2.is_conference and obj1.is_conference is not None:
             # They are both the same so it doesnt matter
             return obj1.is_conference
+
+        if intelligent is True:
+            # Some providers dont give the status. If one is None and the
+            # other is set, trust it.
+            if obj1.is_conference is None and obj2.is_conference is not None:
+                return obj2.is_conference
+            elif obj2.is_conference is None and obj1.is_conference is not None:
+                return obj1.is_conference
 
         cls.__exception(obj1, obj2, "is_conference")
         return None
@@ -166,7 +176,6 @@ class GameFactory():
         """
         Print an exception.
         """
-
         print "EXCEPTION:"
         print "  Field: %s" % field
         print "  Team 1: %s (%s)" % (obj1.__dict__[field], obj1.team_id)

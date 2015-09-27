@@ -13,10 +13,10 @@ season = SeasonFactory.objectify(s_db)
 #t_entry = Teams.get_item(id=team_id)
 
 t_entries = Teams.query_2(
-    index='ConferenceIndex',
-    home_conference__eq='ECAC',
-    is_women__eq=True
-    #id__eq='NCAA-Harvard-W'
+    #index='ConferenceIndex',
+    #home_conference__eq='HEA',
+    #is_women__eq=True,
+    id__eq='NCAA-BU-W',
 )
 
 for team_item in t_entries:
