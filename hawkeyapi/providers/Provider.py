@@ -71,7 +71,7 @@ class Provider(object):
         n_opponent = re.sub(r'\s+', ' ', n_opponent)
         
         # Remove rankings if that is given
-        n_opponent = re.sub(r'^\d+ ', '', n_opponent)
+        n_opponent = re.sub(r'\d+ ', '', n_opponent)
         n_opponent = re.sub(r'NO \d([\/\dRV]+)?', '', n_opponent)
         n_opponent = n_opponent.strip()
 

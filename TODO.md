@@ -2,9 +2,6 @@ TODO
 ====
 
 ## Bugs
-* St Lawrence-W has ranking bugs!
-* As does Clarkson
-* ANd cornell
 * CBSInteractive - BU/Providence had a postponed game that BU reports (PRO doesnt).
 * CBSInteractive doesnt seem to be reporting past conference games. Different attribute?
 
