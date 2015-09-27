@@ -36,7 +36,6 @@ class GameFactory():
 
         conf_status = cls.__validate_isconf(obj1, obj2)
         if conf_status is None:
-            print "IsConference: '%s' vs '%s'" % (obj1.is_conference, obj2.is_conference)
             ret_status = False
 
         iswomen_status = cls.__validate_simple(obj1, obj2, "is_women")
@@ -56,17 +55,14 @@ class GameFactory():
 
         opponent_status = cls.__validate_opponent(obj1, obj2)
         if opponent_status is False:
-            print "Opponent: '%s' vs '%s'" % (obj1.opponent, obj2.opponent)
             ret_status = False
 
         site_status = cls.__validate_site(obj1, obj2)
         if site_status is False:
-            print "Site: '%s' vs '%s'" % (obj1.site, obj2.site)
             ret_status = False
 
         start_status = cls.__validate_start(obj1, obj2)
         if start_status is False:
-            print "Start: '%s' vs '%s'" % (obj1.start_time, obj2.start_time)
             ret_status = False
 
         #print "** Finished validation **\n"
@@ -89,14 +85,8 @@ class GameFactory():
             # They are both the same so it doesnt matter
             return obj1.is_conference
 
-        else:
-            # Something is missing. If one is none then we'll trust the other
-            if obj1.is_conference is None:
-                return obj2.is_conference
-            elif obj2.is_conference is None:
-                return obj1.is_conference
-            else:
-                return None
+        cls.__exception(obj1, obj2, "is_conference")
+        return None
 
     @classmethod
     def __validate_opponent(cls, obj1, obj2):
@@ -106,6 +96,7 @@ class GameFactory():
         if obj1.opponent == obj2.team_id and obj2.opponent == obj1.team_id:
             return True
 
+        cls.__exception(obj1, obj2, "opponent")
         return False
 
     @classmethod
@@ -117,7 +108,10 @@ class GameFactory():
             return True
         elif obj1.site == 'away' and obj2.site == 'home':
             return True
+        elif obj1.site == 'neutral' and obj2.site == 'neutral':
+            return True
         
+        cls.__exception(obj1, obj2, "site")
         return False
 
     @classmethod
