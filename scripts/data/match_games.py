@@ -8,7 +8,7 @@ s_db = Seasons.get_item(id='NCAA-1415-W')
 season = SeasonFactory.objectify(s_db)
 
 #team = Teams.get_item(id='NCAA-Yale-W')
-team_id = 'NCAA-Harvard-W'
+team_id = 'NCAA-RIT-W'
 print "Searching for %s" % team_id
 t_entry = Teams.get_item(id=team_id)
 
@@ -35,12 +35,16 @@ for e_db in entries:
             # WE HAVE REACHED SUCCESS!!!!
             my_obj = e_obj
             their_obj = ScheduleEntryFactory.objectify(opponent_s_entry)
-            g_obj = GameFactory.construct(my_obj, their_obj)
+            valid_status = GameFactory.construct(my_obj, their_obj)
+            if valid_status is True:
+                print "PASSED: '%s vs %s'" % (my_obj.team_id, their_obj.team_id)
+            else:
+                print "FAILED: '%s vs %s'" % (my_obj.team_id, their_obj.team_id)
         except Exception as e:
-            print "Could not find matching entry (%s)" % e
+            print "Could not find matching schedule entry (%s)" % e
             #pass
     except ItemNotFound:
-        print "Could not find %s" % e_obj.opponent
+        print "Could not find opponent %s" % e_obj.opponent
     except Exception as e:
         print "Failed to find %s" % e_obj.opponent
         print e

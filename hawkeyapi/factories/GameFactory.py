@@ -26,41 +26,51 @@ class GameFactory():
         """
         Make a game object from two ScheduleEntries
         """
-        print "** Beginning validation **"
+        #print "** Beginning validation **"
+        ret_status = True
 
         date_status = cls.__validate_simple(obj1, obj2, "date")
         if date_status is False:
             print "Date: '%s' vs '%s'" % (obj1.date, obj2.date)
+            ret_status = False
 
         conf_status = cls.__validate_isconf(obj1, obj2)
         if conf_status is None:
             print "IsConference: '%s' vs '%s'" % (obj1.is_conference, obj2.is_conference)
+            ret_status = False
 
         iswomen_status = cls.__validate_simple(obj1, obj2, "is_women")
         if iswomen_status is False:
             print "IsWomen: '%s' vs '%s'" % (obj1.is_women, obj2.is_women)
+            ret_status = False
 
         league_status = cls.__validate_simple(obj1, obj2, "league")
         if league_status is False:
             print "League: '%s' vs '%s'" % (obj1.league, obj2.league)
+            ret_status = False
 
         location_status = cls.__validate_location(obj1, obj2)
         if location_status is False:
             print "Location: '%s' vs '%s'" % (obj1.location, obj2.location)
+            ret_status = False
 
         opponent_status = cls.__validate_opponent(obj1, obj2)
         if opponent_status is False:
             print "Opponent: '%s' vs '%s'" % (obj1.opponent, obj2.opponent)
+            ret_status = False
 
         site_status = cls.__validate_site(obj1, obj2)
         if site_status is False:
             print "Site: '%s' vs '%s'" % (obj1.site, obj2.site)
+            ret_status = False
 
         start_status = cls.__validate_start(obj1, obj2)
         if start_status is False:
             print "Start: '%s' vs '%s'" % (obj1.start_time, obj2.start_time)
+            ret_status = False
 
-        print "** Finished validation **\n"
+        #print "** Finished validation **\n"
+        return ret_status
 
     @classmethod
     def __validate_simple(cls, obj1, obj2, key):
@@ -116,15 +126,13 @@ class GameFactory():
         Validate that two start times line up. If they dont see if
         we did some null value shit.
         """
-        if obj1.start_time == time(0, 0, 0):
-            if obj2.start_time == time(0, 0, 0):
-                return True
-            else:
-                # They are different but the first obj has no start, so too bad
-                return True
-        elif obj1.start_time == obj2.start_time:
+        if obj1.start_time == obj2.start_time:
             return True
 
+        print "EXCEPTION:"
+        print "  Field: start_time"
+        print "  Team 1: %s (%s)" % (obj1.start_time, obj1.team_id)
+        print "  Team 2: %s (%s)" % (obj2.start_time, obj2.team_id)
         return False
 
     @classmethod

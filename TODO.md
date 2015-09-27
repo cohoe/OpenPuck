@@ -16,4 +16,9 @@ TODO
 * Test connection circuit breaker
 
 ### Fields
+* Teams need a timezone offset field
 
+## UI
+### Matching Games
+* For matching games, pick A, B, Neither to trust per field
+* Add suggestion logic based on application data and rules
