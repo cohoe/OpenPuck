@@ -129,10 +129,7 @@ class GameFactory():
         if obj1.start_time == obj2.start_time:
             return True
 
-        print "EXCEPTION:"
-        print "  Field: start_time"
-        print "  Team 1: %s (%s)" % (obj1.start_time, obj1.team_id)
-        print "  Team 2: %s (%s)" % (obj2.start_time, obj2.team_id)
+        cls.__exception(obj1, obj2, "start_time")
         return False
 
     @classmethod
@@ -152,3 +149,14 @@ class GameFactory():
             else:
                 # Its also fine
                 return True
+
+    @classmethod
+    def __exception(cls, obj1, obj2, field):
+        """
+        Print an exception.
+        """
+
+        print "EXCEPTION:"
+        print "  Field: %s" % field
+        print "  Team 1: %s (%s)" % (obj1.__dict__[field], obj1.team_id)
+        print "  Team 2: %s (%s)" % (obj2.__dict__[field], obj2.team_id)
