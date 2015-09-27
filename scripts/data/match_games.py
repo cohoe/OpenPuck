@@ -28,10 +28,10 @@ for e_db in entries:
         # Find the item for the opponent
         opponent_entry = Teams.get_item(id=e_obj.opponent)
         o_entry = opponent_entry
-        print "Found opponent %s" % o_entry['id']
+        #print "Found opponent %s" % o_entry['id']
         try:
             opponent_s_entry = ScheduleEntries.get_item(team_id=o_entry['id'], date=e_obj.date.toordinal())
-            print "Their opponent is: %s" % opponent_s_entry['opponent']
+            #print "Their opponent is: %s" % opponent_s_entry['opponent']
             # WE HAVE REACHED SUCCESS!!!!
             my_obj = e_obj
             their_obj = ScheduleEntryFactory.objectify(opponent_s_entry)

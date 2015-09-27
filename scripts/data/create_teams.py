@@ -46,4 +46,4 @@ tble = Table.create("teams",
                     ],
                     connection=conn)
 
-print "Created teams table"
+print "Created 'teams' table"

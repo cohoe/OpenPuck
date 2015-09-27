@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 from boto.dynamodb2.items import Item
+from datetime import time
 
 class GameFactory():
     """
@@ -28,30 +29,38 @@ class GameFactory():
         print "** Beginning validation **"
 
         date_status = cls.__validate_simple(obj1, obj2, "date")
-        print "Date: %s" % date_status
+        if date_status is False:
+            print "Date: '%s' vs '%s'" % (obj1.date, obj2.date)
 
         conf_status = cls.__validate_isconf(obj1, obj2)
-        print "IsConference: %s" % conf_status
+        if conf_status is None:
+            print "IsConference: '%s' vs '%s'" % (obj1.is_conference, obj2.is_conference)
 
         iswomen_status = cls.__validate_simple(obj1, obj2, "is_women")
-        print "IsWomen: %s" % iswomen_status
+        if iswomen_status is False:
+            print "IsWomen: '%s' vs '%s'" % (obj1.is_women, obj2.is_women)
 
         league_status = cls.__validate_simple(obj1, obj2, "league")
-        print "League: %s" % league_status
+        if league_status is False:
+            print "League: '%s' vs '%s'" % (obj1.league, obj2.league)
 
-        location_status = cls.__validate_simple(obj1, obj2, "location")
-        print "Location: %s" % location_status
+        location_status = cls.__validate_location(obj1, obj2)
+        if location_status is False:
+            print "Location: '%s' vs '%s'" % (obj1.location, obj2.location)
 
         opponent_status = cls.__validate_opponent(obj1, obj2)
-        print "Opponent: %s" % opponent_status
+        if opponent_status is False:
+            print "Opponent: '%s' vs '%s'" % (obj1.opponent, obj2.opponent)
 
         site_status = cls.__validate_site(obj1, obj2)
-        print "Site: %s" % site_status
+        if site_status is False:
+            print "Site: '%s' vs '%s'" % (obj1.site, obj2.site)
 
-        start_status = cls.__validate_simple(obj1, obj2, "start_time")
-        print "StartTime: %s" % start_status
+        start_status = cls.__validate_start(obj1, obj2)
+        if start_status is False:
+            print "Start: '%s' vs '%s'" % (obj1.start_time, obj2.start_time)
 
-        print "** Finished validation **"
+        print "** Finished validation **\n"
 
     @classmethod
     def __validate_simple(cls, obj1, obj2, key):
@@ -65,6 +74,7 @@ class GameFactory():
         """
         Validate that two objects agree on is_conference.
         """
+        # @TODO: I think there are some logic issues here
         if obj1.is_conference == obj2.is_conference:
             # They are both the same so it doesnt matter
             return obj1.is_conference
@@ -76,7 +86,7 @@ class GameFactory():
             elif obj2.is_conference is None:
                 return obj1.is_conference
             else:
-                return False
+                return None
 
     @classmethod
     def __validate_opponent(cls, obj1, obj2):
@@ -99,3 +109,38 @@ class GameFactory():
             return True
         
         return False
+
+    @classmethod
+    def __validate_start(cls, obj1, obj2):
+        """
+        Validate that two start times line up. If they dont see if
+        we did some null value shit.
+        """
+        if obj1.start_time == time(0, 0, 0):
+            if obj2.start_time == time(0, 0, 0):
+                return True
+            else:
+                # They are different but the first obj has no start, so too bad
+                return True
+        elif obj1.start_time == obj2.start_time:
+            return True
+
+        return False
+
+    @classmethod
+    def __validate_location(cls, obj1, obj2):
+        """
+        Validate that two locations are the same, or if one is None.
+        """
+        if obj1.location is None:
+            if obj2.location is None:
+                return True
+            else:
+                # Its fine
+                return True
+        elif obj2.location is None:
+            if obj1.location is None:
+                return True
+            else:
+                # Its also fine
+                return True
