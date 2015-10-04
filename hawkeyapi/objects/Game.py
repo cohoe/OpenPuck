@@ -4,21 +4,51 @@ import datetime
 from HawkeyApiObject import HawkeyApiObject 
 
 class Game(HawkeyApiObject):
-    def __init__(self, id, date, time, opponent, site, location, links, conference, league, season, team_id, is_women):
+    def __init__(
+        self,
+        id,
+        home_season,
+        home_league,
+        home_conference,
+        home_team_id,
+        away_season,
+        away_league,
+        away_conference,
+        away_team_id,
+        is_conference,
+        is_women,
+        is_nat_tourney,
+        is_conf_tourney,
+        is_tournament,
+        date,
+        time,
+        venue,
+        partial,
+        links,
+        tournament_id=None,
+    ):
         HawkeyApiObject.__init__(self)
-
-        self.team_id = team_id
         self.id = id
-        self.date = date
-        self.start_time = time
-        self.opponent = opponent
-        self.site = site
-        self.location = location
-        self.links = links
-        self.is_conference = conference
-        self.league = league
-        self.season = season
+        self.home_season = home_season
+        self.home_league = home_league
+        self.home_conference = home_conference
+        self.home_team_id = home_team_id
+        self.away_season = away_season
+        self.away_league = away_league
+        self.away_conference = away_conference
+        self.away_team_id = away_team_id
+        self.is_conference = is_conference
         self.is_women = is_women
+        self.is_nat_tourney = is_nat_tourney
+        self.is_conf_tourney = is_conf_tourney
+        self.is_tournament = is_tournament
+        self.date = date
+        self.time = time
+        self.venue = venue
+        self.partial = partial
+        self.links = links
+        self.tournament_id = tournament_id
+
 
     def __repr__(self):
         start_time = self.start_time

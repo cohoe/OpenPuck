@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 from boto.dynamodb2.items import Item
 from datetime import time
+import uuid
 
 class GameFactory():
     """
@@ -29,28 +30,8 @@ class GameFactory():
         #print "** Beginning validation **"
         ret_status = True
 
-        date_status = cls.__validate_simple(obj1, obj2, "date")
-        if date_status is False:
-            print "Date: '%s' vs '%s'" % (obj1.date, obj2.date)
-            ret_status = False
-
         conf_status = cls.__validate_isconf(obj1, obj2, intelligent=True)
         if conf_status is None:
-            ret_status = False
-
-        iswomen_status = cls.__validate_simple(obj1, obj2, "is_women")
-        if iswomen_status is False:
-            print "IsWomen: '%s' vs '%s'" % (obj1.is_women, obj2.is_women)
-            ret_status = False
-
-        league_status = cls.__validate_simple(obj1, obj2, "league")
-        if league_status is False:
-            print "League: '%s' vs '%s'" % (obj1.league, obj2.league)
-            ret_status = False
-
-        location_status = cls.__validate_location(obj1, obj2)
-        if location_status is False:
-            print "Location: '%s' vs '%s'" % (obj1.location, obj2.location)
             ret_status = False
 
         opponent_status = cls.__validate_opponent(obj1, obj2)
@@ -68,15 +49,17 @@ class GameFactory():
             print "START"
             ret_status = False
 
-        #print "** Finished validation **\n"
-        return ret_status
 
     @classmethod
     def __validate_simple(cls, obj1, obj2, key):
         """
         Validate that the two values are identical.
         """
-        return (obj1.__dict__[key] == obj2.__dict__[key])
+        if obj1.__dict__[key] == obj2.__dict__[key]:
+            return obj1.__dict__[key]
+
+        cls.__exception(obj1, obj2, key)
+        return None
 
     @classmethod
     def __validate_isconf(cls, obj1, obj2, intelligent=False):
@@ -142,7 +125,7 @@ class GameFactory():
         we did some null value shit.
         """
         if obj1.start_time == obj2.start_time:
-            return True
+            return obj1.start_time
 
         if intelligent is True:
             # Test for 0's
@@ -166,16 +149,21 @@ class GameFactory():
         """
         if obj1.location is None:
             if obj2.location is None:
-                return True
+                return None
             else:
                 # Its fine
-                return True
+                return obj2.location
         elif obj2.location is None:
             if obj1.location is None:
-                return True
+                return None
             else:
                 # Its also fine
-                return True
+                return obj1.location
+        elif obj1.location == obj2.location:
+            return obj1.location
+        else:
+            cls.__exception(obj1, obj2, "location")
+            return None
 
     @classmethod
     def __exception(cls, obj1, obj2, field):
@@ -186,3 +174,67 @@ class GameFactory():
         print "  Field: %s" % field
         print "  Team 1: %s (%s)" % (obj1.__dict__[field], obj1.team_id)
         print "  Team 2: %s (%s)" % (obj2.__dict__[field], obj2.team_id)
+
+    @classmethod
+    def construct2(cls, team1, sentry1, team2, sentry2):
+        """
+        Return a game object from two schedule_entry objects and teams.
+        """
+        # Game ID
+        id = uuid.uuid4()
+#        # Site
+#        if obj1.site == 'home' and obj2.site == 'away':
+#            # 1 is the home
+#            home_season = sentry1.season
+#            home_league = sentry1.league
+#            home_conference = team1.home_conference
+#            home_team_id = team1.id
+#            away_season = sentry2.season
+#            away_league = sentry2.league
+#            away_conference = team2.home_conference
+#            away_team_id = team2.id
+#        elif obj1.site == 'away' and obj2.site == 'home':
+#            # 2 is the home
+#            home_season = sentry2.season
+#            home_league = sentry2.league
+#            home_conference = team2.home_conference
+#            home_team_id = team2.id
+#            away_season = sentry1.season
+#            away_league = sentry1.league
+#            away_conference = team1.home_conference
+#            away_team_id = team1.id
+
+        # Date
+        date = cls.__validate_simple(sentry1, sentry2, "date")
+        # is_women
+        is_women = cls.__validate_simple(sentry1, sentry2, "is_women")
+        # Tournament (@TODO: implement this)
+        tournament_id = None
+        # Location
+        location = cls.__validate_location(sentry1, sentry2)
+        print location
+        return
+
+        # Return
+        return Game(
+            id,
+            home_season,
+            home_league,
+            home_conference,
+            home_team_id,
+            away_season,
+            away_league,
+            away_conference,
+            away_team_id,
+            is_conference,
+            is_women,
+            is_nat_tourney,
+            is_conf_tourney,
+            is_tournament,
+            date,
+            time,
+            venue,
+            partial,
+            links,
+            tournament_id,
+        )

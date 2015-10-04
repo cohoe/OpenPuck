@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from hawkeyapi.database import ScheduleEntries, Teams, TeamAltnames, Seasons
-from hawkeyapi.factories import ScheduleEntryFactory, SeasonFactory, GameFactory
+from hawkeyapi.factories import ScheduleEntryFactory, SeasonFactory, GameFactory, TeamFactory
 from boto.dynamodb2.exceptions import ItemNotFound
 
 s_db = Seasons.get_item(id='NCAA-1415-W')
@@ -13,14 +13,15 @@ season = SeasonFactory.objectify(s_db)
 #t_entry = Teams.get_item(id=team_id)
 
 t_entries = Teams.query_2(
-    index='ConferenceIndex',
-    home_conference__eq='HEA',
-    is_women__eq=True,
-    #id__eq='NCAA-BU-W',
+    #index='ConferenceIndex',
+    #home_conference__eq='HEA',
+    #is_women__eq=True,
+    id__eq='NCAA-BU-W',
 )
 
 for team_item in t_entries:
     team_id = team_item['id']
+    team_obj = TeamFactory.objectify(team_item)
 
     print "Finding schedule entries..."
     entries = ScheduleEntries.query_2(
@@ -38,6 +39,7 @@ for team_item in t_entries:
         try:
             # Find the item for the opponent
             opponent_entry = Teams.get_item(id=e_obj.opponent)
+            opponent_obj = TeamFactory.objectify(opponent_entry)
             o_entry = opponent_entry
             #print "Found opponent %s" % o_entry['id']
             try:
@@ -46,7 +48,8 @@ for team_item in t_entries:
                 # WE HAVE REACHED SUCCESS!!!!
                 my_obj = e_obj
                 their_obj = ScheduleEntryFactory.objectify(opponent_s_entry)
-                valid_status = GameFactory.construct(my_obj, their_obj)
+                #valid_status = GameFactory.construct(my_obj, their_obj)
+                game_obj = GameFactory.construct2(team_obj, my_obj, opponent_obj, their_obj)
                 if valid_status is True:
                     print "PASSED: '%s vs %s'" % (my_obj.team_id, their_obj.team_id)
                 else:
