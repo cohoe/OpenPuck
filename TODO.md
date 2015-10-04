@@ -4,6 +4,7 @@ TODO
 ## Bugs
 
 ## Organization
+* Move util to providers.util and start modularizing
 
 ## Data Integrity
 * Going to need a validator at some point for things like seasonphase dates
@@ -12,11 +13,18 @@ TODO
 ## Features
 * If provider provides tournament info, get that
 * Test connection circuit breaker
+* Team lookup helper
 
 ### Fields
 * Teams need a timezone offset field
+* Games need modification date
+* sentries need acquisition date
 
 ## UI
 ### Matching Games
 * For matching games, pick A, B, Manual to trust per field
 * Add suggestion logic based on application data and rules
+
+## Future Data
+* Rosters
+* Schedule publish date
