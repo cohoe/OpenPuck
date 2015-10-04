@@ -25,3 +25,14 @@
         "endDate": "2016-02-08",
     }
 }
+
+{
+    "location": {
+        "id": "abc123456",
+        "cn": "Matthews Arena",
+        "streetAddress": "282 St Bolotoph St",
+        "city": "Boston",
+        "state": "MA",
+        "postalCode": "12345"
+    }
+}
