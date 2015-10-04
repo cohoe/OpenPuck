@@ -49,7 +49,7 @@ for team_item in t_entries:
                 my_obj = e_obj
                 their_obj = ScheduleEntryFactory.objectify(opponent_s_entry)
                 #valid_status = GameFactory.construct(my_obj, their_obj)
-                game_obj = GameFactory.construct2(team_obj, my_obj, opponent_obj, their_obj)
+                game_obj = GameFactory.construct(team_obj, my_obj, opponent_obj, their_obj)
                 if valid_status is True:
                     print "PASSED: '%s vs %s'" % (my_obj.team_id, their_obj.team_id)
                 else:

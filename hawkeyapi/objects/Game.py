@@ -20,12 +20,12 @@ class Game(HawkeyApiObject):
         is_nat_tourney,
         is_conf_tourney,
         is_tournament,
+        tournament_id=None,
         date,
         time,
         venue,
         partial,
         links,
-        tournament_id=None,
     ):
         HawkeyApiObject.__init__(self)
         self.id = id
