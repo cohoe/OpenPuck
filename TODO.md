@@ -14,6 +14,7 @@ TODO
 * If provider provides tournament info, get that
 * Test connection circuit breaker
 * Team lookup helper
+* Team home arenas and location altnames
 
 ### Fields
 * Teams need a timezone offset field
@@ -28,3 +29,5 @@ TODO
 ## Future Data
 * Rosters
 * Schedule publish date
+* Box-score posting to notifications
+* Subscribe to updates and live notifications of things
