@@ -19,7 +19,7 @@ class ScheduleEntryFactory():
             isconf = bool(e_db['is_conference'])
 
         return ScheduleEntry(
-            e_db['entry_id'],
+            str(e_db['entry_id']),
             date.fromordinal(e_db['date']),
             dateparser.parse(e_db['start_time']).time(),
             e_db['opponent'],
@@ -31,6 +31,8 @@ class ScheduleEntryFactory():
             e_db['season'],
             e_db['team_id'],
             bool(e_db['is_women']),
+            bool(e_db['normal_opp']),
+            bool(e_db['normal_loc']),
         )
 
     @classmethod
@@ -42,7 +44,7 @@ class ScheduleEntryFactory():
             db_table,
             data = {
                 'team_id': obj.team_id,
-                'entry_id': obj.id,
+                'entry_id': str(obj.id),
                 'date': obj.date.toordinal(),
                 'start_time': obj.start_time.isoformat(),
                 'opponent': obj.opponent,
@@ -53,5 +55,7 @@ class ScheduleEntryFactory():
                 'season': obj.season,
                 'league': obj.league,
                 'is_women': obj.is_women,
+                'normal_loc': obj.normal_loc,
+                'normal_opp': obj.normal_opp,
             },
         )

@@ -4,7 +4,7 @@ import datetime
 from HawkeyApiObject import HawkeyApiObject 
 
 class ScheduleEntry(HawkeyApiObject):
-    def __init__(self, id, date, time, opponent, site, location, links, conference, league, season, team_id, is_women):
+    def __init__(self, id, date, time, opponent, site, location, links, conference, league, season, team_id, is_women, normal_loc=None, normal_opp=None):
         HawkeyApiObject.__init__(self)
 
         self.team_id = team_id
@@ -19,6 +19,8 @@ class ScheduleEntry(HawkeyApiObject):
         self.league = league
         self.season = season
         self.is_women = is_women
+        self.normal_loc = normal_loc
+        self.normal_opp = normal_opp
 
     def __repr__(self):
         start_time = self.start_time
