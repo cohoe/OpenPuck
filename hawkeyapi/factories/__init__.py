@@ -5,3 +5,4 @@ from SeasonFactory import SeasonFactory
 from TeamFactory import TeamFactory
 from SeasonPhaseFactory import SeasonPhaseFactory
 from GameFactory import GameFactory
+from LocationFactory import LocationFactory

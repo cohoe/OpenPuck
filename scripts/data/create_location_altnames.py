@@ -12,19 +12,10 @@ try:
 except JSONResponseError:
     print "Table 'location_altnames' does not exist."
 
-altnames_gender_index = GlobalAllIndex("AltnamesGenderIndex",
-                                       parts=[
-                                           HashKey("altname"),
-                                           RangeKey("is_women", data_type=NUMBER),
-                                       ],
-                                       throughput={
-                                           'read': 1,
-                                           'write': 1
-                                       })
-
 al_idx = GlobalAllIndex("AltnameIndex",
                         parts=[
-                            HashKey("altname"),
+                            HashKey("affiliation"),
+                            RangeKey("altname"),
                         ],
                         throughput={
                             'read': 1,
