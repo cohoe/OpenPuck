@@ -75,6 +75,12 @@ LocationAltnames.put_item(data={
     'altname': 'MOON TOWNSHIP PA',
 },
 overwrite=True)
+LocationAltnames.put_item(data={
+    'location_id': 'LUMBER',
+    'affiliation': 'NCAA-RMU-W',
+    'altname': 'PITTSBURGH PA',
+},
+overwrite=True)
 
 Locations.put_item(data={
     'id': 'TENNITY',
@@ -156,3 +162,24 @@ LocationAltnames.put_item(data={
     'altname': 'HYANNIS MASS',
 },
 overwrite=True)
+
+Locations.put_item(data={
+    'id': 'PEGULA',
+    'cn': 'Pegula Ice Arena',
+}, overwrite=True)
+LocationAltnames.put_item(data={
+    'location_id': 'PEGULA',
+    'affiliation': 'NCAA-Penn State-W',
+    'altname': 'UNIVERSITY PARK PA',
+},
+overwrite=True)
+
+# Add an altname of the ID for now
+location_items = Locations.scan()
+for l_item in location_items:
+    LocationAltnames.put_item(data={
+        'location_id': l_item['id'],
+        'affiliation': l_item['affiliation'],
+        'altname': l_item['id'],
+    },
+    overwrite=True)
