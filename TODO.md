@@ -2,6 +2,7 @@ TODO
 ====
 
 ## Bugs
+* Add lxml to all BeautifulSoup calls
 
 ## Organization
 * Move util to providers.util and start modularizing

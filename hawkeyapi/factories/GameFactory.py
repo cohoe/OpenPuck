@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 from boto.dynamodb2.items import Item
+from hawkeyapi.factories import LocationFactory
+from hawkeyapi.database import LocationAltnames, Locations
 from datetime import time
 import uuid
 
@@ -186,8 +188,22 @@ class GameFactory():
         """
         Return the normalized location of this game.
         """
-        print home_sentry.location
-        print away_sentry.location
+        home_location = LocationAltnames.query_2(
+            index='AffiliationIndex',
+            affiliation__eq=home_team.id,
+            altname__eq=home_sentry.location
+        )
+        home_results = list(home_location)
+        num_home_results = len(home_results)
+        if num_home_results == 0:
+            print "HOME LOCATION '%s' NOT FOUND" % home_sentry.location
+            return
+        elif num_home_results > 1:
+            print "TOO MANY HOME LOCATIONS FOR '%s'" % home_sentry.location
+            return
+        home_loc_altname_item = home_results[0]
+        home_location_item = Locations.get_item(id=home_loc_altname_item['location_id'])
+        print home_location_item['cn']
 
     @classmethod
     def __get_partial(cls, sentry1, sentry2):

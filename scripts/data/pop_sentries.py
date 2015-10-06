@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 
-from hawkeyapi.database import Teams, ScheduleEntries, Seasons, TeamAltnames
-from hawkeyapi.factories import TeamFactory, SeasonFactory, ScheduleEntryFactory
+from hawkeyapi.database import Teams, ScheduleEntries, Seasons, TeamAltnames, Locations, LocationAltnames
+from hawkeyapi.factories import TeamFactory, SeasonFactory, ScheduleEntryFactory, LocationFactory
 import traceback
 
 team_entries = [
     #Teams.get_item(id='NCAA-Harvard-W'),
-    Teams.get_item(id='NCAA-Penn State-W'),
+    Teams.get_item(id='NCAA-Northeastern-W'),
     #Teams.get_item(id='NCAA-UConn-W'),
 ]
 
@@ -35,6 +35,7 @@ for t_db in team_entries:
     try:
         entries = t_obj.get_provider().get_schedule(s_obj)
         for e in entries:
+            # Attempt to overwrite the opponent with a team_id
             try:
                 opponent_team_items = TeamAltnames.query_2(
                     index='AltnamesGenderIndex',
@@ -51,6 +52,36 @@ for t_db in team_entries:
                 else:
                     e.opponent = results_list[0]['team_id']
             except Exception as ex:
+                print "**FAILED to rewrite oppponent"
+                print ex
+
+            # Attempt to overwrite the location with a location_id
+            try:
+                if e.site == 'home':
+                    affiliation = t_obj.id
+                elif e.site == 'away':
+                    affiliation = e.opponent
+                else:
+                    # @TODO Need to figure out without affiliation
+                    pass
+                location_items = LocationAltnames.query_2(
+                    index='AffiliationIndex',
+                    affiliation__eq=affiliation,
+                    altname__eq=e.location
+                )
+                # Really need a helper function for this.
+                results_list = list(location_items)
+                num_results = len(results_list)
+                if num_results == 0:
+                    raise Exception("No location altname found (%s)" % e.location)
+                elif num_results > 1:
+                    raise Exception("Too many location altnames found (%s)" % e.location)
+                else:
+                    e.location = results_list[0]['location_id']
+
+                print "**SUCESS: Rewrote location to '%s'" % e.location
+            except Exception as ex:
+                print "**FAILED to rewrite location"
                 print ex
             sched_entry = ScheduleEntryFactory.itemify(ScheduleEntries, e)
             sched_entry.save(overwrite=True)
