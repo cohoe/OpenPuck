@@ -42,6 +42,12 @@ Locations.put_item(data={
     'id': 'CONTE',
     'cn': 'Conte Forum',
 }, overwrite=True)
+LocationAltnames.put_item(data={
+    'location_id': 'CONTE',
+    'affiliation': 'NCAA-BC-W',
+    'altname': 'CONTE FORUM CHESTNUT HILL MASS',
+},
+overwrite=True)
 
 Locations.put_item(data={
     'id': 'MATTHEWS',
@@ -143,5 +149,10 @@ Locations.put_item(data={
 LocationAltnames.put_item(data={
     'location_id': 'HYANNIS',
     'altname': 'HYANNIS YOUTH AND COMMUNITY CENTER HYANNIS MASS',
+},
+overwrite=True)
+LocationAltnames.put_item(data={
+    'location_id': 'HYANNIS',
+    'altname': 'HYANNIS MASS',
 },
 overwrite=True)

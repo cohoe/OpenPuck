@@ -16,6 +16,7 @@ TODO
 * Test connection circuit breaker
 * Team lookup helper
 * Team home arenas and location altnames
+* onetimer to copy all altnames from mens to womens teams
 
 ### Fields
 * Teams need a timezone offset field
