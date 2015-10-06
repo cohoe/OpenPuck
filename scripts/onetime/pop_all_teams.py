@@ -150,10 +150,10 @@ Teams.put_item(data={
 	'mascot': 'Eagles',
 	'institution': 'Boston College',
 	'common_name': 'BC',
-	'provider': 'CBSInteractiveProvider',
+	'provider': 'SidearmAdaptiveProvider',
 	'is_women': False,
 	'league': 'NCAA',
-	'website': 'http://www.bceagles.com/sports/m-hockey/bc-m-hockey-body.html',
+	'website': 'http://www.bceagles.com/index.aspx?path=mhockey',
 	'home_conference': 'HEA',
 }, overwrite=True)
 Teams.put_item(data={
@@ -161,10 +161,10 @@ Teams.put_item(data={
 	'mascot': 'Eagles',
 	'institution': 'Boston College',
 	'common_name': 'BC',
-	'provider': 'CBSInteractiveProvider',
+	'provider': 'SidearmAdaptiveProvider',
 	'is_women': True,
 	'league': 'NCAA',
-	'website': 'http://www.bceagles.com/sports/w-hockey/bc-w-hockey-body.html',
+	'website': 'http://www.bceagles.com/index.aspx?path=whockey',
 	'home_conference': 'HEA',
 }, overwrite=True)
 Teams.put_item(data={

@@ -6,7 +6,7 @@ import traceback
 
 team_entries = [
     #Teams.get_item(id='NCAA-Harvard-W'),
-    Teams.get_item(id='NCAA-Northeastern-W'),
+    Teams.get_item(id='NCAA-BC-W'),
     #Teams.get_item(id='NCAA-UConn-W'),
 ]
 
