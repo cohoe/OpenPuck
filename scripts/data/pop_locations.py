@@ -173,13 +173,3 @@ LocationAltnames.put_item(data={
     'altname': 'UNIVERSITY PARK PA',
 },
 overwrite=True)
-
-# Add an altname of the ID for now
-location_items = Locations.scan()
-for l_item in location_items:
-    LocationAltnames.put_item(data={
-        'location_id': l_item['id'],
-        'affiliation': l_item['affiliation'],
-        'altname': l_item['id'],
-    },
-    overwrite=True)
