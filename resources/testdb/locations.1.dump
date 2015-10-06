@@ -1,0 +1,3 @@
+{"id": {"S": "GUTT"}, "cn": {"S": "Gutterson Field House"}}
+{"id": {"S": "POLISSENI"}, "cn": {"S": "Gene Polisseni Center"}}
+{"city": {"S": "PROVIDENCE"}, "cn": {"S": "Schneider Arena"}, "country": {"S": "USA"}, "state": {"S": "RI"}, "street": {"S": "292 HUXLEY AVE"}, "postal": {"S": "02908"}, "id": {"S": "SCHNEIDER"}}

@@ -1,0 +1,5 @@
+{"affiliation": {"S": "NCAA-Vermont-W"}, "location_id": {"S": "GUTT"}, "altname": {"S": "BURLINGTON VT"}}
+{"affiliation": {"S": "NCAA-RIT-W"}, "location_id": {"S": "POLISSENI"}, "altname": {"S": "GENE POLISSENI CENTER"}}
+{"affiliation": {"S": "NCAA-RIT-W"}, "location_id": {"S": "POLISSENI"}, "altname": {"S": "POLISSENI"}}
+{"affiliation": {"S": "NCAA-RIT-W"}, "location_id": {"S": "POLISSENI"}, "altname": {"S": "ROCHESTER NY"}}
+{"affiliation": {"S": "NCAA-Providence-W"}, "location_id": {"S": "SCHNEIDER"}, "altname": {"S": "PROVIDENCE RI"}}

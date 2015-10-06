@@ -1,0 +1,51 @@
+{"league": {"S": "NWHL"}, "team_id": {"S": "NWHL-Connecticut-W"}, "is_women": {"N": "1"}, "altname": {"S": "CONNECTICUT WHALE"}}
+{"league": {"S": "NWHL"}, "team_id": {"S": "NWHL-Connecticut-W"}, "is_women": {"N": "1"}, "altname": {"S": "NWHL-Connecticut-W"}}
+{"league": {"S": "NHL"}, "team_id": {"S": "NHL-Buffalo-M"}, "is_women": {"N": "0"}, "altname": {"S": "BUFFALO SABRES"}}
+{"league": {"S": "NHL"}, "team_id": {"S": "NHL-Buffalo-M"}, "is_women": {"N": "0"}, "altname": {"S": "NHL-Buffalo-M"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Colorado Coll-M"}, "is_women": {"N": "0"}, "altname": {"S": "COLORADO COLLEGE"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Colorado Coll-M"}, "is_women": {"N": "0"}, "altname": {"S": "NCAA-Colorado Coll-M"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-BU-W"}, "is_women": {"N": "1"}, "altname": {"S": "BOSTON UNIVERSITY"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-BU-W"}, "is_women": {"N": "1"}, "altname": {"S": "NCAA-BU-W"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Ohio State-M"}, "is_women": {"N": "0"}, "altname": {"S": "NCAA-Ohio State-M"}}
+{"team_id": {"S": "NCAA-Ohio State-M"}, "is_women": {"N": "0"}, "altname": {"S": "OHIO STATE"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Ohio State-M"}, "is_women": {"N": "0"}, "altname": {"S": "OHIO STATE UNIVERSITY"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Notre Dame-M"}, "is_women": {"N": "0"}, "altname": {"S": "NCAA-Notre Dame-M"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Notre Dame-M"}, "is_women": {"N": "0"}, "altname": {"S": "NOTRE DAME UNIVERSITY"}}
+{"league": {"S": "NHL"}, "team_id": {"S": "NHL-Rangers-M"}, "is_women": {"N": "0"}, "altname": {"S": "NEW YORK RANGERS"}}
+{"league": {"S": "NHL"}, "team_id": {"S": "NHL-Rangers-M"}, "is_women": {"N": "0"}, "altname": {"S": "NHL-Rangers-M"}}
+{"team_id": {"S": "NCAA-Mercyhurst-M"}, "is_women": {"N": "0"}, "altname": {"S": "MERCYHURST COLLEGE"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Mercyhurst-M"}, "is_women": {"N": "0"}, "altname": {"S": "MERCYHURST UNIVERSITY"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Mercyhurst-M"}, "is_women": {"N": "0"}, "altname": {"S": "NCAA-Mercyhurst-M"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-St Lawrence-M"}, "is_women": {"N": "0"}, "altname": {"S": "NCAA-St Lawrence-M"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-St Lawrence-M"}, "is_women": {"N": "0"}, "altname": {"S": "ST LAWRENCE UNIVERSITY"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-RPI-W"}, "is_women": {"N": "1"}, "altname": {"S": "NCAA-RPI-W"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-RPI-W"}, "is_women": {"N": "1"}, "altname": {"S": "RENSSELAER POLYTECHNIC INSTITUTE"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Lake Superior-M"}, "is_women": {"N": "0"}, "altname": {"S": "LAKE SUPERIOR STATE"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Lake Superior-M"}, "is_women": {"N": "0"}, "altname": {"S": "NCAA-Lake Superior-M"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Wisconsin-W"}, "is_women": {"N": "1"}, "altname": {"S": "NCAA-Wisconsin-W"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Wisconsin-W"}, "is_women": {"N": "1"}, "altname": {"S": "UNIVERSITY OF WISCONSIN"}}
+{"league": {"S": "CWHL"}, "team_id": {"S": "CWHL-Montreal-W"}, "is_women": {"N": "1"}, "altname": {"S": "CWHL-Montreal-W"}}
+{"league": {"S": "CWHL"}, "team_id": {"S": "CWHL-Montreal-W"}, "is_women": {"N": "1"}, "altname": {"S": "MONTREAL STARS"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Penn State-M"}, "is_women": {"N": "0"}, "altname": {"S": "NCAA-Penn State-M"}}
+{"team_id": {"S": "NCAA-Penn State-M"}, "is_women": {"N": "0"}, "altname": {"S": "PENN STATE"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Penn State-M"}, "is_women": {"N": "0"}, "altname": {"S": "PENN STATE UNIVERSITY"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Brown-M"}, "is_women": {"N": "0"}, "altname": {"S": "BROWN UNIVERSITY"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Brown-M"}, "is_women": {"N": "0"}, "altname": {"S": "NCAA-Brown-M"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Brown-W"}, "is_women": {"N": "1"}, "altname": {"S": "BROWN UNIVERSITY"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Brown-W"}, "is_women": {"N": "1"}, "altname": {"S": "NCAA-Brown-W"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Miami-M"}, "is_women": {"N": "0"}, "altname": {"S": "MIAMI UNIVERSITY"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Miami-M"}, "is_women": {"N": "0"}, "altname": {"S": "NCAA-Miami-M"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Huntsville-M"}, "is_women": {"N": "0"}, "altname": {"S": "NCAA-Huntsville-M"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Huntsville-M"}, "is_women": {"N": "0"}, "altname": {"S": "UNIVERSITY OF ALABAMA-HUNTSVILLE"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Minnesota St-M"}, "is_women": {"N": "0"}, "altname": {"S": "MINNESOTA STATE UNIVERSITY"}}
+{"team_id": {"S": "NCAA-Minnesota St-M"}, "is_women": {"N": "0"}, "altname": {"S": "MINNESOTA STATE UNIVERSITY MANKATO"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Minnesota St-M"}, "is_women": {"N": "0"}, "altname": {"S": "NCAA-Minnesota St-M"}}
+{"team_id": {"S": "NCAA-Mercyhurst-W"}, "is_women": {"N": "1"}, "altname": {"S": "MERCYHURST COLLEGE"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Mercyhurst-W"}, "is_women": {"N": "1"}, "altname": {"S": "MERCYHURST UNIVERSITY"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Mercyhurst-W"}, "is_women": {"N": "1"}, "altname": {"S": "NCAA-Mercyhurst-W"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Vermont-M"}, "is_women": {"N": "0"}, "altname": {"S": "NCAA-Vermont-M"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Vermont-M"}, "is_women": {"N": "0"}, "altname": {"S": "UNIVERSITY OF VERMONT"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-AIC-M"}, "is_women": {"N": "0"}, "altname": {"S": "AMERICAN INTERNATIONAL COLLEGE"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-AIC-M"}, "is_women": {"N": "0"}, "altname": {"S": "NCAA-AIC-M"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Michigan St-M"}, "is_women": {"N": "0"}, "altname": {"S": "MICHIGAN STATE UNIVERSITY"}}
+{"league": {"S": "NCAA"}, "team_id": {"S": "NCAA-Michigan St-M"}, "is_women": {"N": "0"}, "altname": {"S": "NCAA-Michigan St-M"}}
