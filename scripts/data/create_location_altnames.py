@@ -12,10 +12,20 @@ try:
 except JSONResponseError:
     print "Table 'location_altnames' does not exist."
 
-al_idx = GlobalAllIndex("AltnameIndex",
+af_idx = GlobalAllIndex("AffiliationIndex",
                         parts=[
                             HashKey("affiliation"),
                             RangeKey("altname"),
+                        ],
+                        throughput={
+                            'read': 1,
+                            'write': 1,
+                        })
+
+al_idx = GlobalAllIndex("AltnameIndex",
+                        parts=[
+                            HashKey("altname"),
+                            RangeKey("affiliation"),
                         ],
                         throughput={
                             'read': 1,
@@ -32,7 +42,8 @@ altnames_table = Table.create("location_altnames",
                                 'write': 1
                             },
                             global_indexes=[
-                                al_idx
+                                af_idx,
+                                al_idx,
                             ],
                             indexes=[
                             ],
