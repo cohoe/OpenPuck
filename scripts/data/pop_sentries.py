@@ -63,6 +63,7 @@ for t_db in team_entries:
                     affiliation = e.opponent
                 else:
                     # @TODO Need to figure out without affiliation
+                    print "**ERROR: No idea what site this is"
                     pass
                 location_items = LocationAltnames.query_2(
                     index='AffiliationIndex',
@@ -81,7 +82,7 @@ for t_db in team_entries:
 
                 print "**SUCESS: Rewrote location to '%s'" % e.location
             except Exception as ex:
-                print "**FAILED to rewrite location"
+                print "**FAILED to rewrite location for opponent '%s'" % e.opponent
                 print ex
             sched_entry = ScheduleEntryFactory.itemify(ScheduleEntries, e)
             sched_entry.save(overwrite=True)

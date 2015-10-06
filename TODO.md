@@ -3,6 +3,7 @@ TODO
 
 ## Bugs
 * Add lxml to all BeautifulSoup calls
+* Certain BC women games vs Providence arent getting tracked as home games (SidearmAdaptive)
 
 ## Organization
 * Move util to providers.util and start modularizing
