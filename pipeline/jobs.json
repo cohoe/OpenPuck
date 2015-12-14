@@ -28,6 +28,34 @@
 },
 {
     "job": {
+        "name": "SidearmLegacyProvider-Tests",
+        "scm_provider": "git",
+        "scm_url": "https://github.com/cohoe/OpenPuck.git",
+        "scm_branch": "master",
+        "shell_command": "python scripts/tests/providers/test_Provider.py --seasonids $SEASON_IDS --teamids $TEAM_IDS",
+        "parameters": [
+            {
+                "name": "SEASON_IDS",
+                "type": "string",
+                "default": "NCAA-1415-W,NCAA-1516-W",
+                "description": "A comma-seperated string of Season IDs"
+            },
+            {
+                "name": "TEAM_IDS",
+                "type": "string",
+                "default": "NCAA-RIT-W,NCAA-Clarkson-W",
+                "description": "A comma-seperated string of Team IDs"
+            }
+        ],
+        "wrappers": {
+            "inject_env_var": {
+                "file": "config/provider_test.properties"
+            }
+        }
+    }
+},
+{
+    "job": {
         "name": "SidearmAdaptiveProvider-Tests",
         "scm_provider": "git",
         "scm_url": "https://github.com/cohoe/OpenPuck.git",
@@ -44,6 +72,174 @@
                 "name": "TEAM_IDS",
                 "type": "string",
                 "default": "NCAA-Northeastern-W,NCAA-Syracuse-W",
+                "description": "A comma-seperated string of Team IDs"
+            }
+        ],
+        "wrappers": {
+            "inject_env_var": {
+                "file": "config/provider_test.properties"
+            }
+        }
+    }
+},
+{
+    "job": {
+        "name": "NeulionClassicProvider-Tests",
+        "scm_provider": "git",
+        "scm_url": "https://github.com/cohoe/OpenPuck.git",
+        "scm_branch": "master",
+        "shell_command": "python scripts/tests/providers/test_Provider.py --seasonids $SEASON_IDS --teamids $TEAM_IDS",
+        "parameters": [
+            {
+                "name": "SEASON_IDS",
+                "type": "string",
+                "default": "NCAA-1415-W,NCAA-1516-W",
+                "description": "A comma-seperated string of Season IDs"
+            },
+            {
+                "name": "TEAM_IDS",
+                "type": "string",
+                "default": "NCAA-Princeton-W",
+                "description": "A comma-seperated string of Team IDs"
+            }
+        ],
+        "wrappers": {
+            "inject_env_var": {
+                "file": "config/provider_test.properties"
+            }
+        }
+    }
+},
+{
+    "job": {
+        "name": "NeulionAdaptiveProvider-Tests",
+        "scm_provider": "git",
+        "scm_url": "https://github.com/cohoe/OpenPuck.git",
+        "scm_branch": "master",
+        "shell_command": "python scripts/tests/providers/test_Provider.py --seasonids $SEASON_IDS --teamids $TEAM_IDS",
+        "parameters": [
+            {
+                "name": "SEASON_IDS",
+                "type": "string",
+                "default": "NCAA-1415-W,NCAA-1516-W",
+                "description": "A comma-seperated string of Season IDs"
+            },
+            {
+                "name": "TEAM_IDS",
+                "type": "string",
+                "default": "NCAA-Dartmouth-W",
+                "description": "A comma-seperated string of Team IDs"
+            }
+        ],
+        "wrappers": {
+            "inject_env_var": {
+                "file": "config/provider_test.properties"
+            }
+        }
+    }
+},
+{
+    "job": {
+        "name": "PrestoMonthlyProvider-Tests",
+        "scm_provider": "git",
+        "scm_url": "https://github.com/cohoe/OpenPuck.git",
+        "scm_branch": "master",
+        "shell_command": "python scripts/tests/providers/test_Provider.py --seasonids $SEASON_IDS --teamids $TEAM_IDS",
+        "parameters": [
+            {
+                "name": "SEASON_IDS",
+                "type": "string",
+                "default": "NCAA-1415-W,NCAA-1516-W",
+                "description": "A comma-seperated string of Season IDs"
+            },
+            {
+                "name": "TEAM_IDS",
+                "type": "string",
+                "default": "NCAA-Brown-W,NCAA-Merrimack-W",
+                "description": "A comma-seperated string of Team IDs"
+            }
+        ],
+        "wrappers": {
+            "inject_env_var": {
+                "file": "config/provider_test.properties"
+            }
+        }
+    }
+},
+{
+    "job": {
+        "name": "PrestoLegacyProvider-Tests",
+        "scm_provider": "git",
+        "scm_url": "https://github.com/cohoe/OpenPuck.git",
+        "scm_branch": "master",
+        "shell_command": "python scripts/tests/providers/test_Provider.py --seasonids $SEASON_IDS --teamids $TEAM_IDS",
+        "parameters": [
+            {
+                "name": "SEASON_IDS",
+                "type": "string",
+                "default": "NCAA-1415-W,NCAA-1516-W",
+                "description": "A comma-seperated string of Season IDs"
+            },
+            {
+                "name": "TEAM_IDS",
+                "type": "string",
+                "default": "NCAA-Yale-W",
+                "description": "A comma-seperated string of Team IDs"
+            }
+        ],
+        "wrappers": {
+            "inject_env_var": {
+                "file": "config/provider_test.properties"
+            }
+        }
+    }
+},
+{
+    "job": {
+        "name": "PrestoSimpleProvider-Tests",
+        "scm_provider": "git",
+        "scm_url": "https://github.com/cohoe/OpenPuck.git",
+        "scm_branch": "master",
+        "shell_command": "python scripts/tests/providers/test_Provider.py --seasonids $SEASON_IDS --teamids $TEAM_IDS",
+        "parameters": [
+            {
+                "name": "SEASON_IDS",
+                "type": "string",
+                "default": "NCAA-1415-W,NCAA-1516-W",
+                "description": "A comma-seperated string of Season IDs"
+            },
+            {
+                "name": "TEAM_IDS",
+                "type": "string",
+                "default": "NCAA-Maine-W,NCAA-Harvard-W",
+                "description": "A comma-seperated string of Team IDs"
+            }
+        ],
+        "wrappers": {
+            "inject_env_var": {
+                "file": "config/provider_test.properties"
+            }
+        }
+    }
+},
+{
+    "job": {
+        "name": "StreamlineProvider-Tests",
+        "scm_provider": "git",
+        "scm_url": "https://github.com/cohoe/OpenPuck.git",
+        "scm_branch": "master",
+        "shell_command": "python scripts/tests/providers/test_Provider.py --seasonids $SEASON_IDS --teamids $TEAM_IDS",
+        "parameters": [
+            {
+                "name": "SEASON_IDS",
+                "type": "string",
+                "default": "NCAA-1415-W,NCAA-1516-W",
+                "description": "A comma-seperated string of Season IDs"
+            },
+            {
+                "name": "TEAM_IDS",
+                "type": "string",
+                "default": "NCAA-Bemidji-W",
                 "description": "A comma-seperated string of Team IDs"
             }
         ],

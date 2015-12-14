@@ -10,13 +10,12 @@ Some kind of application that provides hockey data in a consumable and fun way. 
 ## Providers
 * SidearmLegacy (RIT, Clarkson)
 * SidearmAdaptive (Northeastern, Syracuse, RPI)
-* NeulionLegacy (Dartmouth)
 * NeulionClassic (Princeton)
-* NeulionAdaptive (North Dakota)
+* NeulionAdaptive (North Dakota, Dartmouth)
 * PrestoMonthly (Brown, Merrimack, SHU)
 * PrestoLegacy (Yale)
 * PrestoSimple (Maine, Harvard, Yale)
-* CBSInteractive (Boston University, Wisconsin, Penn State)
+* CBSInteractive (Boston University, Wisconsin, UConn)
 * Streamline (Bemidji)
 * NWHL???
 * CWHL???

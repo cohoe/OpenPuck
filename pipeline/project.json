@@ -9,7 +9,14 @@
         "jobs": [
             "Providers-Pipeline",
             "CBSInteractiveProvider-Tests",
-            "SidearmAdaptiveProvider-Tests"
+            "SidearmAdaptiveProvider-Tests",
+            "SidearmLegacyProvider-Tests",
+            "NeulionClassicProvider-Tests",
+            "NeulionAdaptiveProvider-Tests",
+            "PrestoMonthlyProvider-Tests",
+            "PrestoLegacyProvider-Tests",
+            "PrestoSimpleProvider-Tests",
+            "StreamlineProvider-Tests"
         ],
         "views": [
             "Provider-Tests",
