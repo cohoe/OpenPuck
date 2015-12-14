@@ -43,7 +43,7 @@
             {
                 "name": "TEAM_IDS",
                 "type": "string",
-                "default": "NCAA-NU-W,NCAA-Syracuse-W",
+                "default": "NCAA-Northeastern-W,NCAA-Syracuse-W",
                 "description": "A comma-seperated string of Team IDs"
             }
         ],

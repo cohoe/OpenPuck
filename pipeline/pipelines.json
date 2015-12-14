@@ -1,0 +1,26 @@
+[{
+    "job": {
+        "name": "Providers-Pipeline",
+        "description": "Build all Pipeline jobs",
+        "job_type": "multi_project",
+        "builders": {
+            "multi_job": {
+                "phases": {
+                    "Tests": {
+                        "jobs": [
+                            {
+                                "name": "CBSInteractiveProvider-Tests",
+                                "kill_phase_on": "NEVER"
+                            },
+                            {
+                                "name": "SidearmAdaptiveProvider-Tests",
+                                "kill_phase_on": "NEVER"
+                            }
+                        ],
+                        "continue_condition": "SUCCESSFUL"
+                    }
+                }
+            }
+        }
+    }
+}]

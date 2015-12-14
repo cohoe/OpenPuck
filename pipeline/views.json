@@ -1,8 +1,16 @@
 [{
     "view": {
-        "name": "Providers",
+        "name": "Provider-Tests",
         "type": "listview",
-        "description": "Data Provider Jobs",
-        "regex": "^(.*)Provider(.*)"
+        "description": "Data Provider Test Jobs",
+        "regex": "^(.*)Provider-Tests"
+    }
+},
+{
+    "view": {
+        "name": "Pipelines",
+        "type": "listview",
+        "description": "All component pipelines",
+        "regex": "^(.*)Pipeline$"
     }
 }]
