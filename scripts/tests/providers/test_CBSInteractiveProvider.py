@@ -14,5 +14,5 @@ print team_obj.json()
 sentry_objs = team_obj.get_provider().get_schedule(season_obj)
 
 for sentry_obj in sentry_objs:
-    #print sentry_obj.json()
-    print "%s - %s" % (sentry_obj.opponent, sentry_obj.is_conference)
+    print sentry_obj.json()
+    #print "%ss" % (sentry_obj.opponent, sentry_obj.is_conference)

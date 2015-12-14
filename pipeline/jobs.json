@@ -7,7 +7,7 @@
         "shell_command": "python scripts/tests/providers/test_CBSInteractiveProvider.py",
         "wrappers": {
             "inject_env_var": {
-                "content": "PYTHONPATH=$WORKSPACE"
+                "content": "PYTHONPATH=$WORKSPACE\nSEASONIDS=NCAA-1415-W,NCAA-1516-W"
             }
         }
     }
@@ -16,12 +16,13 @@
     "job": {
         "name": "SidearmAdaptiveProvider-Tests",
         "scm_provider": "git",
-        "scm_url": "https://github.com/cohoe/OpenPuck-CI.git",
+        "scm_url": "https://github.com/cohoe/OpenPuck.git",
         "scm_branch": "master",
         "shell_command": "python scripts/tests/providers/test_SidearmAdaptiveProvider.py",
         "wrappers": {
             "inject_env_var": {
-                "content": "PYTHONPATH=$WORKSPACE"
+                //"content": "PYTHONPATH=$WORKSPACE"
+                "file": "config/provider_test.properties"
             }
         }
     }

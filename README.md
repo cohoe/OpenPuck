@@ -16,7 +16,7 @@ Some kind of application that provides hockey data in a consumable and fun way. 
 * PrestoMonthly (Brown, Merrimack, SHU)
 * PrestoLegacy (Yale)
 * PrestoSimple (Maine, Harvard, Yale)
-* CBSInteractive (Boston College, Wisconsin, Penn State)
+* CBSInteractive (Boston University, Wisconsin, Penn State)
 * Streamline (Bemidji)
 * NWHL???
 * CWHL???
