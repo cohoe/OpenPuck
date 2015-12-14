@@ -15,7 +15,7 @@
             {
                 "name": "TEAM_IDS",
                 "type": "string",
-                "default": "NCAA-BU-W,NCAA-Wisconsin-W",
+                "default": "NCAA-BU-W,NCAA-UConn-W",
                 "description": "A comma-seperated string of Team IDs"
             }
         ],
