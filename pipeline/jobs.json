@@ -127,7 +127,7 @@
             {
                 "name": "TEAM_IDS",
                 "type": "string",
-                "default": "NCAA-Canisus-M,NCAA-Omaha-M",
+                "default": "NCAA-Canisius-M,NCAA-Omaha-M",
                 "description": "A comma-seperated string of Team IDs"
             }
         ],
@@ -271,6 +271,76 @@
                 "description": "A comma-seperated string of Team IDs"
             }
         ],
+        "wrappers": {
+            "inject_env_var": {
+                "file": "config/provider_test.properties"
+            }
+        }
+    }
+},
+{
+    "job": {
+        "name": "Database-Pop-Teams",
+        "scm_provider": "git",
+        "scm_url": "https://github.com/cohoe/OpenPuck.git",
+        "scm_branch": "master",
+        "shell_command": "python scripts/population/pop_all_teams.py",
+        "wrappers": {
+            "inject_env_var": {
+                "file": "config/provider_test.properties"
+            }
+        }
+    }
+},
+{
+    "job": {
+        "name": "Database-Pop-Seasons",
+        "scm_provider": "git",
+        "scm_url": "https://github.com/cohoe/OpenPuck.git",
+        "scm_branch": "master",
+        "shell_command": "python scripts/population/pop_seasons.py",
+        "wrappers": {
+            "inject_env_var": {
+                "file": "config/provider_test.properties"
+            }
+        }
+    }
+},
+{
+    "job": {
+        "name": "Database-Pop-SeasonPhases",
+        "scm_provider": "git",
+        "scm_url": "https://github.com/cohoe/OpenPuck.git",
+        "scm_branch": "master",
+        "shell_command": "python scripts/population/pop_sphases.py",
+        "wrappers": {
+            "inject_env_var": {
+                "file": "config/provider_test.properties"
+            }
+        }
+    }
+},
+{
+    "job": {
+        "name": "Database-Pop-TeamAltnames",
+        "scm_provider": "git",
+        "scm_url": "https://github.com/cohoe/OpenPuck.git",
+        "scm_branch": "master",
+        "shell_command": "python scripts/population/pop_team_altnames.py",
+        "wrappers": {
+            "inject_env_var": {
+                "file": "config/provider_test.properties"
+            }
+        }
+    }
+},
+{
+    "job": {
+        "name": "Database-Reset",
+        "scm_provider": "git",
+        "scm_url": "https://github.com/cohoe/OpenPuck.git",
+        "scm_branch": "master",
+        "shell_command": "python scripts/population/database_reset.py",
         "wrappers": {
             "inject_env_var": {
                 "file": "config/provider_test.properties"

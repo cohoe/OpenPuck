@@ -13,4 +13,12 @@
         "description": "All component pipelines",
         "regex": "^(.*)Pipeline$"
     }
+},
+{
+    "view": {
+        "name": "Database",
+        "type": "listview",
+        "description": "All database maintenance scripts",
+        "regex": "^Database(.*)"
+    }
 }]

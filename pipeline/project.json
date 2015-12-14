@@ -17,11 +17,17 @@
             "PrestoMonthlyProvider-Tests",
             "PrestoLegacyProvider-Tests",
             "PrestoSimpleProvider-Tests",
-            "StreamlineProvider-Tests"
+            "StreamlineProvider-Tests",
+            "Database-Reset",
+            "Database-Pop-Teams",
+            "Database-Pop-Seasons",
+            "Database-Pop-SeasonPhases",
+            "Database-Pop-TeamAltnames"
         ],
         "views": [
             "Provider-Tests",
-            "Pipelines"
+            "Pipelines",
+            "Database"
         ],
         "foobar": "lolz"
     }
