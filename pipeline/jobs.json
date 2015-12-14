@@ -336,11 +336,109 @@
 },
 {
     "job": {
-        "name": "Database-Reset",
+        "name": "Database-Create-Games",
         "scm_provider": "git",
         "scm_url": "https://github.com/cohoe/OpenPuck.git",
         "scm_branch": "master",
-        "shell_command": "python scripts/population/database_reset.py",
+        "shell_command": "python scripts/database/create_games.py",
+        "wrappers": {
+            "inject_env_var": {
+                "file": "config/provider_test.properties"
+            }
+        }
+    }
+},
+{
+    "job": {
+        "name": "Database-Create-LocationAltnames",
+        "scm_provider": "git",
+        "scm_url": "https://github.com/cohoe/OpenPuck.git",
+        "scm_branch": "master",
+        "shell_command": "python scripts/database/create_location_altnames.py",
+        "wrappers": {
+            "inject_env_var": {
+                "file": "config/provider_test.properties"
+            }
+        }
+    }
+},
+{
+    "job": {
+        "name": "Database-Create-Locations",
+        "scm_provider": "git",
+        "scm_url": "https://github.com/cohoe/OpenPuck.git",
+        "scm_branch": "master",
+        "shell_command": "python scripts/database/create_locations.py",
+        "wrappers": {
+            "inject_env_var": {
+                "file": "config/provider_test.properties"
+            }
+        }
+    }
+},
+{
+    "job": {
+        "name": "Database-Create-Seasons",
+        "scm_provider": "git",
+        "scm_url": "https://github.com/cohoe/OpenPuck.git",
+        "scm_branch": "master",
+        "shell_command": "python scripts/database/create_seasons.py",
+        "wrappers": {
+            "inject_env_var": {
+                "file": "config/provider_test.properties"
+            }
+        }
+    }
+},
+{
+    "job": {
+        "name": "Database-Create-SeasonPhases",
+        "scm_provider": "git",
+        "scm_url": "https://github.com/cohoe/OpenPuck.git",
+        "scm_branch": "master",
+        "shell_command": "python scripts/database/create_sphases.py",
+        "wrappers": {
+            "inject_env_var": {
+                "file": "config/provider_test.properties"
+            }
+        }
+    }
+},
+{
+    "job": {
+        "name": "Database-Create-ScheduleEntries",
+        "scm_provider": "git",
+        "scm_url": "https://github.com/cohoe/OpenPuck.git",
+        "scm_branch": "master",
+        "shell_command": "python scripts/database/create_sentries.py",
+        "wrappers": {
+            "inject_env_var": {
+                "file": "config/provider_test.properties"
+            }
+        }
+    }
+},
+{
+    "job": {
+        "name": "Database-Create-TeamAltnames",
+        "scm_provider": "git",
+        "scm_url": "https://github.com/cohoe/OpenPuck.git",
+        "scm_branch": "master",
+        "shell_command": "python scripts/database/create_team_altnames.py",
+        "wrappers": {
+            "inject_env_var": {
+                "file": "config/provider_test.properties"
+            }
+        }
+    }
+},
+{
+    "job": {
+        "name": "Database-Create-Teams",
+        "scm_provider": "git",
+        "scm_url": "https://github.com/cohoe/OpenPuck.git",
+        "scm_branch": "master",
+        "shell_command": "python scripts/database/create_teams.py",
         "wrappers": {
             "inject_env_var": {
                 "file": "config/provider_test.properties"

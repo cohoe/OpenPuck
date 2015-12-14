@@ -23,7 +23,15 @@
             "Data-Pop-Seasons",
             "Data-Pop-SeasonPhases",
             "Data-Pop-TeamAltnames",
-            "Database-Reset"
+            "Database-Rebuild-Pipeline",
+            "Database-Create-Games",
+            "Database-Create-LocationAltnames",
+            "Database-Create-Locations",
+            "Database-Create-Seasons",
+            "Database-Create-ScheduleEntries",
+            "Database-Create-SeasonPhases",
+            "Database-Create-TeamAltnames",
+            "Database-Create-Teams"
         ],
         "views": [
             "Provider-Tests",

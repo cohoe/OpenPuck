@@ -89,4 +89,50 @@
             }
         }
     }
+},
+{
+    "job": {
+        "name": "Database-Rebuild-Pipeline",
+        "description": "Rebuild the database by calling all creation scripts",
+        "job_type": "multi_project",
+        "builders": {
+            "multi_job": {
+                "phases": {
+                    "Tests": {
+                        "jobs": [
+                            {
+                                "name": "Database-Create-Games",
+                                "kill_phase_on": "NEVER"
+                            },
+                            {
+                                "name": "Database-Create-LocationAltnames",
+                                "kill_phase_on": "NEVER"
+                            },
+                            {
+                                "name": "Database-Create-Locations",
+                                "kill_phase_on": "NEVER"
+                            },
+                            {
+                                "name": "Database-Create-Seasons",
+                                "kill_phase_on": "NEVER"
+                            },
+                            {
+                                "name": "Database-Create-ScheduleEntries",
+                                "kill_phase_on": "NEVER"
+                            },
+                            {
+                                "name": "Database-Create-TeamAltnames",
+                                "kill_phase_on": "NEVER"
+                            },
+                            {
+                                "name": "Database-Create-Teams",
+                                "kill_phase_on": "NEVER"
+                            }
+                        ],
+                        "continue_condition": "SUCCESSFUL"
+                    }
+                }
+            }
+        }
+    }
 }]
