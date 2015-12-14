@@ -16,9 +16,17 @@
 },
 {
     "view": {
+        "name": "Data-Population",
+        "type": "listview",
+        "description": "All data population scripts",
+        "regex": "^Data-Pop(.*)"
+    }
+},
+{
+    "view": {
         "name": "Database",
         "type": "listview",
-        "description": "All database maintenance scripts",
+        "description": "All database management scripts",
         "regex": "^Database(.*)"
     }
 }]

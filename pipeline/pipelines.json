@@ -1,6 +1,6 @@
 [{
     "job": {
-        "name": "Providers-Pipeline",
+        "name": "Provider-Tests-Pipeline",
         "description": "Build all Pipeline jobs",
         "job_type": "multi_project",
         "builders": {
@@ -46,6 +46,40 @@
                             },
                             {
                                 "name": "StreamlineProvider-Tests",
+                                "kill_phase_on": "NEVER"
+                            }
+                        ],
+                        "continue_condition": "SUCCESSFUL"
+                    }
+                }
+            }
+        }
+    }
+},
+{
+    "job": {
+        "name": "Data-Population-Pipeline",
+        "description": "Build all data population jobs",
+        "job_type": "multi_project",
+        "builders": {
+            "multi_job": {
+                "phases": {
+                    "Tests": {
+                        "jobs": [
+                            {
+                                "name": "Data-Pop-Seasons",
+                                "kill_phase_on": "NEVER"
+                            },
+                            {
+                                "name": "Data-Pop-SeasonPhases",
+                                "kill_phase_on": "NEVER"
+                            },
+                            {
+                                "name": "Data-Pop-TeamAltnames",
+                                "kill_phase_on": "NEVER"
+                            },
+                            {
+                                "name": "Data-Pop-Teams",
                                 "kill_phase_on": "NEVER"
                             }
                         ],

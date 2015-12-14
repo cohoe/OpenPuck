@@ -280,11 +280,11 @@
 },
 {
     "job": {
-        "name": "Database-Pop-Teams",
+        "name": "Data-Pop-Teams",
         "scm_provider": "git",
         "scm_url": "https://github.com/cohoe/OpenPuck.git",
         "scm_branch": "master",
-        "shell_command": "python scripts/population/pop_all_teams.py",
+        "shell_command": "python scripts/population/pop_teams.py",
         "wrappers": {
             "inject_env_var": {
                 "file": "config/provider_test.properties"
@@ -294,7 +294,7 @@
 },
 {
     "job": {
-        "name": "Database-Pop-Seasons",
+        "name": "Data-Pop-Seasons",
         "scm_provider": "git",
         "scm_url": "https://github.com/cohoe/OpenPuck.git",
         "scm_branch": "master",
@@ -308,7 +308,7 @@
 },
 {
     "job": {
-        "name": "Database-Pop-SeasonPhases",
+        "name": "Data-Pop-SeasonPhases",
         "scm_provider": "git",
         "scm_url": "https://github.com/cohoe/OpenPuck.git",
         "scm_branch": "master",
@@ -322,7 +322,7 @@
 },
 {
     "job": {
-        "name": "Database-Pop-TeamAltnames",
+        "name": "Data-Pop-TeamAltnames",
         "scm_provider": "git",
         "scm_url": "https://github.com/cohoe/OpenPuck.git",
         "scm_branch": "master",

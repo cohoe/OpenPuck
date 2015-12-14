@@ -34,3 +34,8 @@ TODO
 * Schedule publish date
 * Box-score posting to notifications
 * Subscribe to updates and live notifications of things
+
+## CI
+* Database delete script
+* Database-Populate-Basic
+* Database-Rebuild

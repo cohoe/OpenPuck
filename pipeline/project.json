@@ -7,7 +7,7 @@
     "project": {
         "name": "OpenPuck Providers",
         "jobs": [
-            "Providers-Pipeline",
+            "Provider-Tests-Pipeline",
             "CBSInteractiveProvider-Tests",
             "SidearmAdaptiveProvider-Tests",
             "SidearmLegacyProvider-Tests",
@@ -18,17 +18,18 @@
             "PrestoLegacyProvider-Tests",
             "PrestoSimpleProvider-Tests",
             "StreamlineProvider-Tests",
-            "Database-Reset",
-            "Database-Pop-Teams",
-            "Database-Pop-Seasons",
-            "Database-Pop-SeasonPhases",
-            "Database-Pop-TeamAltnames"
+            "Data-Population-Pipeline",
+            "Data-Pop-Teams",
+            "Data-Pop-Seasons",
+            "Data-Pop-SeasonPhases",
+            "Data-Pop-TeamAltnames",
+            "Database-Reset"
         ],
         "views": [
             "Provider-Tests",
             "Pipelines",
+            "Data-Population",
             "Database"
-        ],
-        "foobar": "lolz"
+        ]
     }
 }]
