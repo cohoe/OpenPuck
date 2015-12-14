@@ -19,8 +19,8 @@ for season_id in args.seasonids.split(','):
         team_item = Teams.get_item(id=team_id)
         team_obj = TeamFactory.objectify(team_item)
 
+        print season_obj.json()
         print team_obj.json()
-
         sentry_objs = team_obj.get_provider().get_schedule(season_obj)
 
         for sentry_obj in sentry_objs:
