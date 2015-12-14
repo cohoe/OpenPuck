@@ -15,34 +15,6 @@
                             {
                                 "name": "SidearmAdaptiveProvider-Tests",
                                 "kill_phase_on": "NEVER"
-                            },
-                            {
-                                "name": "SidearmLegacyProvider-Tests",
-                                "kill_phase_on": "NEVER"
-                            },
-                            {
-                                "name": "NeulionClassicProvider-Tests",
-                                "kill_phase_on": "NEVER"
-                            },
-                            {
-                                "name": "NeulionAdaptiveProvider-Tests",
-                                "kill_phase_on": "NEVER"
-                            },
-                            {
-                                "name": "PrestoMonthlyProvider-Tests",
-                                "kill_phase_on": "NEVER"
-                            },
-                            {
-                                "name": "PrestoSimpleProvider-Tests",
-                                "kill_phase_on": "NEVER"
-                            },
-                            {
-                                "name": "PrestoLegacyProvider-Tests",
-                                "kill_phase_on": "NEVER"
-                            },
-                            {
-                                "name": "StreamlineProvider-Tests",
-                                "kill_phase_on": "NEVER"
                             }
                         ],
                         "continue_condition": "SUCCESSFUL"

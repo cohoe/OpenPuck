@@ -29,6 +29,8 @@ class Team(HawkeyApiObject):
             return hawkeyapi.providers.NeulionAdaptiveProvider(self)
         if self.provider == "NeulionClassicProvider":
             return hawkeyapi.providers.NeulionClassicProvider(self)
+        if self.provider == "NeulionLegacyProvider":
+            return hawkeyapi.providers.NeulionLegacyProvider(self)
         if self.provider == "PrestoLegacyProvider":
             return hawkeyapi.providers.PrestoLegacyProvider(self)
         if self.provider == "PrestoMonthlyProvider":
