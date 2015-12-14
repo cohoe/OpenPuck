@@ -11,6 +11,7 @@ TODO
 ## Data Integrity
 * Going to need a validator at some point for things like seasonphase dates
 * Sanity check for number of total games, number of conference games, etc.
+* Stop rewriting location and opponent information. Keep it raw until game building.
 
 ## Features
 * If provider provides tournament info, get that
@@ -34,8 +35,3 @@ TODO
 * Schedule publish date
 * Box-score posting to notifications
 * Subscribe to updates and live notifications of things
-
-## CI
-* Database delete script
-* Database-Populate-Basic
-* Database-Rebuild
