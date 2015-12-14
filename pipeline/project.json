@@ -1,0 +1,18 @@
+[{
+    "defaults": {
+        "description": "Do not edit in web!"
+    }
+},
+{
+    "project": {
+        "name": "OpenPuck Providers",
+        "jobs": [
+            "CBSInteractiveProvider-Tests",
+            "SidearmAdaptiveProvider-Tests"
+        ],
+        "views": [
+            "Providers"
+        ],
+        "foobar": "lolz"
+    }
+}]

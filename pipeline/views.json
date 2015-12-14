@@ -1,0 +1,8 @@
+[{
+    "view": {
+        "name": "Providers",
+        "type": "listview",
+        "description": "Data Provider Jobs",
+        "regex": "^(.*)Provider(.*)"
+    }
+}]

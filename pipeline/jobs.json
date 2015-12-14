@@ -1,0 +1,28 @@
+[{
+    "job": {
+        "name": "CBSInteractiveProvider-Tests",
+        "scm_provider": "git",
+        "scm_url": "https://github.com/cohoe/OpenPuck.git",
+        "scm_branch": "master",
+        "shell_command": "python scripts/tests/providers/test_CBSInteractiveProvider.py",
+        "wrappers": {
+            "inject_env_var": {
+                "content": "PYTHONPATH=$WORKSPACE"
+            }
+        }
+    }
+},
+{
+    "job": {
+        "name": "SidearmAdaptiveProvider-Tests",
+        "scm_provider": "git",
+        "scm_url": "https://github.com/cohoe/OpenPuck-CI.git",
+        "scm_branch": "master",
+        "shell_command": "python scripts/tests/providers/test_SidearmAdaptiveProvider.py",
+        "wrappers": {
+            "inject_env_var": {
+                "content": "PYTHONPATH=$WORKSPACE"
+            }
+        }
+    }
+}]
