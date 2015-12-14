@@ -11,6 +11,7 @@ Some kind of application that provides hockey data in a consumable and fun way. 
 * SidearmLegacy (RIT, Clarkson)
 * SidearmAdaptive (Northeastern, Syracuse, RPI)
 * NeulionClassic (Princeton)
+* NeulionLegacy (Canisius, Omaha)
 * NeulionAdaptive (North Dakota, Dartmouth)
 * PrestoMonthly (Brown, Merrimack, SHU)
 * PrestoLegacy (Yale)

@@ -25,6 +25,10 @@
                                 "kill_phase_on": "NEVER"
                             },
                             {
+                                "name": "NeulionLegacyProvider-Tests",
+                                "kill_phase_on": "NEVER"
+                            },
+                            {
                                 "name": "NeulionAdaptiveProvider-Tests",
                                 "kill_phase_on": "NEVER"
                             },

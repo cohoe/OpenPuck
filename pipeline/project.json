@@ -12,6 +12,7 @@
             "SidearmAdaptiveProvider-Tests",
             "SidearmLegacyProvider-Tests",
             "NeulionClassicProvider-Tests",
+            "NeulionLegacyProvider-Tests",
             "NeulionAdaptiveProvider-Tests",
             "PrestoMonthlyProvider-Tests",
             "PrestoLegacyProvider-Tests",
