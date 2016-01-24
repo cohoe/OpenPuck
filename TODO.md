@@ -35,3 +35,4 @@ TODO
 * Schedule publish date
 * Box-score posting to notifications
 * Subscribe to updates and live notifications of things
+* Map of team travel history
