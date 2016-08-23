@@ -1,6 +1,0 @@
-{"city": {"S": "ORONO"}, "cn": {"S": "Alfond Arena"}, "country": {"S": "USA"}, "state": {"S": "ME"}, "street": {"S": "TUNK RD"}, "postal": {"S": "04473"}, "id": {"S": "ALFOND"}}
-{"id": {"S": "BRIGHT"}, "cn": {"S": "Bright-Landry Hockey Center"}}
-{"id": {"S": "CONTE"}, "cn": {"S": "Conte Forum"}}
-{"id": {"S": "HURST"}, "cn": {"S": "Mercyhurst Ice Center"}}
-{"city": {"S": "BOSTON"}, "cn": {"S": "Walter Brown Arena"}, "country": {"S": "USA"}, "state": {"S": "MA"}, "street": {"S": "285 BABCOCK ST"}, "postal": {"S": "02215"}, "id": {"S": "WALTER BROWN ARENA"}}
-{"id": {"S": "HYANNIS"}, "cn": {"S": "Hyannis Youth and Community Center"}}
