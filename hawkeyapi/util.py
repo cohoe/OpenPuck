@@ -80,3 +80,12 @@ def get_time_from_string(string):
     string = re.sub(r'\(.*\)', '', string)
 
     return dateutil.parser.parse(string).time()
+
+
+def get_soup_from_content(content):
+    """
+    Return a BeautifulSoup object for given HTML content.
+    :param content: A very long string of HTML content.
+    :return: A BeautifulSoup object.
+    """
+    return BeautifulSoup(content, "lxml")
