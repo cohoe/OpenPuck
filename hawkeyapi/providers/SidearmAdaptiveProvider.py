@@ -36,7 +36,7 @@ class SidearmAdaptiveProvider(Provider):
         Return a list of JSON objects of the schedule.
         """
         url = self.get_schedule_url_for_season(season)
-        soup = BeautifulSoup(get_html_from_url(url))
+        soup = get_soup_from_content(get_html_from_url(url))
 
         games = []
         game_entries = self.get_game_entries(soup)
@@ -160,12 +160,11 @@ class SidearmAdaptiveProvider(Provider):
         """
         Return the full URL of the schedule for a given season.
         """
-        soup = BeautifulSoup(self.get_schedule_from_web())
+        soup = get_soup_from_content(self.get_schedule_from_web())
         sched_select = soup.find(id='ctl00_cplhMainContent_ddlPastschedules2')
 
         # 20150911 They made some of the dropdowns have full years. Ugh.
         # AND THEY MIX THEM IN THE SAME SCHOOL!!!
-        test_option = sched_select.find('option')
         for option in sched_select.find_all('option'):
             text = option.text.strip()
             if len(text) == 9:
