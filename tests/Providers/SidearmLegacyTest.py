@@ -39,3 +39,5 @@ for teamObj in teams:
     scheduleList = teamObj.get_provider().get_schedule(seasonObj)
     for game in scheduleList:
         print game
+
+    print "Total: %d" % len(scheduleList)

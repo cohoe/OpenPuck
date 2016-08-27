@@ -30,7 +30,7 @@ class StreamlineProvider(Provider):
         Return a list of JSON objects of the schedule.
         """
         url = self.get_schedule_url_for_season(season)
-        soup = BeautifulSoup(get_html_from_url(url))
+        soup = get_soup_from_content(get_html_from_url(url))
 
         games = []
         game_entries = self.get_game_entries(soup)
@@ -64,7 +64,7 @@ class StreamlineProvider(Provider):
         """
         Return a list of elements containing games. Usually divs or rows.
         """
-        schedule_table = soup.find('table', class_='list')
+        schedule_table = soup.find('table', class_='schedule')
         headers = [header.text.upper().strip() for header in schedule_table.tr.find_all('th')]
         headers = self.get_clean_headers(headers)
 
