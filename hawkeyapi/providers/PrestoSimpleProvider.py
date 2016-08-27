@@ -34,7 +34,7 @@ class PrestoSimpleProvider(Provider):
         Return a list of JSON objects of the schedule.
         """
         url = self.get_schedule_url_for_season(season)
-        soup = BeautifulSoup(get_html_from_url(url))
+        soup = get_soup_from_content(get_html_from_url(url))
 
         games = []
         game_entries = self.get_game_entries(soup)
@@ -93,7 +93,6 @@ class PrestoSimpleProvider(Provider):
 
         # Flush the last bits of game we have
         games.append(game)
-
         return games
 
     def get_game_site(self, game):
@@ -146,9 +145,12 @@ class PrestoSimpleProvider(Provider):
         """
         Return a time object of the games start time.
         """
-        col_index = 4
+        # Games can be multiple rows. Figure out where the field is based
+        # on what we've see from various instances.
+        # @TODO: This needs to be fully tested
+        col_index = 3
         if len(game) >= 2:
-            col_index = 3
+            col_index = 4
         time_string = game[0].find_all('td')[col_index].text.strip().upper()
         if re.search(r'[a-zA-Z]{3,}', time_string):
             time_string = "12:00 AM"
