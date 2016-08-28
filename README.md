@@ -10,7 +10,7 @@ Some kind of application that provides hockey data in a consumable and fun way. 
 ## Providers
 * SidearmLegacy (RIT, Clarkson)
 * SidearmAdaptive (Northeastern, Syracuse, RPI)
-* SidearmResponsive (Maine, Princeton) **NEW**
+* SidearmResponsive (Maine, Princeton)
 * NeulionLegacy (Canisius, Anchorage)
 * NeulionAdaptive (North Dakota, Dartmouth)
 * NeulionClassic (Omaha)
@@ -28,6 +28,6 @@ Some kind of application that provides hockey data in a consumable and fun way. 
 * CBSi: For having one 4-character month ("Sept") and the rest 3.
 * RIT: For not marking their exhibition games
 * Neulion (and all who use it): For having the grossest URL structure
-* Dartmouth: For using the oldest grossest Neulion application ever
-* Bemidji: For being the only one to use a different technology
+* Omaha: For using the oldest grossest Neulion application ever
+* Bemidji: For being the only one to use a different vendor
 * Yale: For bastardizing their site to require its own provider
