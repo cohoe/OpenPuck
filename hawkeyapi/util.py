@@ -43,8 +43,11 @@ def get_date_from_string(string, years):
     if "-" in string:
         string = string.split("-")[0].strip()
 
+    # Cut out any () extra crap
+    string = re.sub(r'\((.*)\)', '', string)
+
     if re.search(r'[a-zA-Z]{3,}', string):
-        if re.search(r'SEP|OCT|NOV|DEC', string):
+        if re.search(r'SEP|OCT|NOV|DEC|JAN|FEB|MAR', string):
             string = string + " %i" % years[0]
         else:
             string = string + " %i" % years[1]
