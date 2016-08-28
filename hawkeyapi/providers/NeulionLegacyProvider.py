@@ -19,7 +19,7 @@ class NeulionLegacyProvider(Provider):
         Set our URLs so we can reference them later.
         """
         url_obj = urlparse(index_url)
-        soup = BeautifulSoup(get_html_from_url(index_url))
+        soup = get_soup_from_content(get_html_from_url(index_url))
 
         # @TODO: There has to be a better way to do this....
         sched_opts = ["Schedules/Results", "Schedule & Results", "Schedule/Results", "Schedule"]
@@ -34,7 +34,7 @@ class NeulionLegacyProvider(Provider):
         Return a list of JSON objects of the schedule.
         """
         url = self.get_schedule_url_for_season(season)
-        soup = BeautifulSoup(get_html_from_url(url))
+        soup = get_soup_from_content(get_html_from_url(url))
 
         game_entries = self.get_game_entries(soup)
         games = []
@@ -68,13 +68,15 @@ class NeulionLegacyProvider(Provider):
         """
         Return a list of elements containing games. Usually divs or rows.
         """
-        schedule_table = soup.find('table', class_="ScheduleTable")
+        schedule_table = soup.find(id="schedule-table")
         headers = [header.text.upper().strip() for header in schedule_table.find_all('th')]
+        headers.append("SITE")
         results = []
         for row in schedule_table.find_all('tr'):
             game = {}
             for i, cell in enumerate(row.find_all('td')):
                 game[headers[i]] = cell
+            game["SITE"] = row.attrs['class']
             if game and len(game.keys()) == len(headers):
                 results.append(game)
         return results
@@ -89,12 +91,12 @@ class NeulionLegacyProvider(Provider):
         """
         Return a normalized string of the games site classification.
         """
-        if "highlight" in game['OPPONENT'].font['class']:
+        if "home" in game['SITE']:
             return self.get_normalized_site("home")
-        elif "sm" in game['OPPONENT'].font['class']:
-            return self.get_normalized_site("away")
+        elif "sm" in game['SITE']:
+            return self.get_normalized_site("unknown")
         else:
-            return self.get_noramlized_site("unknown")
+            return self.get_normalized_site("away")
 
     def get_game_opponent(self, game):
         """
@@ -108,7 +110,7 @@ class NeulionLegacyProvider(Provider):
         """
         media_urls = {}
 
-        media_element = game['MEDIA']
+        media_element = game['WATCH']
         for link in media_element.find_all('a'):
             link_text = link.text.strip()
             # @TODO This is somewhat institution specific. Likely

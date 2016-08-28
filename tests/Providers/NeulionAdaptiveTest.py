@@ -5,8 +5,9 @@ from hawkeyapi.objects import Season, Team
 # Define the provider and URLs to test
 PROVIDER = 'NeulionAdaptiveProvider'
 TEST_URLS = [
-    'http://www.dartmouthsports.com/SportSelect.dbml?SPID=4726&SPSID=48905',
-    'http://www.undsports.com/SportSelect.dbml?SPID=6403'
+    #'http://www.dartmouthsports.com/SportSelect.dbml?SPID=4726&SPSID=48905',
+    #'http://www.undsports.com/SportSelect.dbml?SPID=6403',
+    'http://www.goholycross.com/SportSelect.dbml?SPID=157211&SPSID=917313'
 ]
 
 # Create a fake season object to hand to the provider for data

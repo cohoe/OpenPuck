@@ -3,10 +3,10 @@
 from hawkeyapi.objects import Season, Team
 
 # Define the provider and URLs to test
-PROVIDER = 'SidearmLegacyProvider'
+PROVIDER = 'NeulionLegacyProvider'
 TEST_URLS = [
-    #'http://www.clarksonathletics.com/index.aspx?path=whock',
-    'http://rmucolonials.com/schedule.aspx?path=mhockey'
+    'http://www.gogriffs.com/SportSelect.dbml?SPID=12001',
+    'http://www.goseawolves.com/SportSelect.dbml?SPID=6373'
 ]
 
 # Create a fake season object to hand to the provider for data
