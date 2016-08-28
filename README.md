@@ -13,7 +13,7 @@ Some kind of application that provides hockey data in a consumable and fun way. 
 * SidearmResponsive (Maine, Princeton) **NEW**
 * NeulionLegacy (Canisius, Anchorage)
 * NeulionAdaptive (North Dakota, Dartmouth)
-* NeulionClassic (Omaha) **RESTORED**
+* NeulionClassic (Omaha)
 * PrestoMonthly (Brown, Merrimack, SHU)
 * PrestoLegacy (Yale)
 * PrestoSimple (Maine, Harvard, Yale)
