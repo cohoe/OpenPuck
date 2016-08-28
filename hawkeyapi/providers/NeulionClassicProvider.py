@@ -19,7 +19,7 @@ class NeulionClassicProvider(Provider):
         Set our URLs so we can reference them later.
         """
         url_obj = urlparse(index_url)
-        soup = BeautifulSoup(get_html_from_url(index_url))
+        soup = get_soup_from_content(get_html_from_url(index_url))
 
         sched_element = soup.find(id='section-menu').find('a', text=["SCHEDULE", "Schedule"])
         self.urls = {
@@ -32,7 +32,7 @@ class NeulionClassicProvider(Provider):
         Return a list of JSON objects of the schedule.
         """
         url = self.get_schedule_url_for_season(season)
-        soup = BeautifulSoup(get_html_from_url(url))
+        soup = get_soup_from_content(get_html_from_url(url))
 
         game_entries = self.get_game_entries(soup)
         games = []
@@ -66,18 +66,17 @@ class NeulionClassicProvider(Provider):
         """
         Return a list of elements containing games. Usually divs or rows.
         """
-        schedule_table = soup.find(id="schedule-table")
+        schedule_table = soup.find('table', class_="ScheduleTable")
         headers = [header.text.upper().strip() for header in schedule_table.find_all('th')]
         results = []
         for row in schedule_table.find_all('tr'):
+            # All rows are in the schedule table
+            if len(row.find_all('td')) < len(headers):
+                continue
             game = {}
             for i, cell in enumerate(row.find_all('td')):
                 game[headers[i]] = cell
 
-            if "tournament-head" in row['class'] or "tournament-end" in row['class']:
-                continue
-
-            game['CLASS'] = row['class']
             results.append(game)
         return results
 
@@ -91,12 +90,12 @@ class NeulionClassicProvider(Provider):
         """
         Return a normalized string of the games site classification.
         """
-        if "home" in game['CLASS']:
+        if "highlight" in game['OPPONENT'].font['class']:
             return self.get_normalized_site("home")
-        elif "tournament" in game['CLASS']:
-            return self.get_normalized_site("neutral")
-        else:
+        elif "sm" in game['OPPONENT'].font['class']:
             return self.get_normalized_site("away")
+        else:
+            return self.get_noramlized_site("unknown")
 
     def get_game_opponent(self, game):
         """

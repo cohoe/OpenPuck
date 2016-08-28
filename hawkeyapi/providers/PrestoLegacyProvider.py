@@ -34,7 +34,7 @@ class PrestoLegacyProvider(Provider):
         Return a list of JSON objects of the schedule.
         """
         url = self.get_schedule_url_for_season(season)
-        soup = BeautifulSoup(get_html_from_url(url))
+        soup = get_soup_from_content(get_html_from_url(url))
 
         games = []
         game_entries = self.get_game_entries(soup)

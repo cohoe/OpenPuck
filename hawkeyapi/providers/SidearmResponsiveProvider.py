@@ -3,7 +3,7 @@
 from Provider import *
 
 
-class SidearmAdaptiveProvider(Provider):
+class SidearmResponsiveProvider(Provider):
     def __init__(self, team):
         """
         Constructor
@@ -43,7 +43,7 @@ class SidearmAdaptiveProvider(Provider):
 
         for game in game_entries:
             # Game ID
-            game_id = game['id'].split('_')[-1]
+            game_id = game['data-game-id']
             # Location
             location = self.get_game_location(game)
             # Site
@@ -69,20 +69,14 @@ class SidearmAdaptiveProvider(Provider):
         """
         Return a list of elements containing games. Usually divs or rows.
         """
-        return soup.find_all('div', class_='schedule_game')
+        return soup.find_all('li', class_='sidearm-schedule-game')
 
     def get_game_location(self, game):
         """
         Return a normalized string of the games location.
         """
-        facility_element = game.find('div', class_='schedule_game_facility')
-        location_element = game.find('div', class_='schedule_game_location')
-        facility = ""
-        if facility_element:
-            facility = self.get_normalized_location(facility_element.text)
+        location_element = game.find('div', class_='sidearm-schedule-game-location')
         location = self.get_normalized_location(location_element.text)
-        location = ' '.join([facility, location])
-        location = location.lstrip()
         return location
 
     def get_game_site(self, game):
@@ -90,11 +84,14 @@ class SidearmAdaptiveProvider(Provider):
         Return a normalized string of the games site
         classification (home, away, neutral)
         """
-        parent_class = game['class'][1:2][0]
-        if parent_class == "" or not parent_class:
-            parent_class = "home"
+        site = "unknown"
 
-        return self.get_normalized_site(parent_class)
+        if bool(game.find('span', class_='sidearm-schedule-game-home')) is True:
+            site = "home"
+        elif bool(game.find('span', class_='sidearm-schedule-game-away')) is True:
+            site = "away"
+
+        return self.get_normalized_site(site)
 
     def get_game_opponent(self, game):
         """
@@ -102,7 +99,7 @@ class SidearmAdaptiveProvider(Provider):
         """
         site = self.get_game_site(game)
 
-        opp_element = game.find('div', class_='schedule_game_opponent_name')
+        opp_element = game.find('span', class_='sidearm-schedule-game-opponent-name')
         opponent = opp_element.text
 
         return self.get_normalized_opponent(opponent)
@@ -134,7 +131,7 @@ class SidearmAdaptiveProvider(Provider):
         Return a date object of the games start time. Note that it will
         have no time so it needs to be paired with a game_time object.
         """
-        date_element = game.find('div', class_='schedule_game_opponent_date')
+        date_element = game.find('div', class_='sidearm-schedule-game-opponent-date').find_all('span')[0]
         date_string = date_element.text.upper().strip()
 
         return get_date_from_string(date_string, years)
@@ -145,7 +142,7 @@ class SidearmAdaptiveProvider(Provider):
         have todays date so it needs to be combined with a game_date
         object.
         """
-        t_element = game.find('div', class_='schedule_game_opponent_time')
+        t_element = game.find('div', class_='sidearm-schedule-game-opponent-date').find_all('span')[1]
         time_string = t_element.text.strip()
         return get_time_from_string(time_string)
 
@@ -153,7 +150,7 @@ class SidearmAdaptiveProvider(Provider):
         """
         Return if this is a conference game or not
         """
-        element = game.find('div', class_='schedule_games_conference')
+        element = game.find('span', class_='sidearm-schedule-game-conference')
         return bool(element)
 
     def get_schedule_url_for_season(self, season):
@@ -161,10 +158,7 @@ class SidearmAdaptiveProvider(Provider):
         Return the full URL of the schedule for a given season.
         """
         soup = get_soup_from_content(self.get_schedule_from_web())
-        sched_select = soup.find(id='ctl00_cplhMainContent_ddlPastschedules2')
-
-        # 20150911 They made some of the dropdowns have full years. Ugh.
-        # AND THEY MIX THEM IN THE SAME SCHOOL!!!
+        sched_select = soup.find(id='ctl00_cplhMainContent_ddl_past_schedules')
         for option in sched_select.find_all('option'):
             text = option.text.strip()
             if len(text) == 9:

@@ -41,7 +41,7 @@ class CBSInteractiveProvider(Provider):
         Return a list of JSON objects of the schedule.
         """
         url = self.get_schedule_url_for_season(season)
-        soup = BeautifulSoup(get_html_from_url(url))
+        soup = get_soup_from_content(get_html_from_url(url))
 
         game_entries = self.get_game_entries(soup)
         games = []
@@ -93,13 +93,8 @@ class CBSInteractiveProvider(Provider):
         """
         game_entries = []
 
-        for row in soup.find(id='schedtable').find_all('tr'):
-            cells = row.find_all('td')
-            try:
-                if cells[0]['class'][0] == "row-text":
-                    game_entries.append(row)
-            except KeyError:
-                continue
+        for row in soup.find_all('tr', class_='event-listing'):
+            game_entries.append(row)
 
         return game_entries
 
@@ -194,7 +189,7 @@ class CBSInteractiveProvider(Provider):
         Return the detail schedule information for a game.
         """
         game_url = self.urls['event_data'] + "%i/%s.xml" % (year, game_id)
-        return BeautifulSoup(get_html_from_url(game_url))
+        return get_soup_from_content(get_html_from_url(game_url))
 
     def get_game_conference(self, game):
         """

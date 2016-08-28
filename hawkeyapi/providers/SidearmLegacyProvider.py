@@ -36,7 +36,7 @@ class SidearmLegacyProvider(Provider):
         Return a list of objects of the schedule.
         """
         url = self.get_schedule_url_for_season(season)
-        soup = BeautifulSoup(get_html_from_url(url))
+        soup = get_soup_from_content(get_html_from_url(url))
 
         games = []
         game_entries = self.get_game_entries(soup)
@@ -89,7 +89,9 @@ class SidearmLegacyProvider(Provider):
 
             game['CLASS'] = row['class']
             game['ID'] = row['id']
-            games.append(game)
+            # Sometimes they don't put the time in for conf/natty games.
+            if game['TIMERESULT'].text.strip() != "":
+                games.append(game)
 
         return games
 
@@ -126,7 +128,7 @@ class SidearmLegacyProvider(Provider):
         """
         links_url = self.urls['schedule_detail'] + "?id=%i" % game_id
         html = get_html_from_url(links_url)
-        soup = BeautifulSoup(html)
+        soup = get_soup_from_content(html)
 
         return soup
 
@@ -170,7 +172,7 @@ class SidearmLegacyProvider(Provider):
         """
         Return the full URL of the schedule for a given season.
         """
-        soup = BeautifulSoup(self.get_schedule_from_web())
+        soup = get_soup_from_content(self.get_schedule_from_web())
         sched_select = soup.find(id='ctl00_cplhMainContent_ddlPastschedules')
         for option in sched_select.find_all('option'):
             if option.text.strip() == season.short_id:

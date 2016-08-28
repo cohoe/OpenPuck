@@ -41,6 +41,8 @@ class Team(HawkeyApiObject):
             return hawkeyapi.providers.SidearmLegacyProvider(self)
         if self.provider == "SidearmAdaptiveProvider":
             return hawkeyapi.providers.SidearmAdaptiveProvider(self)
+        if self.provider == "SidearmResponsiveProvider":
+            return hawkeyapi.providers.SidearmResponsiveProvider(self)
         if self.provider == "StreamlineProvider":
             return hawkeyapi.providers.StreamlineProvider(self)
         else:

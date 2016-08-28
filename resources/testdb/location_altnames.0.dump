@@ -1,7 +1,0 @@
-{"affiliation": {"S": "NCAA-Harvard-W"}, "location_id": {"S": "BRIGHT"}, "altname": {"S": "CAMBRIDGE MASS"}}
-{"affiliation": {"S": "NCAA-BC-W"}, "location_id": {"S": "CONTE"}, "altname": {"S": "CONTE FORUM CHESTNUT HILL MASS"}}
-{"affiliation": {"S": "NCAA-Mercyhurst-W"}, "location_id": {"S": "HURST"}, "altname": {"S": "ERIE PA"}}
-{"affiliation": {"S": "NCAA-Mercyhurst-W"}, "location_id": {"S": "HURST"}, "altname": {"S": "HURST"}}
-{"affiliation": {"S": "NCAA-Mercyhurst-W"}, "location_id": {"S": "HURST"}, "altname": {"S": "MERCYHURST ICE CENTER ERIE PA"}}
-{"location_id": {"S": "HYANNIS"}, "altname": {"S": "HYANNIS MASS"}}
-{"location_id": {"S": "HYANNIS"}, "altname": {"S": "HYANNIS YOUTH AND COMMUNITY CENTER HYANNIS MASS"}}
