@@ -81,6 +81,9 @@ class Provider(object):
         # Same with "vs"
         n_opponent = re.sub(r'^VS ', '', n_opponent)
 
+        # Maybe they included a special site
+        n_opponent = re.sub(r'AT (.*) ARENA', '', n_opponent)
+
         # Lastly, strip it up again
         n_opponent = n_opponent.strip()
 

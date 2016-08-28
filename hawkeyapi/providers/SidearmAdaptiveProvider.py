@@ -82,7 +82,7 @@ class SidearmAdaptiveProvider(Provider):
             facility = self.get_normalized_location(facility_element.text)
         location = self.get_normalized_location(location_element.text)
         location = ' '.join([facility, location])
-        location = location.lstrip()
+        location = location.strip()
         return location
 
     def get_game_site(self, game):

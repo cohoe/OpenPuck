@@ -27,4 +27,10 @@ class ScheduleEntry(HawkeyApiObject):
         if not self.start_time or self.start_time == "":
             start_time = datetime.time(0)
         game_time = datetime.datetime.combine(self.date, start_time).isoformat()
-        return "<%s %s %s>" % (self.__class__.__module__, game_time, self.opponent)
+
+        team_prefix = "vs"
+        location_prefix = "@"
+        if self.site == "away":
+            team_prefix = "at"
+            location_prefix = "in"
+        return "<%s %s %s %s %s %s>" % (self.__class__.__module__, game_time, team_prefix, self.opponent, location_prefix, self.location)
