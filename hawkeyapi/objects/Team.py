@@ -47,3 +47,6 @@ class Team(HawkeyApiObject):
             return hawkeyapi.providers.StreamlineProvider(self)
         else:
             raise Exception("Invalid provider given (%s)" % self.provider)
+
+    def __repr__(self):
+        return "<%s %s %s>" % (self.__class__.__module__, self.id, self.provider)
