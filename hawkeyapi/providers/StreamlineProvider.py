@@ -162,3 +162,12 @@ class StreamlineProvider(Provider):
         Return the full URL of the schedule for a given season.
         """
         return "%s/%s/" % (self.urls['schedule'], season.short_id)
+
+    @classmethod
+    def detect(cls, soup):
+        """
+        Determine of the URL is handled by this provider.
+        :param soup: The site content object to check.
+        :return: Boolean of whether this site is mine.
+        """
+        return 'HELLO'

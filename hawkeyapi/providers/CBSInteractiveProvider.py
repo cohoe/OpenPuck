@@ -218,3 +218,12 @@ class CBSInteractiveProvider(Provider):
                                           self.schedule_file)
 
         return url
+
+    @classmethod
+    def detect(cls, soup):
+        """
+        Determine of the URL is handled by this provider.
+        :param soup: The site content object to check.
+        :return: Boolean of whether this site is mine.
+        """
+        return 'HELLO'

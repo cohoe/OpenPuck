@@ -100,3 +100,12 @@ class TemplateProvider(Provider):
         """
 
         return get_datetime_from_string(date_string)
+
+    @classmethod
+    def detect(cls, soup):
+        """
+        Determine of the URL is handled by this provider.
+        :param soup: The site content object to check.
+        :return: Boolean of whether this site is mine.
+        """
+        return 'HELLO'

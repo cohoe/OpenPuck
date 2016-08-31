@@ -178,3 +178,12 @@ class SidearmAdaptiveProvider(Provider):
                 schedule_number = option['value']
 
         return "%s/schedule.aspx?path=%s&schedule=%s" % (self.server, self.sport, schedule_number)
+
+    @classmethod
+    def detect(cls, soup):
+        """
+        Determine of the URL is handled by this provider.
+        :param soup: The site content object to check.
+        :return: Boolean of whether this site is mine.
+        """
+        return 'flexboxlegacy' in soup.html['class']
