@@ -187,5 +187,10 @@ class SidearmLegacyProvider(Provider):
         :param soup: The site content object to check.
         :return: Boolean of whether this site is mine.
         """
-        return 'HELLO'
+        if soup.html.get('class') is None:
+            if soup.body.get('id') == "ctl00_bdy":
+                return True
+
+        return False
+
 

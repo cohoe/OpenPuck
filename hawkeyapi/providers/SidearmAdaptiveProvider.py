@@ -186,4 +186,8 @@ class SidearmAdaptiveProvider(Provider):
         :param soup: The site content object to check.
         :return: Boolean of whether this site is mine.
         """
-        return 'flexboxlegacy' in soup.html['class']
+        if soup.html.get('class') is not None:
+            if 'index' in soup.html.get('class'):
+                return True
+
+        return False

@@ -180,4 +180,8 @@ class SidearmResponsiveProvider(Provider):
         :param soup: The site content object to check.
         :return: Boolean of whether this site is mine.
         """
-        return 'sidearm-responsive' in soup.html['class']
+        if soup.html.get('class') is not None:
+            if 'sidearm-responsive' in soup.html.get('class'):
+                return True
+
+        return False

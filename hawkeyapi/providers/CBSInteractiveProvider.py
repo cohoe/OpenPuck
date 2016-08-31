@@ -226,4 +226,8 @@ class CBSInteractiveProvider(Provider):
         :param soup: The site content object to check.
         :return: Boolean of whether this site is mine.
         """
-        return 'HELLO'
+        if soup.body.get('class') is not None:
+            if 'bsi-full' in soup.body.get('class'):
+                return True
+
+        return False
