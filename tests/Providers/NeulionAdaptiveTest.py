@@ -38,7 +38,7 @@ for url in TEST_URLS:
 # For each team print their schedule
 for teamObj in teams:
     print "%s :: %s" % (teamObj.provider, teamObj.website)
-    scheduleList = teamObj.get_provider().get_schedule(seasonObj)
+    scheduleList = teamObj.get_provider(seasonObj).get_schedule()
     for game in scheduleList:
         print game
 

@@ -7,11 +7,12 @@ from hawkeyapi.objects import *
 
 
 class Provider(object):
-    def __init__(self, team):
+    def __init__(self, team, season):
         url_obj = urlparse(team.website)
         self.server = "%s://%s" % (url_obj.scheme, url_obj.netloc)
         self.team_id = team.id
         self.is_women = team.is_women
+        self.season = season
 
     def get_schedule_from_web(self):
         """

@@ -5,7 +5,7 @@ import re
 import dateutil.parser
 import hawkeyapi.providers
 from hawkeyapi.util import get_soup_from_content, get_html_from_url
-from datetime import datetime
+import datetime
 
 
 def get_date_from_string(string, years):

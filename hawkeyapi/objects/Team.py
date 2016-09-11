@@ -18,33 +18,33 @@ class Team(HawkeyApiObject):
         self.league = league
 
 
-    def get_provider(self):
+    def get_provider(self, season):
         """
         Return an object of the appropriate provider for a team website.
         """
 
         if self.provider == "CBSInteractiveProvider":
-            return hawkeyapi.providers.CBSInteractiveProvider(self)
+            return hawkeyapi.providers.CBSInteractiveProvider(self, season)
         if self.provider == "NeulionAdaptiveProvider":
-            return hawkeyapi.providers.NeulionAdaptiveProvider(self)
+            return hawkeyapi.providers.NeulionAdaptiveProvider(self, season)
         if self.provider == "NeulionClassicProvider":
-            return hawkeyapi.providers.NeulionClassicProvider(self)
+            return hawkeyapi.providers.NeulionClassicProvider(self, season)
         if self.provider == "NeulionLegacyProvider":
-            return hawkeyapi.providers.NeulionLegacyProvider(self)
+            return hawkeyapi.providers.NeulionLegacyProvider(self, season)
         if self.provider == "PrestoLegacyProvider":
-            return hawkeyapi.providers.PrestoLegacyProvider(self)
+            return hawkeyapi.providers.PrestoLegacyProvider(self, season)
         if self.provider == "PrestoMonthlyProvider":
-            return hawkeyapi.providers.PrestoMonthlyProvider(self)
+            return hawkeyapi.providers.PrestoMonthlyProvider(self, season)
         if self.provider == "PrestoSimpleProvider":
-            return hawkeyapi.providers.PrestoSimpleProvider(self)
+            return hawkeyapi.providers.PrestoSimpleProvider(self, season)
         if self.provider == "SidearmLegacyProvider":
-            return hawkeyapi.providers.SidearmLegacyProvider(self)
+            return hawkeyapi.providers.SidearmLegacyProvider(self, season)
         if self.provider == "SidearmAdaptiveProvider":
-            return hawkeyapi.providers.SidearmAdaptiveProvider(self)
+            return hawkeyapi.providers.SidearmAdaptiveProvider(self, season)
         if self.provider == "SidearmResponsiveProvider":
-            return hawkeyapi.providers.SidearmResponsiveProvider(self)
+            return hawkeyapi.providers.SidearmResponsiveProvider(self, season)
         if self.provider == "StreamlineProvider":
-            return hawkeyapi.providers.StreamlineProvider(self)
+            return hawkeyapi.providers.StreamlineProvider(self, season)
         else:
             raise Exception("Invalid provider given (%s)" % self.provider)
 

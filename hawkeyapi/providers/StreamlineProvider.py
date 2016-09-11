@@ -4,11 +4,11 @@ from Provider import *
 
 
 class StreamlineProvider(Provider):
-    def __init__(self, team):
+    def __init__(self, team, season):
         """
         Constructor
         """
-        Provider.__init__(self, team)
+        Provider.__init__(self, team, season)
 
         index_url = team.website
         self.set_provider_urls(index_url)
@@ -25,11 +25,11 @@ class StreamlineProvider(Provider):
             'schedule': "%s/schedule" % (index_url)
         }
 
-    def get_schedule(self, season):
+    def get_schedule(self):
         """
         Return a list of JSON objects of the schedule.
         """
-        url = self.get_schedule_url_for_season(season)
+        url = self.get_schedule_url_for_season(self.season)
         soup = get_soup_from_content(get_html_from_url(url))
 
         games = []
@@ -46,7 +46,7 @@ class StreamlineProvider(Provider):
             links = self.get_game_media_urls(game)
             # Timestamp
             game_time = self.get_game_time(game)
-            game_date = self.get_game_date(game, season.years())
+            game_date = self.get_game_date(game, self.season.years())
             # Game ID
             game_id = self.get_gameid_from_date_time(game_date, game_time)
             # Conference
@@ -54,7 +54,7 @@ class StreamlineProvider(Provider):
 
             game = ScheduleEntry(game_id, game_date, game_time, opponent, site,
                                  location, links, conference,
-                                 season.league, season.id, self.team_id,
+                                 self.season.league, self.season.id, self.team_id,
                                  self.is_women)
             games.append(game)
 

@@ -4,11 +4,11 @@ from Provider import *
 
 
 class SidearmResponsiveProvider(Provider):
-    def __init__(self, team):
+    def __init__(self, team, season):
         """
         Constructor
         """
-        Provider.__init__(self, team)
+        Provider.__init__(self, team, season)
 
         # Set up the URL information for this provider
         index_url = team.website
@@ -31,11 +31,11 @@ class SidearmResponsiveProvider(Provider):
             'schedule': "%s://%s/schedule.aspx?%s" % (url_obj.scheme, url_obj.netloc, url_obj.query),
         }
         
-    def get_schedule(self, season):
+    def get_schedule(self):
         """
         Return a list of JSON objects of the schedule.
         """
-        url = self.get_schedule_url_for_season(season)
+        url = self.get_schedule_url_for_season(self.season)
         soup = get_soup_from_content(get_html_from_url(url))
 
         games = []
@@ -53,13 +53,13 @@ class SidearmResponsiveProvider(Provider):
             # Links
             links = self.get_game_media_urls(game)
             # Timestamp
-            game_date = self.get_game_date(game, season.years())
+            game_date = self.get_game_date(game, self.season.years())
             game_time = self.get_game_time(game)
             conference = self.get_game_conference(game)
 
             game = ScheduleEntry(game_id, game_date, game_time, opponent, site,
                                  location, links, conference,
-                                 season.league, season.id, self.team_id,
+                                 self.season.league, self.season.id, self.team_id,
                                  self.is_women)
             games.append(game)
 

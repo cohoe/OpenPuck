@@ -4,11 +4,11 @@ from Provider import *
 
 
 class PrestoLegacyProvider(Provider):
-    def __init__(self, team):
+    def __init__(self, team, season):
         """
         Constructor
         """
-        Provider.__init__(self, team)
+        Provider.__init__(self, team, season)
 
         index_url = team.website
         self.set_provider_urls(index_url)
@@ -21,7 +21,7 @@ class PrestoLegacyProvider(Provider):
         url_obj = urlparse(index_url)
 
         self.sport = url_obj.path.split("/")[2]
-        season = DATE_SEASON
+        season = self.season.short_id
         schedule_url = "%s://%s/sports/%s/%s/schedule" % (url_obj.scheme, url_obj.netloc, self.sport, season)
 
         self.urls = {
@@ -29,11 +29,11 @@ class PrestoLegacyProvider(Provider):
             'schedule': schedule_url,
         }
 
-    def get_schedule(self, season):
+    def get_schedule(self):
         """
         Return a list of JSON objects of the schedule.
         """
-        url = self.get_schedule_url_for_season(season)
+        url = self.get_schedule_url_for_season(self.season)
         soup = get_soup_from_content(get_html_from_url(url))
 
         games = []
@@ -51,7 +51,7 @@ class PrestoLegacyProvider(Provider):
             # Links
             links = self.get_game_media_urls(game)
             # Timestamp
-            game_date = self.get_game_date(game, season.years())
+            game_date = self.get_game_date(game, self.season.years())
             game_time = self.get_game_time(game)
             # Game ID
             game_id = self.get_gameid_from_date_time(game_date, game_time)
@@ -61,7 +61,7 @@ class PrestoLegacyProvider(Provider):
             # They don't have game_id's, so lets build one
             game = ScheduleEntry(game_id, game_date, game_time, opponent, site,
                                  location, links, conference,
-                                 season.league, season.id, self.team_id,
+                                 self.season.league, self.season.id, self.team_id,
                                  self.is_women)
             games.append(game)
 

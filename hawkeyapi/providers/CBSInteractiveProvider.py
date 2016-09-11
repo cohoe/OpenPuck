@@ -4,11 +4,11 @@ from Provider import *
 
 
 class CBSInteractiveProvider(Provider):
-    def __init__(self, team):
+    def __init__(self, team, season):
         """
         Constructor
         """
-        Provider.__init__(self, team)
+        Provider.__init__(self, team, season)
 
         index_url = team.website
         self.set_provider_urls(index_url)
@@ -36,11 +36,11 @@ class CBSInteractiveProvider(Provider):
                                                            self.sport),
         }
 
-    def get_schedule(self, season):
+    def get_schedule(self):
         """
         Return a list of JSON objects of the schedule.
         """
-        url = self.get_schedule_url_for_season(season)
+        url = self.get_schedule_url_for_season(self.season)
         soup = get_soup_from_content(get_html_from_url(url))
 
         game_entries = self.get_game_entries(soup)
@@ -51,7 +51,7 @@ class CBSInteractiveProvider(Provider):
             r_game_id = game['id']
             game_id = self.get_id_from_string(game['id'])
             # Details
-            details_soup = self.get_game_details(season.start_year, r_game_id)
+            details_soup = self.get_game_details(self.season.start_year, r_game_id)
             # Determine head-to-head
             raw_h2h = details_soup.find('headtohead')['flag']
             if raw_h2h == 'no':
@@ -74,14 +74,14 @@ class CBSInteractiveProvider(Provider):
             # Links
             links = self.get_game_media_urls(details_soup)
             # Timestamp
-            game_date = self.get_game_date(details_soup, season.years())
+            game_date = self.get_game_date(details_soup, self.season.years())
             game_time = self.get_game_time(details_soup)
             # Conference
             conference = self.get_game_conference(game)
 
             game = ScheduleEntry(game_id, game_date, game_time, opponent,
                                  site, location, links, conference,
-                                 season.league, season.id, self.team_id,
+                                 self.season.league, self.season.id, self.team_id,
                                  self.is_women)
             games.append(game)
 

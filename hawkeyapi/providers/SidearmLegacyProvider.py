@@ -4,11 +4,11 @@ from Provider import *
 
 
 class SidearmLegacyProvider(Provider):
-    def __init__(self, team):
+    def __init__(self, team, season):
         """
         Constructor
         """
-        Provider.__init__(self, team)
+        Provider.__init__(self, team, season)
 
         index_url = team.website
         self.set_provider_urls(index_url)
@@ -31,11 +31,11 @@ class SidearmLegacyProvider(Provider):
             'schedule_detail': get_base_from_url(index_url) + detail_url,
         }
 
-    def get_schedule(self, season):
+    def get_schedule(self):
         """
         Return a list of objects of the schedule.
         """
-        url = self.get_schedule_url_for_season(season)
+        url = self.get_schedule_url_for_season(self.season)
         soup = get_soup_from_content(get_html_from_url(url))
 
         games = []
@@ -55,13 +55,13 @@ class SidearmLegacyProvider(Provider):
             links = self.get_game_media_urls(details_soup)
             # Timestamp
             game_time = self.get_game_time(details_soup)
-            game_date = self.get_game_date(game, season.years())
+            game_date = self.get_game_date(game, self.season.years())
             # Conference
             conference = self.get_game_conference(game)
 
             game = ScheduleEntry(game_id, game_date, game_time, opponent, site,
                                  location, links, conference,
-                                 season.league, season.id, self.team_id,
+                                 self.season.league, self.season.id, self.team_id,
                                  self.is_women)
             games.append(game)
 
