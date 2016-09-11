@@ -14,7 +14,7 @@ def get_date_from_string(string, years):
     """
     string = string.upper().strip()
 
-    # If theres a dash in the date, it likely means a range. We're only
+    # If there's a dash in the date, it likely means a range. We're only
     # going to take the first one.
     if "-" in string:
         string = string.split("-")[0].strip()
