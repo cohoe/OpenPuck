@@ -4,6 +4,7 @@ import json
 import re
 from datetime import datetime, time, date
 
+
 class HawkeyApiObject(object):
     def __init__(self):
         pass
@@ -16,8 +17,8 @@ class HawkeyApiObject(object):
         o_dict = {}
         for k in self.__dict__:
             # This is some StackOverflow magic...
-            nk = re.sub(r'(?!^)_([a-zA-Z])', lambda m: m.group(1).upper(), k)
-
+            # nk = re.sub(r'(?!^)_([a-zA-Z])', lambda m: m.group(1).upper(), k)
+            nk = k
             if isinstance(self.__dict__[k], datetime):
                 o_dict[nk] = self.__dict__[k].isoformat()
             elif isinstance(self.__dict__[k], date):
