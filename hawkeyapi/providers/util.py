@@ -38,7 +38,7 @@ def get_time_from_string(string):
     string = string.upper().strip()
 
     # Too be <x>
-    # @TODO: This might need some work later on. Midnight games are
+    # This might need some work later on. Midnight games are
     # not likely but could happen.
     if re.search(r'TBA|TBD|FINAL|POSTPONED', string):
         return datetime.time(0, 0)
