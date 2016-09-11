@@ -112,7 +112,19 @@ class NeulionClassicProvider(Provider):
         """
         media_urls = {}
 
-        # @TODO: This needs implemented when data is actually available
+        media_header = ""
+        for header in game.keys():
+            if "MEDIA" in header:
+                media_header = header
+                break
+
+        for link in game[media_header].find_all('a', href=True):
+            # This searches for radio station frequencies
+            if re.match(r'\d{2,3}\.\d', link.text) or \
+                    re.match(r'\d{4}', link.text):
+                media_urls['audio'] = link['href']
+            if link.find('img', title="Live Stats") is not None:
+                media_urls['stats'] = link['href']
 
         return media_urls
 
