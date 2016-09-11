@@ -151,7 +151,6 @@ class PrestoSimpleProvider(Provider):
         """
         # Games can be multiple rows. Figure out where the field is based
         # on what we've see from various instances.
-        # @TODO: This needs to be fully tested
         col_index = 3
         if len(game) >= 2:
             col_index = 4

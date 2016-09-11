@@ -39,7 +39,6 @@ class Provider(object):
         # Remove AT
         n_location = re.sub(r'^AT ', '', n_location)
 
-        # @TODO: This might have also broken some shit.
         if not n_location or n_location == "":
             return None
 
@@ -55,7 +54,6 @@ class Provider(object):
 
         # If it's a to be determined, make it so
         if "TBA" in n_opponent or n_opponent == "":
-            # @TODO This might have broken some shit
             return None
 
         # If there is anything in parenthesis, kill it

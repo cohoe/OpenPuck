@@ -46,7 +46,7 @@ class PrestoMonthlyProvider(Provider):
                 if re.search(r'[a-zA-Z]{3}', game.text):
                     month = game.text
                 continue
-            # @TODO: Why is this here?
+            # Skip the separator elements
             if game['class'][0] == "month-sep":
                 continue
 

@@ -39,6 +39,6 @@ for teamObj in teams:
     print "%s :: %s" % (teamObj.provider, teamObj.website)
     scheduleList = teamObj.get_provider(seasonObj).get_schedule()
     for game in scheduleList:
-        print game.links
+        print game
 
     print "Total: %d" % len(scheduleList)
