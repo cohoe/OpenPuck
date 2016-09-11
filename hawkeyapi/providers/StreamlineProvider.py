@@ -105,7 +105,7 @@ class StreamlineProvider(Provider):
         """
         Return a normalized string of the games opponent.
         """
-        opponent = game['OPPONENT'].text
+        opponent = game['OPPONENT'].span.text
         return self.get_normalized_opponent(opponent)
 
     def get_game_media_urls(self, game):
