@@ -68,7 +68,9 @@ def get_list_of_providers():
     """
     providers = []
     for name, obj in inspect.getmembers(hawkeyapi.providers):
-        if inspect.isclass(obj):
+        # Because of the import statement in providers/__init__, datetime
+        # and other such things come along for the ride.
+        if inspect.isclass(obj) and name.endswith("Provider"):
             providers.append(obj)
 
     return providers
