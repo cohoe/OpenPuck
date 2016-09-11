@@ -14,18 +14,18 @@ seasonObj = Season(
     is_women=True
 )
 
-# @TODO: Neulions, Prestos, Streamline. SidearmResponsive is duplicating with Adaptive
+# @TODO: Neulions, Prestos, Streamline.
 testData = [
-    {'provider': 'CBSInteractiveProvider', 'url': 'http://www.gopsusports.com/sports/w-hockey/psu-w-hockey-body-main.html'},
-    # {'provider': 'NeulionAdaptiveProvider', 'url': 'http://www.undsports.com/SportSelect.dbml?spid=6403'},
-    # {'provider': 'NeulionClassicProvider', 'url': 'http://www.omavs.com/SportSelect.dbml?&DB_OEM_ID=31400&SPID=135111&SPSID=795013'},
-    # {'provider': 'NeulionLegacyProvider', 'url': 'http://www.omavs.com/SportSelect.dbml?&DB_OEM_ID=31400&SPID=135111&SPSID=795013'},
+    # {'provider': 'CBSInteractiveProvider', 'url': 'http://www.gopsusports.com/sports/w-hockey/psu-w-hockey-body-main.html'},
+    {'provider': 'NeulionAdaptiveProvider', 'url': 'http://www.undsports.com/SportSelect.dbml?spid=6403'},
+    {'provider': 'NeulionClassicProvider', 'url': 'http://www.omavs.com/SportSelect.dbml?&DB_OEM_ID=31400&SPID=135111&SPSID=795013'},
+    {'provider': 'NeulionLegacyProvider', 'url': 'http://www.omavs.com/SportSelect.dbml?&DB_OEM_ID=31400&SPID=135111&SPSID=795013'},
     # {'provider': 'PrestoLegacyProvider', 'url': 'http://www.yalebulldogs.com/sports/w-hockey/index'},
     # {'provider': 'PrestoMonthlyProvider', 'url': 'http://www.brownbears.com/sports/w-hockey/index'},
     # {'provider': 'PrestoSimpleProvider', 'url': 'http://www.gocrimson.com/sports/wice/index'},
-    {'provider': 'SidearmAdaptiveProvider', 'url': 'http://ritathletics.com/index.aspx?path=whock'},
-    {'provider': 'SidearmLegacyProvider', 'url': 'http://www.clarksonathletics.com/index.aspx?path=whock'},
-    {'provider': 'SidearmResponsiveProvider', 'url': 'http://goprincetontigers.com/index.aspx?path=whockey'},
+    # {'provider': 'SidearmAdaptiveProvider', 'url': 'http://ritathletics.com/index.aspx?path=whock'},
+    # {'provider': 'SidearmLegacyProvider', 'url': 'http://www.clarksonathletics.com/index.aspx?path=whock'},
+    # {'provider': 'SidearmResponsiveProvider', 'url': 'http://goprincetontigers.com/index.aspx?path=whockey'},
     # {'provider': 'StreamlineProvider', 'url': 'http://www.bsubeavers.com/whockey/'}
 ]
 

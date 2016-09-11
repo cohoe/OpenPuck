@@ -187,7 +187,7 @@ class SidearmAdaptiveProvider(Provider):
         :return: Boolean of whether this site is mine.
         """
         if soup.html.get('class') is not None:
-            if 'index' in soup.html.get('class'):
+            if 'index' in soup.html.get('class') and 'sidearm-responsive' not in soup.html.get('class'):
                 return True
 
         return False
