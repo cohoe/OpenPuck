@@ -170,4 +170,7 @@ class StreamlineProvider(Provider):
         :param soup: The site content object to check.
         :return: Boolean of whether this site is mine.
         """
-        return 'HELLO'
+        if soup.find('div', id='bg-page') is not None:
+            return True
+
+        return False
