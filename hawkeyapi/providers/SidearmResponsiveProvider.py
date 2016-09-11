@@ -28,7 +28,8 @@ class SidearmResponsiveProvider(Provider):
 
         self.urls = {
             'index': index_url,
-            'schedule': "%s://%s/schedule.aspx?%s" % (url_obj.scheme, url_obj.netloc, url_obj.query),
+            'schedule': "%s://%s/schedule.aspx?%s" %
+                        (url_obj.scheme, url_obj.netloc, url_obj.query),
         }
         
     def get_schedule(self):
@@ -59,13 +60,14 @@ class SidearmResponsiveProvider(Provider):
 
             game = ScheduleEntry(game_id, game_date, game_time, opponent, site,
                                  location, links, conference,
-                                 self.season.league, self.season.id, self.team_id,
-                                 self.is_women)
+                                 self.season.league, self.season.id,
+                                 self.team_id, self.is_women)
             games.append(game)
 
         return games
 
-    def get_game_entries(self, soup):
+    @classmethod
+    def get_game_entries(cls, soup):
         """
         Return a list of elements containing games. Usually divs or rows.
         """
@@ -75,7 +77,8 @@ class SidearmResponsiveProvider(Provider):
         """
         Return a normalized string of the games location.
         """
-        location_element = game.find('div', class_='sidearm-schedule-game-location')
+        location_element = game.find('div',
+                                     class_='sidearm-schedule-game-location')
         location = self.get_normalized_location(location_element.text)
         return location
 
@@ -86,9 +89,11 @@ class SidearmResponsiveProvider(Provider):
         """
         site = "unknown"
 
-        if bool(game.find('span', class_='sidearm-schedule-game-home')) is True:
+        home_site = bool(game.find('span', class_='sidearm-schedule-game-home'))
+        away_site = bool(game.find('span', class_='sidearm-schedule-game-away'))
+        if home_site is True:
             site = "home"
-        elif bool(game.find('span', class_='sidearm-schedule-game-away')) is True:
+        elif away_site is True:
             site = "away"
 
         return self.get_normalized_site(site)
@@ -97,14 +102,14 @@ class SidearmResponsiveProvider(Provider):
         """
         Return a normalized string of the games opponent.
         """
-        site = self.get_game_site(game)
-
-        opp_element = game.find('span', class_='sidearm-schedule-game-opponent-name')
+        opp_element = game.find('span',
+                                class_='sidearm-schedule-game-opponent-name')
         opponent = opp_element.text
 
         return self.get_normalized_opponent(opponent)
 
-    def get_game_media_urls(self, game):
+    @classmethod
+    def get_game_media_urls(cls, game):
         """
         Return a normalized dictionary of media URLs.
         """
@@ -126,27 +131,34 @@ class SidearmResponsiveProvider(Provider):
 
         return media_urls
 
-    def get_game_date(self, game, years):
+    @classmethod
+    def get_game_date(cls, game, years):
         """
         Return a date object of the games start time. Note that it will
         have no time so it needs to be paired with a game_time object.
         """
-        date_element = game.find('div', class_='sidearm-schedule-game-opponent-date').find_all('span')[0]
+        date_element = game.find('div',
+                                 class_='sidearm-schedule-game-opponent-date')
+        date_element = date_element.find_all('span')[0]
         date_string = date_element.text.upper().strip()
 
         return get_date_from_string(date_string, years)
 
-    def get_game_time(self, game):
+    @classmethod
+    def get_game_time(cls, game):
         """
         Return a time object of the games start time. Note that it will
         have todays date so it needs to be combined with a game_date
         object.
         """
-        t_element = game.find('div', class_='sidearm-schedule-game-opponent-date').find_all('span')[1]
+        t_element = game.find('div',
+                              class_='sidearm-schedule-game-opponent-date')
+        t_element = t_element.find_all('span')[1]
         time_string = t_element.text.strip()
         return get_time_from_string(time_string)
 
-    def get_game_conference(self, game):
+    @classmethod
+    def get_game_conference(cls, game):
         """
         Return if this is a conference game or not
         """
@@ -159,8 +171,10 @@ class SidearmResponsiveProvider(Provider):
         """
         soup = get_soup_from_content(self.get_schedule_from_web())
         sched_select = soup.find(id='ctl00_cplhMainContent_ddl_past_schedules')
+        schedule_number = ""
         for option in sched_select.find_all('option'):
             text = option.text.strip()
+            season_id = ""
             if len(text) == 9:
                 # Long
                 season_id = "%s-%s" % (season.start_year, season.end_year)
@@ -171,7 +185,8 @@ class SidearmResponsiveProvider(Provider):
             if text == season_id:
                 schedule_number = option['value']
 
-        return "%s/schedule.aspx?path=%s&schedule=%s" % (self.server, self.sport, schedule_number)
+        return "%s/schedule.aspx?path=%s&schedule=%s" % \
+               (self.server, self.sport, schedule_number)
 
     @classmethod
     def detect(cls, soup):

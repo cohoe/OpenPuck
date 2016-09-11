@@ -28,7 +28,8 @@ class SidearmAdaptiveProvider(Provider):
 
         self.urls = {
             'index': index_url,
-            'schedule': "%s://%s/schedule.aspx?%s" % (url_obj.scheme, url_obj.netloc, url_obj.query),
+            'schedule': "%s://%s/schedule.aspx?%s" %
+                        (url_obj.scheme, url_obj.netloc, url_obj.query),
         }
         
     def get_schedule(self):
@@ -59,13 +60,14 @@ class SidearmAdaptiveProvider(Provider):
 
             game = ScheduleEntry(game_id, game_date, game_time, opponent, site,
                                  location, links, conference,
-                                 self.season.league, self.season.id, self.team_id,
-                                 self.is_women)
+                                 self.season.league, self.season.id,
+                                 self.team_id, self.is_women)
             games.append(game)
 
         return games
 
-    def get_game_entries(self, soup):
+    @classmethod
+    def get_game_entries(cls, soup):
         """
         Return a list of elements containing games. Usually divs or rows.
         """
@@ -100,14 +102,13 @@ class SidearmAdaptiveProvider(Provider):
         """
         Return a normalized string of the games opponent.
         """
-        site = self.get_game_site(game)
-
         opp_element = game.find('div', class_='schedule_game_opponent_name')
         opponent = opp_element.text
 
         return self.get_normalized_opponent(opponent)
 
-    def get_game_media_urls(self, game):
+    @classmethod
+    def get_game_media_urls(cls, game):
         """
         Return a normalized dictionary of media URLs.
         """
@@ -129,7 +130,8 @@ class SidearmAdaptiveProvider(Provider):
 
         return media_urls
 
-    def get_game_date(self, game, years):
+    @classmethod
+    def get_game_date(cls, game, years):
         """
         Return a date object of the games start time. Note that it will
         have no time so it needs to be paired with a game_time object.
@@ -139,7 +141,8 @@ class SidearmAdaptiveProvider(Provider):
 
         return get_date_from_string(date_string, years)
 
-    def get_game_time(self, game):
+    @classmethod
+    def get_game_time(cls, game):
         """
         Return a time object of the games start time. Note that it will
         have todays date so it needs to be combined with a game_date
@@ -149,7 +152,8 @@ class SidearmAdaptiveProvider(Provider):
         time_string = t_element.text.strip()
         return get_time_from_string(time_string)
 
-    def get_game_conference(self, game):
+    @classmethod
+    def get_game_conference(cls, game):
         """
         Return if this is a conference game or not
         """
@@ -165,8 +169,10 @@ class SidearmAdaptiveProvider(Provider):
 
         # 20150911 They made some of the dropdowns have full years. Ugh.
         # AND THEY MIX THEM IN THE SAME SCHOOL!!!
+        schedule_number = ""
         for option in sched_select.find_all('option'):
             text = option.text.strip()
+            season_id = ""
             if len(text) == 9:
                 # Long
                 season_id = "%s-%s" % (season.start_year, season.end_year)
@@ -177,7 +183,8 @@ class SidearmAdaptiveProvider(Provider):
             if text == season_id:
                 schedule_number = option['value']
 
-        return "%s/schedule.aspx?path=%s&schedule=%s" % (self.server, self.sport, schedule_number)
+        return "%s/schedule.aspx?path=%s&schedule=%s" % \
+               (self.server, self.sport, schedule_number)
 
     @classmethod
     def detect(cls, soup):
@@ -187,7 +194,8 @@ class SidearmAdaptiveProvider(Provider):
         :return: Boolean of whether this site is mine.
         """
         if soup.html.get('class') is not None:
-            if 'index' in soup.html.get('class') and 'sidearm-responsive' not in soup.html.get('class'):
+            if 'index' in soup.html.get('class') and 'sidearm-responsive' \
+                    not in soup.html.get('class'):
                 return True
 
         return False

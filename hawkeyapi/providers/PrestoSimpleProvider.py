@@ -22,7 +22,8 @@ class PrestoSimpleProvider(Provider):
 
         self.sport = url_obj.path.split("/")[2]
         season = self.season.short_id
-        schedule_url = "%s://%s/sports/%s/%s/schedule" % (url_obj.scheme, url_obj.netloc, self.sport, season)
+        schedule_url = "%s://%s/sports/%s/%s/schedule" % \
+                       (url_obj.scheme, url_obj.netloc, self.sport, season)
 
         self.urls = {
             'index': index_url,
@@ -66,7 +67,8 @@ class PrestoSimpleProvider(Provider):
 
         return games
 
-    def get_game_entries(self, soup):
+    @classmethod
+    def get_game_entries(cls, soup):
         """
         Return a list of elements containing games.
         """
@@ -75,7 +77,8 @@ class PrestoSimpleProvider(Provider):
         game = []
 
         table_element = soup.find('table', class_='schedule')
-        for row in table_element.find_all('tr', class_=['schedule-row0', 'schedule-row1']):
+        for row in table_element.find_all('tr', class_=['schedule-row0',
+                                                        'schedule-row1']):
             if "schedule-row%i" % index in row['class']:
                 # This row is for the current game
                 game.append(row)
@@ -141,7 +144,8 @@ class PrestoSimpleProvider(Provider):
 
         return media_urls
 
-    def get_game_time(self, game):
+    @classmethod
+    def get_game_time(cls, game):
         """
         Return a time object of the games start time.
         """
@@ -157,7 +161,8 @@ class PrestoSimpleProvider(Provider):
 
         return get_time_from_string(time_string)
 
-    def get_game_date(self, game, years):
+    @classmethod
+    def get_game_date(cls, game, years):
         """
         Return a date object of the games start date.
         """
@@ -166,18 +171,20 @@ class PrestoSimpleProvider(Provider):
 
         return get_date_from_string(date_string, years)
 
-    def get_game_conference(self, game):
+    @classmethod
+    def get_game_conference(cls, game):
         """
         Is this a conference game?
         """
         raw_opponent = game[0].find_all('td')[1].text.strip()
-        return ("*" in raw_opponent)
+        return "*" in raw_opponent
 
     def get_schedule_url_for_season(self, season):
         """
         Return the full URL of the schedule for a given season.
         """
-        return "%s/sports/%s/%s/schedule" % (self.server, self.sport, season.short_id)
+        return "%s/sports/%s/%s/schedule" % (self.server, self.sport,
+                                             season.short_id)
 
     @classmethod
     def detect(cls, soup):

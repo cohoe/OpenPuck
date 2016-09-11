@@ -51,7 +51,8 @@ class CBSInteractiveProvider(Provider):
             r_game_id = game['id']
             game_id = self.get_id_from_string(game['id'])
             # Details
-            details_soup = self.get_game_details(self.season.start_year, r_game_id)
+            details_soup = self.get_game_details(self.season.start_year,
+                                                 r_game_id)
             # Determine head-to-head
             raw_h2h = details_soup.find('headtohead')['flag']
             if raw_h2h == 'no':
@@ -81,13 +82,14 @@ class CBSInteractiveProvider(Provider):
 
             game = ScheduleEntry(game_id, game_date, game_time, opponent,
                                  site, location, links, conference,
-                                 self.season.league, self.season.id, self.team_id,
-                                 self.is_women)
+                                 self.season.league, self.season.id,
+                                 self.team_id, self.is_women)
             games.append(game)
 
         return games
 
-    def get_game_entries(self, soup):
+    @classmethod
+    def get_game_entries(cls, soup):
         """
         Return a list of elements containing games. Usually divs or rows.
         """
@@ -152,7 +154,8 @@ class CBSInteractiveProvider(Provider):
 
         return self.get_normalized_opponent(raw_opponent)
 
-    def get_game_media_urls(self, game):
+    @classmethod
+    def get_game_media_urls(cls, game):
         """
         Locate the media URLs from the details box.
         """
@@ -165,7 +168,8 @@ class CBSInteractiveProvider(Provider):
 
         return media_urls
 
-    def get_game_time(self, game):
+    @classmethod
+    def get_game_time(cls, game):
         """
         Return a time object of the games start time.
         """
@@ -173,7 +177,8 @@ class CBSInteractiveProvider(Provider):
 
         return get_time_from_string(time_string)
 
-    def get_game_date(self, game, years):
+    @classmethod
+    def get_game_date(cls, game, years):
         """
         Return a date object of the games start date.
         """
@@ -191,7 +196,8 @@ class CBSInteractiveProvider(Provider):
         game_url = self.urls['event_data'] + "%i/%s.xml" % (year, game_id)
         return get_soup_from_content(get_html_from_url(game_url))
 
-    def get_game_conference(self, game):
+    @classmethod
+    def get_game_conference(cls, game):
         """
         Is this a conference game? Some teams dont tell us
         so this has to be None... :(
@@ -206,7 +212,8 @@ class CBSInteractiveProvider(Provider):
         Return the full URL of the schedule for a given season.
         """
         # Try the archive
-        file_ = re.sub(r'\.html', "-%i.html" % season.start_year, self.schedule_file)
+        file_ = re.sub(r'\.html', "-%i.html" % season.start_year,
+                       self.schedule_file)
         directory = "archive"
         url = "%s/sports/%s/%s/%s" % (self.server, self.sport, directory, file_)
 

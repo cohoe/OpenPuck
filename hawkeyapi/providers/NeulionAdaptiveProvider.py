@@ -18,7 +18,6 @@ class NeulionAdaptiveProvider(Provider):
         """
         Set our URLs so we can reference them later.
         """
-        url_obj = urlparse(index_url)
         soup = get_soup_from_content(get_html_from_url(index_url))
 
         sched_element = soup.find(id='section-menu').find('a', text="Schedule")
@@ -56,13 +55,14 @@ class NeulionAdaptiveProvider(Provider):
 
             game = ScheduleEntry(game_id, game_date, game_time, opponent, site,
                                  location, links, conference,
-                                 self.season.league, self.season.id, self.team_id,
-                                 self.is_women)
+                                 self.season.league, self.season.id,
+                                 self.team_id, self.is_women)
             games.append(game)
 
         return games
 
-    def get_game_entries(self, soup):
+    @classmethod
+    def get_game_entries(cls, soup):
         """
         Return a list of elements containing games. Usually divs or rows.
         """
@@ -114,7 +114,8 @@ class NeulionAdaptiveProvider(Provider):
 
         return media_urls
 
-    def get_game_time(self, game):
+    @classmethod
+    def get_game_time(cls, game):
         """
         Return a time object of the games start time.
         """
@@ -124,7 +125,8 @@ class NeulionAdaptiveProvider(Provider):
 
         return get_time_from_string("12:00 AM")
 
-    def get_game_date(self, game, years):
+    @classmethod
+    def get_game_date(cls, game, years):
         """
         Return a date object of the games start date.
         """
@@ -133,12 +135,13 @@ class NeulionAdaptiveProvider(Provider):
 
         return get_date_from_string(date_string, years)
 
-    def get_game_conference(self, game):
+    @classmethod
+    def get_game_conference(cls, game):
         """
         Is this a conference game?
         """
         raw_opponent = game.find('td', class_='opponent').text
-        return ("*" in raw_opponent)
+        return "*" in raw_opponent
 
     def get_schedule_url_for_season(self, season):
         """
@@ -154,7 +157,8 @@ class NeulionAdaptiveProvider(Provider):
         :return: Boolean of whether this site is mine.
         """
         if soup.body.get('class') is not None:
-            if 'responsive' in soup.body.get('class') and 'sport-home' in soup.body.get('class'):
+            if 'responsive' in soup.body.get('class') \
+                    and 'sport-home' in soup.body.get('class'):
                 return True
 
         return False

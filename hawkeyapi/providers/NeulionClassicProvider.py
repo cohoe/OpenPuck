@@ -18,10 +18,10 @@ class NeulionClassicProvider(Provider):
         """
         Set our URLs so we can reference them later.
         """
-        url_obj = urlparse(index_url)
         soup = get_soup_from_content(get_html_from_url(index_url))
 
-        sched_element = soup.find(id='section-menu').find('a', text=["SCHEDULE", "Schedule"])
+        sched_element = soup.find(id='section-menu'
+                                  ).find('a', text=["SCHEDULE", "Schedule"])
         self.urls = {
             'index': index_url,
             'schedule': self.server + sched_element['href']
@@ -56,18 +56,20 @@ class NeulionClassicProvider(Provider):
 
             game = ScheduleEntry(game_id, game_date, game_time, opponent, site,
                                  location, links, conference,
-                                 self.season.league, self.season.id, self.team_id,
-                                 self.is_women)
+                                 self.season.league, self.season.id,
+                                 self.team_id, self.is_women)
             games.append(game)
 
         return games
 
-    def get_game_entries(self, soup):
+    @classmethod
+    def get_game_entries(cls, soup):
         """
         Return a list of elements containing games. Usually divs or rows.
         """
         schedule_table = soup.find('table', class_="ScheduleTable")
-        headers = [header.text.upper().strip() for header in schedule_table.find_all('th')]
+        headers = [header.text.upper().strip() for header in
+                   schedule_table.find_all('th')]
         results = []
         for row in schedule_table.find_all('tr'):
             # All rows are in the schedule table
@@ -95,7 +97,7 @@ class NeulionClassicProvider(Provider):
         elif "sm" in game['OPPONENT'].font['class']:
             return self.get_normalized_site("away")
         else:
-            return self.get_noramlized_site("unknown")
+            return self.get_normalized_site("unknown")
 
     def get_game_opponent(self, game):
         """
@@ -103,7 +105,8 @@ class NeulionClassicProvider(Provider):
         """
         return self.get_normalized_opponent(game['OPPONENT'].text)
 
-    def get_game_media_urls(self, game):
+    @classmethod
+    def get_game_media_urls(cls, game):
         """
         Locate the media URLs from the details box.
         """
@@ -113,7 +116,8 @@ class NeulionClassicProvider(Provider):
 
         return media_urls
 
-    def get_game_time(self, game):
+    @classmethod
+    def get_game_time(cls, game):
         """
         Return a time object of the games start time.
         """
@@ -124,19 +128,21 @@ class NeulionClassicProvider(Provider):
                 break
         return get_time_from_string(game[time_header].text)
 
-    def get_game_date(self, game, years):
+    @classmethod
+    def get_game_date(cls, game, years):
         """
         Return a date object of the games start date.
         """
         date_string = game['DATE'].text.strip().upper()
         return get_date_from_string(date_string, years)
 
-    def get_game_conference(self, game):
+    @classmethod
+    def get_game_conference(cls, game):
         """
         Is this a conference game?
         """
         raw_opponent = game['OPPONENT'].text.strip()
-        return ("*" in raw_opponent)
+        return "*" in raw_opponent
 
     def get_schedule_url_for_season(self, season):
         """

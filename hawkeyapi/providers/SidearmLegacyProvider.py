@@ -27,7 +27,8 @@ class SidearmLegacyProvider(Provider):
         detail_url = "/services/schedule_detail.aspx"
         self.urls = {
             'index': index_url,
-            'schedule': "%s://%s/schedule.aspx?%s" % (url_obj.scheme, url_obj.netloc, url_obj.query),
+            'schedule': "%s://%s/schedule.aspx?%s" %
+                        (url_obj.scheme, url_obj.netloc, url_obj.query),
             'schedule_detail': get_base_from_url(index_url) + detail_url,
         }
 
@@ -61,13 +62,14 @@ class SidearmLegacyProvider(Provider):
 
             game = ScheduleEntry(game_id, game_date, game_time, opponent, site,
                                  location, links, conference,
-                                 self.season.league, self.season.id, self.team_id,
-                                 self.is_women)
+                                 self.season.league, self.season.id,
+                                 self.team_id, self.is_women)
             games.append(game)
 
         return games
 
-    def get_game_entries(self, soup):
+    @classmethod
+    def get_game_entries(cls, soup):
         """
         Return a list of elements containing games. Usually divs or rows.
         """
@@ -76,13 +78,15 @@ class SidearmLegacyProvider(Provider):
         for header in schedule_table.tr.find_all('th'):
             raw_header = header.text.upper().strip()
             raw_header = re.sub(r'[^\w ]', '', raw_header)
-            if raw_header == '' or raw_header == 'CHA' or raw_header == 'AHA' or raw_header == 'CONFERENCE GAME':
+            if raw_header == '' or raw_header == 'CHA' or raw_header == 'AHA' \
+                    or raw_header == 'CONFERENCE GAME':
                 # Its the Clarkson-esqe conference header
                 raw_header = 'CONF'
             headers.append(raw_header)
 
         games = []
-        for row in schedule_table.find_all('tr', class_=['schedule_dgrd_item', 'schedule_dgrd_alt']):
+        for row in schedule_table.find_all('tr', class_=['schedule_dgrd_item',
+                                                         'schedule_dgrd_alt']):
             game = {}
             for i, cell in enumerate(row.find_all('td')):
                 game[headers[i]] = cell
@@ -132,7 +136,8 @@ class SidearmLegacyProvider(Provider):
 
         return soup
 
-    def get_game_media_urls(self, details):
+    @classmethod
+    def get_game_media_urls(cls, details):
         """
         Locate the media URLs from the details box.
         """
@@ -145,7 +150,8 @@ class SidearmLegacyProvider(Provider):
 
         return media_urls
 
-    def get_game_time(self, details):
+    @classmethod
+    def get_game_time(cls, details):
         """
         Return a time object of the games start time.
         """
@@ -155,14 +161,16 @@ class SidearmLegacyProvider(Provider):
 
         return get_time_from_string(time_string)
 
-    def get_game_date(self, game, years):
+    @classmethod
+    def get_game_date(cls, game, years):
         """
         Return a date object of the games start date.
         """
 
         return get_date_from_string(game['DATE'].text.strip(), years)
 
-    def get_game_conference(self, game):
+    @classmethod
+    def get_game_conference(cls, game):
         """
         Is this a conference game?
         """
@@ -174,11 +182,13 @@ class SidearmLegacyProvider(Provider):
         """
         soup = get_soup_from_content(self.get_schedule_from_web())
         sched_select = soup.find(id='ctl00_cplhMainContent_ddlPastschedules')
+        schedule_number = ""
         for option in sched_select.find_all('option'):
             if option.text.strip() == season.short_id:
                 schedule_number = option['value']
 
-        return "%s/schedule.aspx?path=%s&schedule=%s" % (self.server, self.sport, schedule_number)
+        return "%s/schedule.aspx?path=%s&schedule=%s" % \
+               (self.server, self.sport, schedule_number)
 
     @classmethod
     def detect(cls, soup):
@@ -192,5 +202,3 @@ class SidearmLegacyProvider(Provider):
                 return True
 
         return False
-
-

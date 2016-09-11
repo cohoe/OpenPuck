@@ -18,11 +18,9 @@ class StreamlineProvider(Provider):
         """
         Set our URLs so we can reference them later.
         """
-        url_obj = urlparse(index_url)
-
         self.urls = {
             'index': index_url,
-            'schedule': "%s/schedule" % (index_url)
+            'schedule': "%s/schedule" % index_url
         }
 
     def get_schedule(self):
@@ -54,8 +52,8 @@ class StreamlineProvider(Provider):
 
             game = ScheduleEntry(game_id, game_date, game_time, opponent, site,
                                  location, links, conference,
-                                 self.season.league, self.season.id, self.team_id,
-                                 self.is_women)
+                                 self.season.league, self.season.id,
+                                 self.team_id, self.is_women)
             games.append(game)
 
         return games
@@ -65,7 +63,8 @@ class StreamlineProvider(Provider):
         Return a list of elements containing games. Usually divs or rows.
         """
         schedule_table = soup.find('table', class_='schedule')
-        headers = [header.text.upper().strip() for header in schedule_table.tr.find_all('th')]
+        headers = [header.text.upper().strip() for header in
+                   schedule_table.tr.find_all('th')]
         headers = self.get_clean_headers(headers)
 
         games = []
@@ -108,7 +107,8 @@ class StreamlineProvider(Provider):
         opponent = game['OPPONENT'].span.text
         return self.get_normalized_opponent(opponent)
 
-    def get_game_media_urls(self, game):
+    @classmethod
+    def get_game_media_urls(cls, game):
         """
         Locate the media URLs from the details box.
         """
@@ -118,7 +118,8 @@ class StreamlineProvider(Provider):
 
         return media_urls
 
-    def get_game_time(self, game):
+    @classmethod
+    def get_game_time(cls, game):
         """
         Return a time object of the games start time.
         """
@@ -126,7 +127,8 @@ class StreamlineProvider(Provider):
 
         return get_time_from_string(time_string)
 
-    def get_game_date(self, game, years):
+    @classmethod
+    def get_game_date(cls, game, years):
         """
         Return a date object of the games start date.
         """
@@ -134,7 +136,8 @@ class StreamlineProvider(Provider):
 
         return get_date_from_string(date_string, years)
 
-    def get_clean_headers(self, headers):
+    @classmethod
+    def get_clean_headers(cls, headers):
         """
         Clean up the headers we get since they have extra crap.
         """
@@ -150,12 +153,13 @@ class StreamlineProvider(Provider):
 
         return n_headers
 
-    def get_game_conference(self, game):
+    @classmethod
+    def get_game_conference(cls, game):
         """
         Is this a conference game?
         """
         raw_opponent = game['OPPONENT'].text
-        return ("*" in raw_opponent)
+        return "*" in raw_opponent
 
     def get_schedule_url_for_season(self, season):
         """

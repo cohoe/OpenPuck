@@ -22,7 +22,8 @@ class PrestoLegacyProvider(Provider):
 
         self.sport = url_obj.path.split("/")[2]
         season = self.season.short_id
-        schedule_url = "%s://%s/sports/%s/%s/schedule" % (url_obj.scheme, url_obj.netloc, self.sport, season)
+        schedule_url = "%s://%s/sports/%s/%s/schedule" % \
+                       (url_obj.scheme, url_obj.netloc, self.sport, season)
 
         self.urls = {
             'index': index_url,
@@ -61,22 +62,25 @@ class PrestoLegacyProvider(Provider):
             # They don't have game_id's, so lets build one
             game = ScheduleEntry(game_id, game_date, game_time, opponent, site,
                                  location, links, conference,
-                                 self.season.league, self.season.id, self.team_id,
-                                 self.is_women)
+                                 self.season.league, self.season.id,
+                                 self.team_id, self.is_women)
             games.append(game)
 
         return games
 
-    def get_game_entries(self, soup):
+    @classmethod
+    def get_game_entries(cls, soup):
         """
         Return a list of elements containing games.
         """
         schedule_table = soup.find('table', class_='schedule')
         # The bastards dont use th's!!!!
-        headers = [header.text.upper().strip() for header in schedule_table.tr.find_all('td')]
+        headers = [header.text.upper().strip() for header in
+                   schedule_table.tr.find_all('td')]
 
         games = []
-        for row in schedule_table.find_all('tr', class_=["schedule-home", "schedule-away"]):
+        for row in schedule_table.find_all(
+                'tr', class_=["schedule-home", "schedule-away"]):
             if len(row.find_all('td')) < len(headers):
                 # It's a second row that we don't care about
                 continue
@@ -99,7 +103,7 @@ class PrestoLegacyProvider(Provider):
         elif "schedule-away" in game['CLASS']:
             return self.get_normalized_site("away")
         else:
-            return self.get_noramlized_site("unknown")
+            return self.get_normalized_site("unknown")
 
     def get_game_opponent(self, game):
         """
@@ -127,7 +131,8 @@ class PrestoLegacyProvider(Provider):
 
         return media_urls
 
-    def get_game_time(self, game):
+    @classmethod
+    def get_game_time(cls, game):
         """
         Return a time object of the games start time.
         """
@@ -137,7 +142,8 @@ class PrestoLegacyProvider(Provider):
 
         return get_time_from_string(time_string)
 
-    def get_game_date(self, game, years):
+    @classmethod
+    def get_game_date(cls, game, years):
         """
         Return a date object of the games start date.
         """
@@ -146,18 +152,20 @@ class PrestoLegacyProvider(Provider):
 
         return get_date_from_string(date_string, years)
 
-    def get_game_conference(self, game):
+    @classmethod
+    def get_game_conference(cls, game):
         """
         Is this a conference game?
         """
         raw_opponent = game['OPPONENT'].text.strip()
-        return ("*" in raw_opponent)
+        return "*" in raw_opponent
 
     def get_schedule_url_for_season(self, season):
         """
         Return the full URL of the schedule for a given season.
         """
-        return "%s/sports/%s/%s/schedule" % (self.server, self.sport, season.short_id)
+        return "%s/sports/%s/%s/schedule" % (self.server, self.sport,
+                                             season.short_id)
 
     @classmethod
     def detect(cls, soup):

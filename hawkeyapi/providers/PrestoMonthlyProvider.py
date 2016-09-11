@@ -22,7 +22,8 @@ class PrestoMonthlyProvider(Provider):
 
         self.sport = url_obj.path.split("/")[2]
         season = self.season.short_id
-        schedule_url = "%s://%s/sports/%s/%s/schedule" % (url_obj.scheme, url_obj.netloc, self.sport, season)
+        schedule_url = "%s://%s/sports/%s/%s/schedule" % \
+                       (url_obj.scheme, url_obj.netloc, self.sport, season)
 
         self.urls = {
             'index': index_url,
@@ -73,19 +74,21 @@ class PrestoMonthlyProvider(Provider):
 
             game = ScheduleEntry(game_id, game_date, game_time, opponent, site,
                                  location, links, conference,
-                                 self.season.league, self.season.id, self.team_id,
-                                 self.is_women)
+                                 self.season.league, self.season.id,
+                                 self.team_id, self.is_women)
             games.append(game)
 
         return games
 
-    def get_game_entries(self, soup):
+    @classmethod
+    def get_game_entries(cls, soup):
         """
         Return a list of elements containing games. Usually divs or rows.
         In this case, we need it for months as well.
         """
         # Skip the first since its always an empty
-        s_element = soup.find('div', class_=['schedule-data', 'schedule-content'])
+        s_element = soup.find('div', class_=['schedule-data',
+                                             'schedule-content'])
         return s_element.find_all('tr')[1:]
 
     def get_game_site(self, game):
@@ -129,7 +132,8 @@ class PrestoMonthlyProvider(Provider):
 
         return media_urls
 
-    def get_game_time(self, game):
+    @classmethod
+    def get_game_time(cls, game):
         """
         Return a time object of the games start time.
         """
@@ -137,7 +141,8 @@ class PrestoMonthlyProvider(Provider):
 
         return get_time_from_string(time_string)
 
-    def get_game_date(self, game, month, years):
+    @classmethod
+    def get_game_date(cls, game, month, years):
         """
         Return a date object of the games start date.
         """
@@ -150,18 +155,20 @@ class PrestoMonthlyProvider(Provider):
 
         return get_date_from_string(date_string, years)
 
-    def get_game_conference(self, game):
+    @classmethod
+    def get_game_conference(cls, game):
         """
         Return if this a conference game.
         """
         raw_opponent = game.find('td', class_='e_opponent').text
-        return ("*" in raw_opponent)
+        return "*" in raw_opponent
 
     def get_schedule_url_for_season(self, season):
         """
         Return the full URL of the schedule for a given season.
         """
-        return "%s/sports/%s/%s/schedule" % (self.server, self.sport, season.short_id)
+        return "%s/sports/%s/%s/schedule" % (self.server, self.sport,
+                                             season.short_id)
 
     @classmethod
     def detect(cls, soup):
