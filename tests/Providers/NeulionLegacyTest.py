@@ -5,7 +5,7 @@ from hawkeyapi.objects import Season, Team
 # Define the provider and URLs to test
 PROVIDER = 'NeulionLegacyProvider'
 TEST_URLS = [
-    'http://www.gogriffs.com/SportSelect.dbml?SPID=12001',
+    # 'http://www.gogriffs.com/SportSelect.dbml?SPID=12001',
     'http://www.goseawolves.com/SportSelect.dbml?SPID=6373'
 ]
 
@@ -39,6 +39,6 @@ for teamObj in teams:
     print "%s :: %s" % (teamObj.provider, teamObj.website)
     scheduleList = teamObj.get_provider(seasonObj).get_schedule()
     for game in scheduleList:
-        print game
+        print game.links
 
     print "Total: %d" % len(scheduleList)

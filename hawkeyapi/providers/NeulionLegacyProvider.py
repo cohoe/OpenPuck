@@ -112,20 +112,17 @@ class NeulionLegacyProvider(Provider):
         """
         media_urls = {}
 
-        media_element = game['WATCH']
-        for link in media_element.find_all('a'):
-            link_text = link.text.strip()
-            # @TODO This is somewhat institution specific. Likely
-            # need to add more stuff here.
-            if "ILDN" in link_text:
-                media_urls['video'] = link['href']
+        video_element = game['WATCH']
+        if video_element.find('a', href=True) is not None:
+            media_urls['video'] = video_element.find('a', href=True)['href']
 
-            title = link.get("title")
-            if title and "Live Stats" in title:
-                media_urls['stats'] = self.server + link['href']
-
-            if "iheart" in link['href']:
-                media_urls['audio'] = link['href']
+        link_element = game['RELATED LINKS']
+        for link in link_element.find_all('a', href=True):
+            if link.get('title') == "Live Stats":
+                if 'http' not in link['href']:
+                    media_urls['stats'] = self.server + link['href']
+                else:
+                    media_urls['stats'] = link['href']
 
         return media_urls
 
