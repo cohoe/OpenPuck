@@ -39,6 +39,10 @@ class Provider(object):
         # Remove AT
         n_location = re.sub(r'^AT ', '', n_location)
 
+        # @TODO: This might have also broken some shit.
+        if not n_location or n_location == "":
+            return None
+
         # Done for now
         return n_location
 
