@@ -104,13 +104,24 @@ class NeulionAdaptiveProvider(Provider):
         """
         Locate the media URLs from the details box.
         """
-        # @TODO: This needs implemented when data is actually available
         media_urls = {}
 
         media_element = game.find('td', class_='media')
         for link in media_element.find_all('a'):
             if link.text == "Live Stats":
                 media_urls['stats'] = self.server + link['href']
+            elif "Live Video" in link.text:
+                if 'http' not in link['href']:
+                    media_urls['video'] = self.server + link['href']
+                else:
+                    media_urls['video'] = link['href']
+            # Dartmouth is stupid and calls audio links video. BUT ONLY
+            # FOR CERTAIN GAMES!!!
+            elif "Live Audio" in link.text or re.match(r'\d{2,3}\.\d', link.text) or link.get('target') == "RADIO":
+                if 'http' not in link['href']:
+                    media_urls['video'] = self.server + link['href']
+                else:
+                    media_urls['audio'] = link['href']
 
         return media_urls
 
