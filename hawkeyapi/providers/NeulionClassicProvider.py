@@ -151,8 +151,10 @@ class NeulionClassicProvider(Provider):
         :param soup: The site content object to check.
         :return: Boolean of whether this site is mine.
         """
-        if 'sport' in soup.body.get('class'):
-            if soup.find(id='site_wrapper') is not None:
-                return True
+        # Yes, yes, I know this is gross
+        if soup.body.get('class') is not None:
+            if 'sport' in soup.body.get('class'):
+                if soup.find(id='site_wrapper') is not None:
+                    return True
 
         return False

@@ -166,4 +166,8 @@ class PrestoLegacyProvider(Provider):
         :param soup: The site content object to check.
         :return: Boolean of whether this site is mine.
         """
-        return 'HELLO'
+        if soup.body.get('class') is not None:
+            if 'pagebody' in soup.body.get('class'):
+                return True
+
+        return False

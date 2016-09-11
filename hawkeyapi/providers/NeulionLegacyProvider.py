@@ -172,8 +172,9 @@ class NeulionLegacyProvider(Provider):
         :param soup: The site content object to check.
         :return: Boolean of whether this site is mine.
         """
-        if 'desktop' in soup.body.get(
-                'class') and 'sport-home' in soup.body.get('class'):
-            return True
+        if soup.body.get('class') is not None:
+            if 'desktop' in soup.body.get(
+                    'class') and 'sport-home' in soup.body.get('class'):
+                return True
 
         return False
