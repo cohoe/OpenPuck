@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 
 from hawkeyapi.util import *
+from hawkeyapi.providers.util import *
+from hawkeyapi.objects import *
+# ^^ Contrary to PyCharm's suggestion, that import statement is needed.
 
 
 class Provider(object):
