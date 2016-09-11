@@ -170,7 +170,8 @@ class PrestoMonthlyProvider(Provider):
         :param soup: The site content object to check.
         :return: Boolean of whether this site is mine.
         """
-        if soup.find(id='fb-root') is not None:
-            return True
+        if soup.find('a', href=True, text='PrestoSports'):
+            if soup.find(id='fb-root') is not None:
+                return True
 
         return False

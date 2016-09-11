@@ -133,3 +133,7 @@ class Provider(object):
         all non-number characters.
         """
         return int(re.sub(r'[^\d]', '', string))
+
+    @classmethod
+    def get_name(cls):
+        return str(cls).split('.')[-1].replace("'>", "")
