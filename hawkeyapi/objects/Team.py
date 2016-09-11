@@ -2,9 +2,10 @@
 
 from HawkeyApiObject import HawkeyApiObject 
 import hawkeyapi.providers
+from hawkeyapi.providers.util import get_provider_for_url
 
 class Team(HawkeyApiObject):
-    def __init__(self, id, institution, mascot, is_women, home_conference, social_media, web_site, web_provider, league):
+    def __init__(self, id, institution, mascot, is_women, home_conference, social_media, web_site, league, web_provider=None):
         HawkeyApiObject.__init__(self)
 
         self.id = id
@@ -14,8 +15,11 @@ class Team(HawkeyApiObject):
         self.home_conference = home_conference
         self.social_media = social_media
         self.website = web_site
-        self.provider = web_provider
         self.league = league
+
+        self.provider = web_provider
+        if self.provider is None:
+            self.provider = get_provider_for_url(self.website).get_name()
 
 
     def get_provider(self, season):

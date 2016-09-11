@@ -10,8 +10,7 @@ teamObj = Team(
     is_women=True,
     home_conference='LOLZWHATISTHIS',
     social_media='FOOBAR',
-    web_site='lolz',
-    web_provider='SidearmResponsiveProvider',
+    web_site='http://ritathletics.com/index.aspx?path=whock',
     league='LOLZLEAGUE'
 )
 
